@@ -6,7 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.Entity;
 import com.mygdx.game.MapManager;
 import com.mygdx.game.PlayerController;
@@ -75,9 +79,9 @@ public class MainGameScreen implements Screen {
         currentPlayerFrame = player.getFrame();
 
         //check if player activated a portal
-        updatePortalLayerActiviation(player.boundingBox);
+        updatePortalLayerActivation(player.boundingBox);
 
-        //check if player is in collision with layer
+        //if no collisions, will not update the player’s position
         if (!isCollisionWithMapLayer(player.boundingBox)) {
             player.setNextPoitionToCurrent();
         }
@@ -159,5 +163,59 @@ public class MainGameScreen implements Screen {
         Gdx.app.debug(TAG, "WorldRenderer: physical: (" +
                 VIEWPORT.physicalWidth + "," + VIEWPORT.physicalHeight + ")" );
     }
+
+    private boolean isCollisionWithMapLayer(Rectangle boundingBox){
+        MapLayer mapCollisionLayer = mapManger.getCollisionLayer();
+
+        if (mapCollisionLayer == null){
+            return false;
+        }
+
+        Rectangle rectangle = null;
+
+        for (MapObject object : mapCollisionLayer.getObjects()){
+            rectangle = ((RectangleMapObject) object).getRectangle();
+            if (boundingBox.overlaps(rectangle)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean updatePortalLayerActivation(Rectangle boundingBox){
+        MapLayer mapPortalLayer = mapManger.getPortalLayer();
+
+        if (mapPortalLayer == null){
+            return false;
+        }
+
+        Rectangle rectangle = null;
+
+        for (MapObject object : mapPortalLayer.getObjects()){
+            if(object instanceof RectangleMapObject){
+                rectangle = ((RectangleMapObject)object).getRectangle();
+                if(boundingBox.overlaps(rectangle)){
+                    String mapName = object.getName();
+                    if(mapName == null){
+                        return false;
+                    }
+                    mapManger.setClosestStartPositionFromScaledUnits
+                            (player.getCurrentPosition());
+                    mapManger.loadMap(mapName);
+                    player.init(mapManger.getPlayerStartUniScaled().x,
+                            mapManger.getPlayerStartUniScaled.y);
+                    mapRenderer.setMap(mapManger.getCurrentMap());
+
+                    Gdx.app.debug(TAG, "Portal Activated");
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
 
 }
