@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
-/*
+
 public class NPCPhysicsComponent extends PhysicsComponent {
 
     private static final String TAG = NPCPhysicsComponent.class.getSimpleName();
@@ -10,7 +10,7 @@ public class NPCPhysicsComponent extends PhysicsComponent {
 
     public NPCPhysicsComponent(){
         boundingBoxLocation = BoundingBoxLocation.CENTER;
-        initBoundingBox(0.6f, 0.85f);
+        initBoundingBox(0.6f, 0.4f);
     }
 
     @Override
@@ -68,4 +68,3 @@ public class NPCPhysicsComponent extends PhysicsComponent {
 
     }
 }
-*/

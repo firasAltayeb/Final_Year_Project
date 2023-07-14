@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import java.util.Hashtable;
-/*
+
 public abstract class Map {
     private static final String TAG = Map.class.getSimpleName();
 
@@ -210,4 +210,3 @@ public abstract class Map {
     }
 
 }
-*/

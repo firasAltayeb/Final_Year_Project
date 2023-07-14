@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
-/*
+
 public class PlayerInputComponent extends InputComponent implements InputProcessor {
 
 	private final static String TAG = PlayerInputComponent.class.getSimpleName();
@@ -228,4 +228,3 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	}
 
 }
-*/

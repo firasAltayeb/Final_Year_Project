@@ -10,7 +10,8 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-/*
+import com.mygdx.game.EntityConfig.AnimationConfig;
+
 public class NPCGraphicsComponent extends GraphicsComponent {
 
     private static final String TAG = NPCGraphicsComponent.class.getSimpleName();
@@ -49,7 +50,7 @@ public class NPCGraphicsComponent extends GraphicsComponent {
                 EntityConfig entityConfig = json.fromJson(EntityConfig.class, string[1]);
                 Array<EntityConfig.AnimationConfig> animationConfigs = entityConfig.getAnimationConfig();
 
-                for( EntityConfig.AnimationConfig animationConfig : animationConfigs ){
+                for( AnimationConfig animationConfig : animationConfigs ){
                     Array<String> textureNames = animationConfig.getTexturePaths();
                     Array<GridPoint2> points = animationConfig.getGridPoints();
                     Entity.AnimationType animationType = animationConfig.getAnimationType();
@@ -77,7 +78,7 @@ public class NPCGraphicsComponent extends GraphicsComponent {
         }
 
         batch.begin();
-        batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1, 1);
+        batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1.2f, 2.2f);
         batch.end();
 
 //        Used to graphically debug boundingboxes
@@ -114,4 +115,3 @@ public class NPCGraphicsComponent extends GraphicsComponent {
     public void dispose(){
     }
 }
-*/

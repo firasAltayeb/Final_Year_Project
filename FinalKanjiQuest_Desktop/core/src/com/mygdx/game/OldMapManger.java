@@ -1,8 +1,8 @@
 package com.mygdx.game;
 
-/**
- * Created by firasAltayeb on 25/02/2017.
- */
+/*
+  Created by firasAltayeb on 25/02/2017.
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
@@ -13,9 +13,9 @@ import com.badlogic.gdx.math.*;
 
 import java.util.Hashtable;
 
-public class MapManger {
+public class OldMapManger {
 
-    private static final  String TAG = MapManger.class.getName();
+    private static final  String TAG = OldMapManger.class.getName();
 
     //all maps for the game
     private Hashtable<String, String> mapTable;
@@ -50,7 +50,7 @@ public class MapManger {
 
     public final static float UNIT_SCALE  = 1/16f;
 
-    public MapManger(){
+    public OldMapManger(){
         playerStart = new Vector2(0,0);
         mapTable = new Hashtable();
 
@@ -186,7 +186,5 @@ public class MapManger {
         }
         playerStartLocationTable.put(currentMapName, closestPlayerStartPosition.cpy());
     }
-
-
-
 }
+*/

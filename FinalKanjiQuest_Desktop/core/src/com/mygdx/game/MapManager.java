@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-/*
+
 public class MapManager {
     private static final String TAG = MapManager.class.getSimpleName();
 
@@ -89,4 +89,3 @@ public class MapManager {
     }
 
 }
-*/

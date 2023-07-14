@@ -6,8 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.EntityConfig.AnimationConfig;
 
-/*
+
 public class PlayerGraphicsComponent extends GraphicsComponent {
 
     private static final String TAG = PlayerGraphicsComponent.class.getSimpleName();
@@ -64,7 +65,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
         camera.update();
 
         batch.begin();
-        batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1, 1);
+        batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1.2f, 2);
         batch.end();
 
 //        Used to graphically debug boundingboxes
@@ -82,4 +83,3 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
     }
 
 }
-*/

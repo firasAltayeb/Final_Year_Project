@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-/*
+
 public abstract class PhysicsComponent implements Component{
 
     private static final String TAG = PhysicsComponent.class.getSimpleName();
@@ -31,7 +31,7 @@ public abstract class PhysicsComponent implements Component{
     protected PhysicsComponent(){
         this.nextEntityPosition = new Vector2(0,0);
         this.currentEntityPosition = new Vector2(0,0);
-        this.velocity = new Vector2(2f,2f);
+        this.velocity = new Vector2(4f,4f);
         this.boundingBox = new Rectangle();
         this.json = new Json();
         boundingBoxLocation = BoundingBoxLocation.BOTTOM_LEFT;
@@ -226,4 +226,3 @@ public abstract class PhysicsComponent implements Component{
         // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 }
-*/

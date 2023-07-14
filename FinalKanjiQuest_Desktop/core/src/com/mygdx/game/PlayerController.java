@@ -1,8 +1,8 @@
 package com.mygdx.game;
 
-/**
- * Created by firasAltayeb on 02/03/2017.
- */
+/*
+  Created by firasAltayeb on 02/03/2017.
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -330,3 +330,4 @@ public class PlayerController implements InputProcessor {
     }
 
 }
+*/

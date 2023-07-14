@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import java.util.Hashtable;
-/*
+
 public abstract class GraphicsComponent implements Component {
     protected TextureRegion currentFrame = null;
     protected float frameTime = 0f;
@@ -139,4 +139,3 @@ public abstract class GraphicsComponent implements Component {
         return new Animation(frameDuration, animationKeyFrames, Animation.PlayMode.LOOP);
     }
 }
-*/

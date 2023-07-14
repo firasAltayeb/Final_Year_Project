@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Json;
 
 import java.util.HashMap;
 import java.util.Map;
-/*
+
 public abstract class InputComponent implements Component {
 
     protected Entity.Direction currentDirection = null;
@@ -43,4 +43,3 @@ public abstract class InputComponent implements Component {
     public abstract void update(Entity entity, float delta);
 
 }
-*/

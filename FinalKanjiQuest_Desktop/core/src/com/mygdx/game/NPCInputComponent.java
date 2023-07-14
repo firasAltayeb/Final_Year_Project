@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.MathUtils;
-/*
+
 public class NPCInputComponent extends InputComponent implements InputProcessor {
 
     private static final String TAG = NPCInputComponent.class.getSimpleName();
@@ -135,4 +135,3 @@ public class NPCInputComponent extends InputComponent implements InputProcessor 
         return false;
     }
 }
-*/

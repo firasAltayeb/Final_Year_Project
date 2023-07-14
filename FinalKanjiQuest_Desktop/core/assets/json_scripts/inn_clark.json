@@ -1,5 +1,5 @@
 {
-entityID : PLAYER
+entityID : INN_CLARK
 state : IDLE
 direction : DOWN
 animationConfig: [
@@ -7,7 +7,7 @@ animationConfig: [
 		frameDuration: 0.25
 		animationType: WALK_DOWN
 		texturePaths: [
-			sprites/ch1_sheet.png
+			sprites/inn_clark_sheet.png
 		]
 		gridPoints: [
 			{
@@ -33,24 +33,24 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_LEFT
 		texturePaths: [
-			sprites/ch1_sheet.png
+			sprites/inn_clark_sheet.png
 		]
 		gridPoints: [
 			{
-				x: 3
+				x: 1
 				y: 0
 			}
 			
 			{
-				x: 3
+				x: 1
 				y: 1
 			}
 			{
-			    x: 3
+			    x: 1
 				y: 2
 			}
 			{
-			    x: 3
+			    x: 1
 				y: 3
 			}
 		]
@@ -59,24 +59,24 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_RIGHT
 		texturePaths: [
-			sprites/ch1_sheet.png
+			sprites/inn_clark_sheet.png
 		]
 		gridPoints: [
 			{
-				x: 4
+				x: 2
 				y: 0
 			}
 			
 			{
-				x: 4
+				x: 2
 				y: 1
 			}
 			{
-			    x: 4
+			    x: 2
 				y: 2
 			}
 			{
-			    x: 4
+			    x: 2
 				y: 3
 			}
 		]
@@ -85,24 +85,24 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_UP
 		texturePaths: [
-			sprites/ch1_sheet.png
+			sprites/inn_clark_sheet.png
 		]
 		gridPoints: [
 			{
-				x: 5
+				x: 3
 				y: 0
 			}
 			
 			{
-				x: 5
+				x: 3
 				y: 1
 			}
 			{
-			    x: 5
+			    x: 3
 				y: 2
 			}
 			{
-			    x: 5
+			    x: 3
 				y: 3
 			}
 		]
