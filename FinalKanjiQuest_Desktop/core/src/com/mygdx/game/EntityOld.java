@@ -14,10 +14,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
-public class Entity {
+public class EntityOld {
 
-    private static final String TAG = Entity.class.getSimpleName();
-    private static final String defaultSpritePath = "sprites/hiro_sheet.png";
+    private static final String TAG = EntityOld.class.getSimpleName();
+    private static final String defaultSpritePath = "sprites/ch1_sheet.png";
 
     private Vector2 velocity;
     private String entityID;
@@ -50,7 +50,7 @@ public class Entity {
     protected Sprite frameSprite = null;
     protected TextureRegion currentFrame = null;
 
-    public final int FRAME_WIDTH = 19;
+    public final int FRAME_WIDTH = 21;
     public final int FRAME_HEIGHT = 34;
     public static Rectangle boundingBox;
 
@@ -65,7 +65,7 @@ public class Entity {
         DOWN_RIGHT, DOWN_LEFT;
     }
 
-    public Entity(){
+    public EntityOld(){
         initEntity();
     }
 
@@ -158,14 +158,15 @@ public class Entity {
         TextureRegion[][] textureFrames = TextureRegion.split(texture, FRAME_WIDTH, FRAME_HEIGHT);
 
 
+        walkDownFrames = new Array<TextureRegion>(4);
+        walkDownLeftFrames = new Array<TextureRegion>(4);
+        walkDownRightFrames = new Array<TextureRegion>(4);
         walkLeftFrames = new Array<TextureRegion>(4);
         walkRightFrames = new Array<TextureRegion>(4);
         walkUpFrames = new Array<TextureRegion>(4);
-        walkUpRightFrames = new Array<TextureRegion>(4);
         walkUpLeftFrames = new Array<TextureRegion>(4);
-        walkDownFrames = new Array<TextureRegion>(4);
-        walkDownRightFrames = new Array<TextureRegion>(4);
-        walkDownLeftFrames = new Array<TextureRegion>(4);
+        walkUpRightFrames = new Array<TextureRegion>(4);
+
 
 
         for (int i = 0; i < 8; i++) {
@@ -204,15 +205,15 @@ public class Entity {
             }
         }
 
+
+        walkDownAnimation = new Animation(0.25f, walkDownFrames, Animation.PlayMode.LOOP);
+        walkDownLeftAnimation = new Animation(0.25f, walkDownLeftFrames, Animation.PlayMode.LOOP);
+        walkDownRightAnimation = new Animation(0.25f, walkDownRightFrames, Animation.PlayMode.LOOP);
         walkLeftAnimation = new Animation(0.25f, walkLeftFrames, Animation.PlayMode.LOOP);
         walkRightAnimation = new Animation(0.25f, walkRightFrames, Animation.PlayMode.LOOP);
         walkUpAnimation = new Animation(0.25f, walkUpFrames, Animation.PlayMode.LOOP);
-        walkUpRightAnimation = new Animation(0.25f, walkUpRightFrames, Animation.PlayMode.LOOP);
         walkUpLeftAnimation = new Animation(0.25f, walkUpLeftFrames, Animation.PlayMode.LOOP);
-        walkDownAnimation = new Animation(0.25f, walkDownFrames, Animation.PlayMode.LOOP);
-        walkDownRightAnimation = new Animation(0.25f, walkDownLeftFrames, Animation.PlayMode.LOOP); ;
-        walkDownLeftAnimation = new Animation(0.25f, walkDownRightFrames, Animation.PlayMode.LOOP);
-
+        walkUpRightAnimation = new Animation(0.25f, walkUpRightFrames, Animation.PlayMode.LOOP);
 
     }
 

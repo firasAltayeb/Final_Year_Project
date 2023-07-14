@@ -11,7 +11,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.Entity;
+import com.mygdx.game.EntityOld;
 import com.mygdx.game.MapManger;
 import com.mygdx.game.PlayerController;
 
@@ -41,7 +41,7 @@ public class MainGameScreen implements Screen {
         mapManger = new MapManger();
     }
 
-    private static Entity player;
+    private static EntityOld player;
 
     @Override
     public void show() {
@@ -58,7 +58,7 @@ public class MainGameScreen implements Screen {
 
         Gdx.app.debug(TAG, "UniteScale value is: " + mapRenderer.getUnitScale());
 
-        player = new Entity();
+        player = new EntityOld();
         player.init(mapManger.getPlayerStartUnitScaled().x,
                 mapManger.getPlayerStartUnitScaled().y);
 
