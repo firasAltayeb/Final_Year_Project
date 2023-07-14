@@ -21,6 +21,8 @@ public class PlayerController implements InputProcessor {
 	private static Map<Keys, Boolean> keys = new HashMap<Keys, Boolean>();
 	int screenWidth;
 	int screenHeight;
+	int touchDownX;
+	int touchDownY;
 
 
 	//initialize the hashmap for inputs
@@ -44,6 +46,8 @@ public class PlayerController implements InputProcessor {
 
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
+		touchDownX = 0;
+		touchDownY = 0;
 		doNothing = false;
 
 	}
@@ -125,6 +129,11 @@ public class PlayerController implements InputProcessor {
 		//Gdx.app.log(TAG, "Screen Width : " + Gdx.graphics.getWidth());
 		//Gdx.app.log(TAG, "Screen Height : " + Gdx.graphics.getHeight());
 
+		touchDownX = screenX;
+		touchDownY = screenY;
+		Gdx.app.log(TAG, "touchDownX " + screenX);
+		Gdx.app.log(TAG, "touchDownY " + screenY);
+
 		//top left corner
 		if((screenX >= 0 && screenX <= screenWidth/3) &&
 				(screenY >= 0 && screenY <= screenHeight/3)){
@@ -132,11 +141,10 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "doNothing is " + doNothing);
+				Gdx.app.log(TAG, "top left doNothing is " + doNothing);
 			}
 			else {
-				Gdx.app.log(TAG, "up left pressed" );
-				Gdx.app.log(TAG, "doNothing is " + doNothing);
+				Gdx.app.log(TAG, "up left pressed ");
 				this.upLeftPressed();
 			}
 		}
@@ -151,6 +159,7 @@ public class PlayerController implements InputProcessor {
 				Gdx.app.log(TAG, "up doNothing is " + doNothing);
 			}
 			else {
+				Gdx.app.log(TAG, "up pressed ");
 				this.upPressed();
 			}
 		}
@@ -165,6 +174,7 @@ public class PlayerController implements InputProcessor {
 				Gdx.app.log(TAG, "upright doNothing is " + doNothing);
 			}
 			else {
+				Gdx.app.log(TAG, "up right pressed ");
 				this.upRightPressed();
 			}
 		}
@@ -179,6 +189,7 @@ public class PlayerController implements InputProcessor {
 				Gdx.app.log(TAG, "left doNothing is " + doNothing);
 			}
 			else {
+				Gdx.app.log(TAG, "left pressed ");
 				this.leftPressed();
 			}
 		}
@@ -198,6 +209,7 @@ public class PlayerController implements InputProcessor {
 				Gdx.app.log(TAG, " right doNothing is " + doNothing);
 			}
 			else {
+				Gdx.app.log(TAG, "right pressed ");
 				this.rightPressed();
 			}
 		}
@@ -212,6 +224,7 @@ public class PlayerController implements InputProcessor {
 				Gdx.app.log(TAG, " down left doNothing is " + doNothing);
 			}
 			else {
+				Gdx.app.log(TAG, "down left pressed ");
 				this.downLeftPressed();
 			}
 		}
@@ -226,6 +239,7 @@ public class PlayerController implements InputProcessor {
 				Gdx.app.log(TAG, "down doNothing is " + doNothing);
 			}
 			else {
+				Gdx.app.log(TAG, "down pressed ");
 				this.downPressed();
 			}
 		}
@@ -240,11 +254,12 @@ public class PlayerController implements InputProcessor {
 				Gdx.app.log(TAG, "bottom doNothing is " + doNothing);
 			}
 			else {
+				Gdx.app.log(TAG, "down right pressed ");
 				this.downRightPressed();
 			}
 		}
 
-		Gdx.app.log(TAG, "touch down returned" );
+		//Gdx.app.log(TAG, "touch down returned" );
 
 		return true;
 	}
@@ -254,15 +269,14 @@ public class PlayerController implements InputProcessor {
 		//Gdx.app.log(TAG, "touch up : ( x == " + screenX + ", y ==" + screenY + ")" );
 
 		Gdx.app.log(TAG, "touch up inaction" );
-
 		Gdx.app.log(TAG, "do nothing " + doNothing);
 
 		if(doNothing){
 			// do nothing
-			Gdx.app.log(TAG, "doing nothing" );
+			//Gdx.app.log(TAG, "doing nothing" );
 		}
 		else {
-			Gdx.app.log(TAG, "hide() called" );
+			//Gdx.app.log(TAG, "hide() called" );
 			hide();
 		}
 
@@ -272,9 +286,54 @@ public class PlayerController implements InputProcessor {
 
 	}
 
+	//mention how
+	//TODO this helps movement
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false ;
+
+		Gdx.app.log(TAG, "touch dragged inaction" );
+		Gdx.app.log(TAG, "touchDownX " + screenX);
+		Gdx.app.log(TAG, "touchDownY " + screenY);
+
+
+		if(screenX > touchDownX + 50){
+			hide();
+			rightPressed();
+		}
+		else if(screenX < touchDownX - 50){
+			hide();
+			leftPressed();
+		}
+		else if(screenY > touchDownY + 50){
+			hide();
+			downPressed();
+		}
+		else if(screenY < touchDownY - 50){
+			hide();
+			upPressed();
+		}
+
+//		else if((screenX > touchDownX + 50) && (screenY > touchDownY + 50)){
+//			hide();
+//			downRightPressed();
+//		}
+//		else if((screenX > touchDownX + 50) && (screenY < touchDownY - 50)){
+//			hide();
+//			upRightPressed();
+//		}
+//		else if((screenX < touchDownX - 50) && (screenY > touchDownY + 50)){
+//			hide();
+//			downLeftPressed();
+//		}
+//		else if((screenX < touchDownX - 50) && (screenY < touchDownY - 50)){
+//			hide();
+//			upLeftReleased();
+//		}
+
+		touchDownX = screenX;
+		touchDownY = screenY;
+
+		return true;
 	}
 
 	@Override
