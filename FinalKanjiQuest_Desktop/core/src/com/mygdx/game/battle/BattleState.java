@@ -5,13 +5,13 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class BattleState extends BattleSubject {
 
+    //TODO speak about this,
     private static final String TAG = BattleState.class.getSimpleName();
 
     private String currentOpponent;
     private int currentZoneLevel = 0;
-    private final int chanceOfEncounter = 75;
-    private final int chanceOfEscape = 25;
-
+    private final int chanceOfEncounter = 85;
+    private final int chanceOfEscape = 85;
 
     public void setCurrentZoneLevel(int zoneLevel){
         currentZoneLevel = zoneLevel;
@@ -35,22 +35,10 @@ public class BattleState extends BattleSubject {
 
     public void setCurrentOpponent(){
         Gdx.app.debug(TAG, " Entered BATTLE ZONE: " + currentZoneLevel);
-        String monster = MonsterFactory.getInstance().getRandomMonster(currentZoneLevel);
-        if( monster == null ) return;
-        this.currentOpponent = monster;
-        notify(monster, BattleObserver.BattleEvent.OPPONENT_ADDED);
-    }
-
-    public void playerAttacks(){
-        if( currentOpponent == null ){
-            return;
-        }
-
-        notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_START);
-
-        Gdx.app.debug(TAG, "PLAYER ATTACK");
-
-        notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_DONE);
+        String letterToAnswer = MonsterFactory.getInstance().getRandomMonster(currentZoneLevel);
+        if (letterToAnswer == null) return;
+        this.currentOpponent = letterToAnswer;
+        notify(letterToAnswer, BattleObserver.BattleEvent.KANJI_ADDED);
     }
 
     public void playerRuns(){
@@ -58,12 +46,21 @@ public class BattleState extends BattleSubject {
         if( chanceOfEscape > randomVal  ) {
             notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_RUNNING);
         }else{
-            opponentAttacks();
+            answeredIncorrectly();
             return;
         }
     }
 
-    public void opponentAttacks(){
+    public void answeredCorrectly(){
+        if( currentOpponent == null ){
+            return;
+        }
+
+        notify(currentOpponent, BattleObserver.BattleEvent.OPPONENT_DEFEATED);
+
+    }
+
+    public void answeredIncorrectly(){
         if( currentOpponent == null ){
             return;
         }
@@ -71,7 +68,5 @@ public class BattleState extends BattleSubject {
         notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_HIT_DAMAGE);
 
         Gdx.app.debug(TAG, "PLayer lost health");
-
-        notify(currentOpponent, BattleObserver.BattleEvent.OPPONENT_TURN_DONE);
     }
 }

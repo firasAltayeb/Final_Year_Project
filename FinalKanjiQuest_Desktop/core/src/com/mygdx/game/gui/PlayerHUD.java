@@ -105,7 +105,7 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         progressUI.setVisible(false);
         progressUI.setMovable(false);
 
-        //Gdx.app.debug(TAG, "All hiragana memorised is " + LetterLvlCounter.isAllHiraganaMemorised());
+        //Gdx.app.debug(TAG, "All hiragana memorised is " + LetterLvlCounter.areAllHiraganaMemorised());
 
         inventoryUI = new InventoryUI(menuItemWindowWidth, menuItemWindowHeight);
         inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);

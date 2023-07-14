@@ -382,7 +382,7 @@ public class LetterLvlCounter {
           }
      }
 
-     public static boolean isAllHiraganaMemorised(){
+     public static boolean areAllHiraganaMemorised(){
           return allHiraganaMemorised;
      }
 

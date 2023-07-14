@@ -1,6 +1,5 @@
 package com.mygdx.game.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 public class ProgressUI extends Window implements ProgressSubject {
 
     private final static String TAG = ProgressUI.class.getSimpleName();
-
 
     private Label text;
     private String tempString;
@@ -80,7 +78,7 @@ public class ProgressUI extends Window implements ProgressSubject {
                 text = new Label(tempString, Utility.GUI_SKINS, "list_text");
             }
 
-            if(!LetterLvlCounter.isAllHiraganaMemorised()) {
+            if(!LetterLvlCounter.areAllHiraganaMemorised()) {
                 hiraganaLvlCounter += tempInt;
                 if (hiraganaLvlCounter >= 321) {
                     LetterLvlCounter.setAllHiraganaMemorisedToTrue();
@@ -89,7 +87,7 @@ public class ProgressUI extends Window implements ProgressSubject {
             }
 
             innerTable.add(equivalent).left();
-            innerTable.add(text).left();
+            innerTable.add(text).left().padRight(this.getWidth()/10);
         }
 
         table.add(innerTable);
@@ -104,13 +102,6 @@ public class ProgressUI extends Window implements ProgressSubject {
     public void updateSize(float width, float height){
         menuItemWindowWidth = width;
         menuItemWindowHeight = height;
-
-        //if(newMenuItemWindowWidth > menuItemWindowWidth &&
-        //        newMenuItemWindowHeight > menuItemWindowHeight){
-        //    for(int i = 0; i <= table.getCells().size-1; i++){
-        //
-        //    }
-        //}
 
         this.setSize(menuItemWindowWidth, menuItemWindowHeight);
     }
@@ -149,7 +140,7 @@ public class ProgressUI extends Window implements ProgressSubject {
                 text = new Label(tempString, Utility.GUI_SKINS, "list_text");
             }
 
-            if(!LetterLvlCounter.isAllHiraganaMemorised()) {
+            if(!LetterLvlCounter.areAllHiraganaMemorised()) {
                 hiraganaLvlCounter += tempInt;
                 if (hiraganaLvlCounter >= 321) {
                     LetterLvlCounter.setAllHiraganaMemorisedToTrue();
@@ -157,8 +148,7 @@ public class ProgressUI extends Window implements ProgressSubject {
             }
 
             innerTable.add(equivalent).left();
-            innerTable.add(text).left();
-
+            innerTable.add(text).left().padRight(this.getWidth()/10);
         }
 
         table.add(innerTable);
