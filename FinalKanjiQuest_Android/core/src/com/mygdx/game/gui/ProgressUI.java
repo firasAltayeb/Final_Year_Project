@@ -196,7 +196,8 @@ public class ProgressUI extends Window{
             kanjiTable.add(text).left().padRight(this.getWidth()/75);
         }
 
-        table.add(kanjiTable);
+        table.add(kanjiTable).left();
+        table.add();
 
         ScrollPane scrollPane = new ScrollPane(table);
         this.add(scrollPane).fill().expand();

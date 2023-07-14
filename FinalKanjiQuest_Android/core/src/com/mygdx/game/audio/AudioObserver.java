@@ -2,11 +2,11 @@ package com.mygdx.game.audio;
 
 public interface AudioObserver {
     public static enum AudioTypeEvent{
-        MUSIC_TITLE("audio/title_music.wav"),
+        MUSIC_TITLE("audio/main_music.ogg"),
         MUSIC_TOPWORLD("audio/topworld_music.ogg"),
         MUSIC_TOWN("audio/town_music.mp3"),
         MUSIC_BATTLE("audio/random_battle.mp3"),
-        MUSIC_FOREST("audio/forest_music.mp3"),
+        MUSIC_FOREST("audio/forest.mp3"),
         MUSIC_CAVE("audio/cave_music.mp3"),
         MUSIC_COAST("audio/coast_music.mp3"),
         MUSIC_ICE_FOREST("audio/ice_forest_music.mp3"),

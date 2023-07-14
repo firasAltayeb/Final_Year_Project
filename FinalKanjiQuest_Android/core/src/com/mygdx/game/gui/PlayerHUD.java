@@ -513,8 +513,8 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                 //Gdx.app.debug(TAG, "PLAYER_HAS_MOVED ");
                 if (battleUI.isBattleReady()) {
                     MainGameScreen.setGameState(MainGameScreen.GameState.SAVING);
-                    mapManager.disableCurrentmapMusic();
-                    notify(AudioObserver.AudioCommand.MUSIC_PLAY_LOOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
+                    //mapManager.disableCurrentmapMusic();
+                    //notify(AudioObserver.AudioCommand.MUSIC_PLAY_LOOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
                     battleUI.toBack();
                     battleUI.setVisible(true);
                 }
@@ -534,8 +534,8 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                 progressUI.updateTable();
 
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
-                notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
-                mapManager.enableCurrentmapMusic();
+                //notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
+                //mapManager.enableCurrentmapMusic();
                 battleUI.setVisible(false);
                 break;
             case LETTER_ANSWERED_INCORRECTLY:
@@ -546,14 +546,14 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                 showHearts();
                 ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                 if( numberOfHearts <= 0 ){
-                    notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
+                    //notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
                     battleUI.setVisible(false);
                     MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
                 }
                 break;
             case PLAYER_RUNNING:
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
-                mapManager.enableCurrentmapMusic();
+                //mapManager.enableCurrentmapMusic();
                 battleUI.setVisible(false);
                 break;
             case PLAYER_HIT_DAMAGE:

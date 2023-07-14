@@ -32,7 +32,7 @@ public class BattleUI extends Window implements BattleObserver {
     private ArrayList<KanjiLetter> kanjiLettersList;
     
     private BattleState battleState = null;
-    private final float checkTimer = 2.5f;
+    private final float checkTimer = 4;
     private float battleTimer = 0;
 
     private Image hiro;
