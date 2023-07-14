@@ -45,7 +45,7 @@ public class MainGameScreen implements Screen {
     @Override
     public void show() {
         //camera setup
-        setupViewport(10, 10);
+        setupViewport(15, 15);
 
         //get the current size
         camera = new OrthographicCamera();
@@ -83,7 +83,7 @@ public class MainGameScreen implements Screen {
 
         //if no collisions, will not update the player’s position
         if (!isCollisionWithMapLayer(player.boundingBox)) {
-            player.setNextPoitionToCurrent();
+            player.setNextPositionToCurrent();
         }
 
         controller.update(delta);

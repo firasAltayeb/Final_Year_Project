@@ -60,7 +60,8 @@ public class Entity {
         this.nextPlayerPosition = new Vector2();
         this.currentPlayerPosition = new Vector2();
         this.boundingBox = new Rectangle();
-        this.velocity = new Vector2(2f, 2f);
+        //Player speed
+        this.velocity = new Vector2(4f, 4f);
 
         Utility.loadTextureAsset(defaultSpritePath);
         loadDefaultSprite();
@@ -218,5 +219,46 @@ public class Entity {
                 break;
         }
     }
+
+    public void setNextPositionToCurrent(){
+        setCurrentPosition(nextPlayerPosition.x, nextPlayerPosition.y);
+        //Gdx.app.debug(TAG, "Setting nextPosition as Current: (" + _nextPlayerPosition.x + "," + _nextPlayerPosition.y + ")");
+    }
+
+    public void calculateNextPosition(Direction currentDirection, float deltaTime){
+        float testX = currentPlayerPosition.x;
+        float testY = currentPlayerPosition.y;
+
+        //Gdx.app.debug(TAG, "calculateNextPosition:: Current Position: (" + _currentPlayerPosition.x + "," + _currentPlayerPosition.y + ")"  );
+        //Gdx.app.debug(TAG, "calculateNextPosition:: Current Direction: " + _currentDirection  );
+
+        //currentVelocity * scalar quantity
+        velocity.scl(deltaTime);
+
+        switch (currentDirection) {
+            case LEFT :
+                testX -= velocity.x;
+                break;
+            case RIGHT :
+                testX += velocity.x;
+                break;
+            case UP :
+                testY += velocity.y;
+                break;
+            case DOWN :
+                testY -= velocity.y;
+                break;
+            default:
+                break;
+        }
+
+        nextPlayerPosition.x = testX;
+        nextPlayerPosition.y = testY;
+
+        //velocity
+        velocity.scl(1 / deltaTime);
+    }
+
+
 
 }
