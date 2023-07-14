@@ -150,6 +150,16 @@ public class MapManger {
         return  scaledPlayerStart;
     }
 
+    //scaled unit coordinate back to pixel coordinate
+    public void setClosestPlayerStartPositionFromScaledUnits(Vector2 position){
+        if (UNIT_SCALE <= 0)
+            return;
+
+        convertedUnits.set(position.x/UNIT_SCALE,
+                position.y/UNIT_SCALE);
+        setClosestStartPosition(convertedUnits);
+    }
+
     private void setClosestStartPosition(final  Vector2 position) {
         Gdx.app.debug(TAG, "setClosestStartPosition INPUT: (" + position.x + "," + position.y + ") " + currentMapName);
 
@@ -176,17 +186,6 @@ public class MapManger {
         }
         playerStartLocationTable.put(currentMapName, closestPlayerStartPosition.cpy());
     }
-
-    //scaled unit coordinate back to pixel coordinate
-    public void setClosestPlayerStartPositionFromScaledUnits(Vector2 position){
-        if (UNIT_SCALE <= 0)
-            return;
-
-        convertedUnits.set(position.x/UNIT_SCALE,
-                position.y/UNIT_SCALE);
-        setClosestStartPosition(convertedUnits);
-    }
-
 
 
 
