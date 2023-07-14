@@ -163,19 +163,19 @@ public class InventoryUI extends Window implements InventorySubject {
         return items;
     }
 
-    //public static void populateInventory(Table targetTable, Array<InventoryItemLocation> inventoryItems) {
-    //    clearInventoryItems(targetTable);
-    //
-    //    Array<Cell> cells = targetTable.getCells();
-    //    for(int i = 0; i < inventoryItems.size; i++){
-    //        InventoryItemLocation itemLocation = inventoryItems.get(i);
-    //        ItemTypeID itemTypeID = ItemTypeID.valueOf(itemLocation.getItemTypeAtLocation());
-    //        InventorySlot inventorySlot =  ((InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
-    //        InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemTypeID);
-    //        inventorySlot.add(item);
-    //
-    //    }
-    //}
+    public static void populateInventory(Table targetTable, Array<InventoryItemLocation> inventoryItems) {
+        clearInventoryItems(targetTable);
+
+        Array<Cell> cells = targetTable.getCells();
+        for(int i = 0; i < inventoryItems.size; i++){
+            InventoryItemLocation itemLocation = inventoryItems.get(i);
+            ItemTypeID itemTypeID = ItemTypeID.valueOf(itemLocation.getItemTypeAtLocation());
+            InventorySlot inventorySlot =  ((InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
+            InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemTypeID);
+            inventorySlot.add(item);
+
+        }
+    }
 
     public static void clearInventoryItems(Table targetTable){
         Array<Cell> cells = targetTable.getCells();

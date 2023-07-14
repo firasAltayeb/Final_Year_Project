@@ -102,20 +102,20 @@ public class ProfileManager extends ProfileSubject {
 
     public void saveProfile(){
         notify(this, ProfileObserver.ProfileEvent.SAVING_PROFILE);
-        String text = json.prettyPrint(json.toJson(profileProperties));
-        writeProfileToStorage(_profileName, text, true);
+        //String text = json.prettyPrint(json.toJson(profileProperties));
+        //writeProfileToStorage(_profileName, text, true);
     }
 
     public void loadProfile(){
-        String fullProfileFileName = _profileName+SAVEGAME_SUFFIX;
-        boolean doesProfileFileExist = Gdx.files.internal(fullProfileFileName).exists();
-
-        if( !doesProfileFileExist ){
-            System.out.println("File doesn't exist!");
-            return;
-        }
-
-        profileProperties = json.fromJson(ObjectMap.class, profiles.get(_profileName));
+        //String fullProfileFileName = _profileName+SAVEGAME_SUFFIX;
+        //boolean doesProfileFileExist = Gdx.files.internal(fullProfileFileName).exists();
+        //
+        //if( !doesProfileFileExist ){
+        //    System.out.println("File doesn't exist!");
+        //    return;
+        //}
+        //
+        //profileProperties = json.fromJson(ObjectMap.class, profiles.get(_profileName));
         notify(this, ProfileObserver.ProfileEvent.PROFILE_LOADED);
     }
 

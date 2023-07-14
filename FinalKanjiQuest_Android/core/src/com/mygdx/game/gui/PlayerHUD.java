@@ -1,6 +1,7 @@
 package com.mygdx.game.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -21,7 +22,7 @@ import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
 
-public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
+public class PlayerHUD implements Screen, InventoryObserver, ProfileObserver, ProgressObserver {
 
     private final static String TAG = PlayerHUD.class.getSimpleName();
 
@@ -34,7 +35,7 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
     private MenuListUI menuListUI;
 
     private TextButton menuButton;
-    private TextButton statusButton;
+    private TextButton progressButton;
     private TextButton inventoryButton;
 
     private Array<ImageButton> all_health_heart;
@@ -48,11 +49,16 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
 
     private InventoryUI inventoryUI;
 
-    public PlayerHUD(Camera camera, Entity player) {
+    public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer) {
         this.camera = camera;
         this.player = player;
         viewport = new ScreenViewport(this.camera);
         stage = new Stage(viewport);
+
+        multiplexer.addProcessor(this.getStage());
+        multiplexer.addProcessor(player.getInputProcessor());
+        Gdx.input.setInputProcessor(multiplexer);
+
         menuItemsXaxis = stage.getWidth()/40;
         menuItemsYaxis = stage.getHeight()/40;
         menuItemWindowWidth = stage.getWidth()/1.35f;
@@ -64,6 +70,7 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
             health_heart = new ImageButton(Utility.ITEMS_SKINS, "health_heart");
             health_heart.setVisible(false);
             health_heart.setPosition(stage.getWidth() / 60f + i * 20, stage.getHeight() / 1.1f);
+            health_heart.scaleBy(2,2);
             all_health_heart.add(health_heart);
         }
 
@@ -100,21 +107,29 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
         stage.addActor(inventoryUI);
 
         //Observers
-        //ProfileManager.getInstance().addObserver(this);
+        ProfileManager.getInstance().addObserver(this);
         progressUI.addObserver(this);
         inventoryUI.addObserver(this);
 
         menuButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
-                menuListUI.setVisible(menuListUI.isVisible()?false:true);
+                //menuListUI.setVisible(menuListUI.isVisible() ? false : true);
+                //MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+                if (menuListUI.isVisible()) {
+                    menuListUI.setVisible(false);
+                    multiplexer.addProcessor(player.getInputProcessor());
+                }
+                else {
+                    menuListUI.setVisible(true);
+                    multiplexer.removeProcessor(player.getInputProcessor());
+                }
                 progressUI.setVisible(false);
                 inventoryUI.setVisible(false);
-                //MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
             }
         });
 
-        statusButton =  menuListUI.getStatusButton();
-        statusButton.addListener(new ClickListener() {
+        progressButton =  menuListUI.getStatusButton();
+        progressButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
                 progressUI.setVisible(progressUI.isVisible()?false:true);
                 inventoryUI.setVisible(false);
@@ -136,50 +151,53 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
         return stage;
     }
 
-    //@Override
-    //public void onNotify(ProfileManager profileManager, ProfileEvent event) {
-    //    switch(event){
-    //        case PROFILE_LOADED:
-    //            int hpMaxVal = profileManager.getProperty("currentPlayerHPMax", Integer.class);
-    //            int hpVal = profileManager.getProperty("currentPlayerHP", Integer.class);
-    //            boolean firstTime = hpVal<0?true:false;
-    //
-    //            if( firstTime ){
-    //                hpVal = 3;
-    //                hpMaxVal = 10;
-    //                progressUI.setHPValueMax(hpMaxVal);
-    //                progressUI.setHPValue(hpVal);
-    //            }else{
-    //                progressUI.setHPValueMax(hpMaxVal);
-    //                progressUI.setHPValue(hpVal);
-    //            }
-    //
-    //            showHearts(hpVal);
-    //
-    //            if( firstTime ){
-    //                //add default items if first time
-    //                Array<ItemTypeID> items = player.getEntityConfig().getInventory();
-    //                Array<InventoryItemLocation> itemLocations = new Array<InventoryItemLocation>();
-    //                for( int i = 0; i < items.size; i++){
-    //                    itemLocations.add(new InventoryItemLocation(i, items.get(i).toString()));
-    //                }
-    //                InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), itemLocations);
-    //                profileManager.setProperty("playerInventory", InventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
-    //            }
-    //
-    //            Array<InventoryItemLocation> inventory = profileManager.getProperty("playerInventory", Array.class);
-    //            InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), inventory);
-    //
-    //            break;
-    //        case SAVING_PROFILE:
-    //            profileManager.setProperty("playerInventory",  inventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
-    //            profileManager.setProperty("currentPlayerHPMax", progressUI.getHPValueMax() );
-    //            profileManager.setProperty("currentPlayerHP", progressUI.getHPValue() );
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
+    @Override
+    public void onNotify(ProfileManager profileManager, ProfileEvent event) {
+        switch(event){
+            case PROFILE_LOADED:
+                //int hpMaxVal = profileManager.getProperty("currentPlayerHPMax", Integer.class);
+                //int hpVal = profileManager.getProperty("currentPlayerHP", Integer.class);
+                //boolean firstTime = hpVal<0?true:false;
+                int hpVal = 3;
+                int hpMaxVal = 10;
+                boolean firstTime = progressUI.getHPValue()<0?true:false;
+
+                if( firstTime ){
+                    //int hpVal = 3;
+                    //int hpMaxVal = 10;
+                    progressUI.setHPValueMax(hpMaxVal);
+                    progressUI.setHPValue(hpVal);
+                }else{
+                    progressUI.setHPValueMax(hpMaxVal);
+                    progressUI.setHPValue(hpVal);
+                }
+
+                showHearts(hpVal);
+
+                if( firstTime ){
+                    //add default items if first time
+                    Array<ItemTypeID> items = player.getEntityConfig().getInventory();
+                    Array<InventoryItemLocation> itemLocations = new Array<InventoryItemLocation>();
+                    for( int i = 0; i < items.size; i++){
+                        itemLocations.add(new InventoryItemLocation(i, items.get(i).toString()));
+                    }
+                    InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), itemLocations);
+                    //profileManager.setProperty("playerInventory", InventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
+                }
+
+                //Array<InventoryItemLocation> inventory = profileManager.getProperty("playerInventory", Array.class);
+                //InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), inventory);
+
+                break;
+            case SAVING_PROFILE:
+                //profileManager.setProperty("playerInventory",  inventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
+                //profileManager.setProperty("currentPlayerHPMax", progressUI.getHPValueMax() );
+                //profileManager.setProperty("currentPlayerHP", progressUI.getHPValue() );
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     public void show() {
@@ -241,10 +259,10 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
     public void onNotify(int value, StatusEvent event) {
         switch(event) {
             case UPDATED_HP:
-                ProfileManager.getInstance().setProperty("currentPlayerHP", progressUI.getHPValue());
+                //ProfileManager.getInstance().setProperty("currentPlayerHP", progressUI.getHPValue());
                 break;
             case UPDATED_MAX_HP:
-                ProfileManager.getInstance().setProperty("currentPlayerHPMax", progressUI.getHPValueMax());
+                //ProfileManager.getInstance().setProperty("currentPlayerHPMax", progressUI.getHPValueMax());
                 break;
             default:
                 break;

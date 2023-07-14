@@ -1,6 +1,7 @@
 package com.mygdx.game.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -34,7 +35,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private MenuListUI menuListUI;
 
     private TextButton menuButton;
-    private TextButton statusButton;
+    private TextButton progressButton;
     private TextButton inventoryButton;
 
     private Array<ImageButton> all_health_heart;
@@ -48,11 +49,17 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
     private InventoryUI inventoryUI;
 
-    public PlayerHUD(Camera camera, Entity player) {
+    public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer) {
         this.camera = camera;
         this.player = player;
         viewport = new ScreenViewport(this.camera);
         stage = new Stage(viewport);
+
+        multiplexer.addProcessor(this.getStage());
+        multiplexer.addProcessor(player.getInputProcessor());
+        Gdx.input.setInputProcessor(multiplexer);
+
+
         menuItemsXaxis = stage.getWidth()/40;
         menuItemsYaxis = stage.getHeight()/40;
         menuItemWindowWidth = stage.getWidth()/1.35f;
@@ -106,15 +113,23 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
         menuButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
-                menuListUI.setVisible(menuListUI.isVisible()?false:true);
+                //menuListUI.setVisible(menuListUI.isVisible() ? false : true);
+                //MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+                if (menuListUI.isVisible()) {
+                    menuListUI.setVisible(false);
+                    multiplexer.addProcessor(player.getInputProcessor());
+                }
+                else {
+                    menuListUI.setVisible(true);
+                    multiplexer.removeProcessor(player.getInputProcessor());
+                }
                 progressUI.setVisible(false);
                 inventoryUI.setVisible(false);
-                MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
             }
         });
 
-        statusButton =  menuListUI.getStatusButton();
-        statusButton.addListener(new ClickListener() {
+        progressButton =  menuListUI.getStatusButton();
+        progressButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
                 progressUI.setVisible(progressUI.isVisible()?false:true);
                 inventoryUI.setVisible(false);

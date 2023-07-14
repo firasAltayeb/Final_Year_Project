@@ -31,7 +31,6 @@ public class MainMenuScreen implements Screen {
 		TextButton loadGameButton = new TextButton("Load Game", Utility.GUI_SKINS);
 		TextButton exitButton = new TextButton("Exit", Utility.GUI_SKINS);
 
-
 		//Layout
 		table.add(title).spaceBottom(75).row();
 		table.add(newGameButton).spaceBottom(10).row();
