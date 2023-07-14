@@ -71,7 +71,7 @@ public class Entity {
         frameTime = (frameTime + delta) % 5; //want to avoid overflow
 
         //we want the hitbox to be at the feet for a better feel
-        setBoundingBoxSize(0f, 0.5f);
+        setBoundingBoxSize(0.4f, 0.6f);
     }
 
     public void init(float startX, float startY){
@@ -124,5 +124,49 @@ public class Entity {
         boundingBox.set(minX, minY, width, height);
     }
 
+    private void loadDefaultSprite(){
+        Texture texture = Utility.getTextureAsset(defaultSpritePath);
+        TextureRegion [][] textureFrames = TextureRegion.split(texture,
+                FRAME_WIDTH, FRAME_HEIGHT);
+        frameSprite = new Sprite(textureFrames[0][0].getTexture(),
+                0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+        currentFrame = textureFrames[0][0];
+    }
+
+    private void loadAllAnimations(){
+        //Walking animation
+        Texture texture = Utility.getTextureAsset(defaultSpritePath);
+        TextureRegion[][] textureFrames = TextureRegion.split(texture, FRAME_WIDTH, FRAME_HEIGHT);
+
+        walkDownFrames = new Array<TextureRegion>(4);
+        walkLeftFrames = new Array<TextureRegion>(4);
+        walkRightFrames = new Array<TextureRegion>(4);
+        walkUpFrames = new Array<TextureRegion>(4);
+
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                //Gdx.app.debug(TAG, "Got frame " + i + "," + j + " from " + sourceImage);
+                TextureRegion region = textureFrames[i][j];
+                if( region == null ){
+                    Gdx.app.debug(TAG, "Got null animation frame " + i + "," + j);
+                }
+                switch(i)
+                {
+                    case 0:
+                        walkUpFrames.insert(j, region);
+                        break;
+                    case 1:
+                        walkDownFrames.insert(j, region);
+                        break;
+                    case 2:
+                        walkLeftFrames.insert(j, region);
+                        break;
+                    case 3:
+                        walkRightFrames.insert(j, region);
+                        break;
+                }
+            }
+    }
 
 }

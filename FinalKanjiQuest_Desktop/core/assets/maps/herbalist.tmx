@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="16" tilewidth="16" tileheight="16" nextobjectid="23">
  <tileset firstgid="1" name="inside" tilewidth="16" tileheight="16" tilecount="1680" columns="48">
-  <image source="tilesets/inside.png" trans="ffffff" width="768" height="560"/>
+  <image source="../objects/inside.png" trans="ffffff" width="768" height="560"/>
   <terraintypes>
    <terrain name="carpoet1" tile="-1"/>
    <terrain name="carpet2" tile="-1"/>
@@ -143,6 +143,6 @@
   <object id="21" name="PLAYER_START" x="144" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
-  <object id="20" name="TOWN_OF_BEGINNINGS" x="144" y="192" width="32" height="16"/>
+  <object id="20" name="TOWN" x="144" y="192" width="32" height="16"/>
  </objectgroup>
 </map>

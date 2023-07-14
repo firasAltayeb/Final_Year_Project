@@ -22,7 +22,7 @@ public class MapManger {
     private Hashtable<String, Vector2> playerStartLocationTable;
 
     //maps
-    private final static String TOWN_OF_BEGINNINGS = "TOWN_OF_BEGINNINGS";
+    private final static String TOWN = "TOWN";
     private final static String ARMORER = "ARMORER";
     private final static String LIBRARY = "LIBRARY";
     private final static String HERBALIST = "HERBALIST";
@@ -54,7 +54,7 @@ public class MapManger {
         playerStart = new Vector2(0,0);
         mapTable = new Hashtable();
 
-        mapTable.put(TOWN_OF_BEGINNINGS, "maps/town_of_beginnings.tmx" );
+        mapTable.put(TOWN, "maps/town.tmx" );
         mapTable.put(ARMORER, "maps/armorer.tmx" );
         mapTable.put(LIBRARY, "maps/library.tmx" );
         mapTable.put(HERBALIST, "maps/herbalist.tmx" );
@@ -63,7 +63,7 @@ public class MapManger {
         mapTable.put(INN_SECOND_FLOOR, "maps/inn_second_floor.tmx" );
 
         playerStartLocationTable = new Hashtable<>();
-        playerStartLocationTable.put(TOWN_OF_BEGINNINGS, playerStart.cpy());
+        playerStartLocationTable.put(TOWN, playerStart.cpy());
         playerStartLocationTable.put(ARMORER, playerStart.cpy());
         playerStartLocationTable.put(LIBRARY, playerStart.cpy());
         playerStartLocationTable.put(HERBALIST, playerStart.cpy());
@@ -130,7 +130,7 @@ public class MapManger {
 
     public TiledMap getCurrentMap(){
         if (currentMap == null){
-            currentMapName = TOWN_OF_BEGINNINGS;
+            currentMapName = TOWN;
             loadMap(currentMapName);
         }
         return  currentMap;
