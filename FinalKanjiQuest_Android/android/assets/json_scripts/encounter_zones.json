@@ -1,0 +1,28 @@
+[
+
+{
+  zoneID : 1
+  monsters: .kanjiHa.kanjiHana.kanjiKi.kanjiMori.kanjiMushi.
+},
+{
+  zoneID : 2
+  monsters: .kanjiIshi.kanjiKaze.kanjiTsuchi.kanjiUchi.kanjiYama.
+},
+{
+  zoneID : 3
+  monsters: .kanjiUmi.kanjiSakana.kanjiMizu.kanjiKai.kanjiIke.
+},
+{
+  zoneID : 4
+  monsters: .kanjiYuki.kanjiKoori.kanjiKawa.kanjiHayashi.kanjiFuyu.
+},
+{
+  zoneID : 5
+  monsters: .kanjiTo.kanjiMon.kanjiTera.kanjiAna.kanjiSoto.
+},
+{
+  zoneID : 6
+  monsters: .kanjiKa.kanjiHi.kanjiChi.kanjiAka.kanjiHikari.
+},
+
+]

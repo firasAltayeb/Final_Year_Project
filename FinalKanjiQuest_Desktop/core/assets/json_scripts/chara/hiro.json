@@ -1,0 +1,313 @@
+{
+entityID : PLAYER_START
+state : IDLE
+direction : DOWN
+inventory : [
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: HEART
+	},
+	{
+		value: HEART
+	},
+	{
+		value: HEART
+	},
+	{
+		value: HEART
+	},
+	{
+		value: HEART
+	},
+	{
+		value: H_RUNESTONE
+	},
+	{
+		value: H_RUNESTONE
+	},
+	{
+		value: H_RUNESTONE
+	},
+	{
+		value: NEGATIVE_H_RUNESTONE
+	},
+	{
+		value: NEGATIVE_H_RUNESTONE
+	},
+	{
+		value: NEGATIVE_H_RUNESTONE
+	},
+	{
+		value: K_RUNESTONE
+	},
+	{
+		value: K_RUNESTONE
+	},
+	{
+		value: K_RUNESTONE
+	},
+	{
+		value: NEGATIVE_K_RUNESTONE
+	},
+	{
+		value: NEGATIVE_K_RUNESTONE
+	},
+	{
+		value: NEGATIVE_K_RUNESTONE
+	},
+]
+animationConfig: [
+	{
+		frameDuration: 0.25
+		animationType: WALK_DOWN
+		texturePaths: [
+			sprites/chara/hiro_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 0
+				y: 0
+			}
+			
+			{
+				x: 0
+				y: 1
+			}
+			{
+			    x: 0
+				y: 2
+			}
+			{
+			    x: 0
+				y: 3
+			}
+		]
+	}
+	{
+		frameDuration: 0.25
+		animationType: WALK_DOWN_LEFT
+		texturePaths: [
+			sprites/chara/hiro_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 1
+				y: 0
+			}
+
+			{
+				x: 1
+				y: 1
+			}
+			{
+				x: 1
+				y: 2
+			}
+			{
+				x: 1
+				y: 3
+			}
+		]
+	}
+	{
+		frameDuration: 0.25
+		animationType: WALK_DOWN_RIGHT
+		texturePaths: [
+			sprites/chara/hiro_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 2
+				y: 0
+			}
+
+			{
+				x: 2
+				y: 1
+			}
+			{
+				x: 2
+				y: 2
+			}
+			{
+				x: 2
+				y: 3
+			}
+		]
+	}
+	{
+	    frameDuration: 0.25
+		animationType: WALK_LEFT
+		texturePaths: [
+			sprites/chara/hiro_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 3
+				y: 0
+			}
+			
+			{
+				x: 3
+				y: 1
+			}
+			{
+			    x: 3
+				y: 2
+			}
+			{
+			    x: 3
+				y: 3
+			}
+		]
+	}
+	{
+	    frameDuration: 0.25
+		animationType: WALK_RIGHT
+		texturePaths: [
+			sprites/chara/hiro_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 4
+				y: 0
+			}
+			
+			{
+				x: 4
+				y: 1
+			}
+			{
+			    x: 4
+				y: 2
+			}
+			{
+			    x: 4
+				y: 3
+			}
+		]
+	}
+	{
+	    frameDuration: 0.25
+		animationType: WALK_UP
+		texturePaths: [
+			sprites/chara/hiro_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 5
+				y: 0
+			}
+			
+			{
+				x: 5
+				y: 1
+			}
+			{
+			    x: 5
+				y: 2
+			}
+			{
+			    x: 5
+				y: 3
+			}
+		]
+	}
+	{
+		frameDuration: 0.25
+		animationType: WALK_UP_LEFT
+		texturePaths: [
+			sprites/chara/hiro_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 6
+				y: 0
+			}
+
+			{
+				x: 6
+				y: 1
+			}
+			{
+				x: 6
+				y: 2
+			}
+			{
+				x: 6
+				y: 3
+			}
+		]
+	}
+	{
+		frameDuration: 0.25
+		animationType: WALK_UP_RIGHT
+		texturePaths: [
+			sprites/chara/hiro_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 7
+				y: 0
+			}
+
+			{
+				x: 7
+				y: 1
+			}
+			{
+				x: 7
+				y: 2
+			}
+			{
+				x: 7
+				y: 3
+			}
+		]
+	}
+]
+}	

@@ -1,0 +1,537 @@
+[
+	{
+		hiraganaEquivalent: hiraganaA
+		katakanaEquivalent: katakanaA
+		romajiEquivalent: romajiA
+	},
+	{
+		hiraganaEquivalent: hiraganaI
+		katakanaEquivalent: katakanaI
+		romajiEquivalent: romajiI
+	},
+	{
+		hiraganaEquivalent: hiraganaU
+		katakanaEquivalent: katakanaU
+		romajiEquivalent: romajiU
+	},
+	{
+		hiraganaEquivalent: hiraganaE
+		katakanaEquivalent: katakanaE
+		romajiEquivalent: romajiE
+	},
+	{
+		hiraganaEquivalent: hiraganaO
+		katakanaEquivalent: katakanaO
+		romajiEquivalent: romajiO
+	},
+	{
+		hiraganaEquivalent: hiraganaKa
+		katakanaEquivalent: katakanaKa
+		romajiEquivalent: romajiKa
+	},
+	{
+		hiraganaEquivalent: hiraganaKi
+		katakanaEquivalent: katakanaKi
+		romajiEquivalent: romajiKi
+	},
+	{
+		hiraganaEquivalent: hiraganaKu
+		katakanaEquivalent: katakanaKu
+		romajiEquivalent: romajiKu
+	},
+	{
+		hiraganaEquivalent: hiraganaKe
+		katakanaEquivalent: katakanaKe
+		romajiEquivalent: romajiKe
+	},
+	{
+		hiraganaEquivalent: hiraganaKo
+		katakanaEquivalent: katakanaKo
+		romajiEquivalent: romajiKo
+	},
+	{
+		hiraganaEquivalent: hiraganaSa
+		katakanaEquivalent: katakanaSa
+		romajiEquivalent: romajiSa
+	},
+	{
+		hiraganaEquivalent: hiraganaShi
+		katakanaEquivalent: katakanaShi
+		romajiEquivalent: romajiShi
+	},
+	{
+		hiraganaEquivalent: hiraganaSu
+		katakanaEquivalent: katakanaSu
+		romajiEquivalent: romajiSu
+	},
+	{
+		hiraganaEquivalent: hiraganaSe
+		katakanaEquivalent: katakanaSe
+		romajiEquivalent: romajiSe
+	},
+	{
+		hiraganaEquivalent: hiraganaSo
+		katakanaEquivalent: katakanaSo
+		romajiEquivalent: romajiSo
+	},
+	{
+		hiraganaEquivalent: hiraganaTa
+		katakanaEquivalent: katakanaTa
+		romajiEquivalent: romajiTa
+	},
+	{
+		hiraganaEquivalent: hiraganaChi
+		katakanaEquivalent: katakanaChi
+		romajiEquivalent: romajiChi
+	},
+	{
+		hiraganaEquivalent: hiraganaTsu
+		katakanaEquivalent: katakanaTsu
+		romajiEquivalent: romajiTsu
+	},
+	{
+		hiraganaEquivalent: hiraganaTe
+		katakanaEquivalent: katakanaTe
+		romajiEquivalent: romajiTe
+	},
+	{
+		hiraganaEquivalent: hiraganaTo
+		katakanaEquivalent: katakanaTo
+		romajiEquivalent: romajiTo
+	},
+	{
+		hiraganaEquivalent: hiraganaNa
+		katakanaEquivalent: katakanaNa
+		romajiEquivalent: romajiNa
+	},
+	{
+		hiraganaEquivalent: hiraganaNi
+		katakanaEquivalent: katakanaN
+		romajiEquivalent: romajiNi
+	},
+	{
+		hiraganaEquivalent: hiraganaNu
+		katakanaEquivalent: katakanaNu
+		romajiEquivalent: romajiNu
+	},
+	{
+		hiraganaEquivalent: hiraganaNe
+		katakanaEquivalent: katakanaNe
+		romajiEquivalent: romajiNe
+	},
+	{
+		hiraganaEquivalent: hiraganaNo
+		katakanaEquivalent: katakanaNo
+		romajiEquivalent: romajiNo
+	},
+	{
+		hiraganaEquivalent: hiraganaHa
+		katakanaEquivalent: katakanaHa
+		romajiEquivalent: romajiHa
+	},
+	{
+		hiraganaEquivalent: hiraganaHi
+		katakanaEquivalent: katakanaHi
+		romajiEquivalent: romajiHi
+	},
+	{
+		hiraganaEquivalent: hiraganaHu
+		katakanaEquivalent: katakanaHu
+		romajiEquivalent: romajiHu
+	},
+	{
+		hiraganaEquivalent: hiraganaHe
+		katakanaEquivalent: katakanaHe
+		romajiEquivalent: romajiHe
+	},
+	{
+		hiraganaEquivalent: hiraganaHo
+		katakanaEquivalent: katakanaHo
+		romajiEquivalent: romajiHo
+	},
+	{
+		hiraganaEquivalent: hiraganaMa
+		katakanaEquivalent: katakanaMa
+		romajiEquivalent: romajiMa
+	},
+	{
+		hiraganaEquivalent: hiraganaMi
+		katakanaEquivalent: katakanaMi
+		romajiEquivalent: romajiMi
+	},
+	{
+		hiraganaEquivalent: hiraganaMu
+		katakanaEquivalent: katakanaMu
+		romajiEquivalent: romajiMu
+	},
+	{
+		hiraganaEquivalent: hiraganaMe
+		katakanaEquivalent: katakanaMe
+		romajiEquivalent: romajiMe
+	},
+	{
+		hiraganaEquivalent: hiraganaMo
+		katakanaEquivalent: katakanaMo
+		romajiEquivalent: romajiMo
+	},
+	{
+		hiraganaEquivalent: hiraganaRa
+		katakanaEquivalent: katakanaRa
+		romajiEquivalent: romajiRa
+	},
+	{
+		hiraganaEquivalent: hiraganaRi
+		katakanaEquivalent: katakanaRi
+		romajiEquivalent: romajiRi
+	},
+	{
+		hiraganaEquivalent: hiraganaRu
+		katakanaEquivalent: katakanaRu
+		romajiEquivalent: romajiRu
+	},
+	{
+		hiraganaEquivalent: hiraganaRe
+		katakanaEquivalent: katakanaRe
+		romajiEquivalent: romajiRe
+	},
+	{
+		hiraganaEquivalent: hiraganaRo
+		katakanaEquivalent: katakanaRo
+		romajiEquivalent: romajiRo
+	},
+	{
+		hiraganaEquivalent: hiraganaYa
+		katakanaEquivalent: katakanaYa
+		romajiEquivalent: romajiYa
+	},
+	{
+		hiraganaEquivalent: hiraganaYu
+		katakanaEquivalent: katakanaYu
+		romajiEquivalent: romajiYu
+	},
+	{
+		hiraganaEquivalent: hiraganaYo
+		katakanaEquivalent: katakanaYo
+		romajiEquivalent: romajiYo
+	},
+	{
+		hiraganaEquivalent: hiraganaWa
+		katakanaEquivalent: katakanaWa
+		romajiEquivalent: romajiWa
+	},
+	{
+		hiraganaEquivalent: hiraganaWo
+		katakanaEquivalent: katakanaWo
+		romajiEquivalent: romajiWo
+	},
+	{
+		hiraganaEquivalent: hiraganaN
+		katakanaEquivalent: katakanaN
+		romajiEquivalent: romajiN
+	},
+	{
+		hiraganaEquivalent: hiraganaGa
+		katakanaEquivalent: katakanaGa
+		romajiEquivalent: romajiGa
+	},
+	{
+		hiraganaEquivalent: hiraganaGi
+		katakanaEquivalent: katakanaGi
+		romajiEquivalent: romajiGi
+	},
+	{
+		hiraganaEquivalent: hiraganaGu
+		katakanaEquivalent: katakanaGu
+		romajiEquivalent: romajiGu
+	},
+	{
+		hiraganaEquivalent: hiraganaGe
+		katakanaEquivalent: katakanaGe
+		romajiEquivalent: romajiGe
+	},
+	{
+		hiraganaEquivalent: hiraganaGo
+		katakanaEquivalent: katakanaGo
+		romajiEquivalent: romajiGo
+	},
+	{
+		hiraganaEquivalent: hiraganaZa
+		katakanaEquivalent: katakanaZa
+		romajiEquivalent: romajiZa
+	},
+	{
+		hiraganaEquivalent: hiraganaJi
+		katakanaEquivalent: katakanaJi
+		romajiEquivalent: romajiJi
+	},
+	{
+		hiraganaEquivalent: hiraganaZu
+		katakanaEquivalent: katakanaZu
+		romajiEquivalent: romajiZu
+	},
+	{
+		hiraganaEquivalent: hiraganaZe
+		katakanaEquivalent: katakanaZe
+		romajiEquivalent: romajiZe
+	},
+	{
+		hiraganaEquivalent: hiraganaZo
+		katakanaEquivalent: katakanaZo
+		romajiEquivalent: romajiZo
+	},
+	{
+		hiraganaEquivalent: hiraganaDa
+		katakanaEquivalent: katakanaDa
+		romajiEquivalent: romajiDa
+	},
+	{
+		hiraganaEquivalent: hiraganaDi
+		katakanaEquivalent: katakanaDi
+		romajiEquivalent: romajiDi
+	},
+	{
+		hiraganaEquivalent: hiraganaDu
+		katakanaEquivalent: katakanaDu
+		romajiEquivalent: romajiDu
+	},
+	{
+		hiraganaEquivalent: hiraganaDe
+		katakanaEquivalent: katakanaDe
+		romajiEquivalent: romajiDe
+	},
+	{
+		hiraganaEquivalent: hiraganaDo
+		katakanaEquivalent: katakanaDo
+		romajiEquivalent: romajiDo
+	},
+	{
+		hiraganaEquivalent: hiraganaBa
+		katakanaEquivalent: katakanaBa
+		romajiEquivalent: romajiBa
+	},
+	{
+		hiraganaEquivalent: hiraganaBi
+		katakanaEquivalent: katakanaBi
+		romajiEquivalent: romajiBi
+	},
+	{
+		hiraganaEquivalent: hiraganaBu
+		katakanaEquivalent: katakanaBu
+		romajiEquivalent: romajiBu
+	},
+	{
+		hiraganaEquivalent: hiraganaBe
+		katakanaEquivalent: katakanaBe
+		romajiEquivalent: romajiBe
+	},
+	{
+		hiraganaEquivalent: hiraganaBo
+		katakanaEquivalent: katakanaBo
+		romajiEquivalent: romajiBo
+	},
+	{
+		hiraganaEquivalent: hiraganaPa
+		katakanaEquivalent: katakanaPa
+		romajiEquivalent: romajiPa
+	},
+	{
+		hiraganaEquivalent: hiraganaPi
+		katakanaEquivalent: katakanaPi
+		romajiEquivalent: romajiPi
+	},
+	{
+		hiraganaEquivalent: hiraganaPu
+		katakanaEquivalent: katakanaPu
+		romajiEquivalent: romajiPu
+	},
+	{
+		hiraganaEquivalent: hiraganaPe
+		katakanaEquivalent: katakanaPe
+		romajiEquivalent: romajiPe
+	},
+	{
+		hiraganaEquivalent: hiraganaPo
+		katakanaEquivalent: katakanaPo
+		romajiEquivalent: romajiPo
+	},
+	{
+		hiraganaEquivalent: hiraganaKya
+		katakanaEquivalent: katakanaKya
+		romajiEquivalent: romajiKya
+	},
+	{
+		hiraganaEquivalent: hiraganaKyu
+		katakanaEquivalent: katakanaKyu
+		romajiEquivalent: romajiKyu
+	},
+	{
+		hiraganaEquivalent: hiraganaKyo
+		katakanaEquivalent: katakanaKyo
+		romajiEquivalent: romajiKyo
+	},
+	{
+		hiraganaEquivalent: hiraganaSha
+		katakanaEquivalent: katakanaSha
+		romajiEquivalent: romajiSha
+	},
+	{
+		hiraganaEquivalent: hiraganaShu
+		katakanaEquivalent: katakanaShu
+		romajiEquivalent: romajiShu
+	},
+	{
+		hiraganaEquivalent: hiraganaSho
+		katakanaEquivalent: katakanaSho
+		romajiEquivalent: romajiSho
+	},
+	{
+		hiraganaEquivalent: hiraganaCha
+		katakanaEquivalent: katakanaCha
+		romajiEquivalent: romajiCha
+	},
+	{
+		hiraganaEquivalent: hiraganaChu
+		katakanaEquivalent: katakanaChu
+		romajiEquivalent: romajiChu
+	},
+	{
+		hiraganaEquivalent: hiraganaCho
+		katakanaEquivalent: katakanaCho
+		romajiEquivalent: romajiCho
+	},
+	{
+		hiraganaEquivalent: hiraganaHya
+		katakanaEquivalent: katakanaHya
+		romajiEquivalent: romajiHya
+	},
+	{
+		hiraganaEquivalent: hiraganaHyu
+		katakanaEquivalent: katakanaHyu
+		romajiEquivalent: romajiHyu
+	},
+	{
+		hiraganaEquivalent: hiraganaHyo
+		katakanaEquivalent: katakanaHyo
+		romajiEquivalent: romajiHyo
+	},
+	{
+		hiraganaEquivalent: hiraganaNya
+		katakanaEquivalent: katakanaNya
+		romajiEquivalent: romajiNya
+	},
+	{
+		hiraganaEquivalent: hiraganaNyu
+		katakanaEquivalent: katakanaNyu
+		romajiEquivalent: romajiNyu
+	},
+	{
+		hiraganaEquivalent: hiraganaNyo
+		katakanaEquivalent: katakanaNyo
+		romajiEquivalent: romajiNyo
+	},
+	{
+		hiraganaEquivalent: hiraganaMya
+		katakanaEquivalent: katakanaMya
+		romajiEquivalent: romajiMya
+	},
+	{
+		hiraganaEquivalent: hiraganaMyu
+		katakanaEquivalent: katakanaMyu
+		romajiEquivalent: romajiMyu
+	},
+	{
+		hiraganaEquivalent: hiraganaMyo
+		katakanaEquivalent: katakanaMyo
+		romajiEquivalent: romajiMyo
+	},
+	{
+		hiraganaEquivalent: hiraganaRya
+		katakanaEquivalent: katakanaRya
+		romajiEquivalent: romajiRya
+	},
+	{
+		hiraganaEquivalent: hiraganaRyu
+		katakanaEquivalent: katakanaRyu
+		romajiEquivalent: romajiRyu
+	},
+	{
+		hiraganaEquivalent: hiraganaRyo
+		katakanaEquivalent: katakanaRyo
+		romajiEquivalent: romajiRyo
+	},
+	{
+		hiraganaEquivalent: hiraganaGya
+		katakanaEquivalent: katakanaGya
+		romajiEquivalent: romajiGya
+	},
+	{
+		hiraganaEquivalent: hiraganaGyu
+		katakanaEquivalent: katakanaGyu
+		romajiEquivalent: romajiGyu
+	},
+	{
+		hiraganaEquivalent: hiraganaGyo
+		katakanaEquivalent: katakanaGyo
+		romajiEquivalent: romajiGyo
+	},
+	{
+		hiraganaEquivalent: hiraganaJya
+		katakanaEquivalent: katakanaJya
+		romajiEquivalent: romajiJya
+	},
+	{
+		hiraganaEquivalent: hiraganaJyu
+		katakanaEquivalent: katakanaJyu
+		romajiEquivalent: romajiJyu
+	},
+	{
+		hiraganaEquivalent: hiraganaJyo
+		katakanaEquivalent: katakanaJyo
+		romajiEquivalent: romajiJyo
+	},
+	{
+		hiraganaEquivalent: hiraganaDya
+		katakanaEquivalent: katakanaDya
+		romajiEquivalent: romajiDya
+	},
+	{
+		hiraganaEquivalent: hiraganaDyu
+		katakanaEquivalent: katakanaDyu
+		romajiEquivalent: romajiDyu
+	},
+	{
+		hiraganaEquivalent: hiraganaDyo
+		katakanaEquivalent: katakanaDyo
+		romajiEquivalent: romajiDyo
+	},
+	{
+		hiraganaEquivalent: hiraganaBya
+		katakanaEquivalent: katakanaBya
+		romajiEquivalent: romajiBya
+	},
+	{
+		hiraganaEquivalent: hiraganaByu
+		katakanaEquivalent: katakanaByu
+		romajiEquivalent: romajiByu
+	},
+	{
+		hiraganaEquivalent: hiraganaByo
+		katakanaEquivalent: katakanaByo
+		romajiEquivalent: romajiByo
+	},
+	{
+		hiraganaEquivalent: hiraganaPya
+		katakanaEquivalent: katakanaPya
+		romajiEquivalent: romajiPya
+	},
+	{
+		hiraganaEquivalent: hiraganaPyu
+		katakanaEquivalent: katakanaPyu
+		romajiEquivalent: romajiPyu
+	},
+	{
+		hiraganaEquivalent: hiraganaPyo
+		katakanaEquivalent: katakanaPyo
+		romajiEquivalent: romajiPyo
+	},
+]

@@ -114,7 +114,7 @@ public class ProgressUI extends Window{
             hiraganaTable.add(text).left().padRight(this.getWidth()/75);
         }
 
-        table.add(hiraganaTable);
+        table.add(hiraganaTable).left();
         table.row();
 
         text = new Label("Katakana", Utility.GUI_SKINS);
@@ -155,7 +155,7 @@ public class ProgressUI extends Window{
             katakanaTable.add(text).left().padRight(this.getWidth()/75);
         }
 
-        table.add(katakanaTable);
+        table.add(katakanaTable).left();
         table.row();
 
         text = new Label("Kanji", Utility.GUI_SKINS);

@@ -1,0 +1,196 @@
+[
+	{
+		kanjiNameID : kanjiHa
+		kanjiMeaning : leaf
+		kanjiMnemonic : The tree with the greatest (leaf)s laughs  last "HA" "HA"
+		hiraganaEquivalent : .hiraganaHa.
+	},
+	{
+		kanjiNameID : kanjiHana
+		kanjiMeaning : flower
+		kanjiMnemonic : Hannah is so pretty. No can stop planting (flower)s for "Hannah"
+		hiraganaEquivalent : .hiraganaHa.hiraganaNa.
+	},
+	{
+		kanjiNameID : kanjiKi
+		kanjiMeaning : tree
+		kanjiMnemonic : To to go to Narnia. You need the "key" for the (tree)s door
+		hiraganaEquivalent : .hiraganaKi.
+
+	},
+	{
+		kanjiNameID : kanjiMori
+		kanjiMeaning : forest
+		kanjiMnemonic : To light a camp fire you will need "more" than one (forests) wood?
+		hiraganaEquivalent : .hiraganaMo.hiraganaRi.
+	},
+	{
+		kanjiNameID : kanjiMushi
+		kanjiMeaning : bug
+		kanjiMnemonic : How does squishing (insects) sound like "mush"
+		hiraganaEquivalent : .hiraganaMu.hiraganaShi.
+	},
+	{
+		kanjiNameID : kanjiIshi
+		kanjiMeaning : stone
+		kanjiMnemonic : Breaking windows using a (stone) is surprisingly "easy"
+		hiraganaEquivalent : .hiraganaI.hiraganaShi.
+	},
+	{
+		kanjiNameID : kanjiKaze
+		kanjiMeaning :  wind
+		kanjiMnemonic : The word kamikaze was used in WWII. The "kaze" part means (wind).
+		hiraganaEquivalent: .hiraganaKa.hiraganaZe.
+
+	},
+	{
+		kanjiNameID : kanjiTsuchi
+		kanjiMeaning :  soil
+		kanjiMnemonic : Minners who dig (soil) dream about the secret treasure "two cheeses"
+		hiraganaEquivalent: .hiraganaTsu.hiraganaChi.
+
+	},
+	{
+		kanjiNameID : kanjiUchi
+		kanjiMeaning :  inside
+		kanjiMnemonic : A resturant called "Oh Cheese" has just opened (inside) the mall
+		hiraganaEquivalent: .hiraganaU.hiraganaChi.
+
+	},
+	{
+		kanjiNameID : kanjiYama
+		kanjiMeaning :  mountain
+		kanjiMnemonic : The "yams" found at the top of the (mountain) are very healthy
+		hiraganaEquivalent: .hiraganaYa.hiraganaMa.
+
+	},
+	{
+		kanjiNameID : kanjiUmi
+		kanjiMeaning :  ocean
+		kanjiMnemonic : She sells g"ummy me"at by the (sea)shore
+		hiraganaEquivalent: .hiraganaU.hiraganaMi.
+
+	},
+	{
+		kanjiNameID : kanjiSakana
+		kanjiMeaning :  fish
+		kanjiMnemonic : Fifa has organised a match between "soccer nun"s and (fish) market workers
+		hiraganaEquivalent: .hiraganaSa.hiraganaKa.hiraganaN.
+
+	},
+	{
+		kanjiNameID : kanjiMizu
+		kanjiMeaning :  water
+		kanjiMnemonic : Have uou heard about the (water) misstress "miss zu"
+		hiraganaEquivalent: .hiraganaMi.hiraganaZu.
+
+	},
+	{
+		kanjiNameID : kanjiKai
+		kanjiMeaning :  shell
+		kanjiMnemonic : A "ki"te with the shape of a (shell) can fly the highest
+		hiraganaEquivalent: .hiraganaKa.hiraganaI.
+	},
+	{
+		kanjiNameID : kanjiIke
+		kanjiMeaning :  pond
+		kanjiMnemonic : While having lunch near a (pond). A frog jumps on your food. You shriek "EEEK".
+		hiraganaEquivalent: .hiraganaI.hiraganaKe.
+	},
+	{
+		kanjiNameID : kanjiYuki
+		kanjiMeaning :  snow
+		kanjiMnemonic : The air is so polluted. The (snow) color is "yucky" blackish-green
+		hiraganaEquivalent: .hiraganaYu.hiraganaKi.
+	},
+	{
+		kanjiNameID : kanjiKoori
+		kanjiMeaning :  ice
+		kanjiMnemonic : Cory from "Cory" in the house likes (ice) cream
+		hiraganaEquivalent: .hiraganaKo.hiraganaO.hiraganaRi.
+	},
+	{
+		kanjiNameID : kanjiKawa
+		kanjiMeaning :  forest
+		kanjiMnemonic : Dont be "a coward" and jump to the (lake)
+		hiraganaEquivalent: .hiraganaKa.hiraganaWa.
+	},
+	{
+		kanjiNameID : kanjiHayashi
+		kanjiMeaning :  forest
+		kanjiMnemonic : Hyundai new car can be driven in (forests) and its called Hyundai For She or "hyushe"
+		hiraganaEquivalent: .hiraganaHa.hiraganaYa.hiraganaShi.
+	},
+	{
+		kanjiNameID : kanjiFuyu
+		kanjiMeaning :  winter
+		kanjiMnemonic : Only "few" people can survive the (winter)
+		hiraganaEquivalent: .hiraganaFu.hiraganaYu.
+	},
+	{
+		kanjiNameID : kanjiTo
+		kanjiMeaning :  door
+		kanjiMnemonic : Your friend accidentally closed the (door) on your "toe"
+		hiraganaEquivalent: .hiraganaTo.
+	},
+	{
+		kanjiNameID : kanjiMon
+		kanjiMeaning :  gate
+		kanjiMnemonic : Its said that "mon"sters live behind the (gate)
+		hiraganaEquivalent: .hiraganaMo.hiraganaN.
+	},
+	{
+		kanjiNameID : kanjiTera
+		kanjiMeaning :  temple
+		kanjiMnemonic : The (temple) of friendship survived the "terror" attack
+		hiraganaEquivalent: .hiraganaTe.hiraganaRa.
+	},
+	{
+		kanjiNameID : kanjiAna
+		kanjiMeaning :  hole
+		kanjiMnemonic : I had "a na"sty nightmare where I kept falling in a (hole)
+		hiraganaEquivalent: .hiraganaA.hiraganaNa.
+	},
+	{
+		kanjiNameID : kanjiSoto
+		kanjiMeaning :  outside
+		kanjiMnemonic : Its winter. "So to" go (outside) you need a lot of jackets.
+		hiraganaEquivalent: .hiraganaSo.hiraganaTo.
+	},
+	{
+		kanjiNameID : kanjiKa
+		kanjiMeaning :  fire
+		kanjiMnemonic : Camp (fire) can generate alot of "he"at
+		hiraganaEquivalent: .hiraganaHi.
+	},
+	{
+		kanjiNameID : kanjiHi
+		kanjiMeaning :  sun
+		kanjiMnemonic : The (sun) can generate half as much "he"at as camp fire
+		hiraganaEquivalent: .hiraganaHi.
+	},
+	{
+		kanjiNameID : kanjiChi
+		kanjiMeaning :  blood
+		kanjiMnemonic : (Blood) clotting can be improved with "che"ese
+		hiraganaEquivalent: .hiraganaChi.
+	},
+	{
+		kanjiNameID : kanjiAka
+		kanjiMeaning :  red
+		kanjiMnemonic : My friends dont belive that I saw "a ca"t with (red) fur
+		hiraganaEquivalent: .hiraganaA.hiraganaKa.
+	},
+	{
+		kanjiNameID : kanjiHikari
+		kanjiMeaning :  light
+		kanjiMnemonic : Only "he carri"es luggages faster than the speed of (light)
+		hiraganaEquivalent: .hiraganaHi.hiraganaKa.hiraganaRi.
+	},
+	{
+		kanjiNameID : kanjiAka
+		kanjiMeaning :  temp
+		kanjiMnemonic : used for padding
+		hiraganaEquivalent: .hiraganaA.
+	},
+]

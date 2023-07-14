@@ -1,0 +1,754 @@
+large_romaji_sheet.png
+size: 994, 1824
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+romajiA
+  rotate: false
+  xy: 1, 1
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiBa
+  rotate: false
+  xy: 143, 1
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiBe
+  rotate: false
+  xy: 285, 1
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiBi
+  rotate: false
+  xy: 427, 1
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiBo
+  rotate: false
+  xy: 569, 1
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiBu
+  rotate: false
+  xy: 711, 1
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiBya
+  rotate: false
+  xy: 853, 1
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiByo
+  rotate: false
+  xy: 1, 115
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiByu
+  rotate: false
+  xy: 143, 115
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiCha
+  rotate: false
+  xy: 285, 115
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiChi
+  rotate: false
+  xy: 427, 115
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiCho
+  rotate: false
+  xy: 569, 115
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiChu
+  rotate: false
+  xy: 711, 115
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiDa
+  rotate: false
+  xy: 853, 115
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiDe
+  rotate: false
+  xy: 1, 229
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiDi
+  rotate: false
+  xy: 143, 229
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiDo
+  rotate: false
+  xy: 285, 229
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiDu
+  rotate: false
+  xy: 427, 229
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiDya
+  rotate: false
+  xy: 569, 229
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiDyo
+  rotate: false
+  xy: 711, 229
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiDyu
+  rotate: false
+  xy: 853, 229
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiE
+  rotate: false
+  xy: 1, 343
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiGa
+  rotate: false
+  xy: 143, 343
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiGe
+  rotate: false
+  xy: 285, 343
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiGi
+  rotate: false
+  xy: 427, 343
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiGo
+  rotate: false
+  xy: 569, 343
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiGu
+  rotate: false
+  xy: 711, 343
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiGya
+  rotate: false
+  xy: 853, 343
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiGyo
+  rotate: false
+  xy: 1, 457
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiGyu
+  rotate: false
+  xy: 143, 457
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiHa
+  rotate: false
+  xy: 285, 457
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiHe
+  rotate: false
+  xy: 427, 457
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiHi
+  rotate: false
+  xy: 569, 457
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiHo
+  rotate: false
+  xy: 711, 457
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiHu
+  rotate: false
+  xy: 853, 457
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiHya
+  rotate: false
+  xy: 1, 571
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiHyo
+  rotate: false
+  xy: 143, 571
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiHyu
+  rotate: false
+  xy: 285, 571
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiI
+  rotate: false
+  xy: 427, 571
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiJi
+  rotate: false
+  xy: 569, 571
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiJya
+  rotate: false
+  xy: 711, 571
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiJyo
+  rotate: false
+  xy: 853, 571
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiJyu
+  rotate: false
+  xy: 1, 685
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiKa
+  rotate: false
+  xy: 143, 685
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiKe
+  rotate: false
+  xy: 285, 685
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiKi
+  rotate: false
+  xy: 427, 685
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiKo
+  rotate: false
+  xy: 569, 685
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiKu
+  rotate: false
+  xy: 711, 685
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiKya
+  rotate: false
+  xy: 853, 685
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiKyo
+  rotate: false
+  xy: 1, 799
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiKyu
+  rotate: false
+  xy: 143, 799
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiMa
+  rotate: false
+  xy: 285, 799
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiMe
+  rotate: false
+  xy: 427, 799
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiMi
+  rotate: false
+  xy: 569, 799
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiMo
+  rotate: false
+  xy: 711, 799
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiMu
+  rotate: false
+  xy: 853, 799
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiMya
+  rotate: false
+  xy: 1, 913
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiMyo
+  rotate: false
+  xy: 143, 913
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiMyu
+  rotate: false
+  xy: 285, 913
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiN
+  rotate: false
+  xy: 427, 913
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiNa
+  rotate: false
+  xy: 569, 913
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiNe
+  rotate: false
+  xy: 711, 913
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiNi
+  rotate: false
+  xy: 853, 913
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiNo
+  rotate: false
+  xy: 1, 1027
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiNu
+  rotate: false
+  xy: 143, 1027
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiNya
+  rotate: false
+  xy: 285, 1027
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiNyo
+  rotate: false
+  xy: 427, 1027
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiNyu
+  rotate: false
+  xy: 569, 1027
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiO
+  rotate: false
+  xy: 711, 1027
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiPa
+  rotate: false
+  xy: 853, 1027
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiPe
+  rotate: false
+  xy: 1, 1141
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiPi
+  rotate: false
+  xy: 143, 1141
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiPo
+  rotate: false
+  xy: 285, 1141
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiPu
+  rotate: false
+  xy: 427, 1141
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiPya
+  rotate: false
+  xy: 569, 1141
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiPyo
+  rotate: false
+  xy: 711, 1141
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiPyu
+  rotate: false
+  xy: 853, 1141
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiRa
+  rotate: false
+  xy: 1, 1255
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiRe
+  rotate: false
+  xy: 143, 1255
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiRi
+  rotate: false
+  xy: 285, 1255
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiRo
+  rotate: false
+  xy: 427, 1255
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiRu
+  rotate: false
+  xy: 569, 1255
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiRya
+  rotate: false
+  xy: 711, 1255
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiRyo
+  rotate: false
+  xy: 853, 1255
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiRyu
+  rotate: false
+  xy: 1, 1369
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiSa
+  rotate: false
+  xy: 143, 1369
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiSe
+  rotate: false
+  xy: 285, 1369
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiSha
+  rotate: false
+  xy: 427, 1369
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiShi
+  rotate: false
+  xy: 569, 1369
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiSho
+  rotate: false
+  xy: 711, 1369
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiShu
+  rotate: false
+  xy: 853, 1369
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiSo
+  rotate: false
+  xy: 1, 1483
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiSu
+  rotate: false
+  xy: 143, 1483
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiTa
+  rotate: false
+  xy: 285, 1483
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiTe
+  rotate: false
+  xy: 427, 1483
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiTo
+  rotate: false
+  xy: 569, 1483
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiTsu
+  rotate: false
+  xy: 711, 1483
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiU
+  rotate: false
+  xy: 853, 1483
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiWa
+  rotate: false
+  xy: 1, 1597
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiWo
+  rotate: false
+  xy: 143, 1597
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiYa
+  rotate: false
+  xy: 285, 1597
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiYo
+  rotate: false
+  xy: 427, 1597
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiYu
+  rotate: false
+  xy: 569, 1597
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiZa
+  rotate: false
+  xy: 711, 1597
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiZe
+  rotate: false
+  xy: 853, 1597
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiZo
+  rotate: false
+  xy: 1, 1711
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
+romajiZu
+  rotate: false
+  xy: 143, 1711
+  size: 140, 112
+  orig: 140, 112
+  offset: 0, 0
+  index: -1
