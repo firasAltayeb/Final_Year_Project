@@ -2,6 +2,7 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -62,7 +63,34 @@ public class MainGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //preferable to lock and center the camera to the player position
+        camera.position.set(currentPlayerSprite.getX(),
+                currentPlayerSprite.getY(), 0f);
+        camera.update();
+
+        player.update(delta);
+        currentPlayerFrame = player.getFrame();
+
+        //check if player activated a portal
+        updatePortalLayerActiviation(player.boundingBox);
+
+        //check if player is in collision with layer
+        if(!isCollisionWithMapLayer(player.boundingBox)){
+            player.setNextPoitionToCurrent();
+        }
+
+        controller.update(delta);
+
+        mapRenderer.setView(camera);
+        mapRenderer.render();
+
+        mapRenderer.getBatch().begin();
+        mapRenderer.getBatch().draw(currentPlayerFrame, currentPlayerSprite.getX(),
+                                currentPlayerSprite.getY(), 1, 1);
+        mapRenderer.getBatch().end();
     }
 
     @Override
