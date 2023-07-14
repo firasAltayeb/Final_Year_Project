@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
 /*
 public class PlayerPhysicsComponent extends PhysicsComponent {
+
     private static final String TAG = PlayerPhysicsComponent.class.getSimpleName();
 
     private Entity.State _state;
