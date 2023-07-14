@@ -16,10 +16,10 @@ public class MnemonicsUI extends Window{
 
     private final static String TAG = ProgressUI.class.getSimpleName();
 
-    Table table;
-    Table innerTable;
-    float menuItemWindowWidth;
-    float menuItemWindowHeight;
+    private Table table;
+    private Table innerTable;
+    private float menuItemWindowWidth;
+    private float menuItemWindowHeight;
 
     public MnemonicsUI(float width, float height){
         super("Mnemonics", Utility.GUI_SKINS);

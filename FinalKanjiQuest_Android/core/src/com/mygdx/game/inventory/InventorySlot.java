@@ -45,7 +45,7 @@ public class InventorySlot extends Stack {
         }
     }
 
-    public void clearAllInventoryItems(boolean sendRemoveNotifications) {
+    public void clearAllInventoryItems() {
         if( hasItem() ){
             SnapshotArray<Actor> arrayChildren = this.getChildren();
             int numInventoryItems =  getNumItems();

@@ -144,6 +144,6 @@
   <object id="35" name="INN_CLARK" x="176" y="144" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
-  <object id="32" name="INN_FIRST_FLOOR" x="112" y="208" width="32" height="16"/>
+  <object id="32" name="INN_FIRST_FLOOR.FIRST_FLOOR_END" x="112" y="208" width="32" height="16"/>
  </objectgroup>
 </map>

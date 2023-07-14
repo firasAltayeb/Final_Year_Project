@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.japanese.KanaLetter;
 import com.mygdx.game.japanese.KanaLettersFactory;
+import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Utility;
 
 import java.util.ArrayList;
@@ -18,9 +19,18 @@ public class ProgressUI extends Window implements ProgressSubject {
 
     private final static String TAG = ProgressUI.class.getSimpleName();
 
-    Table table;
-    float menuItemWindowWidth;
-    float menuItemWindowHeight;
+
+    private Label text;
+    private String tempString;
+    private int tempInt;
+    private int hiraganaLvlCounter;
+    private Table table;
+    private Table innerTable;
+    private KanaLetter kanaLetter;
+    private ArrayList<KanaLetter> kanaLettersList;
+    private Image equivalent;
+    private float menuItemWindowWidth;
+    private float menuItemWindowHeight;
     private Array<ProgressObserver> observers;
 
     private int hpCurrentMax = -1;
@@ -37,29 +47,53 @@ public class ProgressUI extends Window implements ProgressSubject {
         this.pad(this.getPadTop() + menuItemWindowHeight / 15, 10,
                 menuItemWindowHeight / 30, 10);
 
-        Label text;
+
         table = new Table();
+        innerTable = new Table();
 
-        for(int i = 0; i <= 41; i++){
-            text = new Label("firstText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);
 
-            text = new Label("secondText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
+        kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
 
-            text = new Label("ThirdText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
+        text = new Label("Hiragana", Utility.GUI_SKINS);
+        table.add(text).left();
+        table.row();
 
-            text = new Label("fourthText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
+        for(int i = 0; i < kanaLettersList.size(); i++) {
 
-            table.row();
+            if(i % 4 == 0 ){
+                innerTable.row();
+            }
+
+            kanaLetter = kanaLettersList.get(i);
+            tempString = kanaLetter.getHiraganaEquivalent();
+            tempInt = LetterLvlCounter.getHiraganaLvlTable().get(tempString);
+            equivalent = new Image(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(tempString));
+
+            //Gdx.app.debug(TAG, "tempString is " + tempString);
+
+            if(tempInt >= 3){
+                tempString = "memorised";
+                text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
+            } else {
+                tempString = "Lvl: " + LetterLvlCounter.getHiraganaLvlTable().get(tempString);
+                text = new Label(tempString, Utility.GUI_SKINS, "list_text");
+            }
+
+            if(!LetterLvlCounter.isAllHiraganaMemorised()) {
+                hiraganaLvlCounter += tempInt;
+                if (hiraganaLvlCounter >= 321) {
+                    LetterLvlCounter.setAllHiraganaMemorisedToTrue();
+                }
+                //Gdx.app.debug(TAG, "hiraganaLvlCounter is " + hiraganaLvlCounter);
+            }
+
+            innerTable.add(equivalent).left();
+            innerTable.add(text).left();
         }
 
+        table.add(innerTable);
 
-        //Gdx.app.debug(TAG, "scrollTable size " +  table.getCells().size);
         ScrollPane scrollPane = new ScrollPane(table);
-        //scrollPane.setFillParent(true);
         this.add(scrollPane).fill().expand();
 
         this.setSize(menuItemWindowWidth, menuItemWindowHeight);
@@ -70,7 +104,64 @@ public class ProgressUI extends Window implements ProgressSubject {
         float newMenuItemWindowWidth = width;
         float newMenuItemWindowHeight = height;
 
+        //if(newMenuItemWindowWidth > menuItemWindowWidth &&
+        //        newMenuItemWindowHeight > menuItemWindowHeight){
+        //    for(int i = 0; i <= table.getCells().size-1; i++){
+        //
+        //    }
+        //}
+
         this.setSize(newMenuItemWindowWidth, newMenuItemWindowHeight);
+    }
+
+    //TODO speak about this
+    public void updateTable(){
+        table.clear();
+        innerTable.clear();
+        table = new Table();
+        innerTable = new Table();
+
+        text = new Label("Hiragana", Utility.GUI_SKINS);
+        table.add(text).left();
+        table.row();
+
+        for(int i = 0; i < kanaLettersList.size(); i++) {
+
+            if(i % 4 == 0 ){
+                innerTable.row();
+            }
+
+
+            kanaLetter = kanaLettersList.get(i);
+            tempString = kanaLetter.getHiraganaEquivalent();
+            equivalent = new Image(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(tempString));
+
+            tempInt = LetterLvlCounter.getHiraganaLvlTable().get(tempString);
+
+            if(tempInt >= 3){
+                tempString = "memorised";
+                text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
+            } else {
+                tempString = "Lvl: " + LetterLvlCounter.getHiraganaLvlTable().get(tempString);
+                text = new Label(tempString, Utility.GUI_SKINS, "list_text");
+            }
+
+            if(!LetterLvlCounter.isAllHiraganaMemorised()) {
+                hiraganaLvlCounter += tempInt;
+                if (hiraganaLvlCounter >= 321) {
+                    LetterLvlCounter.setAllHiraganaMemorisedToTrue();
+                }
+            }
+
+            innerTable.add(equivalent).left();
+            innerTable.add(text).left();
+
+        }
+
+        table.add(innerTable);
+
+        ScrollPane scrollPane = new ScrollPane(table);
+        this.add(scrollPane).fill().expand();
     }
 
 

@@ -1,5 +1,5 @@
 large_items_sheet.png
-size: 360, 490
+size: 392, 490
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -68,7 +68,7 @@ H_RUNESTONE
   index: -1
 HEALTH_HEART
   rotate: false
-  xy: 295, 1
+  xy: 295, 197
   size: 64, 68
   orig: 64, 68
   offset: 0, 0
@@ -101,16 +101,30 @@ MEDIUM_POTION_BLUE
   orig: 96, 96
   offset: 0, 0
   index: -1
-POTION_BLUE
+NEGATIVE _K_RUNESTONE
   rotate: false
   xy: 197, 295
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
-PYRAMID
+NEGATIVE_H_RUNESTONE
   rotate: false
   xy: 197, 393
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+POTION_BLUE
+  rotate: false
+  xy: 295, 1
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+PYRAMID
+  rotate: false
+  xy: 295, 99
   size: 96, 96
   orig: 96, 96
   offset: 0, 0

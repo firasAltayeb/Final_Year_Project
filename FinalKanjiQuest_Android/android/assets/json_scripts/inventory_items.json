@@ -20,5 +20,19 @@
 	itemShortDescription: A Large potion that recovers 5 hearts
 	itemUseValue: 5
 },
+{
+	itemAttributes: 1
+	itemUseType: 4
+	itemNameID: H_RUNESTONE
+	itemShortDescription: A mysterious stone that if used stops encounters with hiragana
+	itemUseValue: 0
+},
+{
+	itemAttributes: 1
+	itemUseType: 16
+	itemNameID: NEGATIVE_H_RUNESTONE
+	itemShortDescription: A mysterious stone that if used resets encounters with hiragana
+	itemUseValue: 0
+},
 
 ]

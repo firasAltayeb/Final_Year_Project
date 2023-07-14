@@ -1,4 +1,4 @@
-medium_items_sheet.png
+small_items_sheet.png
 size: 238, 118
 format: RGBA8888
 filter: Linear,Linear

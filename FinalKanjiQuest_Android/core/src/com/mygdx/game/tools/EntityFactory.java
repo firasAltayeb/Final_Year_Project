@@ -7,6 +7,7 @@ import com.mygdx.game.components.NPCInputComponent;
 import com.mygdx.game.components.NPCPhysicsComponent;
 import com.mygdx.game.components.PlayerGraphicsComponent;
 import com.mygdx.game.components.PlayerInputComponent;
+import com.mygdx.game.components.PlayerPhysicsComponent;
 
 public class EntityFactory {
 
@@ -14,7 +15,6 @@ public class EntityFactory {
 
     public static enum EntityType{
         PLAYER,
-        DEMO_PLAYER,
         NPC
     }
 
@@ -24,7 +24,7 @@ public class EntityFactory {
         Entity entity = null;
         switch(entityType){
             case PLAYER:
-                entity = new Entity(new PlayerInputComponent(), new com.mygdx.game.components.PlayerPhysicsComponent(), new PlayerGraphicsComponent());
+                entity = new Entity(new PlayerInputComponent(), new PlayerPhysicsComponent(), new PlayerGraphicsComponent());
                 entity.setEntityConfig(Entity.getEntityConfig(EntityFactory.PLAYER_CONFIG));
                 entity.sendMessage(com.mygdx.game.components.Component.MESSAGE.LOAD_ANIMATIONS, json.toJson(entity.getEntityConfig()));
                 return entity;

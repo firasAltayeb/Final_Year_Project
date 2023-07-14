@@ -131,6 +131,6 @@
   <object id="25" name="LIBRARIAN" x="64" y="128" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
-  <object id="18" name="TOWN" x="112" y="176" width="32" height="16"/>
+  <object id="18" name="TOWN.LIBRARY_START" x="112" y="176" width="32" height="16"/>
  </objectgroup>
 </map>

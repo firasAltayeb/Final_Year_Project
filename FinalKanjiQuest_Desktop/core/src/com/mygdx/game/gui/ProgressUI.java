@@ -67,15 +67,10 @@ public class ProgressUI extends Window implements ProgressSubject {
 
             kanaLetter = kanaLettersList.get(i);
             tempString = kanaLetter.getHiraganaEquivalent();
-
-            LetterLvlCounter.increaseLvl(tempString);
-            LetterLvlCounter.increaseLvl(tempString);
-
-            //Gdx.app.debug(TAG, "tempString is " + tempString);
-
+            tempInt = LetterLvlCounter.getHiraganaLvlTable().get(tempString);
             equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(tempString));
 
-            tempInt = LetterLvlCounter.getHiraganaLvlTable().get(tempString);
+            //Gdx.app.debug(TAG, "tempString is " + tempString);
 
             if(tempInt >= 3){
                 tempString = "memorised";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="38">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="40">
  <tileset firstgid="1" name="inside" tilewidth="16" tileheight="16" tilecount="1680" columns="48">
   <image source="../sprites/map_objects/inside.png" trans="ffffff" width="768" height="560"/>
   <terraintypes>
@@ -135,6 +135,6 @@
   <object id="37" name="BLACKSMITH" x="96" y="132.333" width="16" height="15"/>
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
-  <object id="35" name="TOWN" x="80" y="224" width="32" height="16"/>
+  <object id="35" name="TOWN.ARMORER_START" x="80" y="224" width="32" height="16"/>
  </objectgroup>
 </map>

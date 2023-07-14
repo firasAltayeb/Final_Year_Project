@@ -3,6 +3,9 @@ package com.mygdx.game.maps;
 import java.util.Hashtable;
 
 public class MapFactory {
+
+    private static final String TAG = MapFactory.class.getSimpleName();
+
     //All maps for the game
     private static Hashtable<MapType,Map> mapTable = new Hashtable<MapType, Map>();
 
@@ -13,13 +16,21 @@ public class MapFactory {
         HERB_SHOP,
         HOUSE_ONE,
         INN_FIRST_FLOOR,
-        INN_SECOND_FLOOR
+        INN_SECOND_FLOOR,
+        TOP_WORLD,
+        FOREST,
+        CAVE,
+        COAST,
+        ICE_FOREST,
+        DESERT_TEMPLE,
+        LAVA
     }
 
     public static Map getMap(MapType mapType){
         Map map = null;
         switch(mapType){
             case TOWN:
+                //Gdx.app.log(TAG, "mapType is: " + mapType.toString());
                 map = mapTable.get(MapType.TOWN);
                 if( map == null ){
                     map = new TownMap();
@@ -68,9 +79,61 @@ public class MapFactory {
                     mapTable.put(MapType.INN_SECOND_FLOOR, map);
                 }
                 break;
+            case TOP_WORLD:
+                map = mapTable.get(MapType.TOP_WORLD);
+                if( map == null ){
+                    map = new TopworldMap();
+                    mapTable.put(MapType.TOP_WORLD, map);
+                }
+                break;
+            case FOREST:
+                map = mapTable.get(MapType.FOREST);
+                if( map == null ){
+                    map = new ForestMap();
+                    mapTable.put(MapType.FOREST, map);
+                }
+                break;
+            case CAVE:
+                map = mapTable.get(MapType.CAVE);
+                if( map == null ){
+                    map = new CaveMap();
+                    mapTable.put(MapType.CAVE, map);
+                }
+                break;
+            case COAST:
+                map = mapTable.get(MapType.COAST);
+                if( map == null ){
+                    map = new CoastMap();
+                    mapTable.put(MapType.COAST, map);
+                }
+                break;
+            case ICE_FOREST:
+                map = mapTable.get(MapType.ICE_FOREST);
+                if( map == null ){
+                    map = new IceForestMap();
+                    mapTable.put(MapType.ICE_FOREST, map);
+                }
+                break;
+            case DESERT_TEMPLE:
+                map = mapTable.get(MapType.DESERT_TEMPLE);
+                if( map == null ){
+                    map = new DesertTempleMap();
+                    mapTable.put(MapType.DESERT_TEMPLE, map);
+                }
+                break;
+            case LAVA:
+                map = mapTable.get(MapType.LAVA);
+                if( map == null ){
+                    map = new LavaMap();
+                    mapTable.put(MapType.LAVA, map);
+                }
+                break;
             default:
                 break;
+
         }
         return map;
     }
+
+
 }

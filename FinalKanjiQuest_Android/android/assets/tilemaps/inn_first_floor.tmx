@@ -155,12 +155,12 @@
   <object id="34" x="208" y="128" width="48" height="16"/>
  </objectgroup>
  <objectgroup name="MAP_SPAWNS_LAYER">
-  <object id="46" name="PLAYER_START" x="96" y="176" width="16" height="16"/>
-  <object id="48" name="PLAYER_START" x="128" y="96" width="16" height="16"/>
+  <object id="46" name="FIRST_FLOOR_START" x="96" y="176" width="16" height="16"/>
+  <object id="48" name="FIRST_FLOOR_END" x="128" y="96" width="16" height="16"/>
   <object id="52" name="HERBALIST" x="64" y="96" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
-  <object id="41" name="TOWN" x="80" y="224" width="32" height="16"/>
+  <object id="41" name="TOWN.INN_FIRST_FLOOR_START" x="80" y="224" width="32" height="16"/>
   <object id="43" name="INN_SECOND_FLOOR" x="96" y="16" width="32" height="64"/>
  </objectgroup>
 </map>
