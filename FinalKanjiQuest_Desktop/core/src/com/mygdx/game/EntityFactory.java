@@ -13,23 +13,24 @@ public class EntityFactory {
         NPC
     }
 
-    public static String PLAYER_CONFIG = "json_scripts/player.json";
+    public static String PLAYER_CONFIG = "scripts/player.json";
 
     public static Entity getEntity(EntityType entityType){
         Entity entity = null;
         switch(entityType){
             case PLAYER:
-                //Initializing entityConfig
+                Entity.FRAME_WIDTH = 21;
+                Entity.FRAME_HEIGHT = 34;
                 entity = new Entity(new PlayerInputComponent(), new PlayerPhysicsComponent(), new PlayerGraphicsComponent());
-                //Linking entityConfig
                 entity.setEntityConfig(Entity.getEntityConfig(EntityFactory.PLAYER_CONFIG));
-                //Extracting info from entityConfig
                 entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, json.toJson(entity.getEntityConfig()));
                 return entity;
             case DEMO_PLAYER:
                 entity = new Entity(new NPCInputComponent(), new PlayerPhysicsComponent(), new PlayerGraphicsComponent());
                 return entity;
             case NPC:
+                Entity.FRAME_WIDTH = 16;
+                Entity.FRAME_HEIGHT = 16;
                 entity = new Entity(new NPCInputComponent(), new NPCPhysicsComponent(), new NPCGraphicsComponent());
                 return entity;
             default:

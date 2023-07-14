@@ -226,5 +226,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		keys.put(Keys.DOWN, false);
 		keys.put(Keys.QUIT, false);
 	}
+
 }
 */

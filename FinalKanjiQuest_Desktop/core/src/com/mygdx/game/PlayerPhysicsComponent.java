@@ -15,15 +15,15 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
     private static final String TAG = PlayerPhysicsComponent.class.getSimpleName();
 
-    private Entity.State _state;
+    private Entity.State state;
     private Vector3 mouseSelectCoordinates;
     private boolean isMouseSelectEnabled = false;
     private Ray selectionRay;
     private float selectRayMaximumDistance = 32.0f;
 
     public PlayerPhysicsComponent(){
-        _boundingBoxLocation = BoundingBoxLocation.BOTTOM_CENTER;
-        initBoundingBox(0.3f, 0.5f);
+        boundingBoxLocation = BoundingBoxLocation.BOTTOM_CENTER;
+        initBoundingBox(0.6f, 0.4f);
 
         mouseSelectCoordinates = new Vector3(0,0,0);
         selectionRay = new Ray(new Vector3(), new Vector3());
@@ -43,14 +43,14 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
         //Specifically for messages with 1 object payload
         if( string.length == 2 ) {
             if (string[0].equalsIgnoreCase(MESSAGE.INIT_START_POSITION.toString())) {
-                _currentEntityPosition = _json.fromJson(Vector2.class, string[1]);
-                _nextEntityPosition.set(_currentEntityPosition.x, _currentEntityPosition.y);
+                currentEntityPosition = json.fromJson(Vector2.class, string[1]);
+                nextEntityPosition.set(currentEntityPosition.x, currentEntityPosition.y);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_STATE.toString())) {
-                _state = _json.fromJson(Entity.State.class, string[1]);
+                state = json.fromJson(Entity.State.class, string[1]);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_DIRECTION.toString())) {
-                _currentDirection = _json.fromJson(Entity.Direction.class, string[1]);
+                currentDirection = json.fromJson(Entity.Direction.class, string[1]);
             } else if (string[0].equalsIgnoreCase(MESSAGE.INIT_SELECT_ENTITY.toString())) {
-                mouseSelectCoordinates = _json.fromJson(Vector3.class, string[1]);
+                mouseSelectCoordinates = json.fromJson(Vector3.class, string[1]);
                 isMouseSelectEnabled = true;
             }
         }
@@ -59,7 +59,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     @Override
     public void update(Entity entity, MapManager mapMgr, float delta) {
         //We want the hitbox to be at the feet for a better feel
-        updateBoundingBoxPosition(_nextEntityPosition);
+        updateBoundingBoxPosition(nextEntityPosition);
         updatePortalLayerActivation(mapMgr);
 
         if(isMouseSelectEnabled){
@@ -69,14 +69,14 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
         if (!isCollisionWithMapLayer(entity, mapMgr) &&
                 !isCollisionWithMapEntities(entity, mapMgr) &&
-                _state == Entity.State.WALKING){
+                state == Entity.State.WALKING){
             setNextPositionToCurrent(entity);
 
             Camera camera = mapMgr.getCamera();
-            camera.position.set(_currentEntityPosition.x, _currentEntityPosition.y, 0f);
+            camera.position.set(currentEntityPosition.x, currentEntityPosition.y, 0f);
             camera.update();
         }else{
-            updateBoundingBoxPosition(_currentEntityPosition);
+            updateBoundingBoxPosition(currentEntityPosition);
         }
 
         calculateNextPosition(delta);
@@ -99,7 +99,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
             //Gdx.app.debug(TAG, "Entity Candidate Location " + "(" + mapEntityBoundingBox.x + "," + mapEntityBoundingBox.y + ")");
             if (mapEntity.getCurrentBoundingBox().contains(mouseSelectCoordinates.x, mouseSelectCoordinates.y)) {
                 //Check distance
-                selectionRay.set(_boundingBox.x, _boundingBox.y, 0.0f, mapEntityBoundingBox.x, mapEntityBoundingBox.y, 0.0f);
+                selectionRay.set(boundingBox.x, boundingBox.y, 0.0f, mapEntityBoundingBox.x, mapEntityBoundingBox.y, 0.0f);
                 float distance =  selectionRay.origin.dst(selectionRay.direction);
 
                 if( distance <= selectRayMaximumDistance){
@@ -126,19 +126,19 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
             if(object instanceof RectangleMapObject) {
                 rectangle = ((RectangleMapObject)object).getRectangle();
 
-                if (_boundingBox.overlaps(rectangle) ){
+                if (boundingBox.overlaps(rectangle) ){
                     String mapName = object.getName();
                     if( mapName == null ) {
                         return false;
                     }
 
-                    mapMgr.setClosestStartPositionFromScaledUnits(_currentEntityPosition);
+                    mapMgr.setClosestStartPositionFromScaledUnits(currentEntityPosition);
                     mapMgr.loadMap(MapFactory.MapType.valueOf(mapName));
 
-                    _currentEntityPosition.x = mapMgr.getPlayerStartUnitScaled().x;
-                    _currentEntityPosition.y = mapMgr.getPlayerStartUnitScaled().y;
-                    _nextEntityPosition.x = mapMgr.getPlayerStartUnitScaled().x;
-                    _nextEntityPosition.y = mapMgr.getPlayerStartUnitScaled().y;
+                    currentEntityPosition.x = mapMgr.getPlayerStartUnitScaled().x;
+                    currentEntityPosition.y = mapMgr.getPlayerStartUnitScaled().y;
+                    nextEntityPosition.x = mapMgr.getPlayerStartUnitScaled().x;
+                    nextEntityPosition.y = mapMgr.getPlayerStartUnitScaled().y;
 
                     Gdx.app.debug(TAG, "Portal Activated");
                     return true;

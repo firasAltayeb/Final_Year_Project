@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.Array;
+
 /*
 public class EntityConfig {
     Array<AnimationConfig> animationConfig;
@@ -89,5 +90,6 @@ public class EntityConfig {
             this.animationType = animationType;
         }
     }
+
 }
 */

@@ -141,23 +141,19 @@ public abstract class PhysicsComponent implements Component{
         velocity.scl(1 / deltaTime);
     }
 
-    protected void initBoundingBox(float percentageWidthReduced, float percentageHeightReduced){
+    protected void initBoundingBox(float widthPercentageToReduce, float heightPercentageToReduce){
         //Update the current bounding box
         float width;
         float height;
 
-        // To get for e.g. 80% reduction, we pass .8f == (1 - .20)
-        float widthReductionAmount = 1.0f - percentageWidthReduced; //.8f for 20% (1 - .20)
-        float heightReductionAmount = 1.0f - percentageHeightReduced; //.8f for 20% (1 - .20)
-
-        if( widthReductionAmount > 0 && widthReductionAmount < 1){
-            width = Entity.FRAME_WIDTH * widthReductionAmount;
+        if( widthPercentageToReduce > 0 && widthPercentageToReduce < 1){
+            width = Entity.FRAME_WIDTH * widthPercentageToReduce;
         }else{
             width = Entity.FRAME_WIDTH;
         }
 
-        if( heightReductionAmount > 0 && heightReductionAmount < 1){
-            height = Entity.FRAME_HEIGHT * heightReductionAmount;
+        if( heightPercentageToReduce > 0 && heightPercentageToReduce < 1){
+            height = Entity.FRAME_HEIGHT * heightPercentageToReduce;
         }else{
             height = Entity.FRAME_HEIGHT;
         }
@@ -166,7 +162,7 @@ public abstract class PhysicsComponent implements Component{
             Gdx.app.debug(TAG, "Width and Height are 0!! " + width + ":" + height);
         }
 
-        //Need to account for the unit_scale, since the map coordinates will be in pixels
+        //Need to account for the unitscale, since the map coordinates will be in pixels
         float minX;
         float minY;
 
@@ -180,6 +176,7 @@ public abstract class PhysicsComponent implements Component{
             minX = nextEntityPosition.x;
             minY = nextEntityPosition.y;
         }
+
 
         boundingBox.setWidth(width);
         boundingBox.setHeight(height);
@@ -228,6 +225,5 @@ public abstract class PhysicsComponent implements Component{
         //Gdx.app.debug(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
         // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
-
 }
 */

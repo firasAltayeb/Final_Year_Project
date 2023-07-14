@@ -104,8 +104,7 @@ public abstract class GraphicsComponent implements Component {
     }
 
     //Specific to two frame animations where each frame is stored in a separate texture
-    protected Animation loadAnimation(String firstTexture, String secondTexture,
-                                      Array<GridPoint2> points, float frameDuration){
+    protected Animation loadAnimation(String firstTexture, String secondTexture, Array<GridPoint2> points, float frameDuration){
         Utility.loadTextureAsset(firstTexture);
         Texture texture1 = Utility.getTextureAsset(firstTexture);
 
