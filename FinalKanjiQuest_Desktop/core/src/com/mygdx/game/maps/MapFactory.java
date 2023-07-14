@@ -25,7 +25,8 @@ public class MapFactory {
         CAVE,
         COAST,
         ICE_FOREST,
-        DESERT_TEMPLE
+        DESERT_TEMPLE,
+        LAVA
     }
 
     public static Map getMap(MapType mapType){
@@ -121,6 +122,13 @@ public class MapFactory {
                 if( map == null ){
                     map = new DesertTempleMap();
                     mapTable.put(MapType.DESERT_TEMPLE, map);
+                }
+                break;
+            case LAVA:
+                map = mapTable.get(MapType.LAVA);
+                if( map == null ){
+                    map = new LavaMap();
+                    mapTable.put(MapType.LAVA, map);
                 }
                 break;
             default:

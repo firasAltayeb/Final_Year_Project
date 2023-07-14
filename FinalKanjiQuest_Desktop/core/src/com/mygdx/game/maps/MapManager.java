@@ -15,8 +15,8 @@ import com.mygdx.game.profile.ProfileObserver;
 public class MapManager implements ProfileObserver {
 
     private static final String TAG = MapManager.class.getSimpleName();
-    private Camera camera;
     private boolean mapChanged = false;
+    private Camera camera;
     private Map currentMap;
     private Entity player;
 
@@ -24,7 +24,7 @@ public class MapManager implements ProfileObserver {
         ProfileManager.getInstance().addObserver(this);
     }
 
-    @Override
+    @Override //TODO speak about this
     public void onNotify(ProfileManager profileManager, ProfileEvent event) {
         switch(event){
             case PROFILE_LOADED:
@@ -53,7 +53,6 @@ public class MapManager implements ProfileObserver {
                 break;
         }
     }
-
 
     public TiledMap getCurrentTiledMap(){
         if( currentMap == null ) {

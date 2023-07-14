@@ -155,6 +155,7 @@ public abstract class Map {
         return playerStart;
     }
 
+    //TODO speak about this
     public void setClosestStartPosition(final Vector2 position) {
         Gdx.app.debug(TAG, "setClosestStartPosition INPUT: (" + position.x + "," + position.y + ") " + currentMapType.toString());
 
