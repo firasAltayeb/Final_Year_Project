@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.components.Component;
+import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem;
 import com.mygdx.game.inventory.InventoryItemFactory;
@@ -71,7 +72,6 @@ public class InventoryUI extends Window implements InventorySubject {
                                           public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                                               super.touchUp(event, x, y, pointer, button);
 
-                                              if (getTapCount() == 2) {
                                                   slotToRemove = (InventorySlot) event.getListenerActor();
                                                   if (slotToRemove.hasItem()) {
                                                       InventoryItem item = slotToRemove.getTopInventoryItem();
@@ -96,8 +96,6 @@ public class InventoryUI extends Window implements InventorySubject {
                                                   }
                                               }
 
-
-                                          }
                                       }
             );
 
@@ -111,7 +109,6 @@ public class InventoryUI extends Window implements InventorySubject {
                                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                                         super.touchUp(event, x, y, pointer, button);
 
-                                        if (getTapCount() == 2) {
                                             InventorySlot slot = (InventorySlot) event.getListenerActor();
                                             if (slot.hasItem()) {
                                                 InventoryItem item = slot.getTopInventoryItem();
@@ -125,9 +122,6 @@ public class InventoryUI extends Window implements InventorySubject {
                                                 }
                                             }
                                         }
-
-
-                                    }
 
 
                                 }

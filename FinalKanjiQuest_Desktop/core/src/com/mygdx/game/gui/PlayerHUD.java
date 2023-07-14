@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.components.Component;
+import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem;
@@ -389,6 +390,8 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 }
 
                 showHearts(progressUI.getHPValue());
+                LetterLvlCounter.increaseLvl("hiraganaA");
+                progressUI.updateTable();
 
                 break;
             default:

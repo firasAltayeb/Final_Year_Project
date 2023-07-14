@@ -9,74 +9,74 @@ import java.util.Hashtable;
 
 public class LetterLvlCounter {
 
-    private int
-         hiraganaALvl,     hiraganaKaLvl,
-         hiraganaILvl,     hiraganaKiLvl,
-         hiraganaULvl,     hiraganaKuLvl,
-         hiraganaELvl,     hiraganaKeLvl,
-         hiraganaOLvl,     hiraganaKoLvl,
+    public static int
+         hiraganaALvl = 1,      hiraganaKaLvl = 1,
+         hiraganaILvl = 1,      hiraganaKiLvl = 1,
+         hiraganaULvl = 1,      hiraganaKuLvl = 1,
+         hiraganaELvl = 1,      hiraganaKeLvl = 1,
+         hiraganaOLvl = 1,      hiraganaKoLvl = 1,
 
-         hiraganaSaLvl,     hiraganaTaLvl,
-         hiraganaShiLvl,    hiraganaChiLvl,
-         hiraganaSuLvl,     hiraganaTsuLvl,
-         hiraganaSeLvl,     hiraganaTeLvl,
-         hiraganaSoLvl,     hiraganaToLvl,
+         hiraganaSaLvl = 1,     hiraganaTaLvl = 1,
+         hiraganaShiLvl = 1,    hiraganaChiLvl = 1,
+         hiraganaSuLvl = 1,     hiraganaTsuLvl = 1,
+         hiraganaSeLvl = 1,     hiraganaTeLvl = 1,
+         hiraganaSoLvl = 1,     hiraganaToLvl = 1,
 
-         hiraganaNaLvl,     hiraganaHaLvl,
-         hiraganaNiLvl,     hiraganaHiLvl,
-         hiraganaNuLvl,     hiraganaHuLvl,
-         hiraganaNeLvl,     hiraganaHeLvl,
-         hiraganaNoLvl,     hiraganaHoLvl,
+         hiraganaNaLvl = 1,     hiraganaHaLvl = 1,
+         hiraganaNiLvl = 1,     hiraganaHiLvl = 1,
+         hiraganaNuLvl = 1,     hiraganaHuLvl = 1,
+         hiraganaNeLvl = 1,     hiraganaHeLvl = 1,
+         hiraganaNoLvl = 1,     hiraganaHoLvl = 1,
 
-         hiraganaMaLvl,     hiraganaRaLvl,
-         hiraganaMiLvl,     hiraganaRiLvl,
-         hiraganaMuLvl,     hiraganaRuLvl,
-         hiraganaMeLvl,     hiraganaReLvl,
-         hiraganaMoLvl,     hiraganaRoLvl,
+         hiraganaMaLvl = 1,     hiraganaRaLvl = 1,
+         hiraganaMiLvl = 1,     hiraganaRiLvl = 1,
+         hiraganaMuLvl = 1,     hiraganaRuLvl = 1,
+         hiraganaMeLvl = 1,     hiraganaReLvl = 1,
+         hiraganaMoLvl = 1,     hiraganaRoLvl = 1,
 
-         hiraganaGaLvl,     hiraganaZaLvl,
-         hiraganaGiLvl,     hiraganaJiLvl,
-         hiraganaGuLvl,     hiraganaZuLvl,
-         hiraganaGeLvl,     hiraganaZeLvl,
-         hiraganaGoLvl,     hiraganaZoLvl,
+         hiraganaNLvl  = 1,
 
-         hiraganaDaLvl,     hiraganaBaLvl,
-         hiraganaDiLvl,     hiraganaBiLvl,
-         hiraganaDuLvl,     hiraganaBuLvl,
-         hiraganaDeLvl,     hiraganaBeLvl,
-         hiraganaDoLvl,     hiraganaBoLvl,
+         hiraganaGaLvl = 1,     hiraganaZaLvl = 1,
+         hiraganaGiLvl = 1,     hiraganaJiLvl = 1,
+         hiraganaGuLvl = 1,     hiraganaZuLvl = 1,
+         hiraganaGeLvl = 1,     hiraganaZeLvl = 1,
+         hiraganaGoLvl = 1,     hiraganaZoLvl = 1,
 
-         hiraganaPaLvl,     hiraganaYaLvl,
-         hiraganaPiLvl,     hiraganaYuLvl,
-         hiraganaPuLvl,     hiraganaYoLvl,
-         hiraganaPeLvl,     hiraganaWaLvl,
-         hiraganaPoLvl,     hiraganaWoLvl,
+         hiraganaDaLvl = 1,     hiraganaBaLvl = 1,
+         hiraganaDiLvl = 1,     hiraganaBiLvl = 1,
+         hiraganaDuLvl = 1,     hiraganaBuLvl = 1,
+         hiraganaDeLvl = 1,     hiraganaBeLvl = 1,
+         hiraganaDoLvl = 1,     hiraganaBoLvl = 1,
 
-         hiraganaKyaLvl,    hiraganaShaLvl,
-         hiraganaKyuLvl,    hiraganaShuLvl,
-         hiraganaKyoLvl,    hiraganaShoLvl,
+         hiraganaPaLvl = 1,     hiraganaYaLvl = 1,
+         hiraganaPiLvl = 1,     hiraganaYuLvl = 1,
+         hiraganaPuLvl = 1,     hiraganaYoLvl = 1,
+         hiraganaPeLvl = 1,     hiraganaWaLvl = 1,
+         hiraganaPoLvl = 1,     hiraganaWoLvl = 1,
 
-         hiraganaChaLvl,    hiraganaHyaLvl,
-         hiraganaChuLvl,    hiraganaHyuLvl,
-         hiraganaChoLvl,    hiraganaHyoLvl,
+         hiraganaKyaLvl = 1,    hiraganaShaLvl = 1,
+         hiraganaKyuLvl = 1,    hiraganaShuLvl = 1,
+         hiraganaKyoLvl = 1,    hiraganaShoLvl = 1,
 
-         hiraganaNyaLvl,    hiraganaMyaLvl,
-         hiraganaNyuLvl,    hiraganaMyuLvl,
-         hiraganaNyoLvl,    hiraganaMyoLvl,
+         hiraganaChaLvl = 1,    hiraganaHyaLvl = 1,
+         hiraganaChuLvl = 1,    hiraganaHyuLvl = 1,
+         hiraganaChoLvl = 1,    hiraganaHyoLvl = 1,
 
-         hiraganaRyaLvl,    hiraganaGyaLvl,
-         hiraganaRyuLvl,    hiraganaGyuLvl,
-         hiraganaRyoLvl,    hiraganaGyoLvl,
+         hiraganaNyaLvl = 1,    hiraganaMyaLvl = 1,
+         hiraganaNyuLvl = 1,    hiraganaMyuLvl = 1,
+         hiraganaNyoLvl = 1,    hiraganaMyoLvl = 1,
 
-         hiraganaJyaLvl,    hiraganaDyaLvl,
-         hiraganaJyuLvl,    hiraganaDyuLvl,
-         hiraganaJyoLvl,    hiraganaDyoLvl,
+         hiraganaRyaLvl = 1,    hiraganaGyaLvl = 1,
+         hiraganaRyuLvl = 1,    hiraganaGyuLvl = 1,
+         hiraganaRyoLvl = 1,    hiraganaGyoLvl = 1,
 
-         hiraganaByaLvl,    hiraganaPyaLvl,
-         hiraganaByuLvl,    hiraganaPyuLvl,
-         hiraganaByoLvl,    hiraganaPyoLvl,
+         hiraganaJyaLvl = 1,    hiraganaDyaLvl = 1,
+         hiraganaJyuLvl = 1,    hiraganaDyuLvl = 1,
+         hiraganaJyoLvl = 1,    hiraganaDyoLvl = 1,
 
-         hiraganaNLvl,
+         hiraganaByaLvl = 1,    hiraganaPyaLvl = 1,
+         hiraganaByuLvl = 1,    hiraganaPyuLvl = 1,
+         hiraganaByoLvl = 1,    hiraganaPyoLvl = 1,
 
          katakanaALvl,     katakanaKaLVl,
          katakanaILvl,     katakanaKiLVl,
@@ -144,139 +144,237 @@ public class LetterLvlCounter {
          katakanaByuLvl,    katakanaPyuLvl,
          katakanaByoLvl,    katakanaPyoLvl,
 
-         katakanaNLvl;
+         katakanaNLvl = 1;
 
-     private static LetterLvlCounter instance = null;
-     private Hashtable<String, Integer> hiraganaLvlTable;
+     private static Hashtable<String, Integer> hiraganaLvlTable;
 
-     public static LetterLvlCounter getInstance() {
-         if (instance == null) {
-             instance = new LetterLvlCounter();
-         }
-
-         return instance;
-     }
-
-
-     private LetterLvlCounter(){
-          initHiraganaTable();
-     }
-
-     private void initHiraganaTable(){
+     public static Hashtable<String, Integer> getHiraganaLvlTable(){
 
           hiraganaLvlTable = new Hashtable<String, Integer>();
 
-          hiraganaLvlTable.put("hiraganaA", hiraganaALvl = 1);
-          hiraganaLvlTable.put("hiraganaI", hiraganaILvl = 1);
-          hiraganaLvlTable.put("hiraganaU", hiraganaULvl = 1);
-          hiraganaLvlTable.put("hiraganaE", hiraganaELvl = 1);
-          hiraganaLvlTable.put("hiraganaO", hiraganaOLvl = 1);
-          hiraganaLvlTable.put("hiraganaKa", hiraganaKaLvl = 1);
-          hiraganaLvlTable.put("hiraganaKi", hiraganaKiLvl = 1);
-          hiraganaLvlTable.put("hiraganaKu", hiraganaKuLvl = 1);
-          hiraganaLvlTable.put("hiraganaKe", hiraganaKeLvl = 1);
-          hiraganaLvlTable.put("hiraganaKo", hiraganaKoLvl = 1);
-          hiraganaLvlTable.put("hiraganaSa", hiraganaSaLvl = 1);
-          hiraganaLvlTable.put("hiraganaShi", hiraganaShiLvl = 1);
-          hiraganaLvlTable.put("hiraganaSu", hiraganaSuLvl = 1);
-          hiraganaLvlTable.put("hiraganaSe", hiraganaSeLvl = 1);
-          hiraganaLvlTable.put("hiraganaSo", hiraganaSoLvl = 1);
-          hiraganaLvlTable.put("hiraganaTa", hiraganaTaLvl = 1);
-          hiraganaLvlTable.put("hiraganaChi", hiraganaChiLvl = 1);
-          hiraganaLvlTable.put("hiraganaTsu", hiraganaTsuLvl = 1);
-          hiraganaLvlTable.put("hiraganaTe", hiraganaTeLvl = 1);
-          hiraganaLvlTable.put("hiraganaTo", hiraganaToLvl = 1);
-          hiraganaLvlTable.put("hiraganaNa", hiraganaNaLvl = 1);
-          hiraganaLvlTable.put("hiraganaNi", hiraganaNiLvl = 1);
-          hiraganaLvlTable.put("hiraganaNu", hiraganaNuLvl = 1);
-          hiraganaLvlTable.put("hiraganaNe", hiraganaNeLvl = 1);
-          hiraganaLvlTable.put("hiraganaNo", hiraganaNoLvl = 1);
-          hiraganaLvlTable.put("hiraganaHa", hiraganaHaLvl = 1);
-          hiraganaLvlTable.put("hiraganaHi", hiraganaHiLvl = 1);
-          hiraganaLvlTable.put("hiraganaHu", hiraganaHuLvl = 1);
-          hiraganaLvlTable.put("hiraganaHe", hiraganaHeLvl = 1);
-          hiraganaLvlTable.put("hiraganaHo", hiraganaHoLvl = 1);
-          hiraganaLvlTable.put("hiraganaMa", hiraganaMaLvl = 1);
-          hiraganaLvlTable.put("hiraganaMi", hiraganaMiLvl = 1);
-          hiraganaLvlTable.put("hiraganaMu", hiraganaMuLvl = 1);
-          hiraganaLvlTable.put("hiraganaMe", hiraganaMeLvl = 1);
-          hiraganaLvlTable.put("hiraganaMo", hiraganaMoLvl = 1);
-          hiraganaLvlTable.put("hiraganaRa", hiraganaRaLvl = 1);
-          hiraganaLvlTable.put("hiraganaRi", hiraganaRiLvl = 1);
-          hiraganaLvlTable.put("hiraganaRu", hiraganaRuLvl = 1);
-          hiraganaLvlTable.put("hiraganaRe", hiraganaReLvl = 1);
-          hiraganaLvlTable.put("hiraganaRo", hiraganaRoLvl = 1);
-          hiraganaLvlTable.put("hiraganaGa", hiraganaGaLvl = 1);
-          hiraganaLvlTable.put("hiraganaGi", hiraganaGiLvl = 1);
-          hiraganaLvlTable.put("hiraganaGu", hiraganaGuLvl = 1);
-          hiraganaLvlTable.put("hiraganaGe", hiraganaGeLvl = 1);
-          hiraganaLvlTable.put("hiraganaGo", hiraganaGoLvl = 1);
-          hiraganaLvlTable.put("hiraganaZa", hiraganaZaLvl = 1);
-          hiraganaLvlTable.put("hiraganaJi", hiraganaJiLvl = 1);
-          hiraganaLvlTable.put("hiraganaZu", hiraganaZuLvl = 1);
-          hiraganaLvlTable.put("hiraganaZe", hiraganaZeLvl = 1);
-          hiraganaLvlTable.put("hiraganaZo", hiraganaZoLvl = 1);
-          hiraganaLvlTable.put("hiraganaDa", hiraganaDaLvl = 1);
-          hiraganaLvlTable.put("hiraganaDi", hiraganaDiLvl = 1);
-          hiraganaLvlTable.put("hiraganaDu", hiraganaDuLvl = 1);
-          hiraganaLvlTable.put("hiraganaDe", hiraganaDeLvl = 1);
-          hiraganaLvlTable.put("hiraganaDo", hiraganaDoLvl = 1);
-          hiraganaLvlTable.put("hiraganaBa", hiraganaBaLvl = 1);
-          hiraganaLvlTable.put("hiraganaBi", hiraganaBiLvl = 1);
-          hiraganaLvlTable.put("hiraganaBu", hiraganaBuLvl = 1);
-          hiraganaLvlTable.put("hiraganaBe", hiraganaBeLvl = 1);
-          hiraganaLvlTable.put("hiraganaBo", hiraganaBoLvl = 1);
-          hiraganaLvlTable.put("hiraganaPa", hiraganaPaLvl = 1);
-          hiraganaLvlTable.put("hiraganaPi", hiraganaPiLvl = 1);
-          hiraganaLvlTable.put("hiraganaPu", hiraganaPuLvl = 1);
-          hiraganaLvlTable.put("hiraganaPe", hiraganaPeLvl = 1);
-          hiraganaLvlTable.put("hiraganaPo", hiraganaPoLvl = 1);
-          hiraganaLvlTable.put("hiraganaYa", hiraganaYaLvl = 1);
-          hiraganaLvlTable.put("hiraganaYu", hiraganaYuLvl = 1);
-          hiraganaLvlTable.put("hiraganaYo", hiraganaYoLvl = 1);
-          hiraganaLvlTable.put("hiraganaWa", hiraganaWaLvl = 1);
-          hiraganaLvlTable.put("hiraganaWo", hiraganaWoLvl = 1);
-          hiraganaLvlTable.put("hiraganaKya", hiraganaKyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaKyu", hiraganaKyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaKyo", hiraganaKyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaSha", hiraganaShaLvl = 1);
-          hiraganaLvlTable.put("hiraganaShu", hiraganaShuLvl = 1);
-          hiraganaLvlTable.put("hiraganaSho", hiraganaShoLvl = 1);
-          hiraganaLvlTable.put("hiraganaCha", hiraganaChaLvl = 1);
-          hiraganaLvlTable.put("hiraganaChu", hiraganaChuLvl = 1);
-          hiraganaLvlTable.put("hiraganaCho", hiraganaChoLvl = 1);
-          hiraganaLvlTable.put("hiraganaHya", hiraganaHyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaHyu", hiraganaHyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaHyo", hiraganaHyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaNya", hiraganaNyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaNyu", hiraganaNyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaNyo", hiraganaNyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaMya",  hiraganaMyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaMyu",  hiraganaMyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaMyo",  hiraganaMyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaRya", hiraganaRyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaRyu", hiraganaRyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaRyo", hiraganaRyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaGya", hiraganaGyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaGyu", hiraganaGyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaGyo", hiraganaGyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaJya", hiraganaJyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaJyu", hiraganaJyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaJyo", hiraganaJyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaDya", hiraganaDyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaDyu", hiraganaDyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaDyo", hiraganaDyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaBya", hiraganaByaLvl = 1);
-          hiraganaLvlTable.put("hiraganaByu", hiraganaByuLvl = 1);
-          hiraganaLvlTable.put("hiraganaByo", hiraganaByoLvl = 1);
-          hiraganaLvlTable.put("hiraganaPya", hiraganaPyaLvl = 1);
-          hiraganaLvlTable.put("hiraganaPyu", hiraganaPyuLvl = 1);
-          hiraganaLvlTable.put("hiraganaPyo", hiraganaPyoLvl = 1);
-          hiraganaLvlTable.put("hiraganaN", hiraganaNLvl = 1);
+          hiraganaLvlTable.put("hiraganaA", hiraganaALvl);
+          hiraganaLvlTable.put("hiraganaI", hiraganaILvl);
+          hiraganaLvlTable.put("hiraganaU", hiraganaULvl);
+          hiraganaLvlTable.put("hiraganaE", hiraganaELvl);
+          hiraganaLvlTable.put("hiraganaO", hiraganaOLvl);
+          hiraganaLvlTable.put("hiraganaKa", hiraganaKaLvl);
+          hiraganaLvlTable.put("hiraganaKi", hiraganaKiLvl);
+          hiraganaLvlTable.put("hiraganaKu", hiraganaKuLvl);
+          hiraganaLvlTable.put("hiraganaKe", hiraganaKeLvl);
+          hiraganaLvlTable.put("hiraganaKo", hiraganaKoLvl);
+          hiraganaLvlTable.put("hiraganaSa", hiraganaSaLvl);
+          hiraganaLvlTable.put("hiraganaShi", hiraganaShiLvl);
+          hiraganaLvlTable.put("hiraganaSu", hiraganaSuLvl);
+          hiraganaLvlTable.put("hiraganaSe", hiraganaSeLvl);
+          hiraganaLvlTable.put("hiraganaSo", hiraganaSoLvl);
+          hiraganaLvlTable.put("hiraganaTa", hiraganaTaLvl);
+          hiraganaLvlTable.put("hiraganaChi", hiraganaChiLvl);
+          hiraganaLvlTable.put("hiraganaTsu", hiraganaTsuLvl);
+          hiraganaLvlTable.put("hiraganaTe", hiraganaTeLvl);
+          hiraganaLvlTable.put("hiraganaTo", hiraganaToLvl);
+          hiraganaLvlTable.put("hiraganaNa", hiraganaNaLvl);
+          hiraganaLvlTable.put("hiraganaNi", hiraganaNiLvl);
+          hiraganaLvlTable.put("hiraganaNu", hiraganaNuLvl);
+          hiraganaLvlTable.put("hiraganaNe", hiraganaNeLvl);
+          hiraganaLvlTable.put("hiraganaNo", hiraganaNoLvl);
+          hiraganaLvlTable.put("hiraganaHa", hiraganaHaLvl);
+          hiraganaLvlTable.put("hiraganaHi", hiraganaHiLvl);
+          hiraganaLvlTable.put("hiraganaHu", hiraganaHuLvl);
+          hiraganaLvlTable.put("hiraganaHe", hiraganaHeLvl);
+          hiraganaLvlTable.put("hiraganaHo", hiraganaHoLvl);
+          hiraganaLvlTable.put("hiraganaMa", hiraganaMaLvl);
+          hiraganaLvlTable.put("hiraganaMi", hiraganaMiLvl);
+          hiraganaLvlTable.put("hiraganaMu", hiraganaMuLvl);
+          hiraganaLvlTable.put("hiraganaMe", hiraganaMeLvl);
+          hiraganaLvlTable.put("hiraganaMo", hiraganaMoLvl);
+          hiraganaLvlTable.put("hiraganaRa", hiraganaRaLvl);
+          hiraganaLvlTable.put("hiraganaRi", hiraganaRiLvl);
+          hiraganaLvlTable.put("hiraganaRu", hiraganaRuLvl);
+          hiraganaLvlTable.put("hiraganaRe", hiraganaReLvl);
+          hiraganaLvlTable.put("hiraganaRo", hiraganaRoLvl);
+          hiraganaLvlTable.put("hiraganaN", hiraganaNLvl);
+          hiraganaLvlTable.put("hiraganaGa", hiraganaGaLvl);
+          hiraganaLvlTable.put("hiraganaGi", hiraganaGiLvl);
+          hiraganaLvlTable.put("hiraganaGu", hiraganaGuLvl);
+          hiraganaLvlTable.put("hiraganaGe", hiraganaGeLvl);
+          hiraganaLvlTable.put("hiraganaGo", hiraganaGoLvl);
+          hiraganaLvlTable.put("hiraganaZa", hiraganaZaLvl);
+          hiraganaLvlTable.put("hiraganaJi", hiraganaJiLvl);
+          hiraganaLvlTable.put("hiraganaZu", hiraganaZuLvl);
+          hiraganaLvlTable.put("hiraganaZe", hiraganaZeLvl);
+          hiraganaLvlTable.put("hiraganaZo", hiraganaZoLvl);
+          hiraganaLvlTable.put("hiraganaDa", hiraganaDaLvl);
+          hiraganaLvlTable.put("hiraganaDi", hiraganaDiLvl);
+          hiraganaLvlTable.put("hiraganaDu", hiraganaDuLvl);
+          hiraganaLvlTable.put("hiraganaDe", hiraganaDeLvl);
+          hiraganaLvlTable.put("hiraganaDo", hiraganaDoLvl);
+          hiraganaLvlTable.put("hiraganaBa", hiraganaBaLvl);
+          hiraganaLvlTable.put("hiraganaBi", hiraganaBiLvl);
+          hiraganaLvlTable.put("hiraganaBu", hiraganaBuLvl);
+          hiraganaLvlTable.put("hiraganaBe", hiraganaBeLvl);
+          hiraganaLvlTable.put("hiraganaBo", hiraganaBoLvl);
+          hiraganaLvlTable.put("hiraganaPa", hiraganaPaLvl);
+          hiraganaLvlTable.put("hiraganaPi", hiraganaPiLvl);
+          hiraganaLvlTable.put("hiraganaPu", hiraganaPuLvl);
+          hiraganaLvlTable.put("hiraganaPe", hiraganaPeLvl);
+          hiraganaLvlTable.put("hiraganaPo", hiraganaPoLvl);
+          hiraganaLvlTable.put("hiraganaYa", hiraganaYaLvl);
+          hiraganaLvlTable.put("hiraganaYu", hiraganaYuLvl);
+          hiraganaLvlTable.put("hiraganaYo", hiraganaYoLvl);
+          hiraganaLvlTable.put("hiraganaWa", hiraganaWaLvl);
+          hiraganaLvlTable.put("hiraganaWo", hiraganaWoLvl);
+          hiraganaLvlTable.put("hiraganaKya", hiraganaKyaLvl);
+          hiraganaLvlTable.put("hiraganaKyu", hiraganaKyuLvl);
+          hiraganaLvlTable.put("hiraganaKyo", hiraganaKyoLvl);
+          hiraganaLvlTable.put("hiraganaSha", hiraganaShaLvl);
+          hiraganaLvlTable.put("hiraganaShu", hiraganaShuLvl);
+          hiraganaLvlTable.put("hiraganaSho", hiraganaShoLvl);
+          hiraganaLvlTable.put("hiraganaCha", hiraganaChaLvl);
+          hiraganaLvlTable.put("hiraganaChu", hiraganaChuLvl);
+          hiraganaLvlTable.put("hiraganaCho", hiraganaChoLvl);
+          hiraganaLvlTable.put("hiraganaHya", hiraganaHyaLvl);
+          hiraganaLvlTable.put("hiraganaHyu", hiraganaHyuLvl);
+          hiraganaLvlTable.put("hiraganaHyo", hiraganaHyoLvl);
+          hiraganaLvlTable.put("hiraganaNya", hiraganaNyaLvl);
+          hiraganaLvlTable.put("hiraganaNyu", hiraganaNyuLvl);
+          hiraganaLvlTable.put("hiraganaNyo", hiraganaNyoLvl);
+          hiraganaLvlTable.put("hiraganaMya", hiraganaMyaLvl);
+          hiraganaLvlTable.put("hiraganaMyu", hiraganaMyuLvl);
+          hiraganaLvlTable.put("hiraganaMyo", hiraganaMyoLvl);
+          hiraganaLvlTable.put("hiraganaRya", hiraganaRyaLvl);
+          hiraganaLvlTable.put("hiraganaRyu", hiraganaRyuLvl);
+          hiraganaLvlTable.put("hiraganaRyo", hiraganaRyoLvl);
+          hiraganaLvlTable.put("hiraganaGya", hiraganaGyaLvl);
+          hiraganaLvlTable.put("hiraganaGyu", hiraganaGyuLvl);
+          hiraganaLvlTable.put("hiraganaGyo", hiraganaGyoLvl);
+          hiraganaLvlTable.put("hiraganaJya", hiraganaJyaLvl);
+          hiraganaLvlTable.put("hiraganaJyu", hiraganaJyuLvl);
+          hiraganaLvlTable.put("hiraganaJyo", hiraganaJyoLvl);
+          hiraganaLvlTable.put("hiraganaDya", hiraganaDyaLvl);
+          hiraganaLvlTable.put("hiraganaDyu", hiraganaDyuLvl);
+          hiraganaLvlTable.put("hiraganaDyo", hiraganaDyoLvl);
+          hiraganaLvlTable.put("hiraganaBya", hiraganaByaLvl);
+          hiraganaLvlTable.put("hiraganaByu", hiraganaByuLvl);
+          hiraganaLvlTable.put("hiraganaByo", hiraganaByoLvl);
+          hiraganaLvlTable.put("hiraganaPya", hiraganaPyaLvl);
+          hiraganaLvlTable.put("hiraganaPyu", hiraganaPyuLvl);
+          hiraganaLvlTable.put("hiraganaPyo", hiraganaPyoLvl);
 
+          return hiraganaLvlTable;
      }
 
-     public Hashtable<String, Integer> getHiraganaLvlTable() {
-          return hiraganaLvlTable;
+     public static void increaseLvl(String letter){
+          switch (letter){
+               case "hiraganaA":       hiraganaALvl++;    break;
+               case "hiraganaI":       hiraganaILvl++;    break;
+               case "hiraganaU":       hiraganaULvl++;    break;
+               case "hiraganaE":       hiraganaELvl++;    break;
+               case "hiraganaO":       hiraganaOLvl++;    break;
+               case "hiraganaKa":      hiraganaKaLvl++;     break;
+               case "hiraganaKi":      hiraganaKiLvl++;     break;
+               case "hiraganaKu":      hiraganaKuLvl++;     break;
+               case "hiraganaKe":      hiraganaKeLvl++;     break;
+               case "hiraganaKo":      hiraganaKoLvl++;     break;
+               case "hiraganaSa":      hiraganaSaLvl++;     break;
+               case "hiraganaShi":     hiraganaShiLvl++;    break;
+               case "hiraganaSu":      hiraganaSuLvl++;     break;
+               case "hiraganaSe":      hiraganaSeLvl++;     break;
+               case "hiraganaSo":      hiraganaSoLvl++;     break;
+               case "hiraganaTa":      hiraganaTaLvl++;     break;
+               case "hiraganaChi":     hiraganaChiLvl++;    break;
+               case "hiraganaTsu":     hiraganaTsuLvl++;    break;
+               case "hiraganaTe":      hiraganaTeLvl++;     break;
+               case "hiraganaTo":      hiraganaToLvl++;     break;
+               case "hiraganaNa":      hiraganaNaLvl++;     break;
+               case "hiraganaNi":      hiraganaNiLvl++;     break;
+               case "hiraganaNu":      hiraganaNuLvl++;     break;
+               case "hiraganaNe":      hiraganaNeLvl++;     break;
+               case "hiraganaNo":      hiraganaNoLvl++;     break;
+               case "hiraganaHa":      hiraganaHaLvl++;     break;
+               case "hiraganaHi":      hiraganaHiLvl++;     break;
+               case "hiraganaHu":      hiraganaHuLvl++;     break;
+               case "hiraganaHe":      hiraganaHeLvl++;     break;
+               case "hiraganaHo":      hiraganaHoLvl++;     break;
+               case "hiraganaMa":      hiraganaMaLvl++;     break;
+               case "hiraganaMi":      hiraganaMiLvl++;     break;
+               case "hiraganaMu":      hiraganaMuLvl++;     break;
+               case "hiraganaMe":      hiraganaMeLvl++;     break;
+               case "hiraganaMo":      hiraganaMoLvl++;     break;
+               case "hiraganaRa":      hiraganaRaLvl++;     break;
+               case "hiraganaRi":      hiraganaRiLvl++;     break;
+               case "hiraganaRu":      hiraganaRuLvl++;     break;
+               case "hiraganaRe":      hiraganaReLvl++;     break;
+               case "hiraganaRo":      hiraganaRoLvl++;     break;
+               case "hiraganaN":       hiraganaNLvl++;      break;
+               case "hiraganaGa":      hiraganaGaLvl++;     break;
+               case "hiraganaGi":      hiraganaGiLvl++;     break;
+               case "hiraganaGu":      hiraganaGuLvl++;     break;
+               case "hiraganaGe":      hiraganaGeLvl++;     break;
+               case "hiraganaGo":      hiraganaGoLvl++;     break;
+               case "hiraganaZa":      hiraganaZaLvl++;     break;
+               case "hiraganaJi":      hiraganaJiLvl++;     break;
+               case "hiraganaZu":      hiraganaZuLvl++;     break;
+               case "hiraganaZe":      hiraganaZeLvl++;     break;
+               case "hiraganaZo":      hiraganaZoLvl++;     break;
+               case "hiraganaDa":      hiraganaDaLvl++;     break;
+               case "hiraganaDi":      hiraganaDiLvl++;     break;
+               case "hiraganaDu":      hiraganaDuLvl++;     break;
+               case "hiraganaDe":      hiraganaDeLvl++;     break;
+               case "hiraganaDo":      hiraganaDoLvl++;     break;
+               case "hiraganaBa":      hiraganaBaLvl++;     break;
+               case "hiraganaBi":      hiraganaBiLvl++;     break;
+               case "hiraganaBu":      hiraganaBuLvl++;     break;
+               case "hiraganaBe":      hiraganaBeLvl++;     break;
+               case "hiraganaBo":      hiraganaBoLvl++;     break;
+               case "hiraganaPa":      hiraganaPaLvl++;     break;
+               case "hiraganaPi":      hiraganaPiLvl++;     break;
+               case "hiraganaPu":      hiraganaPuLvl++;     break;
+               case "hiraganaPe":      hiraganaPeLvl++;     break;
+               case "hiraganaPo":      hiraganaPoLvl++;     break;
+               case "hiraganaYa":      hiraganaYaLvl++;     break;
+               case "hiraganaYu":      hiraganaYuLvl++;     break;
+               case "hiraganaYo":      hiraganaYoLvl++;     break;
+               case "hiraganaWa":      hiraganaWaLvl++;     break;
+               case "hiraganaWo":      hiraganaWoLvl++;     break;
+
+               case "hiraganaKya":     hiraganaKyaLvl++;     break;
+               case "hiraganaKyu":     hiraganaKyuLvl++;     break;
+               case "hiraganaKyo":     hiraganaKyoLvl++;     break;
+               case "hiraganaSha":     hiraganaShaLvl++;     break;
+               case "hiraganaShu":     hiraganaShuLvl++;     break;
+               case "hiraganaSho":     hiraganaShoLvl++;     break;
+               case "hiraganaCha":     hiraganaChaLvl++;     break;
+               case "hiraganaChu":     hiraganaChuLvl++;     break;
+               case "hiraganaCho":     hiraganaChoLvl++;     break;
+               case "hiraganaHya":     hiraganaHyaLvl++;     break;
+               case "hiraganaHyu":     hiraganaHyuLvl++;     break;
+               case "hiraganaHyo":     hiraganaHyoLvl++;     break;
+               case "hiraganaNya":     hiraganaNyaLvl++;     break;
+               case "hiraganaNyu":     hiraganaNyuLvl++;     break;
+               case "hiraganaNyo":     hiraganaNyoLvl++;     break;
+               case "hiraganaMya":     hiraganaMyaLvl++;     break;
+               case "hiraganaMyu":     hiraganaMyuLvl++;     break;
+               case "hiraganaMyo":     hiraganaMyoLvl++;     break;
+               case "hiraganaRya":     hiraganaRyaLvl++;     break;
+               case "hiraganaRyu":     hiraganaRyuLvl++;     break;
+               case "hiraganaRyo":     hiraganaRyoLvl++;     break;
+               case "hiraganaGya":     hiraganaGyaLvl++;     break;
+               case "hiraganaGyu":     hiraganaGyuLvl++;     break;
+               case "hiraganaGyo":     hiraganaGyoLvl++;     break;
+               case "hiraganaJya":     hiraganaJyaLvl++;     break;
+               case "hiraganaJyu":     hiraganaJyuLvl++;     break;
+               case "hiraganaJyo":     hiraganaJyoLvl++;     break;
+               case "hiraganaDya":     hiraganaDyaLvl++;     break;
+               case "hiraganaDyu":     hiraganaDyuLvl++;     break;
+               case "hiraganaDyo":     hiraganaDyoLvl++;     break;
+               case "hiraganaBya":     hiraganaByaLvl++;     break;
+               case "hiraganaByu":     hiraganaByuLvl++;     break;
+               case "hiraganaByo":     hiraganaByoLvl++;     break;
+               case "hiraganaPya":     hiraganaPyaLvl++;     break;
+               case "hiraganaPyu":     hiraganaPyuLvl++;     break;
+               case "hiraganaPyo":     hiraganaPyoLvl++;     break;
+               default: break;
+
+          }
      }
 }

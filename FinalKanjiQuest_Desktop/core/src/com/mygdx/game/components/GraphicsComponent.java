@@ -15,15 +15,16 @@ import com.mygdx.game.maps.MapManager;
 
 import java.util.Hashtable;
 
-public abstract class GraphicsComponent implements Component {
+public abstract class GraphicsComponent extends ComponentSubject implements Component {
     protected TextureRegion currentFrame = null;
     protected float frameTime = 0f;
     protected Entity.State currentState;
     protected Entity.Direction currentDirection;
     protected Json json;
-    protected Vector2 currentPosition;
     protected Hashtable<Entity.AnimationType, Animation> animations;
     protected ShapeRenderer shapeRenderer;
+
+    public Vector2 currentPosition;
 
     protected GraphicsComponent(){
         currentPosition = new Vector2(0,0);
@@ -201,4 +202,9 @@ public abstract class GraphicsComponent implements Component {
 
         return new Animation(frameDuration, animationKeyFrames, Animation.PlayMode.LOOP);
     }
+
+    public Animation getAnimation(Entity.AnimationType type){
+        return animations.get(type);
+    }
+
 }

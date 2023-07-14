@@ -12,7 +12,7 @@ import com.mygdx.game.tools.Entity;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
 
-public abstract class PhysicsComponent implements Component{
+public abstract class PhysicsComponent extends ComponentSubject implements Component{
 
     private static final String TAG = PhysicsComponent.class.getSimpleName();
 
