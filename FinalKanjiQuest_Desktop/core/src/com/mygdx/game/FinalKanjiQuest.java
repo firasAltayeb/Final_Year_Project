@@ -1,9 +1,10 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.mygdx.game.screens.GameOverScreen;
 import com.mygdx.game.screens.LoadGameScreen;
 import com.mygdx.game.screens.MainGameScreen;
-import com.badlogic.gdx.Game;
 import com.mygdx.game.screens.MainMenuScreen;
 import com.mygdx.game.screens.NewGameScreen;
 
@@ -13,12 +14,14 @@ public class FinalKanjiQuest extends Game {
 	private static MainMenuScreen mainMenuScreen;
 	private static LoadGameScreen loadGameScreen;
 	private static NewGameScreen newGameScreen;
+	private static GameOverScreen gameOverScreen;
 
 	public static enum ScreenType{
 		MainMenu,
 		MainGame,
 		LoadGame,
-		NewGame
+		NewGame,
+		GameOver
 	}
 
 	public Screen getScreenType(ScreenType screenType){
@@ -31,6 +34,8 @@ public class FinalKanjiQuest extends Game {
 				return loadGameScreen;
 			case NewGame:
 				return newGameScreen;
+			case GameOver:
+				return gameOverScreen;
 			default:
 				return mainMenuScreen;
 		}
@@ -43,6 +48,7 @@ public class FinalKanjiQuest extends Game {
 		mainMenuScreen = new MainMenuScreen(this);
 		loadGameScreen = new LoadGameScreen(this);
 		newGameScreen = new NewGameScreen(this);
+		gameOverScreen = new GameOverScreen(this);
 		setScreen(mainMenuScreen);
 	}
 
@@ -52,6 +58,7 @@ public class FinalKanjiQuest extends Game {
 		mainMenuScreen.dispose();
 		loadGameScreen.dispose();
 		newGameScreen.dispose();
+		gameOverScreen.dispose();
 	}
 
 }

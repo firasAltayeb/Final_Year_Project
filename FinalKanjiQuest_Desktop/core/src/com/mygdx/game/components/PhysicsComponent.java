@@ -23,7 +23,7 @@ public abstract class PhysicsComponent extends ComponentSubject implements Compo
     protected Vector2 velocity;
 
     public Rectangle boundingBox;
-    protected BoundingBoxLocation boundingBoxLocation;
+    public BoundingBoxLocation boundingBoxLocation;
 
     public static enum BoundingBoxLocation{
         BOTTOM_LEFT,

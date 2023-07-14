@@ -24,11 +24,13 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     private boolean isMouseSelectEnabled = false;
     private Ray selectionRay;
     private float selectRayMaximumDistance = 30.0f;
+    private String previousEnemySpawn;
 
     public PlayerPhysicsComponent(){
         boundingBoxLocation = BoundingBoxLocation.BOTTOM_CENTER;
         initBoundingBox(0.6f, 0.4f);
         super.velocity.set(15f,15f);
+        previousEnemySpawn = "0";
 
         mouseSelectCoordinates = new Vector3(0,0,0);
         selectionRay = new Ray(new Vector3(), new Vector3());
@@ -50,6 +52,8 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
             if (string[0].equalsIgnoreCase(MESSAGE.INIT_START_POSITION.toString())) {
                 currentEntityPosition = json.fromJson(Vector2.class, string[1]);
                 nextEntityPosition.set(currentEntityPosition.x, currentEntityPosition.y);
+                previousEnemySpawn = "0";
+                notify(previousEnemySpawn, ComponentObserver.ComponentEvent.ENEMY_SPAWN_LOCATION_CHANGED);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_STATE.toString())) {
                 state = json.fromJson(Entity.State.class, string[1]);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_DIRECTION.toString())) {
@@ -66,6 +70,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
         //We want the hitbox to be at the feet for a better feel
         updateBoundingBoxPosition(nextEntityPosition);
         updatePortalLayerActivation(mapMgr);
+        updateEnemySpawnLayerActivation(mapMgr);
 
         if(isMouseSelectEnabled){
             selectMapEntityCandidate(mapMgr);
@@ -115,6 +120,50 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
                 }
             }
         }
+    }
+
+    private boolean updateEnemySpawnLayerActivation(MapManager mapMgr){
+        MapLayer mapEnemySpawnLayer =  mapMgr.getEnemySpawnLayer();
+
+        if( mapEnemySpawnLayer == null ){
+            return false;
+        }
+
+        Rectangle rectangle = null;
+
+        for( MapObject object: mapEnemySpawnLayer.getObjects()){
+            if(object instanceof RectangleMapObject) {
+                rectangle = ((RectangleMapObject)object).getRectangle();
+
+                if (boundingBox.overlaps(rectangle) ){
+                    String enemySpawnID = object.getName();
+
+                    if( enemySpawnID == null ) {
+                        return false;
+                    }
+
+                    if( previousEnemySpawn.equalsIgnoreCase(enemySpawnID) ){
+                        //Gdx.app.debug(TAG, "Enemy Spawn Area already activated " + enemySpawnID);
+                        return true;
+                    }else{
+                        Gdx.app.debug(TAG, "Enemy Spawn Area " + enemySpawnID + " Activated with previous Spawn value: " + previousEnemySpawn);
+                        previousEnemySpawn = enemySpawnID;
+                    }
+
+                    notify(enemySpawnID, ComponentObserver.ComponentEvent.ENEMY_SPAWN_LOCATION_CHANGED);
+                    return true;
+                }
+            }
+        }
+
+        //If no collision, reset the value
+        if( !previousEnemySpawn.equalsIgnoreCase(String.valueOf(0)) ){
+            Gdx.app.debug(TAG, "Enemy Spawn Area RESET with previous value " + previousEnemySpawn);
+            previousEnemySpawn = String.valueOf(0);
+            notify(previousEnemySpawn, ComponentObserver.ComponentEvent.ENEMY_SPAWN_LOCATION_CHANGED);
+        }
+
+        return false;
     }
 
     private boolean updatePortalLayerActivation(MapManager mapMgr){

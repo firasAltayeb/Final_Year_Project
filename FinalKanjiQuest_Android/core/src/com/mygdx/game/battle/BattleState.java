@@ -9,8 +9,8 @@ public class BattleState extends BattleSubject {
 
     private String currentOpponent;
     private int currentZoneLevel = 0;
-    private final int chanceOfEncounter = 75;
-    private final int chanceOfEscape = 25;
+    private final int chanceOfEncounter = 50;
+    private final int chanceOfEscape = 90;
 
 
     public void setCurrentZoneLevel(int zoneLevel){
@@ -74,4 +74,5 @@ public class BattleState extends BattleSubject {
 
         notify(currentOpponent, BattleObserver.BattleEvent.OPPONENT_TURN_DONE);
     }
+
 }

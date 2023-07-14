@@ -10,21 +10,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.battle.BattleObserver;
 import com.mygdx.game.components.Component;
-import com.mygdx.game.japanese.LetterLvlCounter;
-import com.mygdx.game.tools.Entity;
-import com.mygdx.game.tools.Utility;
+import com.mygdx.game.components.ComponentObserver;
 import com.mygdx.game.inventory.InventoryItem;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 import com.mygdx.game.inventory.InventoryItemLocation;
+import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
-import com.mygdx.game.inventory.InventoryItem.ItemNameID;
+import com.mygdx.game.tools.Entity;
+import com.mygdx.game.tools.OnScreenController;
+import com.mygdx.game.tools.Utility;
 
-
-public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, ProgressObserver {
+public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, ProgressObserver, BattleObserver {
 
     private final static String TAG = PlayerHUD.class.getSimpleName();
 
@@ -32,13 +35,17 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private Viewport viewport;
     private Camera camera;
     private Entity player;
+    private Json json;
 
-    private ProgressUI progressUI;
     private MenuListUI menuListUI;
+    private ProgressUI progressUI;
+    private InventoryUI inventoryUI;
     private KanaUI hiraganaUI;
     private KanaUI katakanaUI;
     private KanjiUI kanjiUI;
     private MnemonicsUI mnemonicsUI;
+    private OnScreenController controllerUI;
+    private BattleUI battleUI;
 
     private TextButton menuButton;
     private TextButton progressButton;
@@ -47,6 +54,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private TextButton katakanaButton;
     private TextButton kanjiButton;
     private TextButton mnemonicsButton;
+    private TextButton controllerButton;
 
     private Array<Image> all_health_heart;
     private Image health_heart;
@@ -56,13 +64,12 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private float menuItemWindowWidth;
     private float menuItemWindowHeight;
 
-    private InventoryUI inventoryUI;
-
     public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer) {
         this.camera = camera;
         this.player = player;
         viewport = new ScreenViewport(this.camera);
         stage = new Stage(viewport);
+        json = new Json();
 
         multiplexer.addProcessor(this.getStage());
         multiplexer.addProcessor(player.getInputProcessor());
@@ -98,6 +105,8 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         progressUI.setVisible(false);
         progressUI.setMovable(false);
 
+        //Gdx.app.debug(TAG, "All hiragana memorised is " + LetterLvlCounter.isAllHiraganaMemorised());
+
         inventoryUI = new InventoryUI(menuItemWindowWidth, menuItemWindowHeight);
         inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         inventoryUI.setMovable(false);
@@ -130,6 +139,14 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
             stage.addActor(all_health_heart.get(i));
         }
 
+        battleUI = new BattleUI();
+        battleUI.setFillParent(true);
+        battleUI.setVisible(false);
+        battleUI.setMovable(false);
+        //removes all listeners including ones that handle focus
+        battleUI.clearListeners();
+
+        stage.addActor(battleUI);
         stage.addActor(menuButton);
         stage.addActor(menuListUI);
         stage.addActor(progressUI);
@@ -141,8 +158,10 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
         //Observers
         ProfileManager.getInstance().addObserver(this);
+        player.registerObserver(this);
         progressUI.addObserver(this);
         inventoryUI.addObserver(this);
+        battleUI.getCurrentState().addObserver(this);
 
         menuButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
@@ -237,12 +256,10 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 mnemonicsUI.setVisible(mnemonicsUI.isVisible()?false:true);
             }
         });
-
-        //stage.setDebugAll(true);
     }
 
     @Override
-    public void onNotify(ProfileManager profileManager, ProfileEvent event) {
+    public void onNotify(ProfileManager profileManager, ProfileObserver.ProfileEvent event) {
         switch(event){
             case PROFILE_LOADED:
                 //int hpMaxVal = profileManager.getProperty("currentPlayerHPMax", Integer.class);
@@ -266,7 +283,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
                 if( firstTime ){
                     //add default items if first time
-                    Array<ItemNameID> items = player.getEntityConfig().getInventory();
+                    Array<InventoryItem.ItemNameID> items = player.getEntityConfig().getInventory();
                     Array<InventoryItemLocation> itemLocations = new Array<InventoryItemLocation>();
                     for( int i = 0; i < items.size; i++){
                         itemLocations.add(new InventoryItemLocation(i, items.get(i).toString()));
@@ -290,6 +307,27 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     }
 
     @Override
+    public void onNotify(String value, ComponentEvent event) {
+        switch(event) {
+            case ENEMY_SPAWN_LOCATION_CHANGED:
+                String enemyZoneID = value;
+                Gdx.app.debug(TAG, "ENEMY_SPAWN_LOCATION_CHANGED " + enemyZoneID);
+                battleUI.battleZoneTriggered(Integer.parseInt(enemyZoneID));
+                break;
+            case PLAYER_HAS_MOVED:
+                //Gdx.app.debug(TAG, "PLAYER_HAS_MOVED ");
+                if (battleUI.isBattleReady()) {
+                    MainGameScreen.setGameState(MainGameScreen.GameState.SAVING);
+                    battleUI.toBack();
+                    battleUI.setVisible(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     public void show() {
     }
 
@@ -297,15 +335,54 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     public void render(float delta) {
         stage.act(delta);
         stage.draw();
+
     }
 
-    @Override
+    @Override //TODO speak about this in the report
     public void resize(int width, int height) {
+        menuItemsXaxis = 0;
+        menuItemsYaxis = height/40;
+        menuItemWindowWidth = width/1.4f;
+        menuItemWindowHeight = height/1.05f;
+
+        Gdx.app.log(TAG, "resize height is: " + height);
+
+        for (int i = 0; i<10; i++) {
+            all_health_heart.get(i).setPosition(health_heart.getWidth() * i, height - health_heart.getHeight());
+        }
+
+        menuButton.setPosition(width/1.2f,  height/12);
+
+        menuListUI.setPosition(width/1.27f, height/2);
+        menuListUI.updateSize(width/3.4f, height/1.4f);
+
+        progressUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        progressUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
+        inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        inventoryUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
+        hiraganaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        hiraganaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
+        katakanaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        katakanaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
+        kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        kanjiUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
+        mnemonicsUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        mnemonicsUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
+
+        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+        stage.getViewport().update(width, height, true);
+
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
@@ -321,6 +398,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     @Override
     public void dispose() {
         stage.dispose();
+        player.dispose();
     }
 
     @Override
@@ -369,17 +447,43 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         }
     }
 
+    @Override
+    public void onNotify(String enemyMonster, BattleEvent event) {
+        switch (event) {
+            case OPPONENT_DEFEATED:
+                MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                battleUI.setVisible(false);
+                break;
+            case PLAYER_RUNNING:
+                MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                battleUI.setVisible(false);
+                break;
+            case PLAYER_HIT_DAMAGE:
+                int hpVal = progressUI.getHPValue() - 1;
+                progressUI.setHPValue(hpVal);
+                showHearts(hpVal);
+                if( hpVal <= 0 ){
+                    battleUI.setVisible(false);
+                    MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     public void showHearts(int hpVal){
         //Gdx.app.log(TAG, "hpVal is: " + hpVal);
-
-        for (int i = 0; i<hpVal; i++) {
-            all_health_heart.get(i).setVisible(true);
+        for (int i = 0; i<all_health_heart.size; i++) {
+            all_health_heart.get(i).setVisible(false);
+        }
+        for (int j = 0; j <hpVal; j++) {
+            all_health_heart.get(j).setVisible(true);
         }
     }
 
     public Stage getStage() {
         return stage;
     }
-
 
 }

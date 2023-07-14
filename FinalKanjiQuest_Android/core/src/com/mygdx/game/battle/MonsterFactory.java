@@ -2,8 +2,6 @@ package com.mygdx.game.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.tools.Entity;
-import com.mygdx.game.tools.EntityConfig;
 
 import java.util.Hashtable;
 

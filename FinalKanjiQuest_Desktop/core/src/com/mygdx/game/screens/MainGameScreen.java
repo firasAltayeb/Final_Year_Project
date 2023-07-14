@@ -31,8 +31,11 @@ public class MainGameScreen implements Screen {
 	}
 
 	public static enum GameState {
+		SAVING,
+		LOADING,
 		RUNNING,
-		PAUSED
+		PAUSED,
+		GAME_OVER
 	}
 	private static GameState gameState;
 
@@ -86,11 +89,16 @@ public class MainGameScreen implements Screen {
 
 	@Override
 	public void hide() {
+		setGameState(GameState.LOADING);
 		Gdx.input.setInputProcessor(null);
 	}
 
 	@Override
 	public void render(float delta) {
+		if( gameState == GameState.GAME_OVER ){
+			game.setScreen(game.getScreenType(FinalKanjiQuest.ScreenType.GameOver));
+		}
+
 		if( gameState == GameState.PAUSED ){
 			player.updateInput(delta);
 			playerHUD.render(delta);
@@ -129,20 +137,24 @@ public class MainGameScreen implements Screen {
 
 	@Override
 	public void pause() {
-		gameState = GameState.PAUSED;
-		ProfileManager.getInstance().saveProfile();
+		setGameState(GameState.SAVING);
 	}
 
 	@Override
 	public void resume() {
-		gameState = GameState.RUNNING;
-		ProfileManager.getInstance().loadProfile();
+		setGameState(GameState.LOADING);
 	}
 
 	@Override
 	public void dispose() {
-		player.dispose();
-		mapRenderer.dispose();
+		if( player != null ){
+			player.unregisterObservers();
+			player.dispose();
+		}
+
+		if( mapRenderer != null ){
+			mapRenderer.dispose();
+		}
 	}
 
 	public static void setGameState(GameState state){
@@ -150,14 +162,23 @@ public class MainGameScreen implements Screen {
 			case RUNNING:
 				gameState = GameState.RUNNING;
 				break;
+			case LOADING:
+				gameState = GameState.RUNNING;
+				ProfileManager.getInstance().loadProfile();
+				break;
+			case SAVING:
+				ProfileManager.getInstance().saveProfile();
+				gameState = GameState.PAUSED;
+				break;
 			case PAUSED:
 				if( gameState == GameState.PAUSED ){
 					gameState = GameState.RUNNING;
-					ProfileManager.getInstance().loadProfile();
 				}else if( gameState == GameState.RUNNING ){
 					gameState = GameState.PAUSED;
-					ProfileManager.getInstance().saveProfile();
 				}
+				break;
+			case GAME_OVER:
+				gameState = GameState.GAME_OVER;
 				break;
 			default:
 				gameState = GameState.RUNNING;

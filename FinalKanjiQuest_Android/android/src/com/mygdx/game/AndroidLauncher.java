@@ -10,10 +10,13 @@ import com.mygdx.game.screens.MainGameScreen;
 
 
 public class AndroidLauncher extends AndroidApplication {
+
+	AndroidApplicationConfiguration config;
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+		config = new AndroidApplicationConfiguration();
 
 		initialize(new FinalKanjiQuest(), config);
 
@@ -28,13 +31,12 @@ public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+		initialize(new FinalKanjiQuest(), config);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		//MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
 	}
 
 	@Override

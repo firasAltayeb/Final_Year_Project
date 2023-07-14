@@ -174,7 +174,7 @@ public class ProgressUI extends Window implements ProgressSubject {
         return hpVal;
     }
 
-    public void removeHPValue(int hpValue){
+    public void subtractHPValue(int hpValue){
         hpVal = MathUtils.clamp(hpVal - hpValue, 0, hpCurrentMax);
         notify(hpVal, ProgressObserver.StatusEvent.UPDATED_HP);
     }

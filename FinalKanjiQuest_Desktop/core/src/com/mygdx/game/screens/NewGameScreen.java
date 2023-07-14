@@ -97,6 +97,7 @@ public class NewGameScreen implements Screen {
 											ProfileManager.getInstance().setCurrentProfile(messageText);
 											ProfileManager.getInstance().saveProfile();
 											ProfileManager.getInstance().loadProfile();
+											middleTable.setVisible(false);
 											NewGameScreen.this.game.setScreen(NewGameScreen.this.game.getScreenType(ScreenType.MainGame));
 											return true;
 										}
@@ -108,6 +109,11 @@ public class NewGameScreen implements Screen {
 									@Override
 									public boolean touchDown(InputEvent event, float x, float y, int pointer, int button ){
 										String messageText = profileText.getText();
+
+										if(messageText.length() < 1){
+											return true;
+										}
+
 										//check to see if the current profile matches one that already exists
 										boolean exists = false;
 

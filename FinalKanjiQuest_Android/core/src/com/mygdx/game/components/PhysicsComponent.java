@@ -8,11 +8,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.mygdx.game.tools.Entity;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
+import com.mygdx.game.tools.Entity;
 
-public abstract class PhysicsComponent implements com.mygdx.game.components.Component {
+public abstract class PhysicsComponent extends ComponentSubject implements Component {
 
     private static final String TAG = PhysicsComponent.class.getSimpleName();
 
@@ -23,7 +23,7 @@ public abstract class PhysicsComponent implements com.mygdx.game.components.Comp
     protected Vector2 velocity;
 
     public Rectangle boundingBox;
-    protected BoundingBoxLocation boundingBoxLocation;
+    public BoundingBoxLocation boundingBoxLocation;
 
     public static enum BoundingBoxLocation{
         BOTTOM_LEFT,
@@ -107,7 +107,7 @@ public abstract class PhysicsComponent implements com.mygdx.game.components.Comp
         this.currentEntityPosition.x = nextEntityPosition.x;
         this.currentEntityPosition.y = nextEntityPosition.y;
 
-        //Gdx.app.debug(TAG, "SETTING Current Position " + entity.getEntityConfig().getEntityID()
+        //Gdx.app.debug(TAG, "SETTING Current Position " + tools.getEntityConfig().getEntityID()
         // + ": (" + currentEntityPosition.x + "," + currentEntityPosition.y + ")");
         entity.sendMessage(MESSAGE.CURRENT_POSITION, json.toJson(currentEntityPosition));
     }
@@ -211,9 +211,6 @@ public abstract class PhysicsComponent implements com.mygdx.game.components.Comp
                 boundingBox.setCenter(minX + origWidth/2, minY + origHeight/2);
                 break;
         }
-
-        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
-        // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 
     protected void updateBoundingBoxPosition(Vector2 position){
@@ -240,8 +237,5 @@ public abstract class PhysicsComponent implements com.mygdx.game.components.Comp
                 boundingBox.setCenter(minX + Entity.FRAME_WIDTH/2, minY + Entity.FRAME_HEIGHT/2);
                 break;
         }
-
-        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
-        // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 }

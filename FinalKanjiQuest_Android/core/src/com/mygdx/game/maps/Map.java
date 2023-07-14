@@ -27,6 +27,7 @@ public abstract class Map {
     protected final static String COLLISION_LAYER = "MAP_COLLISION_LAYER";
     protected final static String SPAWNS_LAYER = "MAP_SPAWNS_LAYER";
     protected final static String PORTAL_LAYER = "MAP_PORTAL_LAYER";
+    protected final static String ENEMY_SPAWN_LAYER = "MAP_ENEMY_SPAWN_LAYER";
 
     //Starting locations
     protected final static String PLAYER_START = "PLAYER_START";
@@ -45,6 +46,7 @@ public abstract class Map {
     protected MapLayer collisionLayer = null;
     protected MapLayer portalLayer = null;
     protected MapLayer spawnsLayer = null;
+    protected MapLayer enemySpawnLayer = null;
 
     protected MapFactory.MapType currentMapType;
     protected Array<Entity> mapEntities;
@@ -88,11 +90,37 @@ public abstract class Map {
             setClosestStartPosition(playerStart);
         }
 
+        enemySpawnLayer = currentMap.getLayers().get(ENEMY_SPAWN_LAYER);
+        if( enemySpawnLayer == null ){
+            Gdx.app.debug(TAG, "No enemy layer found!");
+        }
+
         npcStartPositions = getNPCStartPositions();
         specialNPCStartPositions = getSpecialNPCStartPositions();
     }
 
     public abstract void updateMapEntities(MapManager mapMgr, Batch batch, float delta);
+
+    public Entity initSpecialEntity(EntityConfig entityConfig){
+        Vector2 position = new Vector2(0,0);
+
+        if( specialNPCStartPositions.containsKey(entityConfig.getEntityID()) ) {
+            position = specialNPCStartPositions.get(entityConfig.getEntityID());
+        }
+        return initEntity(entityConfig, position);
+    }
+
+    public Entity initEntity(EntityConfig entityConfig, Vector2 position){
+        Entity entity = EntityFactory.getEntity(EntityFactory.EntityType.NPC);
+        entity.setEntityConfig(entityConfig);
+
+        entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, json.toJson(entity.getEntityConfig()));
+        entity.sendMessage(Component.MESSAGE.INIT_START_POSITION, json.toJson(position));
+        entity.sendMessage(Component.MESSAGE.INIT_STATE, json.toJson(entity.getEntityConfig().getState()));
+        entity.sendMessage(Component.MESSAGE.INIT_DIRECTION, json.toJson(entity.getEntityConfig().getDirection()));
+
+        return entity;
+    }
 
     private Array<Vector2> getNPCStartPositions(){
         Array<Vector2> npcStartPositions = new Array<Vector2>();
@@ -148,12 +176,6 @@ public abstract class Map {
         return specialNPCStartPositions;
     }
 
-    public Vector2 getPlayerStartUnitScaled(){
-        Vector2 playerStart = this.playerStart.cpy();
-        playerStart.set(this.playerStart.x * UNIT_SCALE, this.playerStart.y * UNIT_SCALE);
-        return playerStart;
-    }
-
     //TODO speak about this
     public void setClosestStartPosition(final Vector2 position) {
         Gdx.app.debug(TAG, "setClosestStartPosition INPUT: (" + position.x + "," + position.y + ") " + currentMapType.toString());
@@ -191,27 +213,6 @@ public abstract class Map {
 
     }
 
-    public Entity initEntity(EntityConfig entityConfig, Vector2 position){
-        Entity entity = EntityFactory.getEntity(EntityFactory.EntityType.NPC);
-        entity.setEntityConfig(entityConfig);
-
-        entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, json.toJson(entity.getEntityConfig()));
-        entity.sendMessage(Component.MESSAGE.INIT_START_POSITION, json.toJson(position));
-        entity.sendMessage(Component.MESSAGE.INIT_STATE, json.toJson(entity.getEntityConfig().getState()));
-        entity.sendMessage(Component.MESSAGE.INIT_DIRECTION, json.toJson(entity.getEntityConfig().getDirection()));
-
-        return entity;
-    }
-
-    public Entity initSpecialEntity(EntityConfig entityConfig){
-        Vector2 position = new Vector2(0,0);
-
-        if( specialNPCStartPositions.containsKey(entityConfig.getEntityID()) ) {
-            position = specialNPCStartPositions.get(entityConfig.getEntityID());
-        }
-        return initEntity(entityConfig, position);
-    }
-
     public void setSpecificPortal(String  specificPortal){
         //Gdx.app.debug(TAG, "portalProperties are not null");
         this.specificPortal = specificPortal;
@@ -225,12 +226,22 @@ public abstract class Map {
         return playerStart;
     }
 
+    public Vector2 getPlayerStartUnitScaled(){
+        Vector2 playerStart = this.playerStart.cpy();
+        playerStart.set(this.playerStart.x * UNIT_SCALE, this.playerStart.y * UNIT_SCALE);
+        return playerStart;
+    }
+
     public void setPlayerStart(Vector2 playerStart) {
         this.playerStart = playerStart;
     }
 
     public MapLayer getCollisionLayer(){
         return collisionLayer;
+    }
+
+    public MapLayer getEnemySpawnLayer() {
+        return enemySpawnLayer;
     }
 
     public MapLayer getPortalLayer(){

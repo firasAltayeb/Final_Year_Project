@@ -38,13 +38,11 @@ public class MainMenuScreen implements Screen {
 		Label title = new Label("FKQ", Utility.GUI_SKINS, "title_text");
 		TextButton newGameButton = new TextButton("New Game", Utility.GUI_SKINS);
 		TextButton loadGameButton = new TextButton("Load Game", Utility.GUI_SKINS);
-		TextButton exitButton = new TextButton("Exit", Utility.GUI_SKINS);
 
 		//Layout
 		table.add(title).spaceBottom(75).row();
 		table.add(newGameButton).spaceBottom(10).row();
 		table.add(loadGameButton).spaceBottom(10).row();
-		table.add(exitButton).spaceBottom(10).row();
 
 		stage.addActor(table);
 
@@ -66,17 +64,6 @@ public class MainMenuScreen implements Screen {
 										   return true;
 									   }
 								   }
-		);
-
-		exitButton.addListener(new InputListener() {
-
-								   @Override
-								   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-									   Gdx.app.exit();
-									   return true;
-								   }
-
-							   }
 		);
 
 
@@ -112,6 +99,7 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void pause() {
+
 	}
 
 	@Override

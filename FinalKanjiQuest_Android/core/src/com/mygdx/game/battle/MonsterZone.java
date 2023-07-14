@@ -1,11 +1,9 @@
 package com.mygdx.game.battle;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.tools.Utility;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -34,7 +32,6 @@ public class MonsterZone {
         Json json = new Json();
         Hashtable<String, Array<String>> monsterZones = new Hashtable<String, Array<String>>();
 
-        //TODO talk about this,
         ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(configFilePath));
 
         String temp;

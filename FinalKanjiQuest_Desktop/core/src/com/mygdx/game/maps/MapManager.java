@@ -95,6 +95,10 @@ public class MapManager implements ProfileObserver {
         return currentMap.getMapEntities();
     }
 
+    public MapLayer getEnemySpawnLayer(){
+        return currentMap.getEnemySpawnLayer();
+    }
+
     public void setPlayer(Entity entity){
         this.player = entity;
     }

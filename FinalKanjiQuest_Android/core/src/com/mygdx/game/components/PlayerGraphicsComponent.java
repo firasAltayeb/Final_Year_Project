@@ -6,17 +6,20 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.maps.MapManager;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.EntityConfig;
 import com.mygdx.game.tools.EntityConfig.AnimationConfig;
-import com.mygdx.game.maps.MapManager;
 
 
-public class PlayerGraphicsComponent extends com.mygdx.game.components.GraphicsComponent {
+public class PlayerGraphicsComponent extends GraphicsComponent {
 
     private static final String TAG = PlayerGraphicsComponent.class.getSimpleName();
 
+    protected Vector2 previousPosition;
+
     public PlayerGraphicsComponent(){
+        previousPosition = new Vector2(0,0);
     }
 
     @Override
@@ -63,6 +66,14 @@ public class PlayerGraphicsComponent extends com.mygdx.game.components.GraphicsC
     public void update(Entity entity, MapManager mapMgr, Batch batch, float delta){
         updateAnimations(delta);
 
+        //Player has moved
+        if( previousPosition.x != currentPosition.x ||
+                previousPosition.y != currentPosition.y){
+            notify("", ComponentObserver.ComponentEvent.PLAYER_HAS_MOVED);
+            previousPosition = currentPosition.cpy();
+        }
+
+
         Camera camera = mapMgr.getCamera();
         camera.position.set(currentPosition.x, currentPosition.y, 0f);
         camera.update();
@@ -70,14 +81,6 @@ public class PlayerGraphicsComponent extends com.mygdx.game.components.GraphicsC
         batch.begin();
         batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1.2f, 2);
         batch.end();
-
-//        Used to graphically debug boundingboxes
-//        Rectangle rect = entity.getCurrentBoundingBox();
-//        shapeRenderer.setProjectionMatrix(camera.combined);
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-//        shapeRenderer.setColor(Color.RED);
-//        shapeRenderer.rect(rect.getX() * Map.UNIT_SCALE , rect.getY() * Map.UNIT_SCALE, rect.getWidth() * Map.UNIT_SCALE, rect.getHeight()*Map.UNIT_SCALE);
-//        shapeRenderer.end();
 
     }
 

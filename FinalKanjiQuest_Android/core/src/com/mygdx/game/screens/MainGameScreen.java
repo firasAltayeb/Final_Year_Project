@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Json;
-import com.mygdx.game.components.Component;
-import com.mygdx.game.tools.Entity;
-import com.mygdx.game.tools.EntityFactory;
 import com.mygdx.game.FinalKanjiQuest;
+import com.mygdx.game.components.Component;
 import com.mygdx.game.gui.PlayerHUD;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
 import com.mygdx.game.profile.ProfileManager;
+import com.mygdx.game.tools.Entity;
+import com.mygdx.game.tools.EntityFactory;
 
 public class MainGameScreen implements Screen {
 
@@ -31,8 +31,11 @@ public class MainGameScreen implements Screen {
 	}
 
 	public static enum GameState {
+		SAVING,
+		LOADING,
 		RUNNING,
-		PAUSED
+		PAUSED,
+		GAME_OVER
 	}
 	private static GameState gameState;
 
@@ -61,36 +64,41 @@ public class MainGameScreen implements Screen {
 		camera.setToOrtho(false, VIEWPORT.viewportWidth, VIEWPORT.viewportHeight);
 
 		mapRenderer = new OrthogonalTiledMapRenderer(mapMgr.getCurrentTiledMap(), Map.UNIT_SCALE);
-		mapRenderer.setView(camera);
-		mapMgr.setCamera(camera);
-
-		Gdx.app.debug(TAG, "UnitScale value is: " + mapRenderer.getUnitScale());
 
 		player = EntityFactory.getEntity(EntityFactory.EntityType.PLAYER);
 		mapMgr.setPlayer(player);
+		mapMgr.setCamera(camera);
 
 		hudCamera = new OrthographicCamera();
 		hudCamera.setToOrtho(false, VIEWPORT.physicalWidth, VIEWPORT.physicalHeight);
 
+
 		multiplexer = new InputMultiplexer();
 		playerHUD = new PlayerHUD(hudCamera, player, multiplexer);
-
-		//ProfileManager.getInstance().addObserver(playerHUD);
-		ProfileManager.getInstance().addObserver(mapMgr);
 	}
 
 	@Override
 	public void show() {
+		setGameState(GameState.RUNNING);
 		Gdx.input.setInputProcessor(multiplexer);
+		//
+		//if( mapRenderer == null ){
+		//	mapRenderer = new OrthogonalTiledMapRenderer(mapMgr.getCurrentTiledMap(), Map.UNIT_SCALE);
+		//}
 	}
 
 	@Override
 	public void hide() {
-		Gdx.input.setInputProcessor(null);
+		setGameState(GameState.LOADING);
+		//Gdx.input.setInputProcessor(null);
 	}
 
 	@Override
 	public void render(float delta) {
+		if( gameState == GameState.GAME_OVER ){
+			game.setScreen(game.getScreenType(FinalKanjiQuest.ScreenType.GameOver));
+		}
+
 		if( gameState == GameState.PAUSED ){
 			player.updateInput(delta);
 			playerHUD.render(delta);
@@ -129,20 +137,35 @@ public class MainGameScreen implements Screen {
 
 	@Override
 	public void pause() {
-		gameState = GameState.PAUSED;
-		ProfileManager.getInstance().saveProfile();
+		setGameState(GameState.SAVING);
+		if( player != null ){
+			player.unregisterObservers();
+			player.dispose();
+		}
+
+		if( mapRenderer != null ){
+			mapRenderer.dispose();
+		}
+		playerHUD.dispose();
 	}
 
 	@Override
 	public void resume() {
-		gameState = GameState.RUNNING;
-		ProfileManager.getInstance().loadProfile();
+		setGameState(GameState.LOADING);
+		mapRenderer.render();
 	}
 
 	@Override
 	public void dispose() {
-		player.dispose();
-		mapRenderer.dispose();
+		if( player != null ){
+			player.unregisterObservers();
+			player.dispose();
+		}
+
+		if( mapRenderer != null ){
+			mapRenderer.dispose();
+		}
+		playerHUD.dispose();
 	}
 
 	public static void setGameState(GameState state){
@@ -150,14 +173,23 @@ public class MainGameScreen implements Screen {
 			case RUNNING:
 				gameState = GameState.RUNNING;
 				break;
+			case LOADING:
+				gameState = GameState.RUNNING;
+				//ProfileManager.getInstance().loadProfile();
+				break;
+			case SAVING:
+				//ProfileManager.getInstance().saveProfile();
+				gameState = GameState.PAUSED;
+				break;
 			case PAUSED:
 				if( gameState == GameState.PAUSED ){
 					gameState = GameState.RUNNING;
-					ProfileManager.getInstance().loadProfile();
 				}else if( gameState == GameState.RUNNING ){
 					gameState = GameState.PAUSED;
-					ProfileManager.getInstance().saveProfile();
 				}
+				break;
+			case GAME_OVER:
+				gameState = GameState.GAME_OVER;
 				break;
 			default:
 				gameState = GameState.RUNNING;

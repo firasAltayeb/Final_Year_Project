@@ -27,27 +27,27 @@ public class MapManager implements ProfileObserver {
     public void onNotify(ProfileManager profileManager, ProfileEvent event) {
         switch(event){
             case PROFILE_LOADED:
-                String currentMap = profileManager.getProperty("currentMapType", String.class);
-                MapFactory.MapType mapType;
-                if( currentMap == null || currentMap.isEmpty() ){
-                    mapType = MapFactory.MapType.TOWN;
-                }else{
-                    mapType = MapFactory.MapType.valueOf(currentMap);
-                }
-                loadMap(mapType);
-
-                Vector2 currentMapStartPoistion = profileManager.getProperty("currentMapStartPoistion", Vector2.class);
-                if( currentMapStartPoistion != null ){
-                    MapFactory.getMap(mapType).setPlayerStart(currentMapStartPoistion);
-                }
+                //String currentMap = profileManager.getProperty("currentMapType", String.class);
+                //MapFactory.MapType mapType;
+                //if( currentMap == null || currentMap.isEmpty() ){
+                //    mapType = MapFactory.MapType.TOWN;
+                //}else{
+                //    mapType = MapFactory.MapType.valueOf(currentMap);
+                //}
+                //loadMap(mapType);
+                //
+                //Vector2 currentMapStartPoistion = profileManager.getProperty("currentMapStartPoistion", Vector2.class);
+                //if( currentMapStartPoistion != null ){
+                //    MapFactory.getMap(mapType).setPlayerStart(currentMapStartPoistion);
+                //}
 
                 break;
             case SAVING_PROFILE:
-                if( this.currentMap != null ){
-                    profileManager.setProperty("currentMapType", this.currentMap.currentMapType.toString());
-                }
-                profileManager.setProperty("currentMapStartPoistion", this.currentMap.getPlayerStart());
-                break;
+                //if( this.currentMap != null ){
+                //    profileManager.setProperty("currentMapType", this.currentMap.currentMapType.toString());
+                //}
+                //profileManager.setProperty("currentMapStartPoistion", this.currentMap.getPlayerStart());
+                //break;
             default:
                 break;
         }
@@ -92,6 +92,10 @@ public class MapManager implements ProfileObserver {
 
     public final Array<Entity> getCurrentMapEntities(){
         return currentMap.getMapEntities();
+    }
+
+    public MapLayer getEnemySpawnLayer(){
+        return currentMap.getEnemySpawnLayer();
     }
 
     public void setPlayer(Entity entity){

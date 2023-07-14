@@ -1,7 +1,5 @@
 package com.mygdx.game.battle;
 
-import com.mygdx.game.tools.Entity;
-
 public interface BattleObserver {
     public static enum BattleEvent{
         OPPONENT_ADDED,

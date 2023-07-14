@@ -13,7 +13,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.battle.BattleObserver;
 import com.mygdx.game.components.Component;
+import com.mygdx.game.components.ComponentObserver;
 import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.OnScreenController;
@@ -25,7 +27,7 @@ import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
 import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 
-public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, ProgressObserver {
+public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, ProgressObserver, BattleObserver {
 
     private final static String TAG = PlayerHUD.class.getSimpleName();
 
@@ -43,6 +45,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private KanjiUI kanjiUI;
     private MnemonicsUI mnemonicsUI;
     private OnScreenController controllerUI;
+    private BattleUI battleUI;
 
     private TextButton menuButton;
     private TextButton progressButton;
@@ -60,7 +63,6 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private float menuItemsYaxis;
     private float menuItemWindowWidth;
     private float menuItemWindowHeight;
-
 
     public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer) {
         this.camera = camera;
@@ -130,10 +132,6 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         mnemonicsUI.setMovable(false);
         mnemonicsUI.setVisible(false);
 
-        //controllerUI = new OnScreenController(stage);
-        //controllerUI.getTableDirectional().setPosition(stage.getWidth()/4f,  stage.getHeight()/12);
-        //controllerUI.getTableDirectional().setVisible(false);
-
 
         Gdx.app.log(TAG, "all_health_heart.size is: " + all_health_heart.size);
 
@@ -141,6 +139,14 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
             stage.addActor(all_health_heart.get(i));
         }
 
+        battleUI = new BattleUI();
+        battleUI.setFillParent(true);
+        battleUI.setVisible(false);
+        battleUI.setMovable(false);
+        //removes all listeners including ones that handle focus
+        battleUI.clearListeners();
+
+        stage.addActor(battleUI);
         stage.addActor(menuButton);
         stage.addActor(menuListUI);
         stage.addActor(progressUI);
@@ -152,8 +158,10 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
         //Observers
         ProfileManager.getInstance().addObserver(this);
+        player.registerObserver(this);
         progressUI.addObserver(this);
         inventoryUI.addObserver(this);
+        battleUI.getCurrentState().addObserver(this);
 
         menuButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
@@ -248,21 +256,6 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 mnemonicsUI.setVisible(mnemonicsUI.isVisible()?false:true);
             }
         });
-
-        //controllerButton = menuListUI.getControllerButton();
-        //controllerButton.addListener(new ClickListener() {
-        //    public void clicked (InputEvent event, float x, float y) {
-        //        progressUI.setVisible(false);
-        //        inventoryUI.setVisible(false);
-        //        hiraganaUI.setVisible(false);
-        //        katakanaUI.setVisible(false);
-        //        kanjiUI.setVisible(false);
-        //        mnemonicsUI.setVisible(false);
-        //        controllerUI.getTableDirectional().setVisible( controllerUI.getTableDirectional().isVisible()?false:true);
-        //    }
-        //});
-        //
-        //stage.setDebugAll(true);
     }
 
     @Override
@@ -311,17 +304,32 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     }
 
     @Override
+    public void onNotify(String value, ComponentEvent event) {
+        switch(event) {
+            case ENEMY_SPAWN_LOCATION_CHANGED:
+                String enemyZoneID = value;
+                Gdx.app.debug(TAG, "ENEMY_SPAWN_LOCATION_CHANGED " + enemyZoneID);
+                battleUI.battleZoneTriggered(Integer.parseInt(enemyZoneID));
+                break;
+            case PLAYER_HAS_MOVED:
+                //Gdx.app.debug(TAG, "PLAYER_HAS_MOVED ");
+                if (battleUI.isBattleReady()) {
+                    MainGameScreen.setGameState(MainGameScreen.GameState.SAVING);
+                    battleUI.toBack();
+                    battleUI.setVisible(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     public void show() {
     }
 
     @Override
     public void render(float delta) {
-        //if(controllerUI.isDownPressed()){
-        //    player.sendMessage(Component.MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
-        //    player.sendMessage(Component.MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
-        //}
-        //player.updateInput(delta);
-
         stage.act(delta);
         stage.draw();
 
@@ -388,6 +396,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     @Override
     public void dispose() {
         stage.dispose();
+        player.dispose();
     }
 
     @Override
@@ -436,11 +445,38 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         }
     }
 
+    @Override
+    public void onNotify(String enemyMonster, BattleEvent event) {
+        switch (event) {
+            case OPPONENT_DEFEATED:
+                MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                battleUI.setVisible(false);
+                break;
+            case PLAYER_RUNNING:
+                MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                battleUI.setVisible(false);
+                break;
+            case PLAYER_HIT_DAMAGE:
+                int hpVal = progressUI.getHPValue() - 1;
+                progressUI.setHPValue(hpVal);
+                showHearts(hpVal);
+                if( hpVal <= 0 ){
+                    battleUI.setVisible(false);
+                    MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     public void showHearts(int hpVal){
         //Gdx.app.log(TAG, "hpVal is: " + hpVal);
-
-        for (int i = 0; i<hpVal; i++) {
-            all_health_heart.get(i).setVisible(true);
+        for (int i = 0; i<all_health_heart.size; i++) {
+            all_health_heart.get(i).setVisible(false);
+        }
+        for (int j = 0; j <hpVal; j++) {
+            all_health_heart.get(j).setVisible(true);
         }
     }
 

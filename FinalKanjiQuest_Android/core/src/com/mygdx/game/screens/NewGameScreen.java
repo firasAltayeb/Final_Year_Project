@@ -108,6 +108,12 @@ public class NewGameScreen implements Screen {
 									@Override
 									public boolean touchDown(InputEvent event, float x, float y, int pointer, int button ){
 										String messageText = profileText.getText();
+
+										if(messageText.length() < 1){
+											return true;
+										}
+
+
 										//check to see if the current profile matches one that already exists
 										boolean exists = false;
 

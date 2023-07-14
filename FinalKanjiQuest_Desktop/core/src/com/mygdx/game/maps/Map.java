@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
@@ -28,6 +27,7 @@ public abstract class Map {
     protected final static String COLLISION_LAYER = "MAP_COLLISION_LAYER";
     protected final static String SPAWNS_LAYER = "MAP_SPAWNS_LAYER";
     protected final static String PORTAL_LAYER = "MAP_PORTAL_LAYER";
+    protected final static String ENEMY_SPAWN_LAYER = "MAP_ENEMY_SPAWN_LAYER";
 
     //Starting locations
     protected final static String PLAYER_START = "PLAYER_START";
@@ -46,6 +46,7 @@ public abstract class Map {
     protected MapLayer collisionLayer = null;
     protected MapLayer portalLayer = null;
     protected MapLayer spawnsLayer = null;
+    protected MapLayer enemySpawnLayer = null;
 
     protected MapFactory.MapType currentMapType;
     protected Array<Entity> mapEntities;
@@ -87,6 +88,11 @@ public abstract class Map {
             Gdx.app.debug(TAG, "No spawn layer!");
         }else{
             setClosestStartPosition(playerStart);
+        }
+
+        enemySpawnLayer = currentMap.getLayers().get(ENEMY_SPAWN_LAYER);
+        if( enemySpawnLayer == null ){
+            Gdx.app.debug(TAG, "No enemy layer found!");
         }
 
         npcStartPositions = getNPCStartPositions();
@@ -232,6 +238,10 @@ public abstract class Map {
 
     public MapLayer getCollisionLayer(){
         return collisionLayer;
+    }
+
+    public MapLayer getEnemySpawnLayer() {
+        return enemySpawnLayer;
     }
 
     public MapLayer getPortalLayer(){

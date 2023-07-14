@@ -45,6 +45,9 @@ public class MnemonicsUI extends Window{
         for(int i = 0; i < kanjiLettersList.size(); i++){
 
             if (i == 0) {
+                text = new Label("() - Meaning, \"\" - Reading", Utility.GUI_SKINS, "list_text");
+                table.add(text).center().padRight(150);
+                table.row();
                 text = new Label("Forest Map", Utility.GUI_SKINS);
                 table.add(text).left();
                 table.row();
