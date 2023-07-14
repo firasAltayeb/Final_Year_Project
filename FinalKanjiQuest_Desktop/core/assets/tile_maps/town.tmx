@@ -768,7 +768,7 @@
   <object id="693" name="WALKAROUND_FOUR" x="688" y="288" width="16" height="16"/>
   <object id="695" name="WALKAROUND_TWO" x="688" y="544" width="16" height="16"/>
   <object id="696" name="WALKAROUND_THREE" x="272" y="288" width="16" height="16"/>
-  <object id="697" name="INN_CLARK" x="928" y="256" width="16" height="16"/>
+  <object id="697" name="INN_CLARK" x="943.333" y="287.333" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
   <object id="201" name="LIBRARY" x="864" y="176" width="16" height="32"/>
