@@ -5,7 +5,7 @@ currentPlayerHPMax: {
 }
 currentPlayerHP: {
 	class: java.lang.Integer
-	value: 3
+	value: 8
 }
 libraryMapStartPosition: {
 	class: com.badlogic.gdx.math.Vector2
@@ -61,11 +61,6 @@ playerInventory: [
 		class: com.mygdx.game.inventory.InventoryItemLocation
 		locationIndex: 3
 		itemTypeAtLocation: MEDIUM_POTION_BLUE
-	}
-	{
-		class: com.mygdx.game.inventory.InventoryItemLocation
-		locationIndex: 4
-		itemTypeAtLocation: LARGE_POTION_BLUE
 	}
 ]
 currentMapType: {

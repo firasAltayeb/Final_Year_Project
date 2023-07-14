@@ -3,6 +3,8 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,33 +23,20 @@ public class NewGameScreen implements Screen {
 	private Stage stage;
 	private FinalKanjiQuest game;
 
+	private Texture texture;
+	private Sprite backgroundSprite;
+
 	public NewGameScreen(FinalKanjiQuest game){
 		this.game = game;
-
-		//create
 		stage = new Stage();
+
+		//TopTable
+		texture = new Texture(Gdx.files.internal("sprites/topworld.png"));
+		backgroundSprite = new Sprite(texture);
 
 		Label profileName = new Label("Enter Profile Name: ", Utility.GUI_SKINS);
 		final TextField profileText = new TextField("", Utility.GUI_SKINS, "inventory");
 		profileText.setMaxLength(20);
-
-		final Dialog overwriteDialog = new Dialog("Overwrite?", Utility.GUI_SKINS, "solid_background");
-		Label overwriteLabel = new Label("Overwrite existing profile name?", Utility.GUI_SKINS);
-		TextButton cancelButton = new TextButton("Cancel", Utility.GUI_SKINS, "inventory");
-
-		TextButton overwriteButton = new TextButton("Overwrite", Utility.GUI_SKINS, "inventory");
-		overwriteDialog.setKeepWithinStage(true);
-		overwriteDialog.setModal(true);
-		overwriteDialog.setMovable(false);
-		overwriteDialog.text(overwriteLabel);
-
-		TextButton startButton = new TextButton("Start", Utility.GUI_SKINS);
-		TextButton backButton = new TextButton("Back", Utility.GUI_SKINS);
-
-		//Layout
-		overwriteDialog.row();
-		overwriteDialog.button(overwriteButton).bottom().left();
-		overwriteDialog.button(cancelButton).bottom().right();
 
 		Table topTable = new Table();
 		topTable.padBottom(stage.getHeight()/2);
@@ -55,6 +44,26 @@ public class NewGameScreen implements Screen {
 		topTable.add(profileName).center();
 		topTable.row();
 		topTable.add(profileText).fill();
+
+		//Dialog
+		Label overwriteLabel = new Label("Overwrite existing profile name?", Utility.GUI_SKINS);
+		TextButton cancelButton = new TextButton("Cancel", Utility.GUI_SKINS, "inventory");
+		TextButton overwriteButton = new TextButton("Overwrite", Utility.GUI_SKINS, "inventory");
+
+		final Table overwriteDialog = new Dialog("Overwrite?", Utility.GUI_SKINS);
+		overwriteDialog.setWidth(Gdx.graphics.getWidth()/1.05f);
+		overwriteDialog.setHeight(Gdx.graphics.getHeight()/3);
+		overwriteDialog.setPosition(Gdx.graphics.getWidth()/40f, Gdx.graphics.getHeight()/4);
+
+		overwriteDialog.add(overwriteLabel).bottom().left();
+		overwriteDialog.row();
+		overwriteDialog.add(overwriteButton).bottom().left();
+		overwriteDialog.add(cancelButton).bottom().right();
+		overwriteDialog.setVisible(false);
+
+		//bottomTable
+		TextButton startButton = new TextButton("Start", Utility.GUI_SKINS);
+		TextButton backButton = new TextButton("Back", Utility.GUI_SKINS);
 
 		Table bottomTable = new Table();
 		bottomTable.setHeight(startButton.getHeight());
@@ -64,6 +73,7 @@ public class NewGameScreen implements Screen {
 		bottomTable.add(backButton);
 
 		stage.addActor(topTable);
+		stage.addActor(overwriteDialog);
 		stage.addActor(bottomTable);
 
 		//Listeners
@@ -71,7 +81,7 @@ public class NewGameScreen implements Screen {
 
 									 @Override
 									 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button ){
-										 overwriteDialog.hide();
+										 overwriteDialog.setVisible(false);
 										 return true;
 									 }
 								 }
@@ -104,7 +114,7 @@ public class NewGameScreen implements Screen {
 
 										if( exists ){
 											//Pop up dialog for Overwrite
-											overwriteDialog.show(stage);
+											overwriteDialog.setVisible(true);
 										}else{
 											ProfileManager.getInstance().writeProfileToStorage(messageText,"",false);
 											ProfileManager.getInstance().setCurrentProfile(messageText);
@@ -135,9 +145,14 @@ public class NewGameScreen implements Screen {
 		if( delta == 0){
 			return;
 		}
-		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		stage.getBatch().begin();
+		stage.getBatch().draw(backgroundSprite, 0, 0, stage.getWidth(), stage.getHeight());
+		stage.getBatch().end();
+
+
         stage.act(delta);
         stage.draw();
 	}

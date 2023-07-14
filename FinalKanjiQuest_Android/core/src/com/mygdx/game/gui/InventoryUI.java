@@ -79,12 +79,18 @@ public class InventoryUI extends Window implements InventorySubject {
                                                       pressedSlot.addActor(item2);
                                                       slotToRemove.addActor(item);
 
-                                                      Gdx.app.debug(TAG, "item.getItemTypeID is: " + item.getItemTypeID().toString());
+                                                      //Gdx.app.debug(TAG, "item.getItemTypeID is: " + item.getItemTypeID().toString());
 
                                                       description = item.getItemShortDescription();
-                                                      final int mid = description.length() / 2;
-                                                      itemDescription.setText(description.substring(0, mid) + "\n" +
-                                                              description.substring(mid));
+
+                                                      int mid;
+                                                      int spaceAfterMid;
+                                                      mid = description.length()/2;
+                                                      spaceAfterMid = description.indexOf(" ", mid);
+                                                      itemDescription.setText(description.substring(0, spaceAfterMid) + "\n" +
+                                                              description.substring(spaceAfterMid));
+
+                                                      //if(description.length() - description.replace(" ", "").length()> 4){}
 
                                                   }
                                               }

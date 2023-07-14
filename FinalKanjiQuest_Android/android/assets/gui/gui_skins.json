@@ -8,12 +8,14 @@
 		cyan: {  a: 1, b: 1, g: 0.9, r: 0.72 }
 	},
 	"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+		"title_font": { "file": "fonts/FKQ_R_title.fnt" },
 		"medium_font" : { "file" : "fonts/FKQ_medium.fnt" },
 		"large_font" : { "file" : "fonts/FKQ_large.fnt" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-		"default": { "font": "large_font" },
+		"title_size": { "font": "title_font" },
 		"medium_size": { "font": "medium_font" },
+		"default": { "font": "large_font" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
 		"default": { "titleFont": "large_font", "background": "dialogDim" },

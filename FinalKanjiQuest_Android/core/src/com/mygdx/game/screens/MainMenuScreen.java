@@ -3,6 +3,8 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,6 +20,9 @@ public class MainMenuScreen implements Screen {
 	private Stage stage;
 	private FinalKanjiQuest game;
 
+    private Texture texture;
+    private Sprite backgroundSprite;
+
 	public MainMenuScreen(FinalKanjiQuest game){
 		this.game = game;
 
@@ -26,13 +31,16 @@ public class MainMenuScreen implements Screen {
 		Table table = new Table();
 		table.setFillParent(true);
 
-		Label title = new Label("FKQ", Utility.GUI_SKINS);
+        texture = new Texture(Gdx.files.internal("sprites/topworld.png"));
+        backgroundSprite = new Sprite(texture);
+
+
+		Label title = new Label("FKQ", Utility.GUI_SKINS, "title_size");
 		TextButton newGameButton = new TextButton("New Game", Utility.GUI_SKINS);
 		TextButton loadGameButton = new TextButton("Load Game", Utility.GUI_SKINS);
 		TextButton exitButton = new TextButton("Exit", Utility.GUI_SKINS);
 
 		//Layout
-		title.setFontScale(2);
 		table.add(title).spaceBottom(75).row();
 		table.add(newGameButton).spaceBottom(10).row();
 		table.add(loadGameButton).spaceBottom(10).row();
@@ -78,6 +86,10 @@ public class MainMenuScreen implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        stage.getBatch().begin();
+        stage.getBatch().draw(backgroundSprite, 0, 0, stage.getWidth(), stage.getHeight());
+        stage.getBatch().end();
 
 		stage.act(delta);
 		stage.draw();

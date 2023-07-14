@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,9 +22,15 @@ import com.mygdx.game.profile.ProfileManager;
 public class LoadGameScreen implements Screen {
     private Stage stage;
 	private FinalKanjiQuest game;
+
+	private Texture texture;
+	private Sprite backgroundSprite;
 	
 	public LoadGameScreen(FinalKanjiQuest game){
 		this.game = game;
+
+		texture = new Texture(Gdx.files.internal("sprites/topworld.png"));
+		backgroundSprite = new Sprite(texture);
 
 		//create
 		stage = new Stage();
@@ -94,6 +102,12 @@ public class LoadGameScreen implements Screen {
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		stage.getBatch().begin();
+		stage.getBatch().draw(backgroundSprite, 0, 0, stage.getWidth(), stage.getHeight());
+		stage.getBatch().end();
+
+
 		stage.act(delta);
 		stage.draw();
 	}

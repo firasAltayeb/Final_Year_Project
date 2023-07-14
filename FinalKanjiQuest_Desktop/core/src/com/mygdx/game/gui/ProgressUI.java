@@ -57,7 +57,7 @@ public class ProgressUI extends Window implements ProgressSubject {
         this.add(scrollPane).fill().expand();
 
         this.setSize(menuItemWindowWidth, menuItemWindowHeight);
-        this.debug();
+        //this.debug();
     }
 
     public void updateSize(float width, float height){
