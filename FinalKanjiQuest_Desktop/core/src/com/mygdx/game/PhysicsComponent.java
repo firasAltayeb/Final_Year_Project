@@ -15,7 +15,7 @@ public abstract class PhysicsComponent implements Component{
 
     protected Vector2 nextEntityPosition;
     protected Vector2 currentEntityPosition;
-    protected Entity.Direction _currentDirection;
+    protected Entity.Direction currentDirection;
     protected Json json;
     protected Vector2 velocity;
 
@@ -28,7 +28,7 @@ public abstract class PhysicsComponent implements Component{
         CENTER,
     }
 
-    PhysicsComponent(){
+    protected PhysicsComponent(){
         this.nextEntityPosition = new Vector2(0,0);
         this.currentEntityPosition = new Vector2(0,0);
         this.velocity = new Vector2(2f,2f);
@@ -36,6 +36,8 @@ public abstract class PhysicsComponent implements Component{
         this.json = new Json();
         boundingBoxLocation = BoundingBoxLocation.BOTTOM_LEFT;
     }
+
+    public abstract void update(Entity entity, MapManager mapMgr, float delta);
 
     protected boolean isCollisionWithMapEntities(Entity entity, MapManager mapMgr){
         Array<Entity> entities = mapMgr.getCurrentMapEntities();
@@ -98,8 +100,6 @@ public abstract class PhysicsComponent implements Component{
         return false;
     }
 
-    public abstract void update(Entity entity, MapManager mapMgr, float delta);
-
     protected void setNextPositionToCurrent(Entity entity){
         this.currentEntityPosition.x = nextEntityPosition.x;
         this.currentEntityPosition.y = nextEntityPosition.y;
@@ -110,14 +110,14 @@ public abstract class PhysicsComponent implements Component{
     }
 
     protected void calculateNextPosition(float deltaTime){
-        if( _currentDirection == null ) return;
+        if( currentDirection == null ) return;
 
         float testX = currentEntityPosition.x;
         float testY = currentEntityPosition.y;
 
         velocity.scl(deltaTime);
 
-        switch (_currentDirection) {
+        switch (currentDirection) {
             case LEFT :
                 testX -=  velocity.x;
                 break;

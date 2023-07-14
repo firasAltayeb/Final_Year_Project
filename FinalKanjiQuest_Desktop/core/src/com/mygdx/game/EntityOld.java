@@ -86,7 +86,7 @@ public class EntityOld {
 
     public void update(float delta){
         frameTime = (frameTime + delta) % 5; //want to avoid overflow
-        //Gdx.app.debug(TAG, "frametime: " + _frameTime );
+        //Gdx.app.debug(TAG, "frametime: " + frameTime );
 
         //we want the hitbox to be at the feet for a better feel
         setBoundingBoxSize(0.4f, 0.6f);
@@ -287,7 +287,7 @@ public class EntityOld {
         float testY = currentPlayerPosition.y;
 
         //Gdx.app.debug(TAG, "calculateNextPosition:: Current Position: (" + _currentPlayerPosition.x + "," + _currentPlayerPosition.y + ")"  );
-        //Gdx.app.debug(TAG, "calculateNextPosition:: Current Direction: " + _currentDirection  );
+        //Gdx.app.debug(TAG, "calculateNextPosition:: Current Direction: " + currentDirection  );
 
         //currentVelocity * scalar quantity
         velocity.scl(deltaTime);
