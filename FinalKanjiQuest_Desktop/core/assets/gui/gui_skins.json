@@ -13,9 +13,9 @@
 		"small_font": { "file": "fonts/FKQ_small.fnt" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-		"title_size": { "font": "title_font" },
+		"title": { "font": "title_font" },
 		"default": { "font": "medium_font" },
-		"small_size": { "font": "small_font" },
+		"list_text": { "font": "small_font" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
 		"default": { "titleFont": "medium_font", "background": "dialogDim" },

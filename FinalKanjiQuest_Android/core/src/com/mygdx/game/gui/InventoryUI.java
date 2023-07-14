@@ -52,7 +52,7 @@ public class InventoryUI extends Window implements InventorySubject {
         slotHeight = menuItemWindowHeight / 7.5f;
 
         description = "temp text";
-        itemDescription = new Label("", Utility.GUI_SKINS, "medium_size");
+        itemDescription = new Label("", Utility.GUI_SKINS, "list_text");
         pressedSlot = new com.mygdx.game.inventory.InventorySlot();
         inventorySlotTable = new Table();
         inventorySlotTable.setName("Inventory_Slot_Table");

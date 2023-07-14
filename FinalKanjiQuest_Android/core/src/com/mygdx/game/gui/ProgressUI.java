@@ -36,16 +36,16 @@ public class ProgressUI extends Window implements ProgressSubject {
         table = new Table();
 
         for(int i = 0; i <= 41; i++){
-            text = new Label("firstText", Utility.GUI_SKINS, "medium_size");
+            text = new Label("firstText", Utility.GUI_SKINS, "list_text");
             table.add(text).align(Align.left);
 
-            text = new Label("secondText", Utility.GUI_SKINS, "medium_size");
+            text = new Label("secondText", Utility.GUI_SKINS, "list_text");
             table.add(text).align(Align.left);;
 
-            text = new Label("ThirdText", Utility.GUI_SKINS, "medium_size");
+            text = new Label("ThirdText", Utility.GUI_SKINS, "list_text");
             table.add(text).align(Align.left);;
 
-            text = new Label("fourthText", Utility.GUI_SKINS, "medium_size");
+            text = new Label("fourthText", Utility.GUI_SKINS, "list_text");
             table.add(text).align(Align.left);;
 
             table.row();

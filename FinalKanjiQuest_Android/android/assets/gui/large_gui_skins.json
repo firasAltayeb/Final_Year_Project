@@ -13,17 +13,18 @@
 		"large_font" : { "file" : "fonts/FKQ_large.fnt" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-		"title_size": { "font": "title_font" },
-		"medium_size": { "font": "medium_font" },
+		"title": { "font": "title_font" },
 		"default": { "font": "large_font" },
+		"list_text": { "font": "medium_font" },
+
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
 		"default": { "titleFont": "large_font", "background": "dialogDim" },
 		"solid_background": { "titleFont": "large_font", "background": "dialog" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
-		"inventory-button": { "imageUp": "inventory_button_closed", "imageChecked": "inventory_button_open" },
-		"quest-button": { "imageUp": "quest_book_off", "imageChecked": "quest_book_on" },
+		"inventory_button": { "imageUp": "inventory_button_closed", "imageChecked": "inventory_button_open" },
+		"quest_button": { "imageUp": "quest_book_off", "imageChecked": "quest_book_on" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
 		default: { down: default-round-down, up: default-round, font: large_font, fontColor: white },

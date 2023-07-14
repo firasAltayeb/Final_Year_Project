@@ -65,10 +65,11 @@ public class PlayerHUD implements Screen, InventoryObserver, ProfileObserver, Pr
 
         all_health_heart = new Array<ImageButton>();
 
+        //TODO speak about this
         for (int i = 0; i<10; i++) {
             health_heart = new ImageButton(Utility.ITEMS_SKINS, "health_heart");
             health_heart.setVisible(false);
-            health_heart.setPosition(stage.getWidth() / 60f + i * 20, stage.getHeight() / 1.1f);
+            health_heart.setPosition(health_heart.getWidth() * i, stage.getHeight() - health_heart.getHeight());
             all_health_heart.add(health_heart);
         }
 

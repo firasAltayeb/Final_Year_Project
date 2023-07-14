@@ -66,10 +66,11 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
         all_health_heart = new Array<ImageButton>();
 
+        //TODO speak about this
         for (int i = 0; i<10; i++) {
             health_heart = new ImageButton(Utility.ITEMS_SKINS, "health_heart");
             health_heart.setVisible(false);
-            health_heart.setPosition(stage.getWidth() / 60f + i * 20, stage.getHeight() / 1.1f);
+            health_heart.setPosition(health_heart.getWidth() * i, stage.getHeight() - health_heart.getHeight());
             all_health_heart.add(health_heart);
         }
 
@@ -212,8 +213,9 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         menuItemWindowWidth = width/1.4f;
         menuItemWindowHeight = height/1.05f;
 
-        for (int i = 0; i<all_health_heart.size; i++) {
-            all_health_heart.get(i).setPosition(width/ 60f + i * 25, height / 1.1f);
+        //TODO speak about this
+        for (int i = 0; i<10; i++) {
+            health_heart.setPosition(health_heart.getWidth() * i, height - health_heart.getHeight());
         }
 
         menuButton.setPosition(width/1.2f,  height/12);
