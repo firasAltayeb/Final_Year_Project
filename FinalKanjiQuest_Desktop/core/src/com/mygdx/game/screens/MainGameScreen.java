@@ -11,11 +11,12 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.EntityOld;
+import com.mygdx.game.Entity;
 import com.mygdx.game.MapManger;
 import com.mygdx.game.PlayerController;
 
 public class MainGameScreen implements Screen {
+
     private static final String TAG = MainGameScreen.class.getSimpleName();
 
     public static class VIEWPORT {
@@ -31,17 +32,15 @@ public class MainGameScreen implements Screen {
     private PlayerController controller;
     private TextureRegion currentPlayerFrame;
     private Sprite currentPlayerSprite;
-
     private OrthogonalTiledMapRenderer mapRenderer = null;
     private OrthographicCamera camera = null;
     private static MapManger mapManger;
-
 
     public MainGameScreen() {
         mapManger = new MapManger();
     }
 
-    private static EntityOld player;
+    private static Entity player;
 
     @Override
     public void show() {
@@ -58,7 +57,7 @@ public class MainGameScreen implements Screen {
 
         Gdx.app.debug(TAG, "UniteScale value is: " + mapRenderer.getUnitScale());
 
-        player = new EntityOld();
+        player = new Entity();
         player.init(mapManger.getPlayerStartUnitScaled().x,
                 mapManger.getPlayerStartUnitScaled().y);
 
@@ -74,7 +73,6 @@ public class MainGameScreen implements Screen {
     public void hide() {
 
     }
-
 
     @Override
     public void render(float delta) {
