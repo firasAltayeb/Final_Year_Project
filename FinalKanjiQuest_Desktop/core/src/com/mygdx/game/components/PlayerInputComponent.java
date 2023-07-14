@@ -13,14 +13,11 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	private Vector3 lastMouseCoordinates;
 
 	public PlayerInputComponent(){
-		Gdx.app.debug(TAG, "setInputProcessor this" );
-		Gdx.input.setInputProcessor(this);
 		this.lastMouseCoordinates = new Vector3();
 	}
 
 	@Override
 	public void dispose() {
-		Gdx.app.debug(TAG, "setInputProcessor null" );
 		Gdx.input.setInputProcessor(null);
 	}
 

@@ -14,6 +14,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.audio.AudioManager;
+import com.mygdx.game.audio.AudioObserver;
+import com.mygdx.game.audio.AudioSubject;
 import com.mygdx.game.battle.BattleObserver;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.components.ComponentObserver;
@@ -22,6 +25,7 @@ import com.mygdx.game.japanese.KanaLettersFactory;
 import com.mygdx.game.japanese.KanjiLetter;
 import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.japanese.LetterLvlCounter;
+import com.mygdx.game.maps.MapManager;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.OnScreenController;
 import com.mygdx.game.tools.Utility;
@@ -34,7 +38,7 @@ import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 
 import java.util.ArrayList;
 
-public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, BattleObserver{
+public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, ComponentObserver, InventoryObserver, BattleObserver{
 
     private final static String TAG = PlayerHUD.class.getSimpleName();
 
@@ -73,13 +77,19 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
 
     private int maxNumberOfHearts = -1;
     private int numberOfHearts = -1;
+    private MapManager mapManager;
 
-    public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer) {
+    private Array<AudioObserver> observers;
+
+    public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer, MapManager mapMgr) {
         this.camera = camera;
         this.player = player;
         viewport = new ScreenViewport(this.camera);
         stage = new Stage(viewport);
         json = new Json();
+        mapManager = mapMgr;
+
+        observers = new Array<AudioObserver>();
 
         multiplexer.addProcessor(this.getStage());
         multiplexer.addProcessor(player.getInputProcessor());
@@ -99,8 +109,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
             all_health_heart.add(health_heart);
         }
 
-        Gdx.app.debug(TAG, "all_health_heart size is  " + all_health_heart.size);
-        Gdx.app.debug(TAG, "currentNumber of hearts " + numberOfHearts);
 
         menuButton = new TextButton("menu", Utility.GUI_SKINS);
         menuButton.setPosition(stage.getWidth()/1.2f,  stage.getHeight()/12);
@@ -171,6 +179,7 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
 
         //Observers
         ProfileManager.getInstance().addObserver(this);
+        this.addObserver(AudioManager.getInstance());
         player.registerObserver(this);
         inventoryUI.addObserver(this);
         battleUI.getCurrentState().addObserver(this);
@@ -268,29 +277,50 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 mnemonicsUI.setVisible(mnemonicsUI.isVisible()?false:true);
             }
         });
+
+        //Music/Sound loading
+        notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
+        notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_LEVEL_UP_FANFARE);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_COIN_RUSTLE);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_CREATURE_PAIN);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_PLAYER_WAND_ATTACK);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_EATING);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_DRINKING);
     }
 
     @Override
     public void onNotify(ProfileManager profileManager, ProfileEvent event) {
         switch(event){
             case PROFILE_LOADED:
-                int hpMaxVal = profileManager.getProperty("currentPlayerHPMax", Integer.class);
-                int hpVal = profileManager.getProperty("currentPlayerHP", Integer.class);
-                boolean firstTime = hpVal<0?true:false;
+                boolean firstTime = profileManager.getIsNewProfile();
+                if(firstTime){
 
-                if( firstTime ){
-                    hpMaxVal = 5;
-                    hpVal = 3;
+                    Gdx.app.log(TAG, "PROFILE LOADED First Time");
+                    maxNumberOfHearts = 5;
+                    numberOfHearts = 3;
+                    showHearts();
+
+                    InventoryUI.clearInventoryItems(inventoryUI.getInventorySlotTable());
+
+                    //add default items if first time
+                    Array<ItemNameID> items = player.getEntityConfig().getInventory();
+                    Array<InventoryItemLocation> itemLocations = new Array<InventoryItemLocation>();
+                    for( int i = 0; i < items.size; i++){
+                        itemLocations.add(new InventoryItemLocation(i, items.get(i).toString()));
+                    }
+                    InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), itemLocations);
+                    profileManager.setProperty("playerInventory", InventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
+
+                } else {
+                    int hpMaxVal = profileManager.getProperty("currentPlayerHPMax", Integer.class);
+                    int hpVal = profileManager.getProperty("currentPlayerHP", Integer.class);
+
                     maxNumberOfHearts = hpMaxVal;
                     numberOfHearts = hpVal;
-                }else{
-                    maxNumberOfHearts = hpMaxVal;
-                    numberOfHearts = hpVal;
-                }
+                    showHearts();
 
-                showHearts();
 
-                if(!firstTime){
                     ArrayList<KanaLetter> kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
                     ArrayList<KanjiLetter> kanjiLettersList = KanjiLettersFactory.getInstance().getKanjiLettersList();
                     Array<Integer> hiraganaProgress = profileManager.getProperty("hiraganaList", Array.class);
@@ -309,30 +339,19 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                                 kanjiProgress.get(i));
                     }
 
+                    progressUI.updateTable();
+
                     LetterLvlCounter.setAllHiraganaMemorised(profileManager.getProperty("allHiraganaMemorised", boolean.class));
                     LetterLvlCounter.setAllKatakanaMemorised(profileManager.getProperty("allKatakanaMemorised", boolean.class));
                     LetterLvlCounter.setAllKanjiMemorised(profileManager.getProperty("allKanjiMemorised", boolean.class));
 
-                    progressUI.updateTable();
+                    Array<InventoryItemLocation> inventory = profileManager.getProperty("playerInventory", Array.class);
+                    InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), inventory);
                 }
-
-
-                if( firstTime ){
-                    //add default items if first time
-                    Array<ItemNameID> items = player.getEntityConfig().getInventory();
-                    Array<InventoryItemLocation> itemLocations = new Array<InventoryItemLocation>();
-                    for( int i = 0; i < items.size; i++){
-                        itemLocations.add(new InventoryItemLocation(i, items.get(i).toString()));
-                    }
-                    InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), itemLocations);
-                    profileManager.setProperty("playerInventory", InventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
-                }
-
-                Array<InventoryItemLocation> inventory = profileManager.getProperty("playerInventory", Array.class);
-                InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), inventory);
 
                 break;
             case SAVING_PROFILE:
+                Gdx.app.log(TAG, "PROFILE Saved");
                 profileManager.setProperty("playerInventory",  inventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
                 profileManager.setProperty("currentPlayerHPMax", maxNumberOfHearts );
                 profileManager.setProperty("currentPlayerHP", numberOfHearts);
@@ -342,6 +361,17 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 profileManager.setProperty("allHiraganaMemorised", LetterLvlCounter.isAllHiraganaMemorised());
                 profileManager.setProperty("allKatakanaMemorised", LetterLvlCounter.isAllKatakanaMemorised());
                 profileManager.setProperty("allKanjiMemorised", LetterLvlCounter.isAllKanjiMemorised());
+                break;
+            case CLEAR_CURRENT_PROFILE:
+                profileManager.setProperty("playerInventory", new Array<InventoryItemLocation>());
+                profileManager.setProperty("currentPlayerHPMax", 5 );
+                profileManager.setProperty("currentPlayerHP", 3 );
+                profileManager.setProperty("hiraganaList", 1);
+                profileManager.setProperty("katakanaList", 1);
+                profileManager.setProperty("kanjiList", 1);
+                profileManager.setProperty("allHiraganaMemorised", false);
+                profileManager.setProperty("allKatakanaMemorised", false);
+                profileManager.setProperty("allKanjiMemorised", false);
 
                 break;
             default:
@@ -388,8 +418,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         menuItemWindowWidth = width/1.4f;
         menuItemWindowHeight = height/1.05f;
 
-        Gdx.app.log(TAG, "resize height is: " + height);
-
         for (int i = 0; i<10; i++) {
             all_health_heart.get(i).setPosition(health_heart.getWidth() * i, height - health_heart.getHeight());
         }
@@ -417,11 +445,11 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         mnemonicsUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         mnemonicsUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 
+        if(width > 1280 && height > 720){
+            MainGameScreen.setGameState(MainGameScreen.GameState.LOADING);
+        }
 
-        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
-        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
         stage.getViewport().update(width, height, true);
-
     }
 
     @Override
@@ -458,11 +486,13 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 //Gdx.app.log(TAG, "typeValue is: " + typeValue);
 
                 if( InventoryItem.doesRestoreHP(type) ){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_DRINKING);
                     numberOfHearts = MathUtils.clamp(numberOfHearts + value, 0, maxNumberOfHearts);
                     ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                     showHearts();
                 }
                 else if( InventoryItem.doesIncreaseMaxHP(type) ){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_EATING);
                     maxNumberOfHearts++;
                     numberOfHearts++;
                     showHearts();
@@ -502,24 +532,29 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 progressUI.updateTable();
 
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                mapManager.enableCurrentmapMusic();
                 battleUI.setVisible(false);
                 break;
             case LETTER_ANSWERED_INCORRECTLY:
+                notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
                 LetterLvlCounter.decreaseLvl(answeredLetter, 1);
                 progressUI.updateTable();
                 numberOfHearts--;
                 showHearts();
                 ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                 if( numberOfHearts <= 0 ){
+                    notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
                     battleUI.setVisible(false);
                     MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
                 }
                 break;
             case PLAYER_RUNNING:
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                mapManager.enableCurrentmapMusic();
                 battleUI.setVisible(false);
                 break;
             case PLAYER_HIT_DAMAGE:
+                notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
                 numberOfHearts--;
                 showHearts();
                 ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
@@ -532,7 +567,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 break;
         }
     }
-
 
     public void showHearts(){
         for (int i = 0; i<all_health_heart.size; i++) {
@@ -547,4 +581,25 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         return stage;
     }
 
+    @Override
+    public void addObserver(AudioObserver audioObserver) {
+        observers.add(audioObserver);
+    }
+
+    @Override
+    public void removeObserver(AudioObserver audioObserver) {
+        observers.removeValue(audioObserver, true);
+    }
+
+    @Override
+    public void removeAllObservers() {
+        observers.removeAll(observers, true);
+    }
+
+    @Override
+    public void notify(AudioObserver.AudioCommand command, AudioObserver.AudioTypeEvent event) {
+        for(AudioObserver observer: observers){
+            observer.onNotify(command, event);
+        }
+    }
 }

@@ -18,4 +18,14 @@ public class LibraryMap extends Map{
             entity.update(mapMgr, batch, delta);
         }
     }
+
+    @Override
+    public void unloadMusic() {
+
+    }
+
+    @Override
+    public void loadMusic() {
+
+    }
 }

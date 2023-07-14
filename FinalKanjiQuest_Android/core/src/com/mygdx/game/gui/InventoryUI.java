@@ -1,5 +1,6 @@
 package com.mygdx.game.gui;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -9,12 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.components.Component;
+import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem;
-import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 import com.mygdx.game.inventory.InventoryItemFactory;
 import com.mygdx.game.inventory.InventoryItemLocation;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 import com.mygdx.game.inventory.InventorySlot;
-import com.mygdx.game.tools.Utility;
 
 public class InventoryUI extends Window implements InventorySubject {
 
@@ -70,30 +71,30 @@ public class InventoryUI extends Window implements InventorySubject {
                                           public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                                               super.touchUp(event, x, y, pointer, button);
 
-                                                  slotToRemove = (InventorySlot) event.getListenerActor();
-                                                  if (slotToRemove.hasItem()) {
-                                                      topSlot.clearAllInventoryItems();
-                                                      InventoryItem item = slotToRemove.getTopInventoryItem();
-                                                      InventoryItem item2 = InventoryItemFactory.getInstance()
-                                                              .getInventoryItem(item.getItemNameID());
+                                              slotToRemove = (InventorySlot) event.getListenerActor();
+                                              if (slotToRemove.hasItem()) {
+                                                  topSlot.clearAllInventoryItems();
+                                                  InventoryItem item = slotToRemove.getTopInventoryItem();
+                                                  InventoryItem item2 = InventoryItemFactory.getInstance()
+                                                          .getInventoryItem(item.getItemNameID());
 
-                                                      topSlot.addActor(item);
-                                                      slotToRemove.addActor(item2);
+                                                  topSlot.addActor(item);
+                                                  slotToRemove.addActor(item2);
 
-                                                      //Gdx.app.debug(TAG, "item.getItemNameID is: " + item.getItemNameID().toString());
+                                                  //Gdx.app.debug(TAG, "item.getItemNameID is: " + item.getItemNameID().toString());
 
-                                                      //TODO speak about this,
-                                                      description = item.getItemShortDescription();
+                                                  //TODO speak about this,
+                                                  description = item.getItemShortDescription();
 
-                                                      int mid;
-                                                      int spaceAfterMid;
-                                                      mid = description.length()/2;
-                                                      spaceAfterMid = description.indexOf(" ", mid);
-                                                      itemDescription.setText(description.substring(0, spaceAfterMid) + "\n" +
-                                                              description.substring(spaceAfterMid));
+                                                  int mid;
+                                                  int spaceAfterMid;
+                                                  mid = description.length()/2;
+                                                  spaceAfterMid = description.indexOf(" ", mid);
+                                                  itemDescription.setText(description.substring(0, spaceAfterMid) + "\n" +
+                                                          description.substring(spaceAfterMid));
 
-                                                  }
                                               }
+                                          }
 
                                       }
             );
@@ -104,25 +105,25 @@ public class InventoryUI extends Window implements InventorySubject {
         }
 
         topSlot.addListener(new ClickListener() {
-                                    @Override
-                                    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                                        super.touchUp(event, x, y, pointer, button);
+                                @Override
+                                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                                    super.touchUp(event, x, y, pointer, button);
 
-                                            InventorySlot slot = (InventorySlot) event.getListenerActor();
-                                            if (slot.hasItem()) {
-                                                InventoryItem item = slot.getTopInventoryItem();
-                                                if (item.isConsumable()) {
-                                                    String itemInfo = item.getItemUseType() + Component.MESSAGE_TOKEN + item.getItemUseValue();
-                                                    InventoryUI.this.notify(itemInfo, InventoryObserver.InventoryEvent.ITEM_CONSUMED);
-                                                    topSlot.clearAllInventoryItems();
-                                                    slotToRemove.clearAllInventoryItems();
-                                                    itemDescription.setText("");
-                                                }
-                                            }
+                                    InventorySlot slot = (InventorySlot) event.getListenerActor();
+                                    if (slot.hasItem()) {
+                                        InventoryItem item = slot.getTopInventoryItem();
+                                        if (item.isConsumable()) {
+                                            String itemInfo = item.getItemUseType() + Component.MESSAGE_TOKEN + item.getItemUseValue();
+                                            InventoryUI.this.notify(itemInfo, InventoryObserver.InventoryEvent.ITEM_CONSUMED);
+                                            topSlot.clearAllInventoryItems();
+                                            slotToRemove.clearAllInventoryItems();
+                                            itemDescription.setText("");
                                         }
-
-
+                                    }
                                 }
+
+
+                            }
         );
 
         topSlot.setPosition(menuItemWindowWidth / 16f, menuItemWindowHeight / 1.35f);
@@ -148,8 +149,6 @@ public class InventoryUI extends Window implements InventorySubject {
         inventorySlotTable.setPosition(newMenuItemWindowWidth / 2f, newMenuItemWindowHeight / 2.6f);
 
         for (int i = 0; i <= inventorySlotTable.getCells().size - 1; i++) {
-            //Gdx.app.debug(TAG, " menuItemWindowWidth: " + menuItemWindowWidth );
-            //Gdx.app.debug(TAG, " menuItemWindowHeight: " + menuItemWindowHeight );
             inventorySlotTable.getCells().get(i).size(newMenuItemWindowWidth / 8, newMenuItemWindowHeight / 7.5f);
         }
 
@@ -170,8 +169,7 @@ public class InventoryUI extends Window implements InventorySubject {
             int numItems = inventorySlot.getNumItems();
             if (numItems > 0) {
                 items.add(new InventoryItemLocation(
-                        i,
-                        inventorySlot.getTopInventoryItem().getItemNameID().toString()));
+                        i, inventorySlot.getTopInventoryItem().getItemNameID().toString()));
             }
         }
         return items;
@@ -187,7 +185,6 @@ public class InventoryUI extends Window implements InventorySubject {
             InventorySlot inventorySlot =  ((InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
             InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemNameID);
             inventorySlot.add(item);
-
         }
     }
 
@@ -224,4 +221,6 @@ public class InventoryUI extends Window implements InventorySubject {
             observer.onNotify(value, event);
         }
     }
+
+
 }

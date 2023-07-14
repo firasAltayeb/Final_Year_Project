@@ -14,27 +14,31 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.audio.AudioManager;
+import com.mygdx.game.audio.AudioObserver;
+import com.mygdx.game.audio.AudioSubject;
 import com.mygdx.game.battle.BattleObserver;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.components.ComponentObserver;
+import com.mygdx.game.inventory.InventoryItem;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
+import com.mygdx.game.inventory.InventoryItemLocation;
 import com.mygdx.game.japanese.KanaLetter;
 import com.mygdx.game.japanese.KanaLettersFactory;
 import com.mygdx.game.japanese.KanjiLetter;
 import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.japanese.LetterLvlCounter;
-import com.mygdx.game.tools.Entity;
-import com.mygdx.game.tools.OnScreenController;
-import com.mygdx.game.tools.Utility;
-import com.mygdx.game.inventory.InventoryItem;
-import com.mygdx.game.inventory.InventoryItemLocation;
+import com.mygdx.game.maps.MapManager;
 import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
-import com.mygdx.game.inventory.InventoryItem.ItemNameID;
+import com.mygdx.game.tools.Entity;
+import com.mygdx.game.tools.OnScreenController;
+import com.mygdx.game.tools.Utility;
 
 import java.util.ArrayList;
 
-public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, BattleObserver{
+public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, ComponentObserver, InventoryObserver, BattleObserver {
 
     private final static String TAG = PlayerHUD.class.getSimpleName();
 
@@ -51,7 +55,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
     private KanaUI katakanaUI;
     private KanjiUI kanjiUI;
     private MnemonicsUI mnemonicsUI;
-    private OnScreenController controllerUI;
     private BattleUI battleUI;
 
     private TextButton menuButton;
@@ -73,13 +76,19 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
 
     private int maxNumberOfHearts = -1;
     private int numberOfHearts = -1;
+    private MapManager mapManager;
 
-    public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer) {
+    private Array<AudioObserver> observers;
+
+    public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer, MapManager mapMgr) {
         this.camera = camera;
         this.player = player;
         viewport = new ScreenViewport(this.camera);
         stage = new Stage(viewport);
         json = new Json();
+        mapManager = mapMgr;
+
+        observers = new Array<AudioObserver>();
 
         multiplexer.addProcessor(this.getStage());
         multiplexer.addProcessor(player.getInputProcessor());
@@ -99,8 +108,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
             all_health_heart.add(health_heart);
         }
 
-        Gdx.app.debug(TAG, "all_health_heart size is  " + all_health_heart.size);
-        Gdx.app.debug(TAG, "currentNumber of hearts " + numberOfHearts);
 
         menuButton = new TextButton("menu", Utility.GUI_SKINS);
         menuButton.setPosition(stage.getWidth()/1.2f,  stage.getHeight()/12);
@@ -171,6 +178,7 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
 
         //Observers
         ProfileManager.getInstance().addObserver(this);
+        this.addObserver(AudioManager.getInstance());
         player.registerObserver(this);
         inventoryUI.addObserver(this);
         battleUI.getCurrentState().addObserver(this);
@@ -268,45 +276,103 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 mnemonicsUI.setVisible(mnemonicsUI.isVisible()?false:true);
             }
         });
+
+        //Music/Sound loading
+        notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
+        notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_LEVEL_UP_FANFARE);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_COIN_RUSTLE);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_CREATURE_PAIN);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_PLAYER_WAND_ATTACK);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_EATING);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_DRINKING);
     }
 
     @Override
-    public void onNotify(ProfileManager profileManager, ProfileObserver.ProfileEvent event) {
+    public void onNotify(ProfileManager ProfileManager, ProfileEvent event) {
         switch(event){
             case PROFILE_LOADED:
-                //int hpMaxVal = profileManager.getProperty("currentPlayerHPMax", Integer.class);
-                //int hpVal = profileManager.getProperty("currentPlayerHP", Integer.class);
-                boolean firstTime = numberOfHearts<0?true:false;
+                //boolean firstTime = ProfileManager.getIsNewProfile();
+                boolean firstTime = true;
+                if(firstTime){
 
-                if( firstTime ){
+                    Gdx.app.log(TAG, "PROFILE LOADED First Time");
                     maxNumberOfHearts = 5;
                     numberOfHearts = 3;
-                }else{
-                    //maxNumberOfHearts = hpMaxVal;
-                    //numberOfHearts = hpVal;
-                }
+                    showHearts();
 
-                showHearts();
+                    InventoryUI.clearInventoryItems(inventoryUI.getInventorySlotTable());
 
-                if( firstTime ){
                     //add default items if first time
-                    Array<InventoryItem.ItemNameID> items = player.getEntityConfig().getInventory();
+                    Array<ItemNameID> items = player.getEntityConfig().getInventory();
                     Array<InventoryItemLocation> itemLocations = new Array<InventoryItemLocation>();
                     for( int i = 0; i < items.size; i++){
                         itemLocations.add(new InventoryItemLocation(i, items.get(i).toString()));
                     }
                     InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), itemLocations);
-                    //profileManager.setProperty("playerInventory", InventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
-                }
+                    //ProfileManager.setProperty("playerInventory", InventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
 
-                //Array<InventoryItemLocation> inventory = profileManager.getProperty("playerInventory", Array.class);
-                //InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), inventory);
+                } else {
+                   //int hpMaxVal = ProfileManager.getProperty("currentPlayerHPMax", Integer.class);
+                   //int hpVal = ProfileManager.getProperty("currentPlayerHP", Integer.class);
+                   //
+                   //maxNumberOfHearts = hpMaxVal;
+                   //numberOfHearts = hpVal;
+                   //showHearts();
+                   //
+                   //
+                   //ArrayList<KanaLetter> kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
+                   //ArrayList<KanjiLetter> kanjiLettersList = KanjiLettersFactory.getInstance().getKanjiLettersList();
+                   //Array<Integer> hiraganaProgress = ProfileManager.getProperty("hiraganaList", Array.class);
+                   //for(int i = 0; i <= hiraganaProgress.size-1; i++){
+                   //    LetterLvlCounter.adjustLvl(kanaLettersList.get(i).getHiraganaEquivalent(),
+                   //            hiraganaProgress.get(i));
+                   //}
+                   //Array<Integer> katakanaProgress = ProfileManager.getProperty("katakanaList", Array.class);
+                   //for(int i = 0; i <= katakanaProgress.size-1; i++){
+                   //    LetterLvlCounter.adjustLvl(kanaLettersList.get(i).getKatakanaEquivalent(),
+                   //            katakanaProgress.get(i));
+                   //}
+                   //Array<Integer> kanjiProgress = ProfileManager.getProperty("kanjiList", Array.class);
+                   //for(int i = 0; i <= kanjiProgress.size-1; i++){
+                   //    LetterLvlCounter.adjustLvl(kanjiLettersList.get(i).getKanjiNameID(),
+                   //            kanjiProgress.get(i));
+                   //}
+                   //
+                   //progressUI.updateTable();
+                   //
+                   //LetterLvlCounter.setAllHiraganaMemorised(ProfileManager.getProperty("allHiraganaMemorised", boolean.class));
+                   //LetterLvlCounter.setAllKatakanaMemorised(ProfileManager.getProperty("allKatakanaMemorised", boolean.class));
+                   //LetterLvlCounter.setAllKanjiMemorised(ProfileManager.getProperty("allKanjiMemorised", boolean.class));
+                   //
+                   //Array<InventoryItemLocation> inventory = ProfileManager.getProperty("playerInventory", Array.class);
+                   //InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), inventory);
+                }
 
                 break;
             case SAVING_PROFILE:
-                //profileManager.setProperty("playerInventory",  inventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
-                //profileManager.setProperty("currentPlayerHPMax", progressUI.getHPValueMax() );
-                //profileManager.setProperty("currentPlayerHP", progressUI.getHPValue() );
+                Gdx.app.log(TAG, "PROFILE Saved");
+                //ProfileManager.setProperty("playerInventory",  inventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
+                //ProfileManager.setProperty("currentPlayerHPMax", maxNumberOfHearts );
+                //ProfileManager.setProperty("currentPlayerHP", numberOfHearts);
+                //ProfileManager.setProperty("hiraganaList", LetterLvlCounter.getHiraganaList());
+                //ProfileManager.setProperty("katakanaList", LetterLvlCounter.getKatakanaList());
+                //ProfileManager.setProperty("kanjiList", LetterLvlCounter.getKanjiList());
+                //ProfileManager.setProperty("allHiraganaMemorised", LetterLvlCounter.isAllHiraganaMemorised());
+                //ProfileManager.setProperty("allKatakanaMemorised", LetterLvlCounter.isAllKatakanaMemorised());
+                //ProfileManager.setProperty("allKanjiMemorised", LetterLvlCounter.isAllKanjiMemorised());
+                break;
+            case CLEAR_CURRENT_PROFILE:
+                //ProfileManager.setProperty("playerInventory", new Array<InventoryItemLocation>());
+                //ProfileManager.setProperty("currentPlayerHPMax", 5 );
+                //ProfileManager.setProperty("currentPlayerHP", 3 );
+                //ProfileManager.setProperty("hiraganaList", 1);
+                //ProfileManager.setProperty("katakanaList", 1);
+                //ProfileManager.setProperty("kanjiList", 1);
+                //ProfileManager.setProperty("allHiraganaMemorised", false);
+                //ProfileManager.setProperty("allKatakanaMemorised", false);
+                //ProfileManager.setProperty("allKanjiMemorised", false);
+
                 break;
             default:
                 break;
@@ -347,45 +413,43 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
 
     @Override //TODO speak about this in the report
     public void resize(int width, int height) {
-        menuItemsXaxis = 0;
-        menuItemsYaxis = height/40;
-        menuItemWindowWidth = width/1.4f;
-        menuItemWindowHeight = height/1.05f;
-
-        Gdx.app.log(TAG, "resize height is: " + height);
-
-        for (int i = 0; i<10; i++) {
-            all_health_heart.get(i).setPosition(health_heart.getWidth() * i, height - health_heart.getHeight());
-        }
-
-        menuButton.setPosition(width/1.2f,  height/12);
-
-        menuListUI.setPosition(width/1.27f, height/2);
-        menuListUI.updateSize(width/3.4f, height/1.4f);
-
-        progressUI.setPosition(menuItemsXaxis, menuItemsYaxis);
-        progressUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
-
-        inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
-        inventoryUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
-
-        hiraganaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
-        hiraganaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
-
-        katakanaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
-        katakanaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
-
-        kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
-        kanjiUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
-
-        mnemonicsUI.setPosition(menuItemsXaxis, menuItemsYaxis);
-        mnemonicsUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
-
-
-        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
-        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+        //menuItemsXaxis = 0;
+        //menuItemsYaxis = height/40;
+        //menuItemWindowWidth = width/1.4f;
+        //menuItemWindowHeight = height/1.05f;
+        //
+        //for (int i = 0; i<10; i++) {
+        //    all_health_heart.get(i).setPosition(health_heart.getWidth() * i, height - health_heart.getHeight());
+        //}
+        //
+        //menuButton.setPosition(width/1.2f,  height/12);
+        //
+        //menuListUI.setPosition(width/1.27f, height/2);
+        //menuListUI.updateSize(width/3.4f, height/1.4f);
+        //
+        //progressUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        //progressUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+        //
+        //inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        //inventoryUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+        //
+        //hiraganaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        //hiraganaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+        //
+        //katakanaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        //katakanaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+        //
+        //kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        //kanjiUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+        //
+        //mnemonicsUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        //mnemonicsUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+        //
+        //if(width > 1280 && height > 720){
+        //    MainGameScreen.setGameState(MainGameScreen.GameState.LOADING);
+        //}
+        //
         stage.getViewport().update(width, height, true);
-
     }
 
     @Override
@@ -422,16 +486,18 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 //Gdx.app.log(TAG, "typeValue is: " + typeValue);
 
                 if( InventoryItem.doesRestoreHP(type) ){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_DRINKING);
                     numberOfHearts = MathUtils.clamp(numberOfHearts + value, 0, maxNumberOfHearts);
-                    ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                    //ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                     showHearts();
                 }
                 else if( InventoryItem.doesIncreaseMaxHP(type) ){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_EATING);
                     maxNumberOfHearts++;
                     numberOfHearts++;
                     showHearts();
-                    ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
-                    ProfileManager.getInstance().setProperty("currentPlayerHPMax", maxNumberOfHearts);
+                    //ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                    //ProfileManager.getInstance().setProperty("currentPlayerHPMax", maxNumberOfHearts);
                 }
                 else if(InventoryItem.doesIncreaseHiraganaLvl(type)){
                     LetterLvlCounter.setAllHiraganaMemorised(true);
@@ -466,27 +532,32 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 progressUI.updateTable();
 
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                mapManager.enableCurrentmapMusic();
                 battleUI.setVisible(false);
                 break;
             case LETTER_ANSWERED_INCORRECTLY:
+                notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
                 LetterLvlCounter.decreaseLvl(answeredLetter, 1);
                 progressUI.updateTable();
                 numberOfHearts--;
                 showHearts();
-                ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                //ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                 if( numberOfHearts <= 0 ){
+                    notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
                     battleUI.setVisible(false);
                     MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
                 }
                 break;
             case PLAYER_RUNNING:
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                mapManager.enableCurrentmapMusic();
                 battleUI.setVisible(false);
                 break;
             case PLAYER_HIT_DAMAGE:
+                notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
                 numberOfHearts--;
                 showHearts();
-                ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                //ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                 if( numberOfHearts <= 0 ){
                     battleUI.setVisible(false);
                     MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
@@ -496,7 +567,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 break;
         }
     }
-
 
     public void showHearts(){
         for (int i = 0; i<all_health_heart.size; i++) {
@@ -511,7 +581,25 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         return stage;
     }
 
+    @Override
+    public void addObserver(AudioObserver audioObserver) {
+        observers.add(audioObserver);
+    }
+
+    @Override
+    public void removeObserver(AudioObserver audioObserver) {
+        observers.removeValue(audioObserver, true);
+    }
+
+    @Override
+    public void removeAllObservers() {
+        observers.removeAll(observers, true);
+    }
+
+    @Override
+    public void notify(AudioObserver.AudioCommand command, AudioObserver.AudioTypeEvent event) {
+        for(AudioObserver observer: observers){
+            observer.onNotify(command, event);
+        }
+    }
 }
-
-
-

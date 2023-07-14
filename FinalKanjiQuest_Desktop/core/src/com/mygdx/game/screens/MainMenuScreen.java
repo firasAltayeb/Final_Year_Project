@@ -13,9 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.FinalKanjiQuest.ScreenType;
+import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.tools.Utility;
 
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen extends GameScreen {
 
 	private Stage stage;
 	private FinalKanjiQuest game;
@@ -52,7 +53,7 @@ public class MainMenuScreen implements Screen {
 		newGameButton.addListener(new InputListener() {
 									  @Override
 									  public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-										  MainMenuScreen.this.game.setScreen(MainMenuScreen.this.game.getScreenType(ScreenType.NewGame));
+										  game.setScreen(game.getScreenType(ScreenType.NewGame));
 										  return true;
 									  }
 								  }
@@ -62,7 +63,7 @@ public class MainMenuScreen implements Screen {
 
 									   @Override
 									   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-										   MainMenuScreen.this.game.setScreen(MainMenuScreen.this.game.getScreenType(ScreenType.LoadGame));
+										   game.setScreen(game.getScreenType(ScreenType.LoadGame));
 										   return true;
 									   }
 								   }
@@ -79,6 +80,8 @@ public class MainMenuScreen implements Screen {
 							   }
 		);
 
+
+		notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
 
 	}
 	
@@ -102,6 +105,7 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void show() {
+		notify(AudioObserver.AudioCommand.MUSIC_PLAY_LOOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
 		Gdx.input.setInputProcessor(stage);
 	}
 

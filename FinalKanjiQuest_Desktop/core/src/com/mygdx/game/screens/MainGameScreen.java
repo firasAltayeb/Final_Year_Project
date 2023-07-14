@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.audio.AudioManager;
+import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.EntityFactory;
@@ -16,7 +18,7 @@ import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
 import com.mygdx.game.profile.ProfileManager;
 
-public class MainGameScreen implements Screen {
+public class MainGameScreen extends GameScreen {
 
 	private static final String TAG = MainGameScreen.class.getSimpleName();
 
@@ -35,20 +37,23 @@ public class MainGameScreen implements Screen {
 		LOADING,
 		RUNNING,
 		PAUSED,
-		GAME_OVER
+		GAME_OVER,
+
 	}
 	private static GameState gameState;
 
-	private OrthogonalTiledMapRenderer mapRenderer = null;
-	private OrthographicCamera camera = null;
-	private OrthographicCamera hudCamera = null;
-	private static MapManager mapMgr;
+	protected OrthogonalTiledMapRenderer mapRenderer = null;
+	protected OrthographicCamera camera = null;
+	protected OrthographicCamera hudCamera = null;
+	protected MapManager mapMgr;
+
+
 	private Json json;
 	private FinalKanjiQuest game;
 	private InputMultiplexer multiplexer;
 
-	private static Entity player;
-	private static PlayerHUD playerHUD;
+	private Entity player;
+	private PlayerHUD playerHUD;
 
 	public MainGameScreen(FinalKanjiQuest game){
 		this.game = game;
@@ -63,8 +68,6 @@ public class MainGameScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, VIEWPORT.viewportWidth, VIEWPORT.viewportHeight);
 
-		mapRenderer = new OrthogonalTiledMapRenderer(mapMgr.getCurrentTiledMap(), Map.UNIT_SCALE);
-
 		player = EntityFactory.getEntity(EntityFactory.EntityType.PLAYER);
 		mapMgr.setPlayer(player);
 		mapMgr.setCamera(camera);
@@ -74,12 +77,15 @@ public class MainGameScreen implements Screen {
 
 
 		multiplexer = new InputMultiplexer();
-		playerHUD = new PlayerHUD(hudCamera, player, multiplexer);
+		playerHUD = new PlayerHUD(hudCamera, player, multiplexer, mapMgr);
 	}
 
 	@Override
 	public void show() {
-		setGameState(GameState.RUNNING);
+		ProfileManager.getInstance().addObserver(mapMgr);
+		ProfileManager.getInstance().addObserver(playerHUD);
+
+		setGameState(GameState.LOADING);
 		Gdx.input.setInputProcessor(multiplexer);
 
 		if( mapRenderer == null ){
@@ -89,7 +95,10 @@ public class MainGameScreen implements Screen {
 
 	@Override
 	public void hide() {
-		setGameState(GameState.LOADING);
+		if( gameState != GameState.GAME_OVER ){
+			setGameState(GameState.SAVING);
+		}
+
 		Gdx.input.setInputProcessor(null);
 	}
 
@@ -155,6 +164,8 @@ public class MainGameScreen implements Screen {
 		if( mapRenderer != null ){
 			mapRenderer.dispose();
 		}
+
+		AudioManager.getInstance().dispose();
 	}
 
 	public static void setGameState(GameState state){
@@ -218,4 +229,5 @@ public class MainGameScreen implements Screen {
 		Gdx.app.debug(TAG, "WorldRenderer: viewport: (" + VIEWPORT.viewportWidth + "," + VIEWPORT.viewportHeight + ")" );
 		Gdx.app.debug(TAG, "WorldRenderer: physical: (" + VIEWPORT.physicalWidth + "," + VIEWPORT.physicalHeight + ")" );
 	}
+
 }

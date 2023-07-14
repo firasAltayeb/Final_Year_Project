@@ -14,17 +14,18 @@ public class ProfileManager extends ProfileSubject {
     private static ProfileManager profileManager;
     private Hashtable<String,FileHandle> profiles = null;
     private ObjectMap<String, Object> profileProperties = new ObjectMap<String, Object>();
-
-    private String _profileName;
+    private String profileName;
+    private boolean isNewProfile = false;
 
     private static final String SAVEGAME_SUFFIX = ".sav";
     public static final String DEFAULT_PROFILE = "default";
+
 
     private ProfileManager(){
         json = new Json();
         profiles = new Hashtable<String,FileHandle>();
         profiles.clear();
-        _profileName = DEFAULT_PROFILE;
+        profileName = DEFAULT_PROFILE;
         storeAllProfiles();
     }
 
@@ -33,6 +34,14 @@ public class ProfileManager extends ProfileSubject {
             profileManager = new ProfileManager();
         }
         return profileManager;
+    }
+
+    public void setIsNewProfile(boolean isNewProfile){
+        this.isNewProfile = isNewProfile;
+    }
+
+    public boolean getIsNewProfile(){
+        return this.isNewProfile;
     }
 
     public Array<String> getProfileList(){
@@ -70,7 +79,7 @@ public class ProfileManager extends ProfileSubject {
     public void writeProfileToStorage(String profileName, String fileData, boolean overwrite){
         String fullFilename = profileName+SAVEGAME_SUFFIX;
 
-        boolean localFileExists = Gdx.files.internal(fullFilename).exists();
+        boolean localFileExists = Gdx.files.local(fullFilename).exists();
 
         //If we cannot overwrite and the file exists, exit
         if( localFileExists && !overwrite ){
@@ -103,27 +112,33 @@ public class ProfileManager extends ProfileSubject {
     public void saveProfile(){
         notify(this, ProfileObserver.ProfileEvent.SAVING_PROFILE);
         String text = json.prettyPrint(json.toJson(profileProperties));
-        writeProfileToStorage(_profileName, text, true);
+        writeProfileToStorage(profileName, text, true);
     }
 
     public void loadProfile(){
-        String fullProfileFileName = _profileName+SAVEGAME_SUFFIX;
-        boolean doesProfileFileExist = Gdx.files.internal(fullProfileFileName).exists();
+        if(isNewProfile){
+            notify(this, ProfileObserver.ProfileEvent.CLEAR_CURRENT_PROFILE);
+            saveProfile();
+        }
+
+        String fullProfileFileName = profileName +SAVEGAME_SUFFIX;
+        boolean doesProfileFileExist = Gdx.files.local(fullProfileFileName).exists();
 
         if( !doesProfileFileExist ){
             System.out.println("File doesn't exist!");
             return;
         }
 
-        profileProperties = json.fromJson(ObjectMap.class, profiles.get(_profileName));
+        profileProperties = json.fromJson(ObjectMap.class, profiles.get(profileName));
         notify(this, ProfileObserver.ProfileEvent.PROFILE_LOADED);
+        isNewProfile = false;
     }
 
     public void setCurrentProfile(String profileName){
         if( doesProfileExist(profileName) ){
-            _profileName = profileName;
+            this.profileName = profileName;
         }else{
-            _profileName = DEFAULT_PROFILE;
+            this.profileName = DEFAULT_PROFILE;
         }
     }
 

@@ -1,7 +1,6 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -13,18 +12,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.FinalKanjiQuest.ScreenType;
+import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.tools.Utility;
 
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen extends GameScreen {
 
 	private Stage stage;
-	private FinalKanjiQuest game;
+	private final FinalKanjiQuest game;
 
     private Texture texture;
     private Sprite backgroundSprite;
 
-	public MainMenuScreen(FinalKanjiQuest game){
-		this.game = game;
+	public MainMenuScreen(FinalKanjiQuest fkq){
+		this.game = fkq;
 
 		//creation
 		stage = new Stage();
@@ -38,11 +38,13 @@ public class MainMenuScreen implements Screen {
 		Label title = new Label("FKQ", Utility.GUI_SKINS, "title_text");
 		TextButton newGameButton = new TextButton("New Game", Utility.GUI_SKINS);
 		TextButton loadGameButton = new TextButton("Load Game", Utility.GUI_SKINS);
+		TextButton exitButton = new TextButton("Exit", Utility.GUI_SKINS);
 
 		//Layout
 		table.add(title).spaceBottom(75).row();
 		table.add(newGameButton).spaceBottom(10).row();
 		table.add(loadGameButton).spaceBottom(10).row();
+		table.add(exitButton).spaceBottom(10).row();
 
 		stage.addActor(table);
 
@@ -50,7 +52,7 @@ public class MainMenuScreen implements Screen {
 		newGameButton.addListener(new InputListener() {
 									  @Override
 									  public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-										  MainMenuScreen.this.game.setScreen(MainMenuScreen.this.game.getScreenType(ScreenType.NewGame));
+										  game.setScreen(game.getScreenType(ScreenType.NewGame));
 										  return true;
 									  }
 								  }
@@ -60,12 +62,25 @@ public class MainMenuScreen implements Screen {
 
 									   @Override
 									   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-										   MainMenuScreen.this.game.setScreen(MainMenuScreen.this.game.getScreenType(ScreenType.LoadGame));
+										   game.setScreen(game.getScreenType(ScreenType.LoadGame));
 										   return true;
 									   }
 								   }
 		);
 
+		exitButton.addListener(new InputListener() {
+
+								   @Override
+								   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+									   Gdx.app.exit();
+									   return true;
+								   }
+
+							   }
+		);
+
+
+		notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
 
 	}
 	
@@ -89,6 +104,7 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void show() {
+		notify(AudioObserver.AudioCommand.MUSIC_PLAY_LOOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
 		Gdx.input.setInputProcessor(stage);
 	}
 
@@ -99,7 +115,6 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void pause() {
-
 	}
 
 	@Override

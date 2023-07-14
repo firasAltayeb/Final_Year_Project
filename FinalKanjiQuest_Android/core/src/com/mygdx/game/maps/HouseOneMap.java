@@ -21,4 +21,14 @@ public class HouseOneMap extends Map {
         }
     }
 
+    @Override
+    public void unloadMusic() {
+
+    }
+
+    @Override
+    public void loadMusic() {
+
+    }
+
 }

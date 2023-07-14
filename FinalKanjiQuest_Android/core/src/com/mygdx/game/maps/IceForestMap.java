@@ -17,4 +17,14 @@ public class IceForestMap extends Map {
         }
     }
 
+    @Override
+    public void unloadMusic() {
+
+    }
+
+    @Override
+    public void loadMusic() {
+
+    }
+
 }

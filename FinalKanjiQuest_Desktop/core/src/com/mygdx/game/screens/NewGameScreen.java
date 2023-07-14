@@ -15,16 +15,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.FinalKanjiQuest.ScreenType;
+import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.tools.Utility;
 import com.mygdx.game.profile.ProfileManager;
 
-public class NewGameScreen implements Screen {
+public class NewGameScreen extends GameScreen {
 
 	private Stage stage;
 	private FinalKanjiQuest game;
 
 	private Texture texture;
 	private Sprite backgroundSprite;
+	private final TextField profileText;
+	private final Table middleTable;
 
 	public NewGameScreen(FinalKanjiQuest game){
 		this.game = game;
@@ -35,7 +38,7 @@ public class NewGameScreen implements Screen {
 		backgroundSprite = new Sprite(texture);
 
 		Label profileName = new Label("Enter Profile Name: ", Utility.GUI_SKINS);
-		final TextField profileText = new TextField("", Utility.GUI_SKINS);
+		profileText = new TextField("", Utility.GUI_SKINS);
 		profileText.setMaxLength(20);
 
 		Table topTable = new Table();
@@ -50,7 +53,7 @@ public class NewGameScreen implements Screen {
 		TextButton cancelButton = new TextButton("Cancel", Utility.GUI_SKINS, "inventory");
 		TextButton overwriteButton = new TextButton("Overwrite", Utility.GUI_SKINS, "inventory");
 
-		final Table middleTable = new Dialog("Overwrite?", Utility.GUI_SKINS);
+		middleTable = new Dialog("Overwrite?", Utility.GUI_SKINS);
 		middleTable.setWidth(Gdx.graphics.getWidth()/1.05f);
 		middleTable.setHeight(Gdx.graphics.getHeight()/4);
 		middleTable.setPosition(Gdx.graphics.getWidth()/40f, Gdx.graphics.getHeight()/4);
@@ -95,10 +98,10 @@ public class NewGameScreen implements Screen {
 											String messageText = profileText.getText();
 											ProfileManager.getInstance().writeProfileToStorage(messageText, "", true);
 											ProfileManager.getInstance().setCurrentProfile(messageText);
-											ProfileManager.getInstance().saveProfile();
-											ProfileManager.getInstance().loadProfile();
+											ProfileManager.getInstance().setIsNewProfile(true);
 											middleTable.setVisible(false);
-											NewGameScreen.this.game.setScreen(NewGameScreen.this.game.getScreenType(ScreenType.MainGame));
+											NewGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
+											game.setScreen(game.getScreenType(ScreenType.MainGame));
 											return true;
 										}
 									}
@@ -125,9 +128,9 @@ public class NewGameScreen implements Screen {
 										}else{
 											ProfileManager.getInstance().writeProfileToStorage(messageText,"",false);
 											ProfileManager.getInstance().setCurrentProfile(messageText);
-											ProfileManager.getInstance().saveProfile();
-											ProfileManager.getInstance().loadProfile();
-											NewGameScreen.this.game.setScreen(NewGameScreen.this.game.getScreenType(ScreenType.MainGame));
+											ProfileManager.getInstance().setIsNewProfile(true);
+											NewGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
+											game.setScreen(game.getScreenType(ScreenType.MainGame));
 										}
 
 										return true;
@@ -139,7 +142,7 @@ public class NewGameScreen implements Screen {
 
 								   @Override
 								   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-									   NewGameScreen.this.game.setScreen(NewGameScreen.this.game.getScreenType(ScreenType.MainMenu));
+									   game.setScreen(game.getScreenType(ScreenType.MainMenu));
 									   return true;
 								   }
 							   }
@@ -171,11 +174,15 @@ public class NewGameScreen implements Screen {
 
 	@Override
 	public void show() {
+		middleTable.setVisible(false);
+		profileText.setText("");
 		Gdx.input.setInputProcessor(stage);
 	}
 
 	@Override
 	public void hide() {
+		middleTable.setVisible(false);
+		profileText.setText("");
 		Gdx.input.setInputProcessor(null);
 	}
 

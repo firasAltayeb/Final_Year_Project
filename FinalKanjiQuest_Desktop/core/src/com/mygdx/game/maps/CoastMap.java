@@ -17,4 +17,14 @@ public class CoastMap extends Map {
         }
     }
 
+    @Override
+    public void unloadMusic() {
+
+    }
+
+    @Override
+    public void loadMusic() {
+
+    }
+
 }

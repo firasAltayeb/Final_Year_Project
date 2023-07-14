@@ -138,5 +138,9 @@ public class MapFactory {
         return map;
     }
 
+    public static void clearCache(){
+        mapTable.clear();
+    }
+
 
 }

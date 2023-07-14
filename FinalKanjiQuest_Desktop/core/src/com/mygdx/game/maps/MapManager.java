@@ -37,9 +37,19 @@ public class MapManager implements ProfileObserver {
                 }
                 loadMap(mapType);
 
-                Vector2 currentMapStartPoistion = profileManager.getProperty("currentMapStartPoistion", Vector2.class);
-                if( currentMapStartPoistion != null ){
-                    MapFactory.getMap(mapType).setPlayerStart(currentMapStartPoistion);
+                Vector2 townMapStartPosition = profileManager.getProperty("townMapStartPosition", Vector2.class);
+                if( townMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.TOWN).setPlayerStart(townMapStartPosition);
+                }
+
+                Vector2 topWorldMapStartPosition = profileManager.getProperty("topWorldMapStartPosition", Vector2.class);
+                if( topWorldMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.TOP_WORLD).setPlayerStart(topWorldMapStartPosition);
+                }
+
+                Vector2 forestMapStartPosition = profileManager.getProperty("forestMapStartPosition", Vector2.class);
+                if( townMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.FOREST).setPlayerStart(forestMapStartPosition);
                 }
 
                 break;
@@ -47,7 +57,23 @@ public class MapManager implements ProfileObserver {
                 if( this.currentMap != null ){
                     profileManager.setProperty("currentMapType", this.currentMap.currentMapType.toString());
                 }
-                profileManager.setProperty("currentMapStartPoistion", this.currentMap.getPlayerStart());
+
+                profileManager.setProperty("townMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOWN).getPlayerStart() );
+                profileManager.setProperty("topWorldMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOP_WORLD).getPlayerStart() );
+                profileManager.setProperty("forestMapStartPosition", MapFactory.getMap(MapFactory.MapType.FOREST).getPlayerStart() );
+
+
+                break;
+            case CLEAR_CURRENT_PROFILE:
+                this.currentMap = null;
+                profileManager.setProperty("currentMapType", MapFactory.MapType.TOWN.toString());
+
+                MapFactory.clearCache();
+
+                profileManager.setProperty("townMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOWN).getPlayerStart() );
+                profileManager.setProperty("topWorldMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOP_WORLD).getPlayerStart() );
+                profileManager.setProperty("forestMapStartPosition", MapFactory.getMap(MapFactory.MapType.FOREST).getPlayerStart() );
+
                 break;
             default:
                 break;
@@ -78,9 +104,24 @@ public class MapManager implements ProfileObserver {
             return;
         }
 
+        if( currentMap != null ){
+            currentMap.unloadMusic();
+        }
+
+        map.loadMusic();
+
+
         currentMap = map;
         mapChanged = true;
         Gdx.app.debug(TAG, "Player Start: (" + currentMap.getPlayerStart().x + "," + currentMap.getPlayerStart().y + ")");
+    }
+
+    public void disableCurrentmapMusic(){
+        currentMap.unloadMusic();
+    }
+
+    public void enableCurrentmapMusic(){
+        currentMap.loadMusic();
     }
 
     public Vector2 getPlayerStartUnitScaled() {

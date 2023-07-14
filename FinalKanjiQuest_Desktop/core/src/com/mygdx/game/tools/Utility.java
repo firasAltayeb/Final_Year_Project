@@ -6,8 +6,12 @@ package com.mygdx.game.tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.MusicLoader;
+import com.badlogic.gdx.assets.loaders.SoundLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -20,7 +24,7 @@ public final class Utility {
 
     private static final String TAG = Utility.class.getSimpleName();
     // a nice convenience class for  managing file handles when resolving paths
-    private static InternalFileHandleResolver filepathResolver = new InternalFileHandleResolver();
+    private static InternalFileHandleResolver filePathResolver = new InternalFileHandleResolver();
 
     private final static String GUI_SHEET_PATH = "gui/gui_sheet.atlas";
     private final static String GUI_SKINS_PATH = "gui/gui_skins.json";
@@ -61,17 +65,78 @@ public final class Utility {
 
     public static Skin GUI_SKINS = new Skin(Gdx.files.internal(GUI_SKINS_PATH), GUI_TEXTUREATLAS);
 
-    public static void unloadAsset (String assetFileNamePath){
-        // once the asset manger is done loading
-        if(assetManager.isLoaded(assetFileNamePath)){
-            assetManager.unload(assetFileNamePath);
-        } else {
-            Gdx.app.debug(TAG, "Asset is not loaded; Nothing to unload " + assetFileNamePath);
+    public static boolean isAssetLoaded(String fileName){
+        return assetManager.isLoaded(fileName);
+    }
+
+    public static void loadMusicAsset(String musicFilenamePath){
+        if( musicFilenamePath == null || musicFilenamePath.isEmpty() ){
+            return;
+        }
+
+        if( assetManager.isLoaded(musicFilenamePath) ){
+            return;
+        }
+
+        //load asset
+        if( filePathResolver.resolve(musicFilenamePath).exists() ){
+            assetManager.setLoader(Music.class, new MusicLoader(filePathResolver));
+            assetManager.load(musicFilenamePath, Music.class);
+            //Until we add loading screen, just block until we load the map
+            assetManager.finishLoadingAsset(musicFilenamePath);
+            Gdx.app.debug(TAG, "Music loaded!: " + musicFilenamePath);
+        }
+        else{
+            Gdx.app.debug(TAG, "Music doesn't exist!: " + musicFilenamePath );
         }
     }
 
-    public static boolean isAssetLoaded(String fileName){
-        return assetManager.isLoaded(fileName);
+    public static void loadSoundAsset(String soundFilenamePath){
+        if( soundFilenamePath == null || soundFilenamePath.isEmpty() ){
+            return;
+        }
+
+        if( assetManager.isLoaded(soundFilenamePath) ){
+            return;
+        }
+
+        //load asset
+        if( filePathResolver.resolve(soundFilenamePath).exists() ){
+            assetManager.setLoader(Sound.class, new SoundLoader(filePathResolver));
+            assetManager.load(soundFilenamePath, Sound.class);
+            //Until we add loading screen, just block until we load the map
+            assetManager.finishLoadingAsset(soundFilenamePath);
+            Gdx.app.debug(TAG, "Sound loaded!: " + soundFilenamePath);
+        }
+        else{
+            Gdx.app.debug(TAG, "Sound doesn't exist!: " + soundFilenamePath );
+        }
+    }
+
+    public static Music getMusicAsset(String musicFilenamePath){
+        Music music = null;
+
+        // once the asset manager is done loading
+        if( assetManager.isLoaded(musicFilenamePath) ){
+            music = assetManager.get(musicFilenamePath,Music.class);
+        } else {
+            Gdx.app.debug(TAG, "Music is not loaded: " + musicFilenamePath );
+        }
+
+        return music;
+    }
+
+    public static Sound getSoundAsset(String soundFilenamePath){
+        Sound sound = null;
+
+        // once the asset manager is done loading
+        if( assetManager.isLoaded(soundFilenamePath) ){
+            sound = assetManager.get(soundFilenamePath,Sound.class);
+        } else {
+            Gdx.app.debug(TAG, "Sound is not loaded: " + soundFilenamePath );
+        }
+
+        return sound;
     }
 
     public static void loadMapAsset(String mapFilenamePath) {
@@ -85,8 +150,8 @@ public final class Utility {
         }
 
         //load asset
-        if (filepathResolver.resolve(mapFilenamePath).exists()) {
-            assetManager.setLoader(TiledMap.class, new TmxMapLoader(filepathResolver));
+        if (filePathResolver.resolve(mapFilenamePath).exists()) {
+            assetManager.setLoader(TiledMap.class, new TmxMapLoader(filePathResolver));
             assetManager.load(mapFilenamePath, TiledMap.class);
             //until loading screen is added, block
             assetManager.finishLoadingAsset(mapFilenamePath);
@@ -113,8 +178,8 @@ public final class Utility {
             return;
         }
         //load asset
-        if(filepathResolver.resolve(textureFilenamePath).exists()){
-            assetManager.setLoader(Texture.class, new TextureLoader(filepathResolver));
+        if(filePathResolver.resolve(textureFilenamePath).exists()){
+            assetManager.setLoader(Texture.class, new TextureLoader(filePathResolver));
             assetManager.load(textureFilenamePath, Texture.class);
             //until loading screen is added, block
             assetManager.finishLoadingAsset(textureFilenamePath);

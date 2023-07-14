@@ -17,8 +17,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	int touchDownY;
 
 	public PlayerInputComponent(){
-		Gdx.app.debug(TAG, "setInputProcessor this" );
-		Gdx.input.setInputProcessor(this);
 		this.lastMouseCoordinates = new Vector3();
 
 		screenWidth = Gdx.graphics.getWidth();
@@ -31,7 +29,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 
 	@Override
 	public void dispose() {
-		Gdx.app.debug(TAG, "setInputProcessor null" );
 		Gdx.input.setInputProcessor(null);
 	}
 

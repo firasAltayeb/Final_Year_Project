@@ -1,7 +1,6 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -11,23 +10,25 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.FinalKanjiQuest;
+import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.tools.Utility;
 
-public class GameOverScreen implements Screen {
+public class GameOverScreen extends GameScreen {
+
     private Stage stage;
-    private FinalKanjiQuest game;
-    private static final String DEATH_MESSAGE = "You have fought bravely, but alas, you have fallen during your epic struggle.";
+    private final FinalKanjiQuest game;
+    //private static final String DEATH_MESSAGE = "You have fought bravely, but alas, you have fallen during your epic struggle.";
     private static final String GAMEOVER = "Game Over";
 
-    public GameOverScreen(FinalKanjiQuest game){
-        this.game = game;
+    public GameOverScreen(FinalKanjiQuest fkq){
+        this.game = fkq;
 
         //create
         stage = new Stage();
         TextButton continueButton = new TextButton("Continue", Utility.GUI_SKINS);
         TextButton mainMenuButton = new TextButton("Main Menu", Utility.GUI_SKINS);
-        Label messageLabel = new Label(DEATH_MESSAGE, Utility.GUI_SKINS);
-        messageLabel.setWrap(true);
+        //Label messageLabel = new Label(DEATH_MESSAGE, Utility.GUI_SKINS);
+        //messageLabel.setWrap(true);
 
         Label gameOverLabel = new Label(GAMEOVER, Utility.GUI_SKINS);
         gameOverLabel.setAlignment(Align.center);
@@ -36,7 +37,7 @@ public class GameOverScreen implements Screen {
 
         //Layout
         table.setFillParent(true);
-        table.add(messageLabel).pad(50, 50,50,50).expandX().fillX().row();
+        //table.add(messageLabel).pad(50, 50,50,50).expandX().fillX().row();
         table.add(gameOverLabel);
         table.row();
         table.add(continueButton).pad(50,50,10,50);
@@ -49,7 +50,7 @@ public class GameOverScreen implements Screen {
         continueButton.addListener(new InputListener() {
                                        @Override
                                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                           GameOverScreen.this.game.setScreen(GameOverScreen.this.game.getScreenType(FinalKanjiQuest.ScreenType.LoadGame));
+                                           game.setScreen(game.getScreenType(FinalKanjiQuest.ScreenType.LoadGame));
                                            return true;
                                        }
                                    }
@@ -59,11 +60,13 @@ public class GameOverScreen implements Screen {
 
                                        @Override
                                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                           GameOverScreen.this.game.setScreen(GameOverScreen.this.game.getScreenType(FinalKanjiQuest.ScreenType.MainMenu));
+                                           game.setScreen(game.getScreenType(FinalKanjiQuest.ScreenType.MainMenu));
                                            return true;
                                        }
                                    }
         );
+
+        notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
 
     }
 
@@ -87,6 +90,7 @@ public class GameOverScreen implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+        notify(AudioObserver.AudioCommand.MUSIC_PLAY_LOOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
     }
 
     @Override

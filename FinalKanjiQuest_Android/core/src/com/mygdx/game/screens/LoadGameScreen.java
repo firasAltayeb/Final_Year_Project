@@ -1,7 +1,6 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,19 +14,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.FinalKanjiQuest;
+import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.tools.Utility;
 
 
-public class LoadGameScreen implements Screen {
+public class LoadGameScreen extends GameScreen {
     private Stage stage;
-	private FinalKanjiQuest game;
+	private final FinalKanjiQuest game;
 
 	private Texture texture;
 	private Sprite backgroundSprite;
-	
-	public LoadGameScreen(FinalKanjiQuest game){
-		this.game = game;
+	private final List listItems;
+
+	public LoadGameScreen(FinalKanjiQuest fkq){
+		this.game = fkq;
 
 		texture = new Texture(Gdx.files.internal("sprites/maps/topworld.png"));
 		backgroundSprite = new Sprite(texture);
@@ -39,7 +40,7 @@ public class LoadGameScreen implements Screen {
 
 		ProfileManager.getInstance().storeAllProfiles();
 		Array<String> list = ProfileManager.getInstance().getProfileList();
-		final List listItems = new List(Utility.GUI_SKINS);
+		listItems = new List(Utility.GUI_SKINS);
 		listItems.setItems(list);
 		ScrollPane scrollPane = new ScrollPane(listItems);
 
@@ -70,7 +71,7 @@ public class LoadGameScreen implements Screen {
 		backButton.addListener(new InputListener() {
 								   @Override
 								   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-									   LoadGameScreen.this.game.setScreen(LoadGameScreen.this.game.getScreenType(FinalKanjiQuest.ScreenType.MainMenu));
+									   game.setScreen(game.getScreenType(FinalKanjiQuest.ScreenType.MainMenu));
 									   return true;
 								   }
 							   }
@@ -85,8 +86,8 @@ public class LoadGameScreen implements Screen {
 											   FileHandle file = ProfileManager.getInstance().getProfileFile(fileName);
 											   if (file != null) {
 												   ProfileManager.getInstance().setCurrentProfile(fileName);
-												   ProfileManager.getInstance().loadProfile();
-												   LoadGameScreen.this.game.setScreen(LoadGameScreen.this.game.getScreenType(FinalKanjiQuest.ScreenType.MainGame));
+												   LoadGameScreen.this.notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_TITLE);
+												   game.setScreen(game.getScreenType(FinalKanjiQuest.ScreenType.MainGame));
 											   }
 										   }
 									   }
@@ -121,6 +122,8 @@ public class LoadGameScreen implements Screen {
 
 	@Override
 	public void show() {
+		Array<String> list = ProfileManager.getInstance().getProfileList();
+		listItems.setItems(list);
 		Gdx.input.setInputProcessor(stage);
 	}
 

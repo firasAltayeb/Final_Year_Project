@@ -1,5 +1,6 @@
 package com.mygdx.game.gui;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -148,8 +149,6 @@ public class InventoryUI extends Window implements InventorySubject {
         inventorySlotTable.setPosition(newMenuItemWindowWidth / 2f, newMenuItemWindowHeight / 2.6f);
 
         for (int i = 0; i <= inventorySlotTable.getCells().size - 1; i++) {
-            //Gdx.app.debug(TAG, " menuItemWindowWidth: " + menuItemWindowWidth );
-            //Gdx.app.debug(TAG, " menuItemWindowHeight: " + menuItemWindowHeight );
             inventorySlotTable.getCells().get(i).size(newMenuItemWindowWidth / 8, newMenuItemWindowHeight / 7.5f);
         }
 
@@ -170,8 +169,7 @@ public class InventoryUI extends Window implements InventorySubject {
             int numItems = inventorySlot.getNumItems();
             if (numItems > 0) {
                 items.add(new InventoryItemLocation(
-                        i,
-                        inventorySlot.getTopInventoryItem().getItemNameID().toString()));
+                        i, inventorySlot.getTopInventoryItem().getItemNameID().toString()));
             }
         }
         return items;
@@ -187,7 +185,6 @@ public class InventoryUI extends Window implements InventorySubject {
             InventorySlot inventorySlot =  ((InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
             InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemNameID);
             inventorySlot.add(item);
-
         }
     }
 
@@ -224,4 +221,6 @@ public class InventoryUI extends Window implements InventorySubject {
             observer.onNotify(value, event);
         }
     }
+
+
 }
