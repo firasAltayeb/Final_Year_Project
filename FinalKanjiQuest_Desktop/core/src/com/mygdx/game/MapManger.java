@@ -25,7 +25,7 @@ public class MapManger {
     private final static String TOWN = "TOWN";
     private final static String ARMORER = "ARMORER";
     private final static String LIBRARY = "LIBRARY";
-    private final static String HERBALIST = "HERBALIST";
+    private final static String HERB_SHOP = "HERB_SHOP";
     private final static String HOUSE_ONE = "HOUSE_ONE";
     private final static String INN_FIRST_FLOOR = "INN_FIRST_FLOOR";
     private final static String INN_SECOND_FLOOR = "INN_SECOND_FLOOR";
@@ -57,7 +57,7 @@ public class MapManger {
         mapTable.put(TOWN, "tile_maps/town.tmx" );
         mapTable.put(ARMORER, "tile_maps/armorer.tmx" );
         mapTable.put(LIBRARY, "tile_maps/library.tmx" );
-        mapTable.put(HERBALIST, "tile_maps/herbalist.tmx" );
+        mapTable.put(HERB_SHOP, "tile_maps/herb_shop.tmx" );
         mapTable.put(HOUSE_ONE, "tile_maps/house_one.tmx" );
         mapTable.put(INN_FIRST_FLOOR, "tile_maps/inn_first_floor.tmx" );
         mapTable.put(INN_SECOND_FLOOR, "tile_maps/inn_second_floor.tmx" );
@@ -66,7 +66,7 @@ public class MapManger {
         playerStartLocationTable.put(TOWN, playerStart.cpy());
         playerStartLocationTable.put(ARMORER, playerStart.cpy());
         playerStartLocationTable.put(LIBRARY, playerStart.cpy());
-        playerStartLocationTable.put(HERBALIST, playerStart.cpy());
+        playerStartLocationTable.put(HERB_SHOP, playerStart.cpy());
         playerStartLocationTable.put(HOUSE_ONE, playerStart.cpy());
         playerStartLocationTable.put(INN_FIRST_FLOOR, playerStart.cpy());
         playerStartLocationTable.put(INN_SECOND_FLOOR, playerStart.cpy());
@@ -146,8 +146,7 @@ public class MapManger {
 
     public Vector2 getPlayerStartUnitScaled(){
         Vector2 scaledPlayerStart = playerStart.cpy();
-        scaledPlayerStart.set(playerStart.x * UNIT_SCALE,
-                playerStart.y * UNIT_SCALE);
+        scaledPlayerStart.set(playerStart.x * UNIT_SCALE, playerStart.y * UNIT_SCALE);
         return  scaledPlayerStart;
     }
 

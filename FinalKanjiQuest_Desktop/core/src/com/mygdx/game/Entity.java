@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.Array;
 public class Entity {
 
     private static final String TAG = Entity.class.getSimpleName();
-    private static final String defaultSpritePath = "sprites/characters/hiro_sheet.png";
+    private static final String defaultSpritePath = "sprites/hiro_sheet.png";
 
     private Vector2 velocity;
     private String entityID;
@@ -50,7 +50,7 @@ public class Entity {
     protected Sprite frameSprite = null;
     protected TextureRegion currentFrame = null;
 
-    public final int FRAME_WIDTH = 21;
+    public final int FRAME_WIDTH = 23;
     public final int FRAME_HEIGHT = 34;
     public static Rectangle boundingBox;
 

@@ -105,7 +105,7 @@ public class MainGameScreen implements Screen {
 
         mapRenderer.getBatch().begin();
         //frame, x & y position, width size * 1, height size * 2
-        mapRenderer.getBatch().draw(currentPlayerFrame, currentPlayerSprite.getX(), currentPlayerSprite.getY(), 1, 2);
+        mapRenderer.getBatch().draw(currentPlayerFrame, currentPlayerSprite.getX(), currentPlayerSprite.getY(),1.2f, 2);
         mapRenderer.getBatch().end();
     }
 

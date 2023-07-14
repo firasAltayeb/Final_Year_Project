@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="78" height="55" tilewidth="16" tileheight="16" backgroundcolor="#005500" nextobjectid="685">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="78" height="55" tilewidth="16" tileheight="16" backgroundcolor="#005500" nextobjectid="687">
  <tileset firstgid="1" name="tileset1" tilewidth="16" tileheight="16" tilecount="1833" columns="39">
   <image source="../map_objects/tileset1.png" trans="ffffff" width="624" height="752"/>
   <terraintypes>
@@ -726,7 +726,7 @@
   <object id="608" x="590.5" y="311.5" width="17.5" height="12.5"/>
   <object id="609" x="720" y="311" width="16" height="12"/>
   <object id="612" x="831" y="308" width="49" height="12"/>
-  <object id="614" x="501" y="608" width="50" height="32"/>
+  <object id="614" x="505" y="613" width="43" height="26.5"/>
   <object id="617" x="281" y="484" width="43" height="57"/>
   <object id="618" x="256" y="560" width="48" height="76"/>
   <object id="623" x="501" y="640" width="85" height="32"/>
@@ -769,6 +769,6 @@
   <object id="202" name="HOUSE_ONE" x="624" y="176" width="16" height="32"/>
   <object id="203" name="ARMORER" x="432" y="240" width="16" height="32"/>
   <object id="205" name="INN_FIRST_FLOOR" x="512" y="480" width="16" height="32"/>
-  <object id="206" name="HERBALIST" x="768" y="592" width="16" height="32"/>
+  <object id="206" name="HERB_SHOP" x="768" y="592" width="16" height="32"/>
  </objectgroup>
 </map>
