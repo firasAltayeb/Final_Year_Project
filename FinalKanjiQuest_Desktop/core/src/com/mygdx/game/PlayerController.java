@@ -18,7 +18,8 @@ public class PlayerController implements InputProcessor {
     private final static String TAG = PlayerController.class.getSimpleName();
 
     enum Keys {
-        LEFT, RIGHT, UP, DOWN, QUIT
+        LEFT, RIGHT, UP, DOWN,
+        UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
     }
 
     enum Mouse {
@@ -35,7 +36,10 @@ public class PlayerController implements InputProcessor {
         keys.put(Keys.RIGHT, false);
         keys.put(Keys.UP, false);
         keys.put(Keys.DOWN, false);
-        keys.put(Keys.QUIT, false);
+        keys.put(Keys.UP_RIGHT, false);
+        keys.put(Keys.UP_LEFT, false);
+        keys.put(Keys.DOWN_RIGHT, false);
+        keys.put(Keys.DOWN_LEFT, false);
     };
 
     static {
@@ -66,7 +70,17 @@ public class PlayerController implements InputProcessor {
             this.downPressed();
         }
         if( keycode == Input.Keys.Q){
-            this.quitPressed();
+            this.upLeftPressed();
+
+        }if( keycode == Input.Keys.E){
+            this.upRightPressed();
+
+        }if( keycode == Input.Keys.C){
+            this.downRightPressed();
+
+        }if( keycode == Input.Keys.Z){
+            this.downLeftPressed();
+
         }
 
         return true;
@@ -87,7 +101,17 @@ public class PlayerController implements InputProcessor {
             this.downReleased();
         }
         if( keycode == Input.Keys.Q){
-            this.quitReleased();
+            this.upLeftReleased();
+
+        }if( keycode == Input.Keys.E){
+            this.upRightReleased();
+
+        }if( keycode == Input.Keys.C){
+            this.downRightReleased();
+
+        }if( keycode == Input.Keys.Z){
+            this.downLeftReleased();
+
         }
         return true;
     }
@@ -142,7 +166,6 @@ public class PlayerController implements InputProcessor {
         return false;
     }
 
-
     //presses
     public void leftPressed(){
         keys.put(Keys.LEFT, true);
@@ -160,8 +183,20 @@ public class PlayerController implements InputProcessor {
         keys.put(Keys.DOWN, true);
     }
 
-    public void quitPressed(){
-        keys.put(Keys.QUIT, true);
+    public void upRightPressed(){
+        keys.put(Keys.UP_RIGHT, true);
+    }
+
+    public void upLeftPressed(){
+        keys.put(Keys.UP_LEFT, true);
+    }
+
+    public void downRightPressed(){
+        keys.put(Keys.DOWN_RIGHT, true);
+    }
+
+    public void downLeftPressed(){
+        keys.put(Keys.DOWN_LEFT, true);
     }
 
     public void setClickedMouseCoordinates(int x,int y){
@@ -193,9 +228,22 @@ public class PlayerController implements InputProcessor {
         keys.put(Keys.DOWN, false);
     }
 
-    public void quitReleased(){
-        keys.put(Keys.QUIT, false);
+    public void upRightReleased(){
+        keys.put(Keys.UP_RIGHT, false);
     }
+
+    public void upLeftReleased(){
+        keys.put(Keys.UP_LEFT, false);
+    }
+
+    public void downRightReleased(){
+        keys.put(Keys.DOWN_RIGHT, false);
+    }
+
+    public void downLeftReleased(){
+        keys.put(Keys.DOWN_LEFT, false);
+    }
+
 
     public void selectMouseButtonReleased(int x, int y){
         mouseButtons.put(Mouse.SELECT, false);
@@ -206,9 +254,9 @@ public class PlayerController implements InputProcessor {
     }
 
     public void update(float delta){
+        //Gdx.app.debug(TAG, "update:: Next Position: (" + player.getNextPosition().x
+        // + "," + player.getNextPosition().y + ")" + "DELTA: " + delta);
         processInput(delta);
-        //Gdx.app.debug(TAG, "update:: Next Position: (" + BludBourne._player.getNextPosition().x
-        // + "," + BludBourne._player.getNextPosition().y + ")" + "DELTA: " + delta);
     }
 
     public static void hide(){
@@ -216,7 +264,10 @@ public class PlayerController implements InputProcessor {
         keys.put(Keys.RIGHT, false);
         keys.put(Keys.UP, false);
         keys.put(Keys.DOWN, false);
-        keys.put(Keys.QUIT, false);
+        keys.put(Keys.UP_RIGHT, false);
+        keys.put(Keys.UP_LEFT, false);
+        keys.put(Keys.DOWN_RIGHT, false);
+        keys.put(Keys.DOWN_LEFT, false);
     }
 
     private void processInput(float delta){
@@ -242,9 +293,32 @@ public class PlayerController implements InputProcessor {
             player.calculateNextPosition(Entity.Direction.DOWN, delta);
             player.setState(Entity.State.WALKING);
             player.setDirection(Entity.Direction.DOWN, delta);
-        }else if(keys.get(Keys.QUIT)){
-            Gdx.app.exit();
-        }else{
+        }
+        else if(keys.get(Keys.UP_RIGHT)){
+            //Gdx.app.debug(TAG, "DOWN key");
+            player.calculateNextPosition(Entity.Direction.UP_RIGHT, delta);
+            player.setState(Entity.State.WALKING);
+            player.setDirection(Entity.Direction.UP_RIGHT, delta);
+        }
+        else if(keys.get(Keys.UP_LEFT)){
+            //Gdx.app.debug(TAG, "DOWN key");
+            player.calculateNextPosition(Entity.Direction.UP_LEFT, delta);
+            player.setState(Entity.State.WALKING);
+            player.setDirection(Entity.Direction.UP_LEFT, delta);
+        }
+        else if(keys.get(Keys.DOWN_RIGHT)){
+            //Gdx.app.debug(TAG, "DOWN key");
+            player.calculateNextPosition(Entity.Direction.DOWN_RIGHT, delta);
+            player.setState(Entity.State.WALKING);
+            player.setDirection(Entity.Direction.DOWN_RIGHT, delta);
+        }
+        else if(keys.get(Keys.DOWN_LEFT)){
+            //Gdx.app.debug(TAG, "DOWN key");
+            player.calculateNextPosition(Entity.Direction.DOWN_LEFT, delta);
+            player.setState(Entity.State.WALKING);
+            player.setDirection(Entity.Direction.DOWN_LEFT, delta);
+        }
+        else{
             player.setState(Entity.State.IDLE);
         }
 
