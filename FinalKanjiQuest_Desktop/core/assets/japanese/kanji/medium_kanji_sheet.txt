@@ -10,7 +10,7 @@ kanjiAka
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiAne
+kanjiAna
   rotate: false
   xy: 103, 1
   size: 100, 80
@@ -59,63 +59,63 @@ kanjiHi
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiIke
+kanjiHikari
   rotate: false
   xy: 307, 83
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiIshi
+kanjiIke
   rotate: false
   xy: 409, 83
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiKa
+kanjiIshi
   rotate: false
   xy: 1, 165
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiKai
+kanjiKa
   rotate: false
   xy: 103, 165
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiKawa
+kanjiKai
   rotate: false
   xy: 205, 165
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiKaze
+kanjiKawa
   rotate: false
   xy: 307, 165
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiKi
+kanjiKaze
   rotate: false
   xy: 409, 165
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiKoori
+kanjiKi
   rotate: false
   xy: 1, 247
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
-kanjiMiya
+kanjiKoori
   rotate: false
   xy: 103, 247
   size: 100, 80

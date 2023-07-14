@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.MnemonicsUI;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.Utility;
