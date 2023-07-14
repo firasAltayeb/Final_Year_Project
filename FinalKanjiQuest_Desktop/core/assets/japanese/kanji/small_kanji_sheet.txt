@@ -1,0 +1,215 @@
+small_kanji_sheet.png
+size: 248, 400
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+kanjiAka
+  rotate: false
+  xy: 1, 1
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiAna
+  rotate: false
+  xy: 63, 1
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiChi
+  rotate: false
+  xy: 125, 1
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiFuyu
+  rotate: false
+  xy: 187, 1
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiHa
+  rotate: false
+  xy: 1, 51
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiHana
+  rotate: false
+  xy: 63, 51
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiHayashi
+  rotate: false
+  xy: 125, 51
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiHi
+  rotate: false
+  xy: 187, 51
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiHikari
+  rotate: false
+  xy: 1, 101
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiIke
+  rotate: false
+  xy: 63, 101
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiIshi
+  rotate: false
+  xy: 125, 101
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiKa
+  rotate: false
+  xy: 187, 101
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiKai
+  rotate: false
+  xy: 1, 151
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiKawa
+  rotate: false
+  xy: 63, 151
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiKaze
+  rotate: false
+  xy: 125, 151
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiKi
+  rotate: false
+  xy: 187, 151
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiKoori
+  rotate: false
+  xy: 1, 201
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiMizu
+  rotate: false
+  xy: 63, 201
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiMon
+  rotate: false
+  xy: 125, 201
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiMori
+  rotate: false
+  xy: 187, 201
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiMushi
+  rotate: false
+  xy: 1, 251
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiSakana
+  rotate: false
+  xy: 63, 251
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiSoto
+  rotate: false
+  xy: 125, 251
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiTera
+  rotate: false
+  xy: 187, 251
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiTo
+  rotate: false
+  xy: 1, 301
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiTsuchi
+  rotate: false
+  xy: 63, 301
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiUchi
+  rotate: false
+  xy: 125, 301
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiUmi
+  rotate: false
+  xy: 187, 301
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiYama
+  rotate: false
+  xy: 1, 351
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1
+kanjiYuki
+  rotate: false
+  xy: 63, 351
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: -1

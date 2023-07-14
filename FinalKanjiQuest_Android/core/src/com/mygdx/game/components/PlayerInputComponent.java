@@ -54,7 +54,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 
 		//Keyboard input
 		if(keys.get(Keys.PAUSE)) {
-			System.out.println("INPUT PAUSED");
 			MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
 			pauseReleased();
 		}
@@ -122,7 +121,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		touchDownY = screenY;
 		this.selectMouseButtonPressed(screenX, screenY);
 		this.setClickedMouseCoordinates(screenX, screenY);
-		Gdx.app.log(TAG, "touch down : (x == " + touchDownX + ", y ==" + touchDownY + ")" );
+		////Gdx.app.log(TAG, "touch down : (x == " + touchDownX + ", y ==" + touchDownY + ")" );
 
 		//top left corner
 		if((screenX >= 0 && screenX <= screenWidth/3) &&
@@ -131,10 +130,10 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "top left doNothing is " + doNothing);
+				////Gdx.app.log(TAG, "top left doNothing is " + doNothing);
 			}
 			else {
-				Gdx.app.log(TAG, "up left pressed ");
+				//Gdx.app.log(TAG, "up left pressed ");
 				keys.put(Keys.UP_LEFT, true);
 			}
 		}
@@ -146,10 +145,10 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "up doNothing is " + doNothing);
+				//Gdx.app.log(TAG, "up doNothing is " + doNothing);
 			}
 			else {
-				Gdx.app.log(TAG, "up pressed ");
+				//Gdx.app.log(TAG, "up pressed ");
 				keys.put(Keys.UP, true);
 			}
 		}
@@ -161,10 +160,10 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "top right doNothing is " + doNothing);
+				//Gdx.app.log(TAG, "top right doNothing is " + doNothing);
 			}
 			else {
-				Gdx.app.log(TAG, "up right pressed ");
+				//Gdx.app.log(TAG, "up right pressed ");
 				keys.put(Keys.UP_RIGHT, true);
 			}
 		}
@@ -176,11 +175,11 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "left doNothing is " + doNothing);
+				//Gdx.app.log(TAG, "left doNothing is " + doNothing);
 
 			}
 			else {
-				Gdx.app.log(TAG, "left pressed ");
+				//Gdx.app.log(TAG, "left pressed ");
 				keys.put(Keys.LEFT, true);
 			}
 		}
@@ -189,7 +188,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 				(screenY >= screenHeight/3 && screenY <= screenHeight/1.5)){
 			//do nothing for now
 			doNothing = true;
-			Gdx.app.log(TAG, "center doNothing is " + doNothing);
+			//Gdx.app.log(TAG, "center doNothing is " + doNothing);
 		}
 
 		//center's right pressed
@@ -199,10 +198,10 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "right doNothing is " + doNothing);
+				//Gdx.app.log(TAG, "right doNothing is " + doNothing);
 			}
 			else {
-				Gdx.app.log(TAG, "right pressed ");
+				//Gdx.app.log(TAG, "right pressed ");
 				keys.put(Keys.RIGHT, true);
 			}
 		}
@@ -214,10 +213,10 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
 					keys.get(Keys.DOWN_RIGHT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "down left doNothing is " + doNothing);
+				//Gdx.app.log(TAG, "down left doNothing is " + doNothing);
 			}
 			else {
-				Gdx.app.log(TAG, "down left pressed ");
+				//Gdx.app.log(TAG, "down left pressed ");
 				keys.put(Keys.DOWN_LEFT, true);
 			}
 		}
@@ -229,10 +228,10 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "down doNothing is " + doNothing);
+				//Gdx.app.log(TAG, "down doNothing is " + doNothing);
 			}
 			else {
-				Gdx.app.log(TAG, "down pressed ");
+				//Gdx.app.log(TAG, "down pressed ");
 				keys.put(Keys.DOWN, true);;
 			}
 		}
@@ -244,15 +243,15 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "down right doNothing is " + doNothing);
+				//Gdx.app.log(TAG, "down right doNothing is " + doNothing);
 			}
 			else {
-				Gdx.app.log(TAG, "down right pressed ");
+				//Gdx.app.log(TAG, "down right pressed ");
 				keys.put(Keys.DOWN_RIGHT, true);;
 			}
 		}
 
-		Gdx.app.log(TAG, "touch down returned" );
+		//Gdx.app.log(TAG, "touch down returned" );
 
 		return true;
 	}
@@ -262,14 +261,14 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		
 		this.selectMouseButtonReleased(screenX, screenY);
 
-		//Gdx.app.log(TAG, "touch up : ( x == " + screenX + ", y ==" + screenY + ")" );
-		Gdx.app.log(TAG, "touch up inaction, doNothing: " + doNothing);
+		////Gdx.app.log(TAG, "touch up : ( x == " + screenX + ", y ==" + screenY + ")" );
+		//Gdx.app.log(TAG, "touch up inaction, doNothing: " + doNothing);
 
 		if(doNothing){
-			//Gdx.app.log(TAG, "doing nothing" );
+			////Gdx.app.log(TAG, "doing nothing" );
 		}
 		else {
-			//Gdx.app.log(TAG, "hide() called" );
+			////Gdx.app.log(TAG, "hide() called" );
 			hide();
 		}
 
@@ -320,7 +319,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	}
 
 	public static void hide(){
-		Gdx.app.log(TAG, "hide() inaction" );
+		//Gdx.app.log(TAG, "hide() inaction" );
 		keys.put(Keys.LEFT, false);
 		keys.put(Keys.RIGHT, false);
 		keys.put(Keys.UP, false);

@@ -1,0 +1,90 @@
+{
+currentPlayerHPMax: {
+	class: java.lang.Integer
+	value: 5
+}
+currentPlayerHP: {
+	class: java.lang.Integer
+	value: 3
+}
+currentMapStartPoistion: {
+	class: com.badlogic.gdx.math.Vector2
+	x: 768
+	y: 144
+}
+playerInventory: [
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		itemNameAtLocation: POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 1
+		itemNameAtLocation: POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 2
+		itemNameAtLocation: POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 3
+		itemNameAtLocation: MEDIUM_POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 4
+		itemNameAtLocation: LARGE_POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 5
+		itemNameAtLocation: HEART
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 6
+		itemNameAtLocation: HEART
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 7
+		itemNameAtLocation: HEART
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 8
+		itemNameAtLocation: HEART
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 9
+		itemNameAtLocation: HEART
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 10
+		itemNameAtLocation: H_RUNESTONE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 11
+		itemNameAtLocation: NEGATIVE_H_RUNESTONE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 12
+		itemNameAtLocation: K_RUNESTONE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 13
+		itemNameAtLocation: NEGATIVE_K_RUNESTONE
+	}
+]
+currentMapType: {
+	class: java.lang.String
+	value: FOREST
+}
+}

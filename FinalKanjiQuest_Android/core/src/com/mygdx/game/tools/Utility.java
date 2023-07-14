@@ -25,6 +25,7 @@ public final class Utility {
     private final static String GUI_SHEET_PATH = "gui/gui_sheet.atlas";
     private final static String GUI_SKINS_PATH = "gui/large_gui_skins.json";
     private final static String ITEMS_SHEET_PATH = "items/large_items_sheet.txt";
+    private final static String HIRO_SHEET_PATH = "sprites/chara/large_hiro_sheet.txt";
 
     private final static String LARGE_HIRAGANA_SHEET_PATH = "japanese/hiragana/large_hiragana_sheet.txt";
     private final static String LARGE_KATAKANA_SHEET_PATH = "japanese/katakana/large_katakana_sheet.txt";
@@ -36,10 +37,13 @@ public final class Utility {
     private final static String SMALL_KATAKANA_SHEET_PATH = "japanese/katakana/small_katakana_sheet.txt";
     private final static String SMALL_ROMAJI_SHEET_PATH = "japanese/romaji/small_romaji_sheet.txt";
 
+    private final static String SMALL_KANJI_SHEET_PATH = "japanese/kanji/small_kanji_sheet.txt";
+    private final static String MEDIUM_KANJI_SHEET_PATH = "japanese/kanji/medium_kanji_sheet.txt";
     private final static String LARGE_KANJI_SHEET_PATH = "japanese/kanji/large_kanji_sheet.txt";
 
     public static TextureAtlas GUI_TEXTUREATLAS = new TextureAtlas(GUI_SHEET_PATH);
     public static TextureAtlas ITEMS_TEXTUREATLAS = new TextureAtlas(ITEMS_SHEET_PATH);
+    public static TextureAtlas HIRO_TEXTUREATLAS = new TextureAtlas(HIRO_SHEET_PATH);
 
     public static TextureAtlas LARGE_HIRAGANA_TEXTUREATLAS = new TextureAtlas(LARGE_HIRAGANA_SHEET_PATH);
     public static TextureAtlas LARGE_KATAKANA_TEXTUREATLAS = new TextureAtlas(LARGE_KATAKANA_SHEET_PATH);
@@ -51,7 +55,8 @@ public final class Utility {
     public static TextureAtlas SMALL_KATAKANA_SHEET_TEXTUREATLAS = new TextureAtlas(SMALL_KATAKANA_SHEET_PATH);
     public static TextureAtlas SMALL_ROMAJI_SHEET_TEXTUREATLAS = new TextureAtlas(SMALL_ROMAJI_SHEET_PATH);
 
-
+    public static TextureAtlas SMALL_KANJI_TEXTUREATLAS = new TextureAtlas(SMALL_KANJI_SHEET_PATH);
+    public static TextureAtlas MEDIUM_KANJI_TEXTUREATLAS = new TextureAtlas(MEDIUM_KANJI_SHEET_PATH);
     public static TextureAtlas LARGE_KANJI_TEXTUREATLAS = new TextureAtlas(LARGE_KANJI_SHEET_PATH);
 
     public static Skin GUI_SKINS = new Skin(Gdx.files.internal(GUI_SKINS_PATH), GUI_TEXTUREATLAS);

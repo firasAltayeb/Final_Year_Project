@@ -37,6 +37,7 @@ public final class Utility {
     private final static String SMALL_KATAKANA_SHEET_PATH = "japanese/katakana/small_katakana_sheet.txt";
     private final static String SMALL_ROMAJI_SHEET_PATH = "japanese/romaji/small_romaji_sheet.txt";
 
+    private final static String SMALL_KANJI_SHEET_PATH = "japanese/kanji/small_kanji_sheet.txt";
     private final static String MEDIUM_KANJI_SHEET_PATH = "japanese/kanji/medium_kanji_sheet.txt";
     private final static String LARGE_KANJI_SHEET_PATH = "japanese/kanji/large_kanji_sheet.txt";
 
@@ -54,6 +55,7 @@ public final class Utility {
     public static TextureAtlas SMALL_KATAKANA_TEXTUREATLAS = new TextureAtlas(SMALL_KATAKANA_SHEET_PATH);
     public static TextureAtlas SMALL_ROMAJI_TEXTUREATLAS = new TextureAtlas(SMALL_ROMAJI_SHEET_PATH);
 
+    public static TextureAtlas SMALL_KANJI_TEXTUREATLAS = new TextureAtlas(SMALL_KANJI_SHEET_PATH);
     public static TextureAtlas MEDIUM_KANJI_TEXTUREATLAS = new TextureAtlas(MEDIUM_KANJI_SHEET_PATH);
     public static TextureAtlas LARGE_KANJI_TEXTUREATLAS = new TextureAtlas(LARGE_KANJI_SHEET_PATH);
 

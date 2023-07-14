@@ -2,16 +2,18 @@ package com.mygdx.game.battle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.game.japanese.KanaLettersFactory;
+import com.mygdx.game.japanese.LetterLvlCounter;
 
 public class BattleState extends BattleSubject {
 
+    //TODO speak about this,
     private static final String TAG = BattleState.class.getSimpleName();
 
     private String currentOpponent;
     private int currentZoneLevel = 0;
-    private final int chanceOfEncounter = 50;
-    private final int chanceOfEscape = 90;
-
+    private final int chanceOfEncounter = 85;
+    private final int chanceOfEscape = 85;
 
     public void setCurrentZoneLevel(int zoneLevel){
         currentZoneLevel = zoneLevel;
@@ -35,22 +37,18 @@ public class BattleState extends BattleSubject {
 
     public void setCurrentOpponent(){
         Gdx.app.debug(TAG, " Entered BATTLE ZONE: " + currentZoneLevel);
-        String monster = MonsterFactory.getInstance().getRandomMonster(currentZoneLevel);
-        if( monster == null ) return;
-        this.currentOpponent = monster;
-        notify(monster, BattleObserver.BattleEvent.OPPONENT_ADDED);
-    }
-
-    public void playerAttacks(){
-        if( currentOpponent == null ){
-            return;
+        if(LetterLvlCounter.areAllHiraganaMemorised() == false){
+            int randomVal = MathUtils.random(0,106);
+            String letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getHiraganaEquivalent();
+            if (letterToAnswer == null) return;
+            this.currentOpponent = letterToAnswer;
+            notify(letterToAnswer, BattleObserver.BattleEvent.HIRAGANA_ADDED);
+        } else {
+            String letterToAnswer = MonsterFactory.getInstance().getRandomMonster(currentZoneLevel);
+            if (letterToAnswer == null) return;
+            this.currentOpponent = letterToAnswer;
+            notify(letterToAnswer, BattleObserver.BattleEvent.KANJI_ADDED);
         }
-
-        notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_START);
-
-        Gdx.app.debug(TAG, "PLAYER ATTACK");
-
-        notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_TURN_DONE);
     }
 
     public void playerRuns(){
@@ -58,12 +56,12 @@ public class BattleState extends BattleSubject {
         if( chanceOfEscape > randomVal  ) {
             notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_RUNNING);
         }else{
-            opponentAttacks();
+            playerHit();
             return;
         }
     }
 
-    public void opponentAttacks(){
+    public void playerHit(){
         if( currentOpponent == null ){
             return;
         }
@@ -71,8 +69,20 @@ public class BattleState extends BattleSubject {
         notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_HIT_DAMAGE);
 
         Gdx.app.debug(TAG, "PLayer lost health");
-
-        notify(currentOpponent, BattleObserver.BattleEvent.OPPONENT_TURN_DONE);
     }
 
+    public void answeredCorrectly(String answeredLetter){
+        notify(answeredLetter, BattleObserver.BattleEvent.LETTER_ANSWERED_CORRECTLY);
+    }
+
+
+    public void answeredIncorrectly(String answeredLetter){
+        if( currentOpponent == null ){
+            return;
+        }
+
+        notify(currentOpponent, BattleObserver.BattleEvent.LETTER_ANSWERED_INCORRECTLY);
+
+        Gdx.app.debug(TAG, "PLayer lost health");
+    }
 }

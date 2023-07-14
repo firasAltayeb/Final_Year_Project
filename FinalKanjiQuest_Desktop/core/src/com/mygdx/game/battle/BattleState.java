@@ -2,6 +2,8 @@ package com.mygdx.game.battle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.game.japanese.KanaLettersFactory;
+import com.mygdx.game.japanese.LetterLvlCounter;
 
 public class BattleState extends BattleSubject {
 
@@ -35,10 +37,18 @@ public class BattleState extends BattleSubject {
 
     public void setCurrentOpponent(){
         Gdx.app.debug(TAG, " Entered BATTLE ZONE: " + currentZoneLevel);
-        String letterToAnswer = MonsterFactory.getInstance().getRandomMonster(currentZoneLevel);
-        if (letterToAnswer == null) return;
-        this.currentOpponent = letterToAnswer;
-        notify(letterToAnswer, BattleObserver.BattleEvent.KANJI_ADDED);
+        if(LetterLvlCounter.areAllHiraganaMemorised() == false){
+            int randomVal = MathUtils.random(0,106);
+            String letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getHiraganaEquivalent();
+            if (letterToAnswer == null) return;
+            this.currentOpponent = letterToAnswer;
+            notify(letterToAnswer, BattleObserver.BattleEvent.HIRAGANA_ADDED);
+        } else {
+            String letterToAnswer = EncounterFactory.getInstance().getRandomMonster(currentZoneLevel);
+            if (letterToAnswer == null) return;
+            this.currentOpponent = letterToAnswer;
+            notify(letterToAnswer, BattleObserver.BattleEvent.KANJI_ADDED);
+        }
     }
 
     public void playerRuns(){
@@ -46,26 +56,32 @@ public class BattleState extends BattleSubject {
         if( chanceOfEscape > randomVal  ) {
             notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_RUNNING);
         }else{
-            answeredIncorrectly();
+            playerHit();
             return;
         }
     }
 
-    public void answeredCorrectly(){
-        if( currentOpponent == null ){
-            return;
-        }
-
-        notify(currentOpponent, BattleObserver.BattleEvent.OPPONENT_DEFEATED);
-
-    }
-
-    public void answeredIncorrectly(){
+    public void playerHit(){
         if( currentOpponent == null ){
             return;
         }
 
         notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_HIT_DAMAGE);
+
+        Gdx.app.debug(TAG, "PLayer lost health");
+    }
+
+    public void answeredCorrectly(String answeredLetter){
+        notify(answeredLetter, BattleObserver.BattleEvent.LETTER_ANSWERED_CORRECTLY);
+    }
+
+
+    public void answeredIncorrectly(String answeredLetter){
+        if( currentOpponent == null ){
+            return;
+        }
+
+        notify(currentOpponent, BattleObserver.BattleEvent.LETTER_ANSWERED_INCORRECTLY);
 
         Gdx.app.debug(TAG, "PLayer lost health");
     }

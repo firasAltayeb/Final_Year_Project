@@ -40,9 +40,6 @@ public class KanjiLettersFactory {
 
     public KanjiLetter getKanjiLetter(String kanjiNameID){
         KanjiLetter kanjiLetter = new KanjiLetter(kanjiLettersTable.get(kanjiNameID));
-        kanjiLetter.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_KANJI_TEXTUREATLAS.
-                findRegion(kanjiLetter.getKanjiNameID())));
-        kanjiLetter.setScaling(Scaling.none);
         return kanjiLetter;
     }
 

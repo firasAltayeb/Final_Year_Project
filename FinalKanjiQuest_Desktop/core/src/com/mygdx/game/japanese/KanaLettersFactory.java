@@ -43,7 +43,7 @@ public class KanaLettersFactory {
 
     public KanaLetter getHiraganaLetter(String hiraganaNameID){
         KanaLetter kanaLetter = new KanaLetter(hiraganaLettersTable.get(hiraganaNameID));
-        kanaLetter.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.
+        kanaLetter.setDrawable(new TextureRegionDrawable(Utility.LARGE_HIRAGANA_TEXTUREATLAS.
                 findRegion(kanaLetter.getHiraganaEquivalent())));
         kanaLetter.setScaling(Scaling.none);
         return kanaLetter;
@@ -51,7 +51,7 @@ public class KanaLettersFactory {
 
     public KanaLetter getKatakanaLetter(String katakanaNameID){
         KanaLetter kanaLetter = new KanaLetter(hiraganaLettersTable.get(katakanaNameID));
-        kanaLetter.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_KATAKANA_TEXTUREATLAS.
+        kanaLetter.setDrawable(new TextureRegionDrawable(Utility.LARGE_KATAKANA_TEXTUREATLAS.
                 findRegion(kanaLetter.getKatakanaEquivalent())));
         kanaLetter.setScaling(Scaling.none);
         return kanaLetter;

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class KanjiUI extends Window{
 
-    private final static String TAG = ProgressUI.class.getSimpleName();
+    private final static String TAG = KanjiUI.class.getSimpleName();
 
     Table table;
     Table innerTable;
@@ -104,7 +104,7 @@ public class KanjiUI extends Window{
 
             KanjiLetter kanjiLetter = kanjiLettersList.get(i);
 
-            Gdx.app.log(TAG, "kanjiLetter.getKanjiNameID() is " + kanjiLetter.getKanjiNameID());
+            //Gdx.app.log(TAG, "kanjiLetter.getKanjiNameID() is " + kanjiLetter.getKanjiNameID());
 
             equivalent = new Image(Utility.LARGE_KANJI_TEXTUREATLAS.findRegion(kanjiLetter.getKanjiNameID()));
             innerTable.add(equivalent).left();
@@ -117,7 +117,7 @@ public class KanjiUI extends Window{
             for (int j = 0; j < temp.length(); j++) {
                 if (temp.charAt(j) == '.') {
                     try {
-                        Gdx.app.log(TAG, "j is: " + j);
+                        //Gdx.app.log(TAG, "j is: " + j);
                         indexOfFullStop = temp.indexOf('.', j + 1);
                         split = temp.substring(j + 1, indexOfFullStop);
                         equivalent = new Image(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(split));

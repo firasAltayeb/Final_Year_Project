@@ -41,22 +41,23 @@ public class BattleUI extends Window implements BattleObserver {
     private Table topTable;
     private Table bottomTable;
     private Image imageToAnswer;
-    private Table innerTableOne;
 
-    private float padBetweenInnerTables;
+    private Table innerTableOne;
     private Table innerTableTwo;
     private Table innerTableThree;
     private Table innerTableFour;
+    private float padBetweenTables;
 
     private String firstInnerTableEquivalent;
     private String secondInnerTableEquivalent;
     private String thirdInnerTableEquivalent;
     private String fourthInnerTableEquivalent;
     
-    private Image equivalentOptionOne;
-    private Image equivalentOptionTwo;
-    private Image equivalentOptionThere;
-    private Image equivalentOptionFour;
+    private KanaLetter equivalentImageOptionOne;
+    private KanaLetter equivalentImageOptionTwo;
+    private KanaLetter equivalentImageOptionThree;
+    private KanaLetter equivalentImageOptionFour;
+    private float padBetweenImages;
 
     private TextButton runButton = null;
 
@@ -71,28 +72,26 @@ public class BattleUI extends Window implements BattleObserver {
         kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
         kanjiLettersList = KanjiLettersFactory.getInstance().getKanjiLettersList();
 
-        padBetweenInnerTables = this.getWidth()/5;
+        imageToAnswer = new Image();
+
+        padBetweenTables = this.getWidth()/5;
         innerTableOne = new Table();
         innerTableTwo = new Table();
         innerTableThree = new Table();
         innerTableFour = new Table();
 
-        imageToAnswer = new Image();
-        equivalentOptionOne = new Image();
-        equivalentOptionTwo = new Image();
-        equivalentOptionThere = new Image();
-        equivalentOptionFour = new Image();
+
+        padBetweenImages = this.getWidth()/3;
+        equivalentImageOptionOne = new KanaLetter();
+        equivalentImageOptionTwo = new KanaLetter();
+        equivalentImageOptionThree = new KanaLetter();
+        equivalentImageOptionFour = new KanaLetter();
 
         topTable = new Table();
         topTable.add(imageToAnswer).padRight(this.getWidth()/2);
         topTable.add(hiro).padLeft(this.getWidth()/2);
 
         bottomTable = new Table();
-        bottomTable.add(equivalentOptionOne);
-        bottomTable.add(equivalentOptionTwo);
-        bottomTable.add(equivalentOptionThere);
-        bottomTable.add(equivalentOptionFour);
-
         runButton = new TextButton("Run", Utility.GUI_SKINS);
 
         this.add(topTable).expand().fill().padTop(this.getHeight()/1.5f);;
@@ -139,12 +138,14 @@ public class BattleUI extends Window implements BattleObserver {
     }
 
     @Override
-    public void onNotify(String stringToAnswer, BattleEvent event) {
+    public void onNotify(String letterToAnswer, BattleEvent event) {
+        int randomVal;
+        KanjiLetter tempKanji;
         switch(event){
             case KANJI_ADDED:
                 //question
-                Gdx.app.log(TAG, "imageToAnswer is " + stringToAnswer);
-                kanjiToAnswer = KanjiLettersFactory.getInstance().getKanjiLetter(stringToAnswer);
+                Gdx.app.log(TAG, "Kanji ToAnswer is " + letterToAnswer);
+                kanjiToAnswer = KanjiLettersFactory.getInstance().getKanjiLetter(letterToAnswer);
                 this.imageToAnswer.setDrawable(new TextureRegionDrawable(Utility.LARGE_KANJI_TEXTUREATLAS.findRegion(kanjiToAnswer.getKanjiNameID())));
 
                 bottomTable.clear();
@@ -154,12 +155,9 @@ public class BattleUI extends Window implements BattleObserver {
                 innerTableFour.clear();
 
                 //answer options
-                int randomVal;
-                KanjiLetter tempKanji;
                 Image equivalent;
                 String splitPortion;
                 int indexOfFullStop;
-
                 firstInnerTableEquivalent = kanjiToAnswer.getHiraganaEquivalent();
                 for (int j = 0; j < firstInnerTableEquivalent.length(); j++) {
                     if (firstInnerTableEquivalent.charAt(j) == '.') {
@@ -225,8 +223,42 @@ public class BattleUI extends Window implements BattleObserver {
                     }
                 }
 
-                randomizeOrder();
-                addInnerTableListeners();
+                randomizeOrder(true);
+                addTableListeners();
+
+                break;
+            case HIRAGANA_ADDED:
+                bottomTable.clear();
+                equivalentImageOptionOne.clear();
+                equivalentImageOptionTwo.clear();
+                equivalentImageOptionThree.clear();
+                equivalentImageOptionFour.clear();
+
+                Gdx.app.log(TAG, "Kana ToAnswer is " + letterToAnswer);
+                kanaToAnswer = KanaLettersFactory.getInstance().getHiraganaLetter(letterToAnswer);
+                imageToAnswer.setDrawable(new TextureRegionDrawable(Utility.LARGE_HIRAGANA_TEXTUREATLAS.findRegion(kanaToAnswer.getHiraganaEquivalent())));
+
+                equivalentImageOptionOne = kanaToAnswer;
+                equivalentImageOptionOne.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionOne.getRomajiEquivalent())));
+                Gdx.app.log(TAG, "equivalentImageOptionOne is " + equivalentImageOptionOne.getRomajiEquivalent());
+
+                randomVal = MathUtils.random(0,107);
+                equivalentImageOptionTwo = kanaLettersList.get(randomVal);
+                equivalentImageOptionTwo.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionTwo.getRomajiEquivalent())));
+                Gdx.app.log(TAG, "equivalentImageOptionTwo is " + equivalentImageOptionTwo.getRomajiEquivalent());
+
+                randomVal = MathUtils.random(0,107);
+                equivalentImageOptionThree = kanaLettersList.get(randomVal);
+                equivalentImageOptionThree.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionThree.getRomajiEquivalent())));
+                Gdx.app.log(TAG, "equivalentImageOptionTwo is " + equivalentImageOptionThree.getRomajiEquivalent());
+
+                randomVal = MathUtils.random(0,107);
+                equivalentImageOptionFour = kanaLettersList.get(randomVal);
+                equivalentImageOptionFour.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionFour.getRomajiEquivalent())));
+                Gdx.app.log(TAG, "equivalentImageOptionTwo is " + equivalentImageOptionFour.getRomajiEquivalent());
+
+                randomizeOrder(false);
+                addHiraganaImageListeners();
 
                 break;
             default:
@@ -241,48 +273,76 @@ public class BattleUI extends Window implements BattleObserver {
         super.act(delta);
     }
 
-    public void randomizeOrder(){
+    public void randomizeOrder(boolean tables){
         int randomVal = MathUtils.random(0,3);
         switch (randomVal){
             case 0:
-                bottomTable.add(innerTableOne).padLeft(padBetweenInnerTables).padRight(padBetweenInnerTables);
-                bottomTable.add(innerTableTwo).padLeft(padBetweenInnerTables);
-                bottomTable.add(innerTableThree).padLeft(padBetweenInnerTables);
-                bottomTable.add(innerTableFour).padLeft(padBetweenInnerTables).padRight(padBetweenInnerTables);
+                if(tables) {
+                    bottomTable.add(innerTableOne);
+                    bottomTable.add(innerTableTwo).padLeft(padBetweenTables);
+                    bottomTable.add(innerTableThree).padLeft(padBetweenTables);
+                    bottomTable.add(innerTableFour).padLeft(padBetweenTables);
+                } else {
+                    bottomTable.add(equivalentImageOptionOne);
+                    bottomTable.add(equivalentImageOptionTwo).padLeft(padBetweenImages);
+                    bottomTable.add(equivalentImageOptionThree).padLeft(padBetweenImages);
+                    bottomTable.add(equivalentImageOptionFour).padLeft(padBetweenImages);
+                }
                 break;
             case 1:
-                bottomTable.add(innerTableTwo).padLeft(padBetweenInnerTables).padRight(padBetweenInnerTables);
-                bottomTable.add(innerTableOne).padLeft(padBetweenInnerTables);
-                bottomTable.add(innerTableThree).padLeft(padBetweenInnerTables);
-                bottomTable.add(innerTableFour).padLeft(padBetweenInnerTables).padRight(padBetweenInnerTables);
+                if(tables) {
+                    bottomTable.add(innerTableTwo);
+                    bottomTable.add(innerTableOne).padLeft(padBetweenTables);
+                    bottomTable.add(innerTableThree).padLeft(padBetweenTables);
+                    bottomTable.add(innerTableFour).padLeft(padBetweenTables).padRight(padBetweenTables);
+                } else {
+                    bottomTable.add(equivalentImageOptionTwo);
+                    bottomTable.add(equivalentImageOptionOne).padLeft(padBetweenImages);
+                    bottomTable.add(equivalentImageOptionThree).padLeft(padBetweenImages);
+                    bottomTable.add(equivalentImageOptionFour).padLeft(padBetweenImages);
+                }
                 break;
             case 2:
-                bottomTable.add(innerTableTwo).padLeft(padBetweenInnerTables).padRight(padBetweenInnerTables);
-                bottomTable.add(innerTableThree).padLeft(padBetweenInnerTables);
-                bottomTable.add(innerTableOne).padLeft(padBetweenInnerTables);
-                bottomTable.add(innerTableFour).padLeft(padBetweenInnerTables).padRight(padBetweenInnerTables);
+                if(tables) {
+                    bottomTable.add(innerTableTwo);
+                    bottomTable.add(innerTableThree).padLeft(padBetweenTables);
+                    bottomTable.add(innerTableOne).padLeft(padBetweenTables);
+                    bottomTable.add(innerTableFour).padLeft(padBetweenTables);
+                } else {
+                    bottomTable.add(equivalentImageOptionTwo);
+                    bottomTable.add(equivalentImageOptionThree).padLeft(padBetweenImages);
+                    bottomTable.add(equivalentImageOptionOne).padLeft(padBetweenImages);
+                    bottomTable.add(equivalentImageOptionFour).padLeft(padBetweenImages);
+                }
                 break;
             case 3:
-                bottomTable.add(innerTableTwo).padLeft(padBetweenInnerTables).padRight(padBetweenInnerTables);
-                bottomTable.add(innerTableThree).padLeft(padBetweenInnerTables);
-                bottomTable.add(innerTableFour).padLeft(padBetweenInnerTables);
-                bottomTable.add(innerTableOne).padLeft(padBetweenInnerTables).padRight(padBetweenInnerTables);
+                if(tables) {
+                    bottomTable.add(innerTableTwo);
+                    bottomTable.add(innerTableThree).padLeft(padBetweenTables);
+                    bottomTable.add(innerTableFour).padLeft(padBetweenTables);
+                    bottomTable.add(innerTableOne).padLeft(padBetweenTables);
+                }else {
+                    bottomTable.add(equivalentImageOptionTwo);
+                    bottomTable.add(equivalentImageOptionThree).padLeft(padBetweenImages);
+                    bottomTable.add(equivalentImageOptionFour).padLeft(padBetweenImages);
+                    bottomTable.add(equivalentImageOptionOne).padLeft(padBetweenImages);
+                }
                 break;
             default: break;
         }
 
     }
 
-    public void addInnerTableListeners(){
+    public void addTableListeners(){
         innerTableOne.addListener(
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         Gdx.app.log(TAG, firstInnerTableEquivalent);
                         if(firstInnerTableEquivalent.equalsIgnoreCase(kanjiToAnswer.getHiraganaEquivalent()))
-                            battleState.answeredCorrectly();
+                            battleState.answeredCorrectly(kanjiToAnswer.getKanjiNameID());
                         else {
-                            battleState.answeredIncorrectly();
+                            battleState.answeredIncorrectly(kanjiToAnswer.getKanjiNameID());
                         }
 
                     }
@@ -294,9 +354,9 @@ public class BattleUI extends Window implements BattleObserver {
                     public void clicked(InputEvent event, float x, float y) {
                         Gdx.app.log(TAG, secondInnerTableEquivalent);
                         if(secondInnerTableEquivalent.equalsIgnoreCase(kanjiToAnswer.getHiraganaEquivalent()))
-                            battleState.answeredCorrectly();
+                            battleState.answeredCorrectly(kanjiToAnswer.getKanjiNameID());
                         else {
-                            battleState.answeredIncorrectly();
+                            battleState.answeredIncorrectly(kanjiToAnswer.getKanjiNameID());
                         }
                     }
                 }
@@ -307,9 +367,9 @@ public class BattleUI extends Window implements BattleObserver {
                     public void clicked(InputEvent event, float x, float y) {
                         Gdx.app.log(TAG, thirdInnerTableEquivalent);
                         if(thirdInnerTableEquivalent.equalsIgnoreCase(kanjiToAnswer.getHiraganaEquivalent()))
-                            battleState.answeredCorrectly();
+                            battleState.answeredCorrectly(kanjiToAnswer.getKanjiNameID());
                         else {
-                            battleState.answeredIncorrectly();
+                            battleState.answeredIncorrectly(kanjiToAnswer.getKanjiNameID());
                         }
                     }
                 }
@@ -320,9 +380,66 @@ public class BattleUI extends Window implements BattleObserver {
                     public void clicked(InputEvent event, float x, float y) {
                         Gdx.app.log(TAG, fourthInnerTableEquivalent);
                         if(fourthInnerTableEquivalent.equalsIgnoreCase(kanjiToAnswer.getHiraganaEquivalent()))
-                            battleState.answeredCorrectly();
+                            battleState.answeredCorrectly(kanjiToAnswer.getKanjiNameID());
                         else {
-                            battleState.answeredIncorrectly();
+                            battleState.answeredIncorrectly(kanjiToAnswer.getKanjiNameID());
+                        }
+                    }
+                }
+        );
+
+    }
+
+    public void addHiraganaImageListeners(){
+        equivalentImageOptionOne.addListener(
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Gdx.app.log(TAG, equivalentImageOptionOne.getHiraganaEquivalent());
+                        if(equivalentImageOptionOne.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
+                            battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        else {
+                            battleState.answeredIncorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        }
+
+                    }
+                }
+        );
+        equivalentImageOptionTwo.addListener(
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Gdx.app.log(TAG, equivalentImageOptionTwo.getHiraganaEquivalent());
+                        if(equivalentImageOptionTwo.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
+                            battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        else {
+                            battleState.answeredIncorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        }
+                    }
+                }
+        );
+        equivalentImageOptionThree.addListener(
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Gdx.app.log(TAG, equivalentImageOptionThree.getHiraganaEquivalent());
+                        if(equivalentImageOptionThree.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
+                            battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        else {
+                            battleState.answeredIncorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        }
+                    }
+                }
+        );
+        equivalentImageOptionFour.addListener(
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Gdx.app.log(TAG, equivalentImageOptionFour.getHiraganaEquivalent());
+                        if(equivalentImageOptionFour.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
+                            battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        else {
+                            battleState.answeredIncorrectly(kanaToAnswer.getHiraganaEquivalent());
                         }
                     }
                 }

@@ -16,16 +16,16 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.battle.BattleObserver;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.components.ComponentObserver;
-import com.mygdx.game.inventory.InventoryItem;
-import com.mygdx.game.inventory.InventoryItem.ItemNameID;
-import com.mygdx.game.inventory.InventoryItemLocation;
 import com.mygdx.game.japanese.LetterLvlCounter;
-import com.mygdx.game.profile.ProfileManager;
-import com.mygdx.game.profile.ProfileObserver;
-import com.mygdx.game.screens.MainGameScreen;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.OnScreenController;
 import com.mygdx.game.tools.Utility;
+import com.mygdx.game.inventory.InventoryItem;
+import com.mygdx.game.inventory.InventoryItemLocation;
+import com.mygdx.game.profile.ProfileManager;
+import com.mygdx.game.profile.ProfileObserver;
+import com.mygdx.game.screens.MainGameScreen;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 
 public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, ProgressObserver, BattleObserver {
 
@@ -104,8 +104,9 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         progressUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         progressUI.setVisible(false);
         progressUI.setMovable(false);
+        progressUI.updateTable();
 
-        //Gdx.app.debug(TAG, "All hiragana memorised is " + LetterLvlCounter.isAllHiraganaMemorised());
+        //Gdx.app.debug(TAG, "All hiragana memorised is " + LetterLvlCounter.areAllHiraganaMemorised());
 
         inventoryUI = new InventoryUI(menuItemWindowWidth, menuItemWindowHeight);
         inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
@@ -306,6 +307,7 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         }
     }
 
+
     @Override
     public void onNotify(String value, ComponentEvent event) {
         switch(event) {
@@ -383,6 +385,7 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
 
     @Override
     public void pause() {
+
     }
 
     @Override
@@ -405,10 +408,10 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
     public void onNotify(int value, StatusEvent event) {
         switch(event) {
             case UPDATED_HP:
-                //ProfileManager.getInstance().setProperty("currentPlayerHP", progressUI.getHPValue());
+                ProfileManager.getInstance().setProperty("currentPlayerHP", progressUI.getHPValue());
                 break;
             case UPDATED_MAX_HP:
-                //ProfileManager.getInstance().setProperty("currentPlayerHPMax", progressUI.getHPValueMax());
+                ProfileManager.getInstance().setProperty("currentPlayerHPMax", progressUI.getHPValueMax());
                 break;
             default:
                 break;
@@ -432,11 +435,11 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                     showHearts(progressUI.getHPValue());
                 }
                 else if(InventoryItem.doesIncreaseHiraganaLvl(type)){
-                    LetterLvlCounter.setAllHiraganaMemorisedToTrue();
+                    LetterLvlCounter.allHiraganaMemorised();
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseHiraganaLvl(type)){
-                    LetterLvlCounter.setAllHiraganaMemorisedToFalse();
+                    LetterLvlCounter.allHiraganaNotMemorised();
                     progressUI.updateTable();
                 }
 
@@ -448,18 +451,35 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
     }
 
     @Override
-    public void onNotify(String enemyMonster, BattleEvent event) {
+    public void onNotify(String answeredLetter, BattleEvent event) {
+        int hpVal;
         switch (event) {
-            case OPPONENT_DEFEATED:
+            case LETTER_ANSWERED_CORRECTLY:
+                Gdx.app.debug(TAG, "areAllHiraganaMemorised: " + LetterLvlCounter.areAllHiraganaMemorised());
+                LetterLvlCounter.increaseLvl(answeredLetter, 1);
+                progressUI.updateTable();
+
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
                 battleUI.setVisible(false);
+                break;
+            case LETTER_ANSWERED_INCORRECTLY:
+                LetterLvlCounter.decreaseLvl(answeredLetter, 1);
+                progressUI.updateTable();
+
+                hpVal = progressUI.getHPValue() - 1;
+                progressUI.setHPValue(hpVal);
+                showHearts(hpVal);
+                if( hpVal <= 0 ){
+                    battleUI.setVisible(false);
+                    MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
+                }
                 break;
             case PLAYER_RUNNING:
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
                 battleUI.setVisible(false);
                 break;
             case PLAYER_HIT_DAMAGE:
-                int hpVal = progressUI.getHPValue() - 1;
+                hpVal = progressUI.getHPValue() - 1;
                 progressUI.setHPValue(hpVal);
                 showHearts(hpVal);
                 if( hpVal <= 0 ){

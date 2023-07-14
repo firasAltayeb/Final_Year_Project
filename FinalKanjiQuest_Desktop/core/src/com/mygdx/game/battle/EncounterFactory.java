@@ -2,26 +2,24 @@ package com.mygdx.game.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.tools.Entity;
-import com.mygdx.game.tools.EntityConfig;
 
 import java.util.Hashtable;
 
-public class MonsterFactory {
+public class EncounterFactory {
 
-    private static MonsterFactory _instance = null;
+    private static EncounterFactory _instance = null;
     private Hashtable<String,Array<String> > monsterZones;
 
-    public static MonsterFactory getInstance() {
+    public static EncounterFactory getInstance() {
         if (_instance == null) {
-            _instance = new MonsterFactory();
+            _instance = new EncounterFactory();
         }
 
         return _instance;
     }
 
-    private MonsterFactory(){
-        monsterZones = MonsterZone.getMonsterZones("json_scripts/monster_zones.json");
+    private EncounterFactory(){
+        monsterZones = EncounterZone.getMonsterZones("json_scripts/encounter_zones.json");
     }
 
 

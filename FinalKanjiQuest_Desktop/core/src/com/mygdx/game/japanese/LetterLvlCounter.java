@@ -1,11 +1,12 @@
 package com.mygdx.game.japanese;
 
 
-import java.util.ArrayList;
+import com.badlogic.gdx.math.MathUtils;
+
 import java.util.Hashtable;
 
 /**
- * Created by firasAltayeb on 07/04/2017.
+ * Created by firasAltayeb on 17/14/2117.
  */
 
 public class LetterLvlCounter {
@@ -145,14 +146,31 @@ public class LetterLvlCounter {
 
          katakanaByaLvl = 1,    katakanaPyaLvl = 1,
          katakanaByuLvl = 1,    katakanaPyuLvl = 1,
-         katakanaByoLvl = 1,    katakanaPyoLvl = 1;
+         katakanaByoLvl = 1,    katakanaPyoLvl = 1,
+
+             kanjiHaLvl = 1,      kanjiHanaLvl = 1,
+             kanjiKiLvl = 1,      kanjiMoriLvl = 1,
+          kanjiMushiLvl = 1,      kanjiIshiLvl = 1,
+           kanjiKazeLvl = 1,     kanjiTsuchiLvl = 1,
+           kanjiUchiLvl = 1,      kanjiYamaLvl = 1,
+            kanjiUmiLvl = 1,    kanjiSakanaLvl = 1,
+           kanjiMizuLvl = 1,       kanjiKaiLvl = 1,
+            kanjiIkeLvl = 1,      kanjiYukiLvl = 1,
+          kanjiKooriLvl = 1,      kanjiKawaLvl = 1,
+        kanjiHayashiLvl = 1,      kanjiFuyuLvl = 1,
+             kanjiToLvl = 1,       kanjiMonLvl = 1,
+           kanjiTeraLvl = 1,       kanjiAnaLvl = 1,
+           kanjiSotoLvl = 1,        kanjiKaLvl = 1,
+             kanjiHiLvl = 1,       kanjiChiLvl = 1,
+            kanjiAkaLvl = 1,    kanjiHikariLvl = 1;
 
 
      private static boolean allHiraganaMemorised = false;
      private static boolean allKatakanaMemorised = false;
+     private static boolean allKanjiMemorised = false;
      private static Hashtable<String, Integer> hiraganaLvlTable;
      private static Hashtable<String, Integer> katakanaLvlTable;
-
+     private static Hashtable<String, Integer> kanjiLvlTable;
 
      public static Hashtable<String, Integer> getHiraganaLvlTable(){
 
@@ -388,444 +406,542 @@ public class LetterLvlCounter {
           return katakanaLvlTable;
      }
 
-     public static void increaseLvl(String letter){
+     public static Hashtable<String, Integer> getKanjiLvlTable() {
+
+         kanjiLvlTable = new Hashtable<String, Integer>();
+
+         kanjiLvlTable.put("kanjiHa",       kanjiHaLvl);
+         kanjiLvlTable.put("kanjiKi",       kanjiKiLvl);
+         kanjiLvlTable.put("kanjiMushi",    kanjiMushiLvl);
+         kanjiLvlTable.put("kanjiKaze",     kanjiKazeLvl);
+         kanjiLvlTable.put("kanjiTsuchi", kanjiTsuchiLvl);
+         kanjiLvlTable.put("kanjiUchi",     kanjiUchiLvl);
+         kanjiLvlTable.put("kanjiUmi",      kanjiUmiLvl);
+         kanjiLvlTable.put("kanjiMizu",     kanjiMizuLvl);
+         kanjiLvlTable.put("kanjiIke",      kanjiIkeLvl);
+         kanjiLvlTable.put("kanjiKoori",    kanjiKooriLvl);
+         kanjiLvlTable.put("kanjiHayashi", kanjiHayashiLvl);
+         kanjiLvlTable.put("kanjiTo",       kanjiToLvl);
+         kanjiLvlTable.put("kanjiTera",     kanjiTeraLvl);
+         kanjiLvlTable.put("kanjiSoto",     kanjiSotoLvl);
+         kanjiLvlTable.put("kanjiHi",       kanjiHiLvl);
+         kanjiLvlTable.put("kanjiAka",      kanjiAkaLvl);
+         kanjiLvlTable.put("kanjiHana",     kanjiHanaLvl);
+         kanjiLvlTable.put("kanjiMori",     kanjiMoriLvl);
+         kanjiLvlTable.put("kanjiIshi",     kanjiIshiLvl);
+         kanjiLvlTable.put("kanjiYama",     kanjiYamaLvl);
+         kanjiLvlTable.put("kanjiSakana",  kanjiSakanaLvl);
+         kanjiLvlTable.put("kanjiKai",      kanjiKaiLvl);
+         kanjiLvlTable.put("kanjiYuki",     kanjiYukiLvl);
+         kanjiLvlTable.put("kanjiKawa",     kanjiKawaLvl);
+         kanjiLvlTable.put("kanjiFuyu",     kanjiFuyuLvl);
+         kanjiLvlTable.put("kanjiMon",      kanjiMonLvl);
+         kanjiLvlTable.put("kanjiAna",      kanjiAnaLvl);
+         kanjiLvlTable.put("kanjiKa",       kanjiKaLvl);
+         kanjiLvlTable.put("kanjiChi",      kanjiChiLvl);
+         kanjiLvlTable.put("kanjiHikari",  kanjiHikariLvl);
+
+          return kanjiLvlTable;
+     }
+
+     public static void increaseLvl(String letter, int addOn){
           switch (letter){
-               case "hiraganaA":       hiraganaALvl++;    break;
-               case "hiraganaI":       hiraganaILvl++;    break;
-               case "hiraganaU":       hiraganaULvl++;    break;
-               case "hiraganaE":       hiraganaELvl++;    break;
-               case "hiraganaO":       hiraganaOLvl++;    break;
-               case "hiraganaKa":      hiraganaKaLvl++;     break;
-               case "hiraganaKi":      hiraganaKiLvl++;     break;
-               case "hiraganaKu":      hiraganaKuLvl++;     break;
-               case "hiraganaKe":      hiraganaKeLvl++;     break;
-               case "hiraganaKo":      hiraganaKoLvl++;     break;
-               case "hiraganaSa":      hiraganaSaLvl++;     break;
-               case "hiraganaShi":     hiraganaShiLvl++;    break;
-               case "hiraganaSu":      hiraganaSuLvl++;     break;
-               case "hiraganaSe":      hiraganaSeLvl++;     break;
-               case "hiraganaSo":      hiraganaSoLvl++;     break;
-               case "hiraganaTa":      hiraganaTaLvl++;     break;
-               case "hiraganaChi":     hiraganaChiLvl++;    break;
-               case "hiraganaTsu":     hiraganaTsuLvl++;    break;
-               case "hiraganaTe":      hiraganaTeLvl++;     break;
-               case "hiraganaTo":      hiraganaToLvl++;     break;
-               case "hiraganaNa":      hiraganaNaLvl++;     break;
-               case "hiraganaNi":      hiraganaNiLvl++;     break;
-               case "hiraganaNu":      hiraganaNuLvl++;     break;
-               case "hiraganaNe":      hiraganaNeLvl++;     break;
-               case "hiraganaNo":      hiraganaNoLvl++;     break;
-               case "hiraganaHa":      hiraganaHaLvl++;     break;
-               case "hiraganaHi":      hiraganaHiLvl++;     break;
-               case "hiraganaHu":      hiraganaHuLvl++;     break;
-               case "hiraganaHe":      hiraganaHeLvl++;     break;
-               case "hiraganaHo":      hiraganaHoLvl++;     break;
-               case "hiraganaMa":      hiraganaMaLvl++;     break;
-               case "hiraganaMi":      hiraganaMiLvl++;     break;
-               case "hiraganaMu":      hiraganaMuLvl++;     break;
-               case "hiraganaMe":      hiraganaMeLvl++;     break;
-               case "hiraganaMo":      hiraganaMoLvl++;     break;
-               case "hiraganaRa":      hiraganaRaLvl++;     break;
-               case "hiraganaRi":      hiraganaRiLvl++;     break;
-               case "hiraganaRu":      hiraganaRuLvl++;     break;
-               case "hiraganaRe":      hiraganaReLvl++;     break;
-               case "hiraganaRo":      hiraganaRoLvl++;     break;
-               case "hiraganaYa":      hiraganaYaLvl++;     break;
-               case "hiraganaYu":      hiraganaYuLvl++;     break;
-               case "hiraganaYo":      hiraganaYoLvl++;     break;
-               case "hiraganaWa":      hiraganaWaLvl++;     break;
-               case "hiraganaWo":      hiraganaWoLvl++;     break;
-               case "hiraganaN":       hiraganaNLvl++;      break;
-               case "hiraganaGa":      hiraganaGaLvl++;     break;
-               case "hiraganaGi":      hiraganaGiLvl++;     break;
-               case "hiraganaGu":      hiraganaGuLvl++;     break;
-               case "hiraganaGe":      hiraganaGeLvl++;     break;
-               case "hiraganaGo":      hiraganaGoLvl++;     break;
-               case "hiraganaZa":      hiraganaZaLvl++;     break;
-               case "hiraganaJi":      hiraganaJiLvl++;     break;
-               case "hiraganaZu":      hiraganaZuLvl++;     break;
-               case "hiraganaZe":      hiraganaZeLvl++;     break;
-               case "hiraganaZo":      hiraganaZoLvl++;     break;
-               case "hiraganaDa":      hiraganaDaLvl++;     break;
-               case "hiraganaDi":      hiraganaDiLvl++;     break;
-               case "hiraganaDu":      hiraganaDuLvl++;     break;
-               case "hiraganaDe":      hiraganaDeLvl++;     break;
-               case "hiraganaDo":      hiraganaDoLvl++;     break;
-               case "hiraganaBa":      hiraganaBaLvl++;     break;
-               case "hiraganaBi":      hiraganaBiLvl++;     break;
-               case "hiraganaBu":      hiraganaBuLvl++;     break;
-               case "hiraganaBe":      hiraganaBeLvl++;     break;
-               case "hiraganaBo":      hiraganaBoLvl++;     break;
-               case "hiraganaPa":      hiraganaPaLvl++;     break;
-               case "hiraganaPi":      hiraganaPiLvl++;     break;
-               case "hiraganaPu":      hiraganaPuLvl++;     break;
-               case "hiraganaPe":      hiraganaPeLvl++;     break;
-               case "hiraganaPo":      hiraganaPoLvl++;     break;
-               case "hiraganaKya":     hiraganaKyaLvl++;     break;
-               case "hiraganaKyu":     hiraganaKyuLvl++;     break;
-               case "hiraganaKyo":     hiraganaKyoLvl++;     break;
-               case "hiraganaSha":     hiraganaShaLvl++;     break;
-               case "hiraganaShu":     hiraganaShuLvl++;     break;
-               case "hiraganaSho":     hiraganaShoLvl++;     break;
-               case "hiraganaCha":     hiraganaChaLvl++;     break;
-               case "hiraganaChu":     hiraganaChuLvl++;     break;
-               case "hiraganaCho":     hiraganaChoLvl++;     break;
-               case "hiraganaHya":     hiraganaHyaLvl++;     break;
-               case "hiraganaHyu":     hiraganaHyuLvl++;     break;
-               case "hiraganaHyo":     hiraganaHyoLvl++;     break;
-               case "hiraganaNya":     hiraganaNyaLvl++;     break;
-               case "hiraganaNyu":     hiraganaNyuLvl++;     break;
-               case "hiraganaNyo":     hiraganaNyoLvl++;     break;
-               case "hiraganaMya":     hiraganaMyaLvl++;     break;
-               case "hiraganaMyu":     hiraganaMyuLvl++;     break;
-               case "hiraganaMyo":     hiraganaMyoLvl++;     break;
-               case "hiraganaRya":     hiraganaRyaLvl++;     break;
-               case "hiraganaRyu":     hiraganaRyuLvl++;     break;
-               case "hiraganaRyo":     hiraganaRyoLvl++;     break;
-               case "hiraganaGya":     hiraganaGyaLvl++;     break;
-               case "hiraganaGyu":     hiraganaGyuLvl++;     break;
-               case "hiraganaGyo":     hiraganaGyoLvl++;     break;
-               case "hiraganaJya":     hiraganaJyaLvl++;     break;
-               case "hiraganaJyu":     hiraganaJyuLvl++;     break;
-               case "hiraganaJyo":     hiraganaJyoLvl++;     break;
-               case "hiraganaDya":     hiraganaDyaLvl++;     break;
-               case "hiraganaDyu":     hiraganaDyuLvl++;     break;
-               case "hiraganaDyo":     hiraganaDyoLvl++;     break;
-               case "hiraganaBya":     hiraganaByaLvl++;     break;
-               case "hiraganaByu":     hiraganaByuLvl++;     break;
-               case "hiraganaByo":     hiraganaByoLvl++;     break;
-               case "hiraganaPya":     hiraganaPyaLvl++;     break;
-               case "hiraganaPyu":     hiraganaPyuLvl++;     break;
-               case "hiraganaPyo":     hiraganaPyoLvl++;     break;
-               case "katakanaA":       katakanaALvl++;    break;
-               case "katakanaI":       katakanaILvl++;    break;
-               case "katakanaU":       katakanaULvl++;    break;
-               case "katakanaE":       katakanaELvl++;    break;
-               case "katakanaO":       katakanaOLvl++;    break;
-               case "katakanaKa":      katakanaKaLvl++;     break;
-               case "katakanaKi":      katakanaKiLvl++;     break;
-               case "katakanaKu":      katakanaKuLvl++;     break;
-               case "katakanaKe":      katakanaKeLvl++;     break;
-               case "katakanaKo":      katakanaKoLvl++;     break;
-               case "katakanaSa":      katakanaSaLvl++;     break;
-               case "katakanaShi":     katakanaShiLvl++;    break;
-               case "katakanaSu":      katakanaSuLvl++;     break;
-               case "katakanaSe":      katakanaSeLvl++;     break;
-               case "katakanaSo":      katakanaSoLvl++;     break;
-               case "katakanaTa":      katakanaTaLvl++;     break;
-               case "katakanaChi":     katakanaChiLvl++;    break;
-               case "katakanaTsu":     katakanaTsuLvl++;    break;
-               case "katakanaTe":      katakanaTeLvl++;     break;
-               case "katakanaTo":      katakanaToLvl++;     break;
-               case "katakanaNa":      katakanaNaLvl++;     break;
-               case "katakanaNi":      katakanaNiLvl++;     break;
-               case "katakanaNu":      katakanaNuLvl++;     break;
-               case "katakanaNe":      katakanaNeLvl++;     break;
-               case "katakanaNo":      katakanaNoLvl++;     break;
-               case "katakanaHa":      katakanaHaLvl++;     break;
-               case "katakanaHi":      katakanaHiLvl++;     break;
-               case "katakanaHu":      katakanaHuLvl++;     break;
-               case "katakanaHe":      katakanaHeLvl++;     break;
-               case "katakanaHo":      katakanaHoLvl++;     break;
-               case "katakanaMa":      katakanaMaLvl++;     break;
-               case "katakanaMi":      katakanaMiLvl++;     break;
-               case "katakanaMu":      katakanaMuLvl++;     break;
-               case "katakanaMe":      katakanaMeLvl++;     break;
-               case "katakanaMo":      katakanaMoLvl++;     break;
-               case "katakanaRa":      katakanaRaLvl++;     break;
-               case "katakanaRi":      katakanaRiLvl++;     break;
-               case "katakanaRu":      katakanaRuLvl++;     break;
-               case "katakanaRe":      katakanaReLvl++;     break;
-               case "katakanaRo":      katakanaRoLvl++;     break;
-               case "katakanaYa":      katakanaYaLvl++;     break;
-               case "katakanaYu":      katakanaYuLvl++;     break;
-               case "katakanaYo":      katakanaYoLvl++;     break;
-               case "katakanaWa":      katakanaWaLvl++;     break;
-               case "katakanaWo":      katakanaWoLvl++;     break;
-               case "katakanaN":       katakanaNLvl++;      break;
-               case "katakanaGa":      katakanaGaLvl++;     break;
-               case "katakanaGi":      katakanaGiLvl++;     break;
-               case "katakanaGu":      katakanaGuLvl++;     break;
-               case "katakanaGe":      katakanaGeLvl++;     break;
-               case "katakanaGo":      katakanaGoLvl++;     break;
-               case "katakanaZa":      katakanaZaLvl++;     break;
-               case "katakanaJi":      katakanaJiLvl++;     break;
-               case "katakanaZu":      katakanaZuLvl++;     break;
-               case "katakanaZe":      katakanaZeLvl++;     break;
-               case "katakanaZo":      katakanaZoLvl++;     break;
-               case "katakanaDa":      katakanaDaLvl++;     break;
-               case "katakanaDi":      katakanaDiLvl++;     break;
-               case "katakanaDu":      katakanaDuLvl++;     break;
-               case "katakanaDe":      katakanaDeLvl++;     break;
-               case "katakanaDo":      katakanaDoLvl++;     break;
-               case "katakanaBa":      katakanaBaLvl++;     break;
-               case "katakanaBi":      katakanaBiLvl++;     break;
-               case "katakanaBu":      katakanaBuLvl++;     break;
-               case "katakanaBe":      katakanaBeLvl++;     break;
-               case "katakanaBo":      katakanaBoLvl++;     break;
-               case "katakanaPa":      katakanaPaLvl++;     break;
-               case "katakanaPi":      katakanaPiLvl++;     break;
-               case "katakanaPu":      katakanaPuLvl++;     break;
-               case "katakanaPe":      katakanaPeLvl++;     break;
-               case "katakanaPo":      katakanaPoLvl++;     break;
-               case "katakanaKya":     katakanaKyaLvl++;     break;
-               case "katakanaKyu":     katakanaKyuLvl++;     break;
-               case "katakanaKyo":     katakanaKyoLvl++;     break;
-               case "katakanaSha":     katakanaShaLvl++;     break;
-               case "katakanaShu":     katakanaShuLvl++;     break;
-               case "katakanaSho":     katakanaShoLvl++;     break;
-               case "katakanaCha":     katakanaChaLvl++;     break;
-               case "katakanaChu":     katakanaChuLvl++;     break;
-               case "katakanaCho":     katakanaChoLvl++;     break;
-               case "katakanaHya":     katakanaHyaLvl++;     break;
-               case "katakanaHyu":     katakanaHyuLvl++;     break;
-               case "katakanaHyo":     katakanaHyoLvl++;     break;
-               case "katakanaNya":     katakanaNyaLvl++;     break;
-               case "katakanaNyu":     katakanaNyuLvl++;     break;
-               case "katakanaNyo":     katakanaNyoLvl++;     break;
-               case "katakanaMya":     katakanaMyaLvl++;     break;
-               case "katakanaMyu":     katakanaMyuLvl++;     break;
-               case "katakanaMyo":     katakanaMyoLvl++;     break;
-               case "katakanaRya":     katakanaRyaLvl++;     break;
-               case "katakanaRyu":     katakanaRyuLvl++;     break;
-               case "katakanaRyo":     katakanaRyoLvl++;     break;
-               case "katakanaGya":     katakanaGyaLvl++;     break;
-               case "katakanaGyu":     katakanaGyuLvl++;     break;
-               case "katakanaGyo":     katakanaGyoLvl++;     break;
-               case "katakanaJya":     katakanaJyaLvl++;     break;
-               case "katakanaJyu":     katakanaJyuLvl++;     break;
-               case "katakanaJyo":     katakanaJyoLvl++;     break;
-               case "katakanaDya":     katakanaDyaLvl++;     break;
-               case "katakanaDyu":     katakanaDyuLvl++;     break;
-               case "katakanaDyo":     katakanaDyoLvl++;     break;
-               case "katakanaBya":     katakanaByaLvl++;     break;
-               case "katakanaByu":     katakanaByuLvl++;     break;
-               case "katakanaByo":     katakanaByoLvl++;     break;
-               case "katakanaPya":     katakanaPyaLvl++;     break;
-               case "katakanaPyu":     katakanaPyuLvl++;     break;
-               case "katakanaPyo":     katakanaPyoLvl++;     break;
+               case "hiraganaA":         hiraganaALvl = MathUtils.clamp(addOn +    hiraganaALvl, 1, 4);    break;
+               case "hiraganaI":         hiraganaILvl = MathUtils.clamp(addOn +    hiraganaILvl, 1, 4);    break;
+               case "hiraganaU":         hiraganaULvl = MathUtils.clamp(addOn +    hiraganaULvl, 1, 4);    break;
+               case "hiraganaE":         hiraganaELvl = MathUtils.clamp(addOn +    hiraganaELvl, 1, 4);    break;
+               case "hiraganaO":         hiraganaOLvl = MathUtils.clamp(addOn +    hiraganaOLvl, 1, 4);    break;
+               case "hiraganaKa":       hiraganaKaLvl = MathUtils.clamp(addOn +   hiraganaKaLvl, 1, 4);    break;
+               case "hiraganaKi":       hiraganaKiLvl = MathUtils.clamp(addOn +   hiraganaKiLvl, 1, 4);    break;
+               case "hiraganaKu":       hiraganaKuLvl = MathUtils.clamp(addOn +   hiraganaKuLvl, 1, 4);    break;
+               case "hiraganaKe":       hiraganaKeLvl = MathUtils.clamp(addOn +   hiraganaKeLvl, 1, 4);    break;
+               case "hiraganaKo":       hiraganaKoLvl = MathUtils.clamp(addOn +   hiraganaKoLvl, 1, 4);    break;
+               case "hiraganaSa":       hiraganaSaLvl = MathUtils.clamp(addOn +   hiraganaSaLvl, 1, 4);    break;
+               case "hiraganaShi":     hiraganaShiLvl = MathUtils.clamp(addOn +  hiraganaShiLvl, 1, 4);    break;
+               case "hiraganaSu":       hiraganaSuLvl = MathUtils.clamp(addOn +   hiraganaSuLvl, 1, 4);    break;
+               case "hiraganaSe":       hiraganaSeLvl = MathUtils.clamp(addOn +   hiraganaSeLvl, 1, 4);    break;
+               case "hiraganaSo":       hiraganaSoLvl = MathUtils.clamp(addOn +   hiraganaSoLvl, 1, 4);    break;
+               case "hiraganaTa":       hiraganaTaLvl = MathUtils.clamp(addOn +   hiraganaTaLvl, 1, 4);    break;
+               case "hiraganaChi":     hiraganaChiLvl = MathUtils.clamp(addOn +  hiraganaChiLvl, 1, 4);    break;
+               case "hiraganaTsu":     hiraganaTsuLvl = MathUtils.clamp(addOn +  hiraganaTsuLvl, 1, 4);    break;
+               case "hiraganaTe":       hiraganaTeLvl = MathUtils.clamp(addOn +   hiraganaTeLvl, 1, 4);    break;
+               case "hiraganaTo":       hiraganaToLvl = MathUtils.clamp(addOn +   hiraganaToLvl, 1, 4);    break;
+               case "hiraganaNa":       hiraganaNaLvl = MathUtils.clamp(addOn +   hiraganaNaLvl, 1, 4);    break;
+               case "hiraganaNi":       hiraganaNiLvl = MathUtils.clamp(addOn +   hiraganaNiLvl, 1, 4);    break;
+               case "hiraganaNu":       hiraganaNuLvl = MathUtils.clamp(addOn +   hiraganaNuLvl, 1, 4);    break;
+               case "hiraganaNe":       hiraganaNeLvl = MathUtils.clamp(addOn +   hiraganaNeLvl, 1, 4);    break;
+               case "hiraganaNo":       hiraganaNoLvl = MathUtils.clamp(addOn +   hiraganaNoLvl, 1, 4);    break;
+               case "hiraganaHa":       hiraganaHaLvl = MathUtils.clamp(addOn +   hiraganaHaLvl, 1, 4);    break;
+               case "hiraganaHi":       hiraganaHiLvl = MathUtils.clamp(addOn +   hiraganaHiLvl, 1, 4);    break;
+               case "hiraganaHu":       hiraganaHuLvl = MathUtils.clamp(addOn +   hiraganaHuLvl, 1, 4);    break;
+               case "hiraganaHe":       hiraganaHeLvl = MathUtils.clamp(addOn +   hiraganaHeLvl, 1, 4);    break;
+               case "hiraganaHo":       hiraganaHoLvl = MathUtils.clamp(addOn +   hiraganaHoLvl, 1, 4);    break;
+               case "hiraganaMa":       hiraganaMaLvl = MathUtils.clamp(addOn +   hiraganaMaLvl, 1, 4);    break;
+               case "hiraganaMi":       hiraganaMiLvl = MathUtils.clamp(addOn +   hiraganaMiLvl, 1, 4);    break;
+               case "hiraganaMu":       hiraganaMuLvl = MathUtils.clamp(addOn +   hiraganaMuLvl, 1, 4);    break;
+               case "hiraganaMe":       hiraganaMeLvl = MathUtils.clamp(addOn +   hiraganaMeLvl, 1, 4);    break;
+               case "hiraganaMo":       hiraganaMoLvl = MathUtils.clamp(addOn +   hiraganaMoLvl, 1, 4);    break;
+               case "hiraganaRa":       hiraganaRaLvl = MathUtils.clamp(addOn +   hiraganaRaLvl, 1, 4);    break;
+               case "hiraganaRi":       hiraganaRiLvl = MathUtils.clamp(addOn +   hiraganaRiLvl, 1, 4);    break;
+               case "hiraganaRu":       hiraganaRuLvl = MathUtils.clamp(addOn +   hiraganaRuLvl, 1, 4);    break;
+               case "hiraganaRe":       hiraganaReLvl = MathUtils.clamp(addOn +   hiraganaReLvl, 1, 4);    break;
+               case "hiraganaRo":       hiraganaRoLvl = MathUtils.clamp(addOn +   hiraganaRoLvl, 1, 4);    break;
+               case "hiraganaYa":       hiraganaYaLvl = MathUtils.clamp(addOn +   hiraganaYaLvl, 1, 4);    break;
+               case "hiraganaYu":       hiraganaYuLvl = MathUtils.clamp(addOn +   hiraganaYuLvl, 1, 4);    break;
+               case "hiraganaYo":       hiraganaYoLvl = MathUtils.clamp(addOn +   hiraganaYoLvl, 1, 4);    break;
+               case "hiraganaWa":       hiraganaWaLvl = MathUtils.clamp(addOn +   hiraganaWaLvl, 1, 4);    break;
+               case "hiraganaWo":       hiraganaWoLvl = MathUtils.clamp(addOn +   hiraganaWoLvl, 1, 4);    break;
+               case "hiraganaN":         hiraganaNLvl = MathUtils.clamp(addOn +    hiraganaNLvl, 1, 4);    break;
+               case "hiraganaGa":       hiraganaGaLvl = MathUtils.clamp(addOn +   hiraganaGaLvl, 1, 4);    break;
+               case "hiraganaGi":       hiraganaGiLvl = MathUtils.clamp(addOn +   hiraganaGiLvl, 1, 4);    break;
+               case "hiraganaGu":       hiraganaGuLvl = MathUtils.clamp(addOn +   hiraganaGuLvl, 1, 4);    break;
+               case "hiraganaGe":       hiraganaGeLvl = MathUtils.clamp(addOn +   hiraganaGeLvl, 1, 4);    break;
+               case "hiraganaGo":       hiraganaGoLvl = MathUtils.clamp(addOn +   hiraganaGoLvl, 1, 4);    break;
+               case "hiraganaZa":       hiraganaZaLvl = MathUtils.clamp(addOn +   hiraganaZaLvl, 1, 4);    break;
+               case "hiraganaJi":       hiraganaJiLvl = MathUtils.clamp(addOn +   hiraganaJiLvl, 1, 4);    break;
+               case "hiraganaZu":       hiraganaZuLvl = MathUtils.clamp(addOn +   hiraganaZuLvl, 1, 4);    break;
+               case "hiraganaZe":       hiraganaZeLvl = MathUtils.clamp(addOn +   hiraganaZeLvl, 1, 4);    break;
+               case "hiraganaZo":       hiraganaZoLvl = MathUtils.clamp(addOn +   hiraganaZoLvl, 1, 4);    break;
+               case "hiraganaDa":       hiraganaDaLvl = MathUtils.clamp(addOn +   hiraganaDaLvl, 1, 4);    break;
+               case "hiraganaDi":       hiraganaDiLvl = MathUtils.clamp(addOn +   hiraganaDiLvl, 1, 4);    break;
+               case "hiraganaDu":       hiraganaDuLvl = MathUtils.clamp(addOn +   hiraganaDuLvl, 1, 4);    break;
+               case "hiraganaDe":       hiraganaDeLvl = MathUtils.clamp(addOn +   hiraganaDeLvl, 1, 4);    break;
+               case "hiraganaDo":       hiraganaDoLvl = MathUtils.clamp(addOn +   hiraganaDoLvl, 1, 4);    break;
+               case "hiraganaBa":       hiraganaBaLvl = MathUtils.clamp(addOn +   hiraganaBaLvl, 1, 4);    break;
+               case "hiraganaBi":       hiraganaBiLvl = MathUtils.clamp(addOn +   hiraganaBiLvl, 1, 4);    break;
+               case "hiraganaBu":       hiraganaBuLvl = MathUtils.clamp(addOn +   hiraganaBuLvl, 1, 4);    break;
+               case "hiraganaBe":       hiraganaBeLvl = MathUtils.clamp(addOn +   hiraganaBeLvl, 1, 4);    break;
+               case "hiraganaBo":       hiraganaBoLvl = MathUtils.clamp(addOn +   hiraganaBoLvl, 1, 4);    break;
+               case "hiraganaPa":       hiraganaPaLvl = MathUtils.clamp(addOn +   hiraganaPaLvl, 1, 4);    break;
+               case "hiraganaPi":       hiraganaPiLvl = MathUtils.clamp(addOn +   hiraganaPiLvl, 1, 4);    break;
+               case "hiraganaPu":       hiraganaPuLvl = MathUtils.clamp(addOn +   hiraganaPuLvl, 1, 4);    break;
+               case "hiraganaPe":       hiraganaPeLvl = MathUtils.clamp(addOn +   hiraganaPeLvl, 1, 4);    break;
+               case "hiraganaPo":       hiraganaPoLvl = MathUtils.clamp(addOn +   hiraganaPoLvl, 1, 4);    break;
+               case "hiraganaKya":     hiraganaKyaLvl = MathUtils.clamp(addOn +  hiraganaKyaLvl, 1, 4);    break;
+               case "hiraganaKyu":     hiraganaKyuLvl = MathUtils.clamp(addOn +  hiraganaKyuLvl, 1, 4);    break;
+               case "hiraganaKyo":     hiraganaKyoLvl = MathUtils.clamp(addOn +  hiraganaKyoLvl, 1, 4);    break;
+               case "hiraganaSha":     hiraganaShaLvl = MathUtils.clamp(addOn +  hiraganaShaLvl, 1, 4);    break;
+               case "hiraganaShu":     hiraganaShuLvl = MathUtils.clamp(addOn +  hiraganaShuLvl, 1, 4);    break;
+               case "hiraganaSho":     hiraganaShoLvl = MathUtils.clamp(addOn +  hiraganaShoLvl, 1, 4);    break;
+               case "hiraganaCha":     hiraganaChaLvl = MathUtils.clamp(addOn +  hiraganaChaLvl, 1, 4);    break;
+               case "hiraganaChu":     hiraganaChuLvl = MathUtils.clamp(addOn +  hiraganaChuLvl, 1, 4);    break;
+               case "hiraganaCho":     hiraganaChoLvl = MathUtils.clamp(addOn +  hiraganaChoLvl, 1, 4);    break;
+               case "hiraganaHya":     hiraganaHyaLvl = MathUtils.clamp(addOn +  hiraganaHyaLvl, 1, 4);    break;
+               case "hiraganaHyu":     hiraganaHyuLvl = MathUtils.clamp(addOn +  hiraganaHyuLvl, 1, 4);    break;
+               case "hiraganaHyo":     hiraganaHyoLvl = MathUtils.clamp(addOn +  hiraganaHyoLvl, 1, 4);    break;
+               case "hiraganaNya":     hiraganaNyaLvl = MathUtils.clamp(addOn +  hiraganaNyaLvl, 1, 4);    break;
+               case "hiraganaNyu":     hiraganaNyuLvl = MathUtils.clamp(addOn +  hiraganaNyuLvl, 1, 4);    break;
+               case "hiraganaNyo":     hiraganaNyoLvl = MathUtils.clamp(addOn +  hiraganaNyoLvl, 1, 4);    break;
+               case "hiraganaMya":     hiraganaMyaLvl = MathUtils.clamp(addOn +  hiraganaMyaLvl, 1, 4);    break;
+               case "hiraganaMyu":     hiraganaMyuLvl = MathUtils.clamp(addOn +  hiraganaMyuLvl, 1, 4);    break;
+               case "hiraganaMyo":     hiraganaMyoLvl = MathUtils.clamp(addOn +  hiraganaMyoLvl, 1, 4);    break;
+               case "hiraganaRya":     hiraganaRyaLvl = MathUtils.clamp(addOn +  hiraganaRyaLvl, 1, 4);    break;
+               case "hiraganaRyu":     hiraganaRyuLvl = MathUtils.clamp(addOn +  hiraganaRyuLvl, 1, 4);    break;
+               case "hiraganaRyo":     hiraganaRyoLvl = MathUtils.clamp(addOn +  hiraganaRyoLvl, 1, 4);    break;
+               case "hiraganaGya":     hiraganaGyaLvl = MathUtils.clamp(addOn +  hiraganaGyaLvl, 1, 4);    break;
+               case "hiraganaGyu":     hiraganaGyuLvl = MathUtils.clamp(addOn +  hiraganaGyuLvl, 1, 4);    break;
+               case "hiraganaGyo":     hiraganaGyoLvl = MathUtils.clamp(addOn +  hiraganaGyoLvl, 1, 4);    break;
+               case "hiraganaJya":     hiraganaJyaLvl = MathUtils.clamp(addOn +  hiraganaJyaLvl, 1, 4);    break;
+               case "hiraganaJyu":     hiraganaJyuLvl = MathUtils.clamp(addOn +  hiraganaJyuLvl, 1, 4);    break;
+               case "hiraganaJyo":     hiraganaJyoLvl = MathUtils.clamp(addOn +  hiraganaJyoLvl, 1, 4);    break;
+               case "hiraganaDya":     hiraganaDyaLvl = MathUtils.clamp(addOn +  hiraganaDyaLvl, 1, 4);    break;
+               case "hiraganaDyu":     hiraganaDyuLvl = MathUtils.clamp(addOn +  hiraganaDyuLvl, 1, 4);    break;
+               case "hiraganaDyo":     hiraganaDyoLvl = MathUtils.clamp(addOn +  hiraganaDyoLvl, 1, 4);    break;
+               case "hiraganaBya":     hiraganaByaLvl = MathUtils.clamp(addOn +  hiraganaByaLvl, 1, 4);    break;
+               case "hiraganaByu":     hiraganaByuLvl = MathUtils.clamp(addOn +  hiraganaByuLvl, 1, 4);    break;
+               case "hiraganaByo":     hiraganaByoLvl = MathUtils.clamp(addOn +  hiraganaByoLvl, 1, 4);    break;
+               case "hiraganaPya":     hiraganaPyaLvl = MathUtils.clamp(addOn +  hiraganaPyaLvl, 1, 4);    break;
+               case "hiraganaPyu":     hiraganaPyuLvl = MathUtils.clamp(addOn +  hiraganaPyuLvl, 1, 4);    break;
+               case "hiraganaPyo":     hiraganaPyoLvl = MathUtils.clamp(addOn +  hiraganaPyoLvl, 1, 4);    break;
+               case "katakanaA":         katakanaALvl = MathUtils.clamp(addOn +    katakanaALvl, 1, 4);    break;
+               case "katakanaI":         katakanaILvl = MathUtils.clamp(addOn +    katakanaILvl, 1, 4);    break;
+               case "katakanaU":         katakanaULvl = MathUtils.clamp(addOn +    katakanaULvl, 1, 4);    break;
+               case "katakanaE":         katakanaELvl = MathUtils.clamp(addOn +    katakanaELvl, 1, 4);    break;
+               case "katakanaO":         katakanaOLvl = MathUtils.clamp(addOn +    katakanaOLvl, 1, 4);    break;
+               case "katakanaKa":       katakanaKaLvl = MathUtils.clamp(addOn +   katakanaKaLvl, 1, 4);    break;
+               case "katakanaKi":       katakanaKiLvl = MathUtils.clamp(addOn +   katakanaKiLvl, 1, 4);    break;
+               case "katakanaKu":       katakanaKuLvl = MathUtils.clamp(addOn +   katakanaKuLvl, 1, 4);    break;
+               case "katakanaKe":       katakanaKeLvl = MathUtils.clamp(addOn +   katakanaKeLvl, 1, 4);    break;
+               case "katakanaKo":       katakanaKoLvl = MathUtils.clamp(addOn +   katakanaKoLvl, 1, 4);    break;
+               case "katakanaSa":       katakanaSaLvl = MathUtils.clamp(addOn +   katakanaSaLvl, 1, 4);    break;
+               case "katakanaLvlShi":  katakanaShiLvl = MathUtils.clamp(addOn +  katakanaShiLvl, 1, 4);    break;
+               case "katakanaLvlSu":   katakanaSuLvl = MathUtils.clamp(addOn +    katakanaSuLvl, 1, 4);    break;
+               case "katakanaLvlSe":    katakanaSeLvl = MathUtils.clamp(addOn +   katakanaSeLvl, 1, 4);    break;
+               case "katakanaLvlSo":    katakanaSoLvl = MathUtils.clamp(addOn +   katakanaSoLvl, 1, 4);    break;
+               case "katakanaLvlTa":    katakanaTaLvl = MathUtils.clamp(addOn +   katakanaTaLvl, 1, 4);    break;
+               case "katakanaLvlChi":  katakanaChiLvl = MathUtils.clamp(addOn +  katakanaChiLvl, 1, 4);    break;
+               case "katakanaLvlTsu":  katakanaTsuLvl = MathUtils.clamp(addOn +  katakanaTsuLvl, 1, 4);    break;
+               case "katakanaLvlTe":    katakanaTeLvl = MathUtils.clamp(addOn +   katakanaTeLvl, 1, 4);    break;
+               case "katakanaLvlTo":    katakanaToLvl = MathUtils.clamp(addOn +   katakanaToLvl, 1, 4);    break;
+               case "katakanaLvlNa":    katakanaNaLvl = MathUtils.clamp(addOn +   katakanaNaLvl, 1, 4);    break;
+               case "katakanaLvlNi":    katakanaNiLvl = MathUtils.clamp(addOn +   katakanaNiLvl, 1, 4);    break;
+               case "katakanaLvlNu":    katakanaNuLvl = MathUtils.clamp(addOn +   katakanaNuLvl, 1, 4);    break;
+               case "katakanaLvlNe":    katakanaNeLvl = MathUtils.clamp(addOn +   katakanaNeLvl, 1, 4);    break;
+               case "katakanaLvlNo":    katakanaNoLvl = MathUtils.clamp(addOn +   katakanaNoLvl, 1, 4);    break;
+               case "katakanaLvlHa":    katakanaHaLvl = MathUtils.clamp(addOn +   katakanaHaLvl, 1, 4);    break;
+               case "katakanaLvlHi":    katakanaHiLvl = MathUtils.clamp(addOn +   katakanaHiLvl, 1, 4);    break;
+               case "katakanaLvlHu":    katakanaHuLvl = MathUtils.clamp(addOn +   katakanaHuLvl, 1, 4);    break;
+               case "katakanaLvlHe":    katakanaHeLvl = MathUtils.clamp(addOn +   katakanaHeLvl, 1, 4);    break;
+               case "katakanaLvlHo":    katakanaHoLvl = MathUtils.clamp(addOn +   katakanaHoLvl, 1, 4);    break;
+               case "katakanaLvlMa":    katakanaMaLvl = MathUtils.clamp(addOn +   katakanaMaLvl, 1, 4);    break;
+               case "katakanaLvlMi":    katakanaMiLvl = MathUtils.clamp(addOn +   katakanaMiLvl, 1, 4);    break;
+               case "katakanaLvlMu":    katakanaMuLvl = MathUtils.clamp(addOn +   katakanaMuLvl, 1, 4);    break;
+               case "katakanaLvlMe":    katakanaMeLvl = MathUtils.clamp(addOn +   katakanaMeLvl, 1, 4);    break;
+               case "katakanaLvlMo":    katakanaMoLvl = MathUtils.clamp(addOn +   katakanaMoLvl, 1, 4);    break;
+               case "katakanaLvlRa":    katakanaRaLvl = MathUtils.clamp(addOn +   katakanaRaLvl, 1, 4);    break;
+               case "katakanaLvlRi":    katakanaRiLvl = MathUtils.clamp(addOn +   katakanaRiLvl, 1, 4);    break;
+               case "katakanaLvlRu":    katakanaRuLvl = MathUtils.clamp(addOn +   katakanaRuLvl, 1, 4);    break;
+               case "katakanaLvlRe":    katakanaReLvl = MathUtils.clamp(addOn +   katakanaReLvl, 1, 4);    break;
+               case "katakanaLvlRo":    katakanaRoLvl = MathUtils.clamp(addOn +   katakanaRoLvl, 1, 4);    break;
+               case "katakanaLvlYa":    katakanaYaLvl = MathUtils.clamp(addOn +   katakanaYaLvl, 1, 4);    break;
+               case "katakanaLvlYu":    katakanaYuLvl = MathUtils.clamp(addOn +   katakanaYuLvl, 1, 4);    break;
+               case "katakanaLvlYo":    katakanaYoLvl = MathUtils.clamp(addOn +   katakanaYoLvl, 1, 4);    break;
+               case "katakanaLvlWa":    katakanaWaLvl = MathUtils.clamp(addOn +   katakanaWaLvl, 1, 4);    break;
+               case "katakanaLvlWo":    katakanaWoLvl = MathUtils.clamp(addOn +   katakanaWoLvl, 1, 4);    break;
+               case "katakanaLvlN":      katakanaNLvl = MathUtils.clamp(addOn +    katakanaNLvl, 1, 4);    break;
+               case "katakanaLvlGa":    katakanaGaLvl = MathUtils.clamp(addOn +   katakanaGaLvl, 1, 4);    break;
+               case "katakanaLvlGi":    katakanaGiLvl = MathUtils.clamp(addOn +   katakanaGiLvl, 1, 4);    break;
+               case "katakanaLvlGu":    katakanaGuLvl = MathUtils.clamp(addOn +   katakanaGuLvl, 1, 4);    break;
+               case "katakanaLvlGe":    katakanaGeLvl = MathUtils.clamp(addOn +   katakanaGeLvl, 1, 4);    break;
+               case "katakanaLvlGo":    katakanaGoLvl = MathUtils.clamp(addOn +   katakanaGoLvl, 1, 4);    break;
+               case "katakanaLvlZa":    katakanaZaLvl = MathUtils.clamp(addOn +   katakanaZaLvl, 1, 4);    break;
+               case "katakanaLvlJi":    katakanaJiLvl = MathUtils.clamp(addOn +   katakanaJiLvl, 1, 4);    break;
+               case "katakanaLvlZu":    katakanaZuLvl = MathUtils.clamp(addOn +   katakanaZuLvl, 1, 4);    break;
+               case "katakanaLvlZe":    katakanaZeLvl = MathUtils.clamp(addOn +   katakanaZeLvl, 1, 4);    break;
+               case "katakanaLvlZo":    katakanaZoLvl = MathUtils.clamp(addOn +   katakanaZoLvl, 1, 4);    break;
+               case "katakanaLvlDa":    katakanaDaLvl = MathUtils.clamp(addOn +   katakanaDaLvl, 1, 4);    break;
+               case "katakanaLvlDi":    katakanaDiLvl = MathUtils.clamp(addOn +   katakanaDiLvl, 1, 4);    break;
+               case "katakanaLvlDu":    katakanaDuLvl = MathUtils.clamp(addOn +   katakanaDuLvl, 1, 4);    break;
+               case "katakanaLvlDe":    katakanaDeLvl = MathUtils.clamp(addOn +   katakanaDeLvl, 1, 4);    break;
+               case "katakanaLvlDo":    katakanaDoLvl = MathUtils.clamp(addOn +   katakanaDoLvl, 1, 4);    break;
+               case "katakanaLvlBa":    katakanaBaLvl = MathUtils.clamp(addOn +   katakanaBaLvl, 1, 4);    break;
+               case "katakanaLvlBi":    katakanaBiLvl = MathUtils.clamp(addOn +   katakanaBiLvl, 1, 4);    break;
+               case "katakanaLvlBu":    katakanaBuLvl = MathUtils.clamp(addOn +   katakanaBuLvl, 1, 4);    break;
+               case "katakanaLvlBe":    katakanaBeLvl = MathUtils.clamp(addOn +   katakanaBeLvl, 1, 4);    break;
+               case "katakanaLvlBo":    katakanaBoLvl = MathUtils.clamp(addOn +   katakanaBoLvl, 1, 4);    break;
+               case "katakanaLvlPa":    katakanaPaLvl = MathUtils.clamp(addOn +   katakanaPaLvl, 1, 4);    break;
+               case "katakanaLvlPi":    katakanaPiLvl = MathUtils.clamp(addOn +   katakanaPiLvl, 1, 4);    break;
+               case "katakanaLvlPu":    katakanaPuLvl = MathUtils.clamp(addOn +   katakanaPuLvl, 1, 4);    break;
+               case "katakanaLvlPe":    katakanaPeLvl = MathUtils.clamp(addOn +   katakanaPeLvl, 1, 4);    break;
+               case "katakanaLvlPo":    katakanaPoLvl = MathUtils.clamp(addOn +   katakanaPoLvl, 1, 4);    break;
+               case "katakanaLvlKya":  katakanaKyaLvl = MathUtils.clamp(addOn +  katakanaKyaLvl, 1, 4);    break;
+               case "katakanaLvlKyu":  katakanaKyuLvl = MathUtils.clamp(addOn +  katakanaKyuLvl, 1, 4);    break;
+               case "katakanaLvlKyo":  katakanaKyoLvl = MathUtils.clamp(addOn +  katakanaKyoLvl, 1, 4);    break;
+               case "katakanaLvlSha":  katakanaShaLvl = MathUtils.clamp(addOn +  katakanaShaLvl, 1, 4);    break;
+               case "katakanaLvlShu":  katakanaShuLvl = MathUtils.clamp(addOn +  katakanaShuLvl, 1, 4);    break;
+               case "katakanaLvlSho":  katakanaShoLvl = MathUtils.clamp(addOn +  katakanaShoLvl, 1, 4);    break;
+               case "katakanaLvlCha":  katakanaChaLvl = MathUtils.clamp(addOn +  katakanaChaLvl, 1, 4);    break;
+               case "katakanaLvlChu":  katakanaChuLvl = MathUtils.clamp(addOn +  katakanaChuLvl, 1, 4);    break;
+               case "katakanaLvlCho":  katakanaChoLvl = MathUtils.clamp(addOn +  katakanaChoLvl, 1, 4);    break;
+               case "katakanaLvlHya":  katakanaHyaLvl = MathUtils.clamp(addOn +  katakanaHyaLvl, 1, 4);    break;
+               case "katakanaLvlHyu":  katakanaHyuLvl = MathUtils.clamp(addOn +  katakanaHyuLvl, 1, 4);    break;
+               case "katakanaLvlHyo":  katakanaHyoLvl = MathUtils.clamp(addOn +  katakanaHyoLvl, 1, 4);    break;
+               case "katakanaLvlNya":  katakanaNyaLvl = MathUtils.clamp(addOn +  katakanaNyaLvl, 1, 4);    break;
+               case "katakanaLvlNyu":  katakanaNyuLvl = MathUtils.clamp(addOn +  katakanaNyuLvl, 1, 4);    break;
+               case "katakanaLvlNyo":  katakanaNyoLvl = MathUtils.clamp(addOn +  katakanaNyoLvl, 1, 4);    break;
+               case "katakanaLvlMya":  katakanaMyaLvl = MathUtils.clamp(addOn +  katakanaMyaLvl, 1, 4);    break;
+               case "katakanaLvlMyu":  katakanaMyuLvl = MathUtils.clamp(addOn +  katakanaMyuLvl, 1, 4);    break;
+               case "katakanaLvlMyo":  katakanaMyoLvl = MathUtils.clamp(addOn +  katakanaMyoLvl, 1, 4);    break;
+               case "katakanaLvlRya":  katakanaRyaLvl = MathUtils.clamp(addOn +  katakanaRyaLvl, 1, 4);    break;
+               case "katakanaLvlRyu":  katakanaRyuLvl = MathUtils.clamp(addOn +  katakanaRyuLvl, 1, 4);    break;
+               case "katakanaLvlRyo":  katakanaRyoLvl = MathUtils.clamp(addOn +  katakanaRyoLvl, 1, 4);    break;
+               case "katakanaLvlGya":  katakanaGyaLvl = MathUtils.clamp(addOn +  katakanaGyaLvl, 1, 4);    break;
+               case "katakanaLvlGyu":  katakanaGyuLvl = MathUtils.clamp(addOn +  katakanaGyuLvl, 1, 4);    break;
+               case "katakanaLvlGyo":  katakanaGyoLvl = MathUtils.clamp(addOn +  katakanaGyoLvl, 1, 4);    break;
+               case "katakanaLvlJya":  katakanaJyaLvl = MathUtils.clamp(addOn +  katakanaJyaLvl, 1, 4);    break;
+               case "katakanaLvlJyu":  katakanaJyuLvl = MathUtils.clamp(addOn +  katakanaJyuLvl, 1, 4);    break;
+               case "katakanaLvlJyo":  katakanaJyoLvl = MathUtils.clamp(addOn +  katakanaJyoLvl, 1, 4);    break;
+               case "katakanaLvlDya":  katakanaDyaLvl = MathUtils.clamp(addOn +  katakanaDyaLvl, 1, 4);    break;
+               case "katakanaLvlDyu":  katakanaDyuLvl = MathUtils.clamp(addOn +  katakanaDyuLvl, 1, 4);    break;
+               case "katakanaLvlDyo":  katakanaDyoLvl = MathUtils.clamp(addOn +  katakanaDyoLvl, 1, 4);    break;
+               case "katakanaLvlBya":  katakanaByaLvl = MathUtils.clamp(addOn +  katakanaByaLvl, 1, 4);    break;
+               case "katakanaLvlByu":  katakanaByuLvl = MathUtils.clamp(addOn +  katakanaByuLvl, 1, 4);    break;
+               case "katakanaLvlByo":  katakanaByoLvl = MathUtils.clamp(addOn +  katakanaByoLvl, 1, 4);    break;
+               case "katakanaLvlPya":  katakanaPyaLvl = MathUtils.clamp(addOn +  katakanaPyaLvl, 1, 4);    break;
+               case "katakanaLvlPyu":  katakanaPyuLvl = MathUtils.clamp(addOn +  katakanaPyuLvl, 1, 4);    break;
+               case "katakanaLvlPyo":  katakanaPyoLvl = MathUtils.clamp(addOn +  katakanaPyoLvl, 1, 4);    break;
+               case "kanjiHa":          kanjiHaLvl = MathUtils.clamp(addOn +      kanjiHaLvl, 1, 6);    break;
+               case "kanjiKi":          kanjiKiLvl = MathUtils.clamp(addOn +      kanjiKiLvl, 1, 6);    break;
+               case "kanjiMushi":    kanjiMushiLvl = MathUtils.clamp(addOn +   kanjiMushiLvl, 1, 6);    break;
+               case "kanjiKaze":      kanjiKazeLvl = MathUtils.clamp(addOn +    kanjiKazeLvl, 1, 6);    break;
+               case "kanjiUchi":      kanjiUchiLvl = MathUtils.clamp(addOn +    kanjiUchiLvl, 1, 6);    break;
+               case "kanjiUmi":        kanjiUmiLvl = MathUtils.clamp(addOn +     kanjiUmiLvl, 1, 6);    break;
+               case "kanjiMizu":      kanjiMizuLvl = MathUtils.clamp(addOn +    kanjiMizuLvl, 1, 6);    break;
+               case "kanjiIke":        kanjiIkeLvl = MathUtils.clamp(addOn +     kanjiIkeLvl, 1, 6);    break;
+               case "kanjiKoori":    kanjiKooriLvl = MathUtils.clamp(addOn +   kanjiKooriLvl, 1, 6);    break;
+               case "kanjiHayashi":kanjiHayashiLvl = MathUtils.clamp(addOn + kanjiHayashiLvl, 1, 6);    break;
+               case "kanjiTo":          kanjiToLvl = MathUtils.clamp(addOn +      kanjiToLvl, 1, 6);    break;
+               case "kanjiTera":      kanjiTeraLvl = MathUtils.clamp(addOn +    kanjiTeraLvl, 1, 6);    break;
+               case "kanjiSoto":      kanjiSotoLvl = MathUtils.clamp(addOn +    kanjiSotoLvl, 1, 6);    break;
+               case "kanjiHi":          kanjiHiLvl = MathUtils.clamp(addOn +      kanjiHiLvl, 1, 6);    break;
+               case "kanjiAka":        kanjiAkaLvl = MathUtils.clamp(addOn +     kanjiAkaLvl, 1, 6);    break;
+               case "kanjiHana":      kanjiHanaLvl = MathUtils.clamp(addOn +    kanjiHanaLvl, 1, 6);    break;
+               case "kanjiMori":      kanjiMoriLvl = MathUtils.clamp(addOn +    kanjiMoriLvl, 1, 6);    break;
+               case "kanjiIshi":      kanjiIshiLvl = MathUtils.clamp(addOn +    kanjiIshiLvl, 1, 6);    break;
+               case "kanjiTsuchi":    kanjiTsuchiLvl = MathUtils.clamp(addOn + kanjiTsuchiLvl, 1, 6);    break;
+               case "kanjiYama":      kanjiYamaLvl = MathUtils.clamp(addOn +    kanjiYamaLvl, 1, 6);    break;
+               case "kanjiSakana":  kanjiSakanaLvl = MathUtils.clamp(addOn +  kanjiSakanaLvl, 1, 6);    break;
+               case "kanjiKai":        kanjiKaiLvl = MathUtils.clamp(addOn +     kanjiKaiLvl, 1, 6);    break;
+               case "kanjiYuki":      kanjiYukiLvl = MathUtils.clamp(addOn +    kanjiYukiLvl, 1, 6);    break;
+               case "kanjiKawa":      kanjiKawaLvl = MathUtils.clamp(addOn +    kanjiKawaLvl, 1, 6);    break;
+               case "kanjiFuyu":      kanjiFuyuLvl = MathUtils.clamp(addOn +    kanjiFuyuLvl, 1, 6);    break;
+               case "kanjiMon":        kanjiMonLvl = MathUtils.clamp(addOn +     kanjiMonLvl, 1, 6);    break;
+               case "kanjiAna":        kanjiAnaLvl = MathUtils.clamp(addOn +     kanjiAnaLvl, 1, 6);    break;
+               case "kanjiKa":          kanjiKaLvl = MathUtils.clamp(addOn +      kanjiKaLvl, 1, 6);    break;
+               case "kanjiChi":        kanjiChiLvl = MathUtils.clamp(addOn +     kanjiChiLvl, 1, 6);    break;
+               case "kanjiHikari":  kanjiHikariLvl = MathUtils.clamp(addOn +  kanjiHikariLvl, 1, 6);    break;
                default: break;
 
           }
      }
 
-     public static void decreaseLvl(String letter){
+     public static void decreaseLvl (String letter, int takeOff){
           switch (letter){
-               case "hiraganaA":       hiraganaALvl--;    break;
-               case "hiraganaI":       hiraganaILvl--;    break;
-               case "hiraganaU":       hiraganaULvl--;    break;
-               case "hiraganaE":       hiraganaELvl--;    break;
-               case "hiraganaO":       hiraganaOLvl--;    break;
-               case "hiraganaKa":      hiraganaKaLvl--;     break;
-               case "hiraganaKi":      hiraganaKiLvl--;     break;
-               case "hiraganaKu":      hiraganaKuLvl--;     break;
-               case "hiraganaKe":      hiraganaKeLvl--;     break;
-               case "hiraganaKo":      hiraganaKoLvl--;     break;
-               case "hiraganaSa":      hiraganaSaLvl--;     break;
-               case "hiraganaShi":     hiraganaShiLvl--;    break;
-               case "hiraganaSu":      hiraganaSuLvl--;     break;
-               case "hiraganaSe":      hiraganaSeLvl--;     break;
-               case "hiraganaSo":      hiraganaSoLvl--;     break;
-               case "hiraganaTa":      hiraganaTaLvl--;     break;
-               case "hiraganaChi":     hiraganaChiLvl--;    break;
-               case "hiraganaTsu":     hiraganaTsuLvl--;    break;
-               case "hiraganaTe":      hiraganaTeLvl--;     break;
-               case "hiraganaTo":      hiraganaToLvl--;     break;
-               case "hiraganaNa":      hiraganaNaLvl--;     break;
-               case "hiraganaNi":      hiraganaNiLvl--;     break;
-               case "hiraganaNu":      hiraganaNuLvl--;     break;
-               case "hiraganaNe":      hiraganaNeLvl--;     break;
-               case "hiraganaNo":      hiraganaNoLvl--;     break;
-               case "hiraganaHa":      hiraganaHaLvl--;     break;
-               case "hiraganaHi":      hiraganaHiLvl--;     break;
-               case "hiraganaHu":      hiraganaHuLvl--;     break;
-               case "hiraganaHe":      hiraganaHeLvl--;     break;
-               case "hiraganaHo":      hiraganaHoLvl--;     break;
-               case "hiraganaMa":      hiraganaMaLvl--;     break;
-               case "hiraganaMi":      hiraganaMiLvl--;     break;
-               case "hiraganaMu":      hiraganaMuLvl--;     break;
-               case "hiraganaMe":      hiraganaMeLvl--;     break;
-               case "hiraganaMo":      hiraganaMoLvl--;     break;
-               case "hiraganaRa":      hiraganaRaLvl--;     break;
-               case "hiraganaRi":      hiraganaRiLvl--;     break;
-               case "hiraganaRu":      hiraganaRuLvl--;     break;
-               case "hiraganaRe":      hiraganaReLvl--;     break;
-               case "hiraganaRo":      hiraganaRoLvl--;     break;
-               case "hiraganaYa":      hiraganaYaLvl--;     break;
-               case "hiraganaYu":      hiraganaYuLvl--;     break;
-               case "hiraganaYo":      hiraganaYoLvl--;     break;
-               case "hiraganaWa":      hiraganaWaLvl--;     break;
-               case "hiraganaWo":      hiraganaWoLvl--;     break;
-               case "hiraganaN":       hiraganaNLvl--;      break;
-               case "hiraganaGa":      hiraganaGaLvl--;     break;
-               case "hiraganaGi":      hiraganaGiLvl--;     break;
-               case "hiraganaGu":      hiraganaGuLvl--;     break;
-               case "hiraganaGe":      hiraganaGeLvl--;     break;
-               case "hiraganaGo":      hiraganaGoLvl--;     break;
-               case "hiraganaZa":      hiraganaZaLvl--;     break;
-               case "hiraganaJi":      hiraganaJiLvl--;     break;
-               case "hiraganaZu":      hiraganaZuLvl--;     break;
-               case "hiraganaZe":      hiraganaZeLvl--;     break;
-               case "hiraganaZo":      hiraganaZoLvl--;     break;
-               case "hiraganaDa":      hiraganaDaLvl--;     break;
-               case "hiraganaDi":      hiraganaDiLvl--;     break;
-               case "hiraganaDu":      hiraganaDuLvl--;     break;
-               case "hiraganaDe":      hiraganaDeLvl--;     break;
-               case "hiraganaDo":      hiraganaDoLvl--;     break;
-               case "hiraganaBa":      hiraganaBaLvl--;     break;
-               case "hiraganaBi":      hiraganaBiLvl--;     break;
-               case "hiraganaBu":      hiraganaBuLvl--;     break;
-               case "hiraganaBe":      hiraganaBeLvl--;     break;
-               case "hiraganaBo":      hiraganaBoLvl--;     break;
-               case "hiraganaPa":      hiraganaPaLvl--;     break;
-               case "hiraganaPi":      hiraganaPiLvl--;     break;
-               case "hiraganaPu":      hiraganaPuLvl--;     break;
-               case "hiraganaPe":      hiraganaPeLvl--;     break;
-               case "hiraganaPo":      hiraganaPoLvl--;     break;
-               case "hiraganaKya":     hiraganaKyaLvl--;     break;
-               case "hiraganaKyu":     hiraganaKyuLvl--;     break;
-               case "hiraganaKyo":     hiraganaKyoLvl--;     break;
-               case "hiraganaSha":     hiraganaShaLvl--;     break;
-               case "hiraganaShu":     hiraganaShuLvl--;     break;
-               case "hiraganaSho":     hiraganaShoLvl--;     break;
-               case "hiraganaCha":     hiraganaChaLvl--;     break;
-               case "hiraganaChu":     hiraganaChuLvl--;     break;
-               case "hiraganaCho":     hiraganaChoLvl--;     break;
-               case "hiraganaHya":     hiraganaHyaLvl--;     break;
-               case "hiraganaHyu":     hiraganaHyuLvl--;     break;
-               case "hiraganaHyo":     hiraganaHyoLvl--;     break;
-               case "hiraganaNya":     hiraganaNyaLvl--;     break;
-               case "hiraganaNyu":     hiraganaNyuLvl--;     break;
-               case "hiraganaNyo":     hiraganaNyoLvl--;     break;
-               case "hiraganaMya":     hiraganaMyaLvl--;     break;
-               case "hiraganaMyu":     hiraganaMyuLvl--;     break;
-               case "hiraganaMyo":     hiraganaMyoLvl--;     break;
-               case "hiraganaRya":     hiraganaRyaLvl--;     break;
-               case "hiraganaRyu":     hiraganaRyuLvl--;     break;
-               case "hiraganaRyo":     hiraganaRyoLvl--;     break;
-               case "hiraganaGya":     hiraganaGyaLvl--;     break;
-               case "hiraganaGyu":     hiraganaGyuLvl--;     break;
-               case "hiraganaGyo":     hiraganaGyoLvl--;     break;
-               case "hiraganaJya":     hiraganaJyaLvl--;     break;
-               case "hiraganaJyu":     hiraganaJyuLvl--;     break;
-               case "hiraganaJyo":     hiraganaJyoLvl--;     break;
-               case "hiraganaDya":     hiraganaDyaLvl--;     break;
-               case "hiraganaDyu":     hiraganaDyuLvl--;     break;
-               case "hiraganaDyo":     hiraganaDyoLvl--;     break;
-               case "hiraganaBya":     hiraganaByaLvl--;     break;
-               case "hiraganaByu":     hiraganaByuLvl--;     break;
-               case "hiraganaByo":     hiraganaByoLvl--;     break;
-               case "hiraganaPya":     hiraganaPyaLvl--;     break;
-               case "hiraganaPyu":     hiraganaPyuLvl--;     break;
-               case "hiraganaPyo":     hiraganaPyoLvl--;     break;
-               case "katakanaA":       katakanaALvl--;    break;
-               case "katakanaI":       katakanaILvl--;    break;
-               case "katakanaU":       katakanaULvl--;    break;
-               case "katakanaE":       katakanaELvl--;    break;
-               case "katakanaO":       katakanaOLvl--;    break;
-               case "katakanaKa":      katakanaKaLvl--;     break;
-               case "katakanaKi":      katakanaKiLvl--;     break;
-               case "katakanaKu":      katakanaKuLvl--;     break;
-               case "katakanaKe":      katakanaKeLvl--;     break;
-               case "katakanaKo":      katakanaKoLvl--;     break;
-               case "katakanaSa":      katakanaSaLvl--;     break;
-               case "katakanaShi":     katakanaShiLvl--;    break;
-               case "katakanaSu":      katakanaSuLvl--;     break;
-               case "katakanaSe":      katakanaSeLvl--;     break;
-               case "katakanaSo":      katakanaSoLvl--;     break;
-               case "katakanaTa":      katakanaTaLvl--;     break;
-               case "katakanaChi":     katakanaChiLvl--;    break;
-               case "katakanaTsu":     katakanaTsuLvl--;    break;
-               case "katakanaTe":      katakanaTeLvl--;     break;
-               case "katakanaTo":      katakanaToLvl--;     break;
-               case "katakanaNa":      katakanaNaLvl--;     break;
-               case "katakanaNi":      katakanaNiLvl--;     break;
-               case "katakanaNu":      katakanaNuLvl--;     break;
-               case "katakanaNe":      katakanaNeLvl--;     break;
-               case "katakanaNo":      katakanaNoLvl--;     break;
-               case "katakanaHa":      katakanaHaLvl--;     break;
-               case "katakanaHi":      katakanaHiLvl--;     break;
-               case "katakanaHu":      katakanaHuLvl--;     break;
-               case "katakanaHe":      katakanaHeLvl--;     break;
-               case "katakanaHo":      katakanaHoLvl--;     break;
-               case "katakanaMa":      katakanaMaLvl--;     break;
-               case "katakanaMi":      katakanaMiLvl--;     break;
-               case "katakanaMu":      katakanaMuLvl--;     break;
-               case "katakanaMe":      katakanaMeLvl--;     break;
-               case "katakanaMo":      katakanaMoLvl--;     break;
-               case "katakanaRa":      katakanaRaLvl--;     break;
-               case "katakanaRi":      katakanaRiLvl--;     break;
-               case "katakanaRu":      katakanaRuLvl--;     break;
-               case "katakanaRe":      katakanaReLvl--;     break;
-               case "katakanaRo":      katakanaRoLvl--;     break;
-               case "katakanaYa":      katakanaYaLvl--;     break;
-               case "katakanaYu":      katakanaYuLvl--;     break;
-               case "katakanaYo":      katakanaYoLvl--;     break;
-               case "katakanaWa":      katakanaWaLvl--;     break;
-               case "katakanaWo":      katakanaWoLvl--;     break;
-               case "katakanaN":       katakanaNLvl--;      break;
-               case "katakanaGa":      katakanaGaLvl--;     break;
-               case "katakanaGi":      katakanaGiLvl--;     break;
-               case "katakanaGu":      katakanaGuLvl--;     break;
-               case "katakanaGe":      katakanaGeLvl--;     break;
-               case "katakanaGo":      katakanaGoLvl--;     break;
-               case "katakanaZa":      katakanaZaLvl--;     break;
-               case "katakanaJi":      katakanaJiLvl--;     break;
-               case "katakanaZu":      katakanaZuLvl--;     break;
-               case "katakanaZe":      katakanaZeLvl--;     break;
-               case "katakanaZo":      katakanaZoLvl--;     break;
-               case "katakanaDa":      katakanaDaLvl--;     break;
-               case "katakanaDi":      katakanaDiLvl--;     break;
-               case "katakanaDu":      katakanaDuLvl--;     break;
-               case "katakanaDe":      katakanaDeLvl--;     break;
-               case "katakanaDo":      katakanaDoLvl--;     break;
-               case "katakanaBa":      katakanaBaLvl--;     break;
-               case "katakanaBi":      katakanaBiLvl--;     break;
-               case "katakanaBu":      katakanaBuLvl--;     break;
-               case "katakanaBe":      katakanaBeLvl--;     break;
-               case "katakanaBo":      katakanaBoLvl--;     break;
-               case "katakanaPa":      katakanaPaLvl--;     break;
-               case "katakanaPi":      katakanaPiLvl--;     break;
-               case "katakanaPu":      katakanaPuLvl--;     break;
-               case "katakanaPe":      katakanaPeLvl--;     break;
-               case "katakanaPo":      katakanaPoLvl--;     break;
-               case "katakanaKya":     katakanaKyaLvl--;     break;
-               case "katakanaKyu":     katakanaKyuLvl--;     break;
-               case "katakanaKyo":     katakanaKyoLvl--;     break;
-               case "katakanaSha":     katakanaShaLvl--;     break;
-               case "katakanaShu":     katakanaShuLvl--;     break;
-               case "katakanaSho":     katakanaShoLvl--;     break;
-               case "katakanaCha":     katakanaChaLvl--;     break;
-               case "katakanaChu":     katakanaChuLvl--;     break;
-               case "katakanaCho":     katakanaChoLvl--;     break;
-               case "katakanaHya":     katakanaHyaLvl--;     break;
-               case "katakanaHyu":     katakanaHyuLvl--;     break;
-               case "katakanaHyo":     katakanaHyoLvl--;     break;
-               case "katakanaNya":     katakanaNyaLvl--;     break;
-               case "katakanaNyu":     katakanaNyuLvl--;     break;
-               case "katakanaNyo":     katakanaNyoLvl--;     break;
-               case "katakanaMya":     katakanaMyaLvl--;     break;
-               case "katakanaMyu":     katakanaMyuLvl--;     break;
-               case "katakanaMyo":     katakanaMyoLvl--;     break;
-               case "katakanaRya":     katakanaRyaLvl--;     break;
-               case "katakanaRyu":     katakanaRyuLvl--;     break;
-               case "katakanaRyo":     katakanaRyoLvl--;     break;
-               case "katakanaGya":     katakanaGyaLvl--;     break;
-               case "katakanaGyu":     katakanaGyuLvl--;     break;
-               case "katakanaGyo":     katakanaGyoLvl--;     break;
-               case "katakanaJya":     katakanaJyaLvl--;     break;
-               case "katakanaJyu":     katakanaJyuLvl--;     break;
-               case "katakanaJyo":     katakanaJyoLvl--;     break;
-               case "katakanaDya":     katakanaDyaLvl--;     break;
-               case "katakanaDyu":     katakanaDyuLvl--;     break;
-               case "katakanaDyo":     katakanaDyoLvl--;     break;
-               case "katakanaBya":     katakanaByaLvl--;     break;
-               case "katakanaByu":     katakanaByuLvl--;     break;
-               case "katakanaByo":     katakanaByoLvl--;     break;
-               case "katakanaPya":     katakanaPyaLvl--;     break;
-               case "katakanaPyu":     katakanaPyuLvl--;     break;
-               case "katakanaPyo":     katakanaPyoLvl--;     break;
-               default: break;
+                case "hiraganaA":         hiraganaALvl = MathUtils.clamp(takeOff -    hiraganaALvl, 1, 4);    break;
+                case "hiraganaI":         hiraganaILvl = MathUtils.clamp(takeOff -    hiraganaILvl, 1, 4);    break;
+                case "hiraganaU":         hiraganaULvl = MathUtils.clamp(takeOff -    hiraganaULvl, 1, 4);    break;
+                case "hiraganaE":         hiraganaELvl = MathUtils.clamp(takeOff -    hiraganaELvl, 1, 4);    break;
+                case "hiraganaO":         hiraganaOLvl = MathUtils.clamp(takeOff -    hiraganaOLvl, 1, 4);    break;
+                case "hiraganaKa":       hiraganaKaLvl = MathUtils.clamp(takeOff -   hiraganaKaLvl, 1, 4);    break;
+                case "hiraganaKi":       hiraganaKiLvl = MathUtils.clamp(takeOff -   hiraganaKiLvl, 1, 4);    break;
+                case "hiraganaKu":       hiraganaKuLvl = MathUtils.clamp(takeOff -   hiraganaKuLvl, 1, 4);    break;
+                case "hiraganaKe":       hiraganaKeLvl = MathUtils.clamp(takeOff -   hiraganaKeLvl, 1, 4);    break;
+                case "hiraganaKo":       hiraganaKoLvl = MathUtils.clamp(takeOff -   hiraganaKoLvl, 1, 4);    break;
+                case "hiraganaSa":       hiraganaSaLvl = MathUtils.clamp(takeOff -   hiraganaSaLvl, 1, 4);    break;
+                case "hiraganaShi":     hiraganaShiLvl = MathUtils.clamp(takeOff -  hiraganaShiLvl, 1, 4);    break;
+                case "hiraganaSu":       hiraganaSuLvl = MathUtils.clamp(takeOff -   hiraganaSuLvl, 1, 4);    break;
+                case "hiraganaSe":       hiraganaSeLvl = MathUtils.clamp(takeOff -   hiraganaSeLvl, 1, 4);    break;
+                case "hiraganaSo":       hiraganaSoLvl = MathUtils.clamp(takeOff -   hiraganaSoLvl, 1, 4);    break;
+                case "hiraganaTa":       hiraganaTaLvl = MathUtils.clamp(takeOff -   hiraganaTaLvl, 1, 4);    break;
+                case "hiraganaChi":     hiraganaChiLvl = MathUtils.clamp(takeOff -  hiraganaChiLvl, 1, 4);    break;
+                case "hiraganaTsu":     hiraganaTsuLvl = MathUtils.clamp(takeOff -  hiraganaTsuLvl, 1, 4);    break;
+                case "hiraganaTe":       hiraganaTeLvl = MathUtils.clamp(takeOff -   hiraganaTeLvl, 1, 4);    break;
+                case "hiraganaTo":       hiraganaToLvl = MathUtils.clamp(takeOff -   hiraganaToLvl, 1, 4);    break;
+                case "hiraganaNa":       hiraganaNaLvl = MathUtils.clamp(takeOff -   hiraganaNaLvl, 1, 4);    break;
+                case "hiraganaNi":       hiraganaNiLvl = MathUtils.clamp(takeOff -   hiraganaNiLvl, 1, 4);    break;
+                case "hiraganaNu":       hiraganaNuLvl = MathUtils.clamp(takeOff -   hiraganaNuLvl, 1, 4);    break;
+                case "hiraganaNe":       hiraganaNeLvl = MathUtils.clamp(takeOff -   hiraganaNeLvl, 1, 4);    break;
+                case "hiraganaNo":       hiraganaNoLvl = MathUtils.clamp(takeOff -   hiraganaNoLvl, 1, 4);    break;
+                case "hiraganaHa":       hiraganaHaLvl = MathUtils.clamp(takeOff -   hiraganaHaLvl, 1, 4);    break;
+                case "hiraganaHi":       hiraganaHiLvl = MathUtils.clamp(takeOff -   hiraganaHiLvl, 1, 4);    break;
+                case "hiraganaHu":       hiraganaHuLvl = MathUtils.clamp(takeOff -   hiraganaHuLvl, 1, 4);    break;
+                case "hiraganaHe":       hiraganaHeLvl = MathUtils.clamp(takeOff -   hiraganaHeLvl, 1, 4);    break;
+                case "hiraganaHo":       hiraganaHoLvl = MathUtils.clamp(takeOff -   hiraganaHoLvl, 1, 4);    break;
+                case "hiraganaMa":       hiraganaMaLvl = MathUtils.clamp(takeOff -   hiraganaMaLvl, 1, 4);    break;
+                case "hiraganaMi":       hiraganaMiLvl = MathUtils.clamp(takeOff -   hiraganaMiLvl, 1, 4);    break;
+                case "hiraganaMu":       hiraganaMuLvl = MathUtils.clamp(takeOff -   hiraganaMuLvl, 1, 4);    break;
+                case "hiraganaMe":       hiraganaMeLvl = MathUtils.clamp(takeOff -   hiraganaMeLvl, 1, 4);    break;
+                case "hiraganaMo":       hiraganaMoLvl = MathUtils.clamp(takeOff -   hiraganaMoLvl, 1, 4);    break;
+                case "hiraganaRa":       hiraganaRaLvl = MathUtils.clamp(takeOff -   hiraganaRaLvl, 1, 4);    break;
+                case "hiraganaRi":       hiraganaRiLvl = MathUtils.clamp(takeOff -   hiraganaRiLvl, 1, 4);    break;
+                case "hiraganaRu":       hiraganaRuLvl = MathUtils.clamp(takeOff -   hiraganaRuLvl, 1, 4);    break;
+                case "hiraganaRe":       hiraganaReLvl = MathUtils.clamp(takeOff -   hiraganaReLvl, 1, 4);    break;
+                case "hiraganaRo":       hiraganaRoLvl = MathUtils.clamp(takeOff -   hiraganaRoLvl, 1, 4);    break;
+                case "hiraganaYa":       hiraganaYaLvl = MathUtils.clamp(takeOff -   hiraganaYaLvl, 1, 4);    break;
+                case "hiraganaYu":       hiraganaYuLvl = MathUtils.clamp(takeOff -   hiraganaYuLvl, 1, 4);    break;
+                case "hiraganaYo":       hiraganaYoLvl = MathUtils.clamp(takeOff -   hiraganaYoLvl, 1, 4);    break;
+                case "hiraganaWa":       hiraganaWaLvl = MathUtils.clamp(takeOff -   hiraganaWaLvl, 1, 4);    break;
+                case "hiraganaWo":       hiraganaWoLvl = MathUtils.clamp(takeOff -   hiraganaWoLvl, 1, 4);    break;
+                case "hiraganaN":         hiraganaNLvl = MathUtils.clamp(takeOff -    hiraganaNLvl, 1, 4);    break;
+                case "hiraganaGa":       hiraganaGaLvl = MathUtils.clamp(takeOff -   hiraganaGaLvl, 1, 4);    break;
+                case "hiraganaGi":       hiraganaGiLvl = MathUtils.clamp(takeOff -   hiraganaGiLvl, 1, 4);    break;
+                case "hiraganaGu":       hiraganaGuLvl = MathUtils.clamp(takeOff -   hiraganaGuLvl, 1, 4);    break;
+                case "hiraganaGe":       hiraganaGeLvl = MathUtils.clamp(takeOff -   hiraganaGeLvl, 1, 4);    break;
+                case "hiraganaGo":       hiraganaGoLvl = MathUtils.clamp(takeOff -   hiraganaGoLvl, 1, 4);    break;
+                case "hiraganaZa":       hiraganaZaLvl = MathUtils.clamp(takeOff -   hiraganaZaLvl, 1, 4);    break;
+                case "hiraganaJi":       hiraganaJiLvl = MathUtils.clamp(takeOff -   hiraganaJiLvl, 1, 4);    break;
+                case "hiraganaZu":       hiraganaZuLvl = MathUtils.clamp(takeOff -   hiraganaZuLvl, 1, 4);    break;
+                case "hiraganaZe":       hiraganaZeLvl = MathUtils.clamp(takeOff -   hiraganaZeLvl, 1, 4);    break;
+                case "hiraganaZo":       hiraganaZoLvl = MathUtils.clamp(takeOff -   hiraganaZoLvl, 1, 4);    break;
+                case "hiraganaDa":       hiraganaDaLvl = MathUtils.clamp(takeOff -   hiraganaDaLvl, 1, 4);    break;
+                case "hiraganaDi":       hiraganaDiLvl = MathUtils.clamp(takeOff -   hiraganaDiLvl, 1, 4);    break;
+                case "hiraganaDu":       hiraganaDuLvl = MathUtils.clamp(takeOff -   hiraganaDuLvl, 1, 4);    break;
+                case "hiraganaDe":       hiraganaDeLvl = MathUtils.clamp(takeOff -   hiraganaDeLvl, 1, 4);    break;
+                case "hiraganaDo":       hiraganaDoLvl = MathUtils.clamp(takeOff -   hiraganaDoLvl, 1, 4);    break;
+                case "hiraganaBa":       hiraganaBaLvl = MathUtils.clamp(takeOff -   hiraganaBaLvl, 1, 4);    break;
+                case "hiraganaBi":       hiraganaBiLvl = MathUtils.clamp(takeOff -   hiraganaBiLvl, 1, 4);    break;
+                case "hiraganaBu":       hiraganaBuLvl = MathUtils.clamp(takeOff -   hiraganaBuLvl, 1, 4);    break;
+                case "hiraganaBe":       hiraganaBeLvl = MathUtils.clamp(takeOff -   hiraganaBeLvl, 1, 4);    break;
+                case "hiraganaBo":       hiraganaBoLvl = MathUtils.clamp(takeOff -   hiraganaBoLvl, 1, 4);    break;
+                case "hiraganaPa":       hiraganaPaLvl = MathUtils.clamp(takeOff -   hiraganaPaLvl, 1, 4);    break;
+                case "hiraganaPi":       hiraganaPiLvl = MathUtils.clamp(takeOff -   hiraganaPiLvl, 1, 4);    break;
+                case "hiraganaPu":       hiraganaPuLvl = MathUtils.clamp(takeOff -   hiraganaPuLvl, 1, 4);    break;
+                case "hiraganaPe":       hiraganaPeLvl = MathUtils.clamp(takeOff -   hiraganaPeLvl, 1, 4);    break;
+                case "hiraganaPo":       hiraganaPoLvl = MathUtils.clamp(takeOff -   hiraganaPoLvl, 1, 4);    break;
+                case "hiraganaKya":     hiraganaKyaLvl = MathUtils.clamp(takeOff -  hiraganaKyaLvl, 1, 4);    break;
+                case "hiraganaKyu":     hiraganaKyuLvl = MathUtils.clamp(takeOff -  hiraganaKyuLvl, 1, 4);    break;
+                case "hiraganaKyo":     hiraganaKyoLvl = MathUtils.clamp(takeOff -  hiraganaKyoLvl, 1, 4);    break;
+                case "hiraganaSha":     hiraganaShaLvl = MathUtils.clamp(takeOff -  hiraganaShaLvl, 1, 4);    break;
+                case "hiraganaShu":     hiraganaShuLvl = MathUtils.clamp(takeOff -  hiraganaShuLvl, 1, 4);    break;
+                case "hiraganaSho":     hiraganaShoLvl = MathUtils.clamp(takeOff -  hiraganaShoLvl, 1, 4);    break;
+                case "hiraganaCha":     hiraganaChaLvl = MathUtils.clamp(takeOff -  hiraganaChaLvl, 1, 4);    break;
+                case "hiraganaChu":     hiraganaChuLvl = MathUtils.clamp(takeOff -  hiraganaChuLvl, 1, 4);    break;
+                case "hiraganaCho":     hiraganaChoLvl = MathUtils.clamp(takeOff -  hiraganaChoLvl, 1, 4);    break;
+                case "hiraganaHya":     hiraganaHyaLvl = MathUtils.clamp(takeOff -  hiraganaHyaLvl, 1, 4);    break;
+                case "hiraganaHyu":     hiraganaHyuLvl = MathUtils.clamp(takeOff -  hiraganaHyuLvl, 1, 4);    break;
+                case "hiraganaHyo":     hiraganaHyoLvl = MathUtils.clamp(takeOff -  hiraganaHyoLvl, 1, 4);    break;
+                case "hiraganaNya":     hiraganaNyaLvl = MathUtils.clamp(takeOff -  hiraganaNyaLvl, 1, 4);    break;
+                case "hiraganaNyu":     hiraganaNyuLvl = MathUtils.clamp(takeOff -  hiraganaNyuLvl, 1, 4);    break;
+                case "hiraganaNyo":     hiraganaNyoLvl = MathUtils.clamp(takeOff -  hiraganaNyoLvl, 1, 4);    break;
+                case "hiraganaMya":     hiraganaMyaLvl = MathUtils.clamp(takeOff -  hiraganaMyaLvl, 1, 4);    break;
+                case "hiraganaMyu":     hiraganaMyuLvl = MathUtils.clamp(takeOff -  hiraganaMyuLvl, 1, 4);    break;
+                case "hiraganaMyo":     hiraganaMyoLvl = MathUtils.clamp(takeOff -  hiraganaMyoLvl, 1, 4);    break;
+                case "hiraganaRya":     hiraganaRyaLvl = MathUtils.clamp(takeOff -  hiraganaRyaLvl, 1, 4);    break;
+                case "hiraganaRyu":     hiraganaRyuLvl = MathUtils.clamp(takeOff -  hiraganaRyuLvl, 1, 4);    break;
+                case "hiraganaRyo":     hiraganaRyoLvl = MathUtils.clamp(takeOff -  hiraganaRyoLvl, 1, 4);    break;
+                case "hiraganaGya":     hiraganaGyaLvl = MathUtils.clamp(takeOff -  hiraganaGyaLvl, 1, 4);    break;
+                case "hiraganaGyu":     hiraganaGyuLvl = MathUtils.clamp(takeOff -  hiraganaGyuLvl, 1, 4);    break;
+                case "hiraganaGyo":     hiraganaGyoLvl = MathUtils.clamp(takeOff -  hiraganaGyoLvl, 1, 4);    break;
+                case "hiraganaJya":     hiraganaJyaLvl = MathUtils.clamp(takeOff -  hiraganaJyaLvl, 1, 4);    break;
+                case "hiraganaJyu":     hiraganaJyuLvl = MathUtils.clamp(takeOff -  hiraganaJyuLvl, 1, 4);    break;
+                case "hiraganaJyo":     hiraganaJyoLvl = MathUtils.clamp(takeOff -  hiraganaJyoLvl, 1, 4);    break;
+                case "hiraganaDya":     hiraganaDyaLvl = MathUtils.clamp(takeOff -  hiraganaDyaLvl, 1, 4);    break;
+                case "hiraganaDyu":     hiraganaDyuLvl = MathUtils.clamp(takeOff -  hiraganaDyuLvl, 1, 4);    break;
+                case "hiraganaDyo":     hiraganaDyoLvl = MathUtils.clamp(takeOff -  hiraganaDyoLvl, 1, 4);    break;
+                case "hiraganaBya":     hiraganaByaLvl = MathUtils.clamp(takeOff -  hiraganaByaLvl, 1, 4);    break;
+                case "hiraganaByu":     hiraganaByuLvl = MathUtils.clamp(takeOff -  hiraganaByuLvl, 1, 4);    break;
+                case "hiraganaByo":     hiraganaByoLvl = MathUtils.clamp(takeOff -  hiraganaByoLvl, 1, 4);    break;
+                case "hiraganaPya":     hiraganaPyaLvl = MathUtils.clamp(takeOff -  hiraganaPyaLvl, 1, 4);    break;
+                case "hiraganaPyu":     hiraganaPyuLvl = MathUtils.clamp(takeOff -  hiraganaPyuLvl, 1, 4);    break;
+                case "hiraganaPyo":     hiraganaPyoLvl = MathUtils.clamp(takeOff -  hiraganaPyoLvl, 1, 4);    break;
+                case "katakanaA":         katakanaALvl = MathUtils.clamp(takeOff -    katakanaALvl, 1, 4);    break;
+                case "katakanaI":         katakanaILvl = MathUtils.clamp(takeOff -    katakanaILvl, 1, 4);    break;
+                case "katakanaU":         katakanaULvl = MathUtils.clamp(takeOff -    katakanaULvl, 1, 4);    break;
+                case "katakanaE":         katakanaELvl = MathUtils.clamp(takeOff -    katakanaELvl, 1, 4);    break;
+                case "katakanaO":         katakanaOLvl = MathUtils.clamp(takeOff -    katakanaOLvl, 1, 4);    break;
+                case "katakanaKa":       katakanaKaLvl = MathUtils.clamp(takeOff -   katakanaKaLvl, 1, 4);    break;
+                case "katakanaKi":       katakanaKiLvl = MathUtils.clamp(takeOff -   katakanaKiLvl, 1, 4);    break;
+                case "katakanaKu":       katakanaKuLvl = MathUtils.clamp(takeOff -   katakanaKuLvl, 1, 4);    break;
+                case "katakanaKe":       katakanaKeLvl = MathUtils.clamp(takeOff -   katakanaKeLvl, 1, 4);    break;
+                case "katakanaKo":       katakanaKoLvl = MathUtils.clamp(takeOff -   katakanaKoLvl, 1, 4);    break;
+                case "katakanaSa":       katakanaSaLvl = MathUtils.clamp(takeOff -   katakanaSaLvl, 1, 4);    break;
+                case "katakanaLvlShi":  katakanaShiLvl = MathUtils.clamp(takeOff -  katakanaShiLvl, 1, 4);    break;
+                case "katakanaLvlSu":   katakanaSuLvl = MathUtils.clamp(takeOff -    katakanaSuLvl, 1, 4);    break;
+                case "katakanaLvlSe":    katakanaSeLvl = MathUtils.clamp(takeOff -   katakanaSeLvl, 1, 4);    break;
+                case "katakanaLvlSo":    katakanaSoLvl = MathUtils.clamp(takeOff -   katakanaSoLvl, 1, 4);    break;
+                case "katakanaLvlTa":    katakanaTaLvl = MathUtils.clamp(takeOff -   katakanaTaLvl, 1, 4);    break;
+                case "katakanaLvlChi":  katakanaChiLvl = MathUtils.clamp(takeOff -  katakanaChiLvl, 1, 4);    break;
+                case "katakanaLvlTsu":  katakanaTsuLvl = MathUtils.clamp(takeOff -  katakanaTsuLvl, 1, 4);    break;
+                case "katakanaLvlTe":    katakanaTeLvl = MathUtils.clamp(takeOff -   katakanaTeLvl, 1, 4);    break;
+                case "katakanaLvlTo":    katakanaToLvl = MathUtils.clamp(takeOff -   katakanaToLvl, 1, 4);    break;
+                case "katakanaLvlNa":    katakanaNaLvl = MathUtils.clamp(takeOff -   katakanaNaLvl, 1, 4);    break;
+                case "katakanaLvlNi":    katakanaNiLvl = MathUtils.clamp(takeOff -   katakanaNiLvl, 1, 4);    break;
+                case "katakanaLvlNu":    katakanaNuLvl = MathUtils.clamp(takeOff -   katakanaNuLvl, 1, 4);    break;
+                case "katakanaLvlNe":    katakanaNeLvl = MathUtils.clamp(takeOff -   katakanaNeLvl, 1, 4);    break;
+                case "katakanaLvlNo":    katakanaNoLvl = MathUtils.clamp(takeOff -   katakanaNoLvl, 1, 4);    break;
+                case "katakanaLvlHa":    katakanaHaLvl = MathUtils.clamp(takeOff -   katakanaHaLvl, 1, 4);    break;
+                case "katakanaLvlHi":    katakanaHiLvl = MathUtils.clamp(takeOff -   katakanaHiLvl, 1, 4);    break;
+                case "katakanaLvlHu":    katakanaHuLvl = MathUtils.clamp(takeOff -   katakanaHuLvl, 1, 4);    break;
+                case "katakanaLvlHe":    katakanaHeLvl = MathUtils.clamp(takeOff -   katakanaHeLvl, 1, 4);    break;
+                case "katakanaLvlHo":    katakanaHoLvl = MathUtils.clamp(takeOff -   katakanaHoLvl, 1, 4);    break;
+                case "katakanaLvlMa":    katakanaMaLvl = MathUtils.clamp(takeOff -   katakanaMaLvl, 1, 4);    break;
+                case "katakanaLvlMi":    katakanaMiLvl = MathUtils.clamp(takeOff -   katakanaMiLvl, 1, 4);    break;
+                case "katakanaLvlMu":    katakanaMuLvl = MathUtils.clamp(takeOff -   katakanaMuLvl, 1, 4);    break;
+                case "katakanaLvlMe":    katakanaMeLvl = MathUtils.clamp(takeOff -   katakanaMeLvl, 1, 4);    break;
+                case "katakanaLvlMo":    katakanaMoLvl = MathUtils.clamp(takeOff -   katakanaMoLvl, 1, 4);    break;
+                case "katakanaLvlRa":    katakanaRaLvl = MathUtils.clamp(takeOff -   katakanaRaLvl, 1, 4);    break;
+                case "katakanaLvlRi":    katakanaRiLvl = MathUtils.clamp(takeOff -   katakanaRiLvl, 1, 4);    break;
+                case "katakanaLvlRu":    katakanaRuLvl = MathUtils.clamp(takeOff -   katakanaRuLvl, 1, 4);    break;
+                case "katakanaLvlRe":    katakanaReLvl = MathUtils.clamp(takeOff -   katakanaReLvl, 1, 4);    break;
+                case "katakanaLvlRo":    katakanaRoLvl = MathUtils.clamp(takeOff -   katakanaRoLvl, 1, 4);    break;
+                case "katakanaLvlYa":    katakanaYaLvl = MathUtils.clamp(takeOff -   katakanaYaLvl, 1, 4);    break;
+                case "katakanaLvlYu":    katakanaYuLvl = MathUtils.clamp(takeOff -   katakanaYuLvl, 1, 4);    break;
+                case "katakanaLvlYo":    katakanaYoLvl = MathUtils.clamp(takeOff -   katakanaYoLvl, 1, 4);    break;
+                case "katakanaLvlWa":    katakanaWaLvl = MathUtils.clamp(takeOff -   katakanaWaLvl, 1, 4);    break;
+                case "katakanaLvlWo":    katakanaWoLvl = MathUtils.clamp(takeOff -   katakanaWoLvl, 1, 4);    break;
+                case "katakanaLvlN":      katakanaNLvl = MathUtils.clamp(takeOff -    katakanaNLvl, 1, 4);    break;
+                case "katakanaLvlGa":    katakanaGaLvl = MathUtils.clamp(takeOff -   katakanaGaLvl, 1, 4);    break;
+                case "katakanaLvlGi":    katakanaGiLvl = MathUtils.clamp(takeOff -   katakanaGiLvl, 1, 4);    break;
+                case "katakanaLvlGu":    katakanaGuLvl = MathUtils.clamp(takeOff -   katakanaGuLvl, 1, 4);    break;
+                case "katakanaLvlGe":    katakanaGeLvl = MathUtils.clamp(takeOff -   katakanaGeLvl, 1, 4);    break;
+                case "katakanaLvlGo":    katakanaGoLvl = MathUtils.clamp(takeOff -   katakanaGoLvl, 1, 4);    break;
+                case "katakanaLvlZa":    katakanaZaLvl = MathUtils.clamp(takeOff -   katakanaZaLvl, 1, 4);    break;
+                case "katakanaLvlJi":    katakanaJiLvl = MathUtils.clamp(takeOff -   katakanaJiLvl, 1, 4);    break;
+                case "katakanaLvlZu":    katakanaZuLvl = MathUtils.clamp(takeOff -   katakanaZuLvl, 1, 4);    break;
+                case "katakanaLvlZe":    katakanaZeLvl = MathUtils.clamp(takeOff -   katakanaZeLvl, 1, 4);    break;
+                case "katakanaLvlZo":    katakanaZoLvl = MathUtils.clamp(takeOff -   katakanaZoLvl, 1, 4);    break;
+                case "katakanaLvlDa":    katakanaDaLvl = MathUtils.clamp(takeOff -   katakanaDaLvl, 1, 4);    break;
+                case "katakanaLvlDi":    katakanaDiLvl = MathUtils.clamp(takeOff -   katakanaDiLvl, 1, 4);    break;
+                case "katakanaLvlDu":    katakanaDuLvl = MathUtils.clamp(takeOff -   katakanaDuLvl, 1, 4);    break;
+                case "katakanaLvlDe":    katakanaDeLvl = MathUtils.clamp(takeOff -   katakanaDeLvl, 1, 4);    break;
+                case "katakanaLvlDo":    katakanaDoLvl = MathUtils.clamp(takeOff -   katakanaDoLvl, 1, 4);    break;
+                case "katakanaLvlBa":    katakanaBaLvl = MathUtils.clamp(takeOff -   katakanaBaLvl, 1, 4);    break;
+                case "katakanaLvlBi":    katakanaBiLvl = MathUtils.clamp(takeOff -   katakanaBiLvl, 1, 4);    break;
+                case "katakanaLvlBu":    katakanaBuLvl = MathUtils.clamp(takeOff -   katakanaBuLvl, 1, 4);    break;
+                case "katakanaLvlBe":    katakanaBeLvl = MathUtils.clamp(takeOff -   katakanaBeLvl, 1, 4);    break;
+                case "katakanaLvlBo":    katakanaBoLvl = MathUtils.clamp(takeOff -   katakanaBoLvl, 1, 4);    break;
+                case "katakanaLvlPa":    katakanaPaLvl = MathUtils.clamp(takeOff -   katakanaPaLvl, 1, 4);    break;
+                case "katakanaLvlPi":    katakanaPiLvl = MathUtils.clamp(takeOff -   katakanaPiLvl, 1, 4);    break;
+                case "katakanaLvlPu":    katakanaPuLvl = MathUtils.clamp(takeOff -   katakanaPuLvl, 1, 4);    break;
+                case "katakanaLvlPe":    katakanaPeLvl = MathUtils.clamp(takeOff -   katakanaPeLvl, 1, 4);    break;
+                case "katakanaLvlPo":    katakanaPoLvl = MathUtils.clamp(takeOff -   katakanaPoLvl, 1, 4);    break;
+                case "katakanaLvlKya":  katakanaKyaLvl = MathUtils.clamp(takeOff -  katakanaKyaLvl, 1, 4);    break;
+                case "katakanaLvlKyu":  katakanaKyuLvl = MathUtils.clamp(takeOff -  katakanaKyuLvl, 1, 4);    break;
+                case "katakanaLvlKyo":  katakanaKyoLvl = MathUtils.clamp(takeOff -  katakanaKyoLvl, 1, 4);    break;
+                case "katakanaLvlSha":  katakanaShaLvl = MathUtils.clamp(takeOff -  katakanaShaLvl, 1, 4);    break;
+                case "katakanaLvlShu":  katakanaShuLvl = MathUtils.clamp(takeOff -  katakanaShuLvl, 1, 4);    break;
+                case "katakanaLvlSho":  katakanaShoLvl = MathUtils.clamp(takeOff -  katakanaShoLvl, 1, 4);    break;
+                case "katakanaLvlCha":  katakanaChaLvl = MathUtils.clamp(takeOff -  katakanaChaLvl, 1, 4);    break;
+                case "katakanaLvlChu":  katakanaChuLvl = MathUtils.clamp(takeOff -  katakanaChuLvl, 1, 4);    break;
+                case "katakanaLvlCho":  katakanaChoLvl = MathUtils.clamp(takeOff -  katakanaChoLvl, 1, 4);    break;
+                case "katakanaLvlHya":  katakanaHyaLvl = MathUtils.clamp(takeOff -  katakanaHyaLvl, 1, 4);    break;
+                case "katakanaLvlHyu":  katakanaHyuLvl = MathUtils.clamp(takeOff -  katakanaHyuLvl, 1, 4);    break;
+                case "katakanaLvlHyo":  katakanaHyoLvl = MathUtils.clamp(takeOff -  katakanaHyoLvl, 1, 4);    break;
+                case "katakanaLvlNya":  katakanaNyaLvl = MathUtils.clamp(takeOff -  katakanaNyaLvl, 1, 4);    break;
+                case "katakanaLvlNyu":  katakanaNyuLvl = MathUtils.clamp(takeOff -  katakanaNyuLvl, 1, 4);    break;
+                case "katakanaLvlNyo":  katakanaNyoLvl = MathUtils.clamp(takeOff -  katakanaNyoLvl, 1, 4);    break;
+                case "katakanaLvlMya":  katakanaMyaLvl = MathUtils.clamp(takeOff -  katakanaMyaLvl, 1, 4);    break;
+                case "katakanaLvlMyu":  katakanaMyuLvl = MathUtils.clamp(takeOff -  katakanaMyuLvl, 1, 4);    break;
+                case "katakanaLvlMyo":  katakanaMyoLvl = MathUtils.clamp(takeOff -  katakanaMyoLvl, 1, 4);    break;
+                case "katakanaLvlRya":  katakanaRyaLvl = MathUtils.clamp(takeOff -  katakanaRyaLvl, 1, 4);    break;
+                case "katakanaLvlRyu":  katakanaRyuLvl = MathUtils.clamp(takeOff -  katakanaRyuLvl, 1, 4);    break;
+                case "katakanaLvlRyo":  katakanaRyoLvl = MathUtils.clamp(takeOff -  katakanaRyoLvl, 1, 4);    break;
+                case "katakanaLvlGya":  katakanaGyaLvl = MathUtils.clamp(takeOff -  katakanaGyaLvl, 1, 4);    break;
+                case "katakanaLvlGyu":  katakanaGyuLvl = MathUtils.clamp(takeOff -  katakanaGyuLvl, 1, 4);    break;
+                case "katakanaLvlGyo":  katakanaGyoLvl = MathUtils.clamp(takeOff -  katakanaGyoLvl, 1, 4);    break;
+                case "katakanaLvlJya":  katakanaJyaLvl = MathUtils.clamp(takeOff -  katakanaJyaLvl, 1, 4);    break;
+                case "katakanaLvlJyu":  katakanaJyuLvl = MathUtils.clamp(takeOff -  katakanaJyuLvl, 1, 4);    break;
+                case "katakanaLvlJyo":  katakanaJyoLvl = MathUtils.clamp(takeOff -  katakanaJyoLvl, 1, 4);    break;
+                case "katakanaLvlDya":  katakanaDyaLvl = MathUtils.clamp(takeOff -  katakanaDyaLvl, 1, 4);    break;
+                case "katakanaLvlDyu":  katakanaDyuLvl = MathUtils.clamp(takeOff -  katakanaDyuLvl, 1, 4);    break;
+                case "katakanaLvlDyo":  katakanaDyoLvl = MathUtils.clamp(takeOff -  katakanaDyoLvl, 1, 4);    break;
+                case "katakanaLvlBya":  katakanaByaLvl = MathUtils.clamp(takeOff -  katakanaByaLvl, 1, 4);    break;
+                case "katakanaLvlByu":  katakanaByuLvl = MathUtils.clamp(takeOff -  katakanaByuLvl, 1, 4);    break;
+                case "katakanaLvlByo":  katakanaByoLvl = MathUtils.clamp(takeOff -  katakanaByoLvl, 1, 4);    break;
+                case "katakanaLvlPya":  katakanaPyaLvl = MathUtils.clamp(takeOff -  katakanaPyaLvl, 1, 4);    break;
+                case "katakanaLvlPyu":  katakanaPyuLvl = MathUtils.clamp(takeOff -  katakanaPyuLvl, 1, 4);    break;
+                case "katakanaLvlPyo":  katakanaPyoLvl = MathUtils.clamp(takeOff -  katakanaPyoLvl, 1, 4);    break;
+                case "kanjiHa":          kanjiHaLvl = MathUtils.clamp(takeOff -      kanjiHaLvl, 1, 6);    break;
+                case "kanjiKi":          kanjiKiLvl = MathUtils.clamp(takeOff -      kanjiKiLvl, 1, 6);    break;
+                case "kanjiMushi":    kanjiMushiLvl = MathUtils.clamp(takeOff -   kanjiMushiLvl, 1, 6);    break;
+                case "kanjiKaze":      kanjiKazeLvl = MathUtils.clamp(takeOff -    kanjiKazeLvl, 1, 6);    break;
+                case "kanjiUchi":      kanjiUchiLvl = MathUtils.clamp(takeOff -    kanjiUchiLvl, 1, 6);    break;
+                case "kanjiUmi":        kanjiUmiLvl = MathUtils.clamp(takeOff -     kanjiUmiLvl, 1, 6);    break;
+                case "kanjiMizu":      kanjiMizuLvl = MathUtils.clamp(takeOff -    kanjiMizuLvl, 1, 6);    break;
+                case "kanjiIke":        kanjiIkeLvl = MathUtils.clamp(takeOff -     kanjiIkeLvl, 1, 6);    break;
+                case "kanjiKoori":    kanjiKooriLvl = MathUtils.clamp(takeOff -   kanjiKooriLvl, 1, 6);    break;
+                case "kanjiHayashi":kanjiHayashiLvl = MathUtils.clamp(takeOff - kanjiHayashiLvl, 1, 6);    break;
+                case "kanjiTo":          kanjiToLvl = MathUtils.clamp(takeOff -      kanjiToLvl, 1, 6);    break;
+                case "kanjiTera":      kanjiTeraLvl = MathUtils.clamp(takeOff -    kanjiTeraLvl, 1, 6);    break;
+                case "kanjiSoto":      kanjiSotoLvl = MathUtils.clamp(takeOff -    kanjiSotoLvl, 1, 6);    break;
+                case "kanjiHi":          kanjiHiLvl = MathUtils.clamp(takeOff -      kanjiHiLvl, 1, 6);    break;
+                case "kanjiAka":        kanjiAkaLvl = MathUtils.clamp(takeOff -     kanjiAkaLvl, 1, 6);    break;
+                case "kanjiHana":      kanjiHanaLvl = MathUtils.clamp(takeOff -    kanjiHanaLvl, 1, 6);    break;
+                case "kanjiMori":      kanjiMoriLvl = MathUtils.clamp(takeOff -    kanjiMoriLvl, 1, 6);    break;
+                case "kanjiIshi":      kanjiIshiLvl = MathUtils.clamp(takeOff -    kanjiIshiLvl, 1, 6);    break;
+                case "kanjiTsuchi":    kanjiTsuchiLvl = MathUtils.clamp(takeOff - kanjiTsuchiLvl, 1, 6);    break;
+                case "kanjiYama":      kanjiYamaLvl = MathUtils.clamp(takeOff -    kanjiYamaLvl, 1, 6);    break;
+                case "kanjiSakana":  kanjiSakanaLvl = MathUtils.clamp(takeOff -  kanjiSakanaLvl, 1, 6);    break;
+                case "kanjiKai":        kanjiKaiLvl = MathUtils.clamp(takeOff -     kanjiKaiLvl, 1, 6);    break;
+                case "kanjiYuki":      kanjiYukiLvl = MathUtils.clamp(takeOff -    kanjiYukiLvl, 1, 6);    break;
+                case "kanjiKawa":      kanjiKawaLvl = MathUtils.clamp(takeOff -    kanjiKawaLvl, 1, 6);    break;
+                case "kanjiFuyu":      kanjiFuyuLvl = MathUtils.clamp(takeOff -    kanjiFuyuLvl, 1, 6);    break;
+                case "kanjiMon":        kanjiMonLvl = MathUtils.clamp(takeOff -     kanjiMonLvl, 1, 6);    break;
+                case "kanjiAna":        kanjiAnaLvl = MathUtils.clamp(takeOff -     kanjiAnaLvl, 1, 6);    break;
+                case "kanjiKa":          kanjiKaLvl = MathUtils.clamp(takeOff -      kanjiKaLvl, 1, 6);    break;
+                case "kanjiChi":        kanjiChiLvl = MathUtils.clamp(takeOff -     kanjiChiLvl, 1, 6);    break;
+                case "kanjiHikari":  kanjiHikariLvl = MathUtils.clamp(takeOff -  kanjiHikariLvl, 1, 6);    break;
+                default: break;
 
           }
      }
@@ -834,305 +950,36 @@ public class LetterLvlCounter {
           return allHiraganaMemorised;
      }
 
-     public static void setAllHiraganaMemorisedToTrue(){
-
+     public static void allHiraganaMemorised(){
           allHiraganaMemorised = true;
-
-          hiraganaALvl = 3;      hiraganaKaLvl = 3;
-          hiraganaILvl = 3;      hiraganaKiLvl = 3;
-          hiraganaULvl = 3;      hiraganaKuLvl = 3;
-          hiraganaELvl = 3;      hiraganaKeLvl = 3;
-          hiraganaOLvl = 3;      hiraganaKoLvl = 3;
-
-          hiraganaSaLvl = 3;     hiraganaTaLvl = 3;
-          hiraganaShiLvl = 3;    hiraganaChiLvl = 3;
-          hiraganaSuLvl = 3;     hiraganaTsuLvl = 3;
-          hiraganaSeLvl = 3;     hiraganaTeLvl = 3;
-          hiraganaSoLvl = 3;     hiraganaToLvl = 3;
-
-          hiraganaNaLvl = 3;     hiraganaHaLvl = 3;
-          hiraganaNiLvl = 3;     hiraganaHiLvl = 3;
-          hiraganaNuLvl = 3;     hiraganaHuLvl = 3;
-          hiraganaNeLvl = 3;     hiraganaHeLvl = 3;
-          hiraganaNoLvl = 3;     hiraganaHoLvl = 3;
-
-          hiraganaMaLvl = 3;     hiraganaRaLvl = 3;
-          hiraganaMiLvl = 3;     hiraganaRiLvl = 3;
-          hiraganaMuLvl = 3;     hiraganaRuLvl = 3;
-          hiraganaMeLvl = 3;     hiraganaReLvl = 3;
-          hiraganaMoLvl = 3;     hiraganaRoLvl = 3;
-
-          hiraganaNLvl  = 3;
-
-          hiraganaGaLvl = 3;     hiraganaZaLvl = 3;
-          hiraganaGiLvl = 3;     hiraganaJiLvl = 3;
-          hiraganaGuLvl = 3;     hiraganaZuLvl = 3;
-          hiraganaGeLvl = 3;     hiraganaZeLvl = 3;
-          hiraganaGoLvl = 3;     hiraganaZoLvl = 3;
-
-          hiraganaDaLvl = 3;     hiraganaBaLvl = 3;
-          hiraganaDiLvl = 3;     hiraganaBiLvl = 3;
-          hiraganaDuLvl = 3;     hiraganaBuLvl = 3;
-          hiraganaDeLvl = 3;     hiraganaBeLvl = 3;
-          hiraganaDoLvl = 3;     hiraganaBoLvl = 3;
-
-          hiraganaPaLvl = 3;     hiraganaYaLvl = 3;
-          hiraganaPiLvl = 3;     hiraganaYuLvl = 3;
-          hiraganaPuLvl = 3;     hiraganaYoLvl = 3;
-          hiraganaPeLvl = 3;     hiraganaWaLvl = 3;
-          hiraganaPoLvl = 3;     hiraganaWoLvl = 3;
-
-          hiraganaKyaLvl = 3;    hiraganaShaLvl = 3;
-          hiraganaKyuLvl = 3;    hiraganaShuLvl = 3;
-          hiraganaKyoLvl = 3;    hiraganaShoLvl = 3;
-
-          hiraganaChaLvl = 3;    hiraganaHyaLvl = 3;
-          hiraganaChuLvl = 3;    hiraganaHyuLvl = 3;
-          hiraganaChoLvl = 3;    hiraganaHyoLvl = 3;
-
-          hiraganaNyaLvl = 3;    hiraganaMyaLvl = 3;
-          hiraganaNyuLvl = 3;    hiraganaMyuLvl = 3;
-          hiraganaNyoLvl = 3;    hiraganaMyoLvl = 3;
-
-          hiraganaRyaLvl = 3;    hiraganaGyaLvl = 3;
-          hiraganaRyuLvl = 3;    hiraganaGyuLvl = 3;
-          hiraganaRyoLvl = 3;    hiraganaGyoLvl = 3;
-
-          hiraganaJyaLvl = 3;    hiraganaDyaLvl = 3;
-          hiraganaJyuLvl = 3;    hiraganaDyuLvl = 3;
-          hiraganaJyoLvl = 3;    hiraganaDyoLvl = 3;
-
-          hiraganaByaLvl = 3;    hiraganaPyaLvl = 3;
-          hiraganaByuLvl = 3;    hiraganaPyuLvl = 3;
-          hiraganaByoLvl = 3;    hiraganaPyoLvl = 3;
-
      }
 
-     public static void setAllHiraganaMemorisedToFalse(){
-
+     public static void allHiraganaNotMemorised(){
           allHiraganaMemorised = false;
-
-          hiraganaALvl = 1;      hiraganaKaLvl = 1;
-          hiraganaILvl = 1;      hiraganaKiLvl = 1;
-          hiraganaULvl = 1;      hiraganaKuLvl = 1;
-          hiraganaELvl = 1;      hiraganaKeLvl = 1;
-          hiraganaOLvl = 1;      hiraganaKoLvl = 1;
-
-          hiraganaSaLvl = 1;     hiraganaTaLvl = 1;
-          hiraganaShiLvl = 1;    hiraganaChiLvl = 1;
-          hiraganaSuLvl = 1;     hiraganaTsuLvl = 1;
-          hiraganaSeLvl = 1;     hiraganaTeLvl = 1;
-          hiraganaSoLvl = 1;     hiraganaToLvl = 1;
-
-          hiraganaNaLvl = 1;     hiraganaHaLvl = 1;
-          hiraganaNiLvl = 1;     hiraganaHiLvl = 1;
-          hiraganaNuLvl = 1;     hiraganaHuLvl = 1;
-          hiraganaNeLvl = 1;     hiraganaHeLvl = 1;
-          hiraganaNoLvl = 1;     hiraganaHoLvl = 1;
-
-          hiraganaMaLvl = 1;     hiraganaRaLvl = 1;
-          hiraganaMiLvl = 1;     hiraganaRiLvl = 1;
-          hiraganaMuLvl = 1;     hiraganaRuLvl = 1;
-          hiraganaMeLvl = 1;     hiraganaReLvl = 1;
-          hiraganaMoLvl = 1;     hiraganaRoLvl = 1;
-
-          hiraganaNLvl  = 1;
-
-          hiraganaGaLvl = 1;     hiraganaZaLvl = 1;
-          hiraganaGiLvl = 1;     hiraganaJiLvl = 1;
-          hiraganaGuLvl = 1;     hiraganaZuLvl = 1;
-          hiraganaGeLvl = 1;     hiraganaZeLvl = 1;
-          hiraganaGoLvl = 1;     hiraganaZoLvl = 1;
-
-          hiraganaDaLvl = 1;     hiraganaBaLvl = 1;
-          hiraganaDiLvl = 1;     hiraganaBiLvl = 1;
-          hiraganaDuLvl = 1;     hiraganaBuLvl = 1;
-          hiraganaDeLvl = 1;     hiraganaBeLvl = 1;
-          hiraganaDoLvl = 1;     hiraganaBoLvl = 1;
-
-          hiraganaPaLvl = 1;     hiraganaYaLvl = 1;
-          hiraganaPiLvl = 1;     hiraganaYuLvl = 1;
-          hiraganaPuLvl = 1;     hiraganaYoLvl = 1;
-          hiraganaPeLvl = 1;     hiraganaWaLvl = 1;
-          hiraganaPoLvl = 1;     hiraganaWoLvl = 1;
-
-          hiraganaKyaLvl = 1;    hiraganaShaLvl = 1;
-          hiraganaKyuLvl = 1;    hiraganaShuLvl = 1;
-          hiraganaKyoLvl = 1;    hiraganaShoLvl = 1;
-
-          hiraganaChaLvl = 1;    hiraganaHyaLvl = 1;
-          hiraganaChuLvl = 1;    hiraganaHyuLvl = 1;
-          hiraganaChoLvl = 1;    hiraganaHyoLvl = 1;
-
-          hiraganaNyaLvl = 1;    hiraganaMyaLvl = 1;
-          hiraganaNyuLvl = 1;    hiraganaMyuLvl = 1;
-          hiraganaNyoLvl = 1;    hiraganaMyoLvl = 1;
-
-          hiraganaRyaLvl = 1;    hiraganaGyaLvl = 1;
-          hiraganaRyuLvl = 1;    hiraganaGyuLvl = 1;
-          hiraganaRyoLvl = 1;    hiraganaGyoLvl = 1;
-
-          hiraganaJyaLvl = 1;    hiraganaDyaLvl = 1;
-          hiraganaJyuLvl = 1;    hiraganaDyuLvl = 1;
-          hiraganaJyoLvl = 1;    hiraganaDyoLvl = 1;
-
-          hiraganaByaLvl = 1;    hiraganaPyaLvl = 1;
-          hiraganaByuLvl = 1;    hiraganaPyuLvl = 1;
-          hiraganaByoLvl = 1;    hiraganaPyoLvl = 1;
-
      }
 
      public static boolean areAllKatakanaMemorised(){
           return allKatakanaMemorised;
      }
 
-     public static void setAllkatakanaMemorisedToTrue(){
-
+     public static void allKatakanaMemorised() {
           allKatakanaMemorised = true;
-
-          katakanaALvl = 3;      katakanaKaLvl = 3;
-          katakanaILvl = 3;      katakanaKiLvl = 3;
-          katakanaULvl = 3;      katakanaKuLvl = 3;
-          katakanaELvl = 3;      katakanaKeLvl = 3;
-          katakanaOLvl = 3;      katakanaKoLvl = 3;
-
-          katakanaSaLvl = 3;     katakanaTaLvl = 3;
-          katakanaShiLvl = 3;    katakanaChiLvl = 3;
-          katakanaSuLvl = 3;     katakanaTsuLvl = 3;
-          katakanaSeLvl = 3;     katakanaTeLvl = 3;
-          katakanaSoLvl = 3;     katakanaToLvl = 3;
-
-          katakanaNaLvl = 3;     katakanaHaLvl = 3;
-          katakanaNiLvl = 3;     katakanaHiLvl = 3;
-          katakanaNuLvl = 3;     katakanaHuLvl = 3;
-          katakanaNeLvl = 3;     katakanaHeLvl = 3;
-          katakanaNoLvl = 3;     katakanaHoLvl = 3;
-
-          katakanaMaLvl = 3;     katakanaRaLvl = 3;
-          katakanaMiLvl = 3;     katakanaRiLvl = 3;
-          katakanaMuLvl = 3;     katakanaRuLvl = 3;
-          katakanaMeLvl = 3;     katakanaReLvl = 3;
-          katakanaMoLvl = 3;     katakanaRoLvl = 3;
-
-          katakanaNLvl  = 3;
-
-          katakanaGaLvl = 3;     katakanaZaLvl = 3;
-          katakanaGiLvl = 3;     katakanaJiLvl = 3;
-          katakanaGuLvl = 3;     katakanaZuLvl = 3;
-          katakanaGeLvl = 3;     katakanaZeLvl = 3;
-          katakanaGoLvl = 3;     katakanaZoLvl = 3;
-
-          katakanaDaLvl = 3;     katakanaBaLvl = 3;
-          katakanaDiLvl = 3;     katakanaBiLvl = 3;
-          katakanaDuLvl = 3;     katakanaBuLvl = 3;
-          katakanaDeLvl = 3;     katakanaBeLvl = 3;
-          katakanaDoLvl = 3;     katakanaBoLvl = 3;
-
-          katakanaPaLvl = 3;     katakanaYaLvl = 3;
-          katakanaPiLvl = 3;     katakanaYuLvl = 3;
-          katakanaPuLvl = 3;     katakanaYoLvl = 3;
-          katakanaPeLvl = 3;     katakanaWaLvl = 3;
-          katakanaPoLvl = 3;     katakanaWoLvl = 3;
-
-          katakanaKyaLvl = 3;    katakanaShaLvl = 3;
-          katakanaKyuLvl = 3;    katakanaShuLvl = 3;
-          katakanaKyoLvl = 3;    katakanaShoLvl = 3;
-
-          katakanaChaLvl = 3;    katakanaHyaLvl = 3;
-          katakanaChuLvl = 3;    katakanaHyuLvl = 3;
-          katakanaChoLvl = 3;    katakanaHyoLvl = 3;
-
-          katakanaNyaLvl = 3;    katakanaMyaLvl = 3;
-          katakanaNyuLvl = 3;    katakanaMyuLvl = 3;
-          katakanaNyoLvl = 3;    katakanaMyoLvl = 3;
-
-          katakanaRyaLvl = 3;    katakanaGyaLvl = 3;
-          katakanaRyuLvl = 3;    katakanaGyuLvl = 3;
-          katakanaRyoLvl = 3;    katakanaGyoLvl = 3;
-
-          katakanaJyaLvl = 3;    katakanaDyaLvl = 3;
-          katakanaJyuLvl = 3;    katakanaDyuLvl = 3;
-          katakanaJyoLvl = 3;    katakanaDyoLvl = 3;
-
-          katakanaByaLvl = 3;    katakanaPyaLvl = 3;
-          katakanaByuLvl = 3;    katakanaPyuLvl = 3;
-          katakanaByoLvl = 3;    katakanaPyoLvl = 3;
-
      }
 
-     public static void setAllkatakanaMemorisedToFalse(){
-
+     public static void allKatakanaNotMemorised(){
           allKatakanaMemorised = false;
-
-          katakanaALvl = 1;      katakanaKaLvl = 1;
-          katakanaILvl = 1;      katakanaKiLvl = 1;
-          katakanaULvl = 1;      katakanaKuLvl = 1;
-          katakanaELvl = 1;      katakanaKeLvl = 1;
-          katakanaOLvl = 1;      katakanaKoLvl = 1;
-
-          katakanaSaLvl = 1;     katakanaTaLvl = 1;
-          katakanaShiLvl = 1;    katakanaChiLvl = 1;
-          katakanaSuLvl = 1;     katakanaTsuLvl = 1;
-          katakanaSeLvl = 1;     katakanaTeLvl = 1;
-          katakanaSoLvl = 1;     katakanaToLvl = 1;
-
-          katakanaNaLvl = 1;     katakanaHaLvl = 1;
-          katakanaNiLvl = 1;     katakanaHiLvl = 1;
-          katakanaNuLvl = 1;     katakanaHuLvl = 1;
-          katakanaNeLvl = 1;     katakanaHeLvl = 1;
-          katakanaNoLvl = 1;     katakanaHoLvl = 1;
-
-          katakanaMaLvl = 1;     katakanaRaLvl = 1;
-          katakanaMiLvl = 1;     katakanaRiLvl = 1;
-          katakanaMuLvl = 1;     katakanaRuLvl = 1;
-          katakanaMeLvl = 1;     katakanaReLvl = 1;
-          katakanaMoLvl = 1;     katakanaRoLvl = 1;
-
-          katakanaNLvl  = 1;
-
-          katakanaGaLvl = 1;     katakanaZaLvl = 1;
-          katakanaGiLvl = 1;     katakanaJiLvl = 1;
-          katakanaGuLvl = 1;     katakanaZuLvl = 1;
-          katakanaGeLvl = 1;     katakanaZeLvl = 1;
-          katakanaGoLvl = 1;     katakanaZoLvl = 1;
-
-          katakanaDaLvl = 1;     katakanaBaLvl = 1;
-          katakanaDiLvl = 1;     katakanaBiLvl = 1;
-          katakanaDuLvl = 1;     katakanaBuLvl = 1;
-          katakanaDeLvl = 1;     katakanaBeLvl = 1;
-          katakanaDoLvl = 1;     katakanaBoLvl = 1;
-
-          katakanaPaLvl = 1;     katakanaYaLvl = 1;
-          katakanaPiLvl = 1;     katakanaYuLvl = 1;
-          katakanaPuLvl = 1;     katakanaYoLvl = 1;
-          katakanaPeLvl = 1;     katakanaWaLvl = 1;
-          katakanaPoLvl = 1;     katakanaWoLvl = 1;
-
-          katakanaKyaLvl = 1;    katakanaShaLvl = 1;
-          katakanaKyuLvl = 1;    katakanaShuLvl = 1;
-          katakanaKyoLvl = 1;    katakanaShoLvl = 1;
-
-          katakanaChaLvl = 1;    katakanaHyaLvl = 1;
-          katakanaChuLvl = 1;    katakanaHyuLvl = 1;
-          katakanaChoLvl = 1;    katakanaHyoLvl = 1;
-
-          katakanaNyaLvl = 1;    katakanaMyaLvl = 1;
-          katakanaNyuLvl = 1;    katakanaMyuLvl = 1;
-          katakanaNyoLvl = 1;    katakanaMyoLvl = 1;
-
-          katakanaRyaLvl = 1;    katakanaGyaLvl = 1;
-          katakanaRyuLvl = 1;    katakanaGyuLvl = 1;
-          katakanaRyoLvl = 1;    katakanaGyoLvl = 1;
-
-          katakanaJyaLvl = 1;    katakanaDyaLvl = 1;
-          katakanaJyuLvl = 1;    katakanaDyuLvl = 1;
-          katakanaJyoLvl = 1;    katakanaDyoLvl = 1;
-
-          katakanaByaLvl = 1;    katakanaPyaLvl = 1;
-          katakanaByuLvl = 1;    katakanaPyuLvl = 1;
-          katakanaByoLvl = 1;    katakanaPyoLvl = 1;
-
      }
 
+     public static boolean areAllKanjiMemorised(){
+          return allKanjiMemorised;
+     }
+
+     public static void allKanjiMemorised(){
+          allKanjiMemorised = true;
+     }
+
+     public static void allKanjiNotMemorised(){
+          allKanjiMemorised = false;
+     }
 
 }

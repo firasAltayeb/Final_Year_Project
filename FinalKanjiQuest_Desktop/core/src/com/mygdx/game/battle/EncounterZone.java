@@ -1,16 +1,14 @@
 package com.mygdx.game.battle;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.tools.Utility;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class MonsterZone {
+public class EncounterZone {
     private String zoneID;
     private String monsters;
 
@@ -43,7 +41,7 @@ public class MonsterZone {
         Array<String> monster;
 
         for (JsonValue jsonVal : list) {
-            MonsterZone zone = json.readValue(MonsterZone.class, jsonVal);
+            EncounterZone zone = json.readValue(EncounterZone.class, jsonVal);
 
             temp = zone.getMonsters();
             monster = new Array<>();
