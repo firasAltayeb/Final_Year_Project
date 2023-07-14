@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -27,7 +28,7 @@ import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
 import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 
-public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, ProgressObserver, BattleObserver {
+public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, BattleObserver{
 
     private final static String TAG = PlayerHUD.class.getSimpleName();
 
@@ -64,6 +65,9 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
     private float menuItemWindowWidth;
     private float menuItemWindowHeight;
 
+    private int maxNumberOfHearts = -1;
+    private int numberOfHearts = -1;
+
     public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer) {
         this.camera = camera;
         this.player = player;
@@ -81,14 +85,16 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         menuItemWindowHeight = stage.getHeight()/1.05f;
 
         all_health_heart = new Array<Image>();
-
         //TODO speak about this
         for (int i = 0; i<10; i++) {
             health_heart = new Image(Utility.ITEMS_TEXTUREATLAS.findRegion("HEALTH_HEART"));
-            health_heart.setPosition(health_heart.getWidth() * i, stage.getHeight() - health_heart.getHeight());
+            health_heart.setPosition(health_heart.getWidth() * all_health_heart.size + i, stage.getHeight() - health_heart.getHeight());
             health_heart.setVisible(false);
             all_health_heart.add(health_heart);
         }
+
+        Gdx.app.debug(TAG, "all_health_heart size is  " + all_health_heart.size);
+        Gdx.app.debug(TAG, "currentNumber of hearts " + numberOfHearts);
 
         menuButton = new TextButton("menu", Utility.GUI_SKINS);
         menuButton.setPosition(stage.getWidth()/1.2f,  stage.getHeight()/12);
@@ -160,7 +166,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         //Observers
         ProfileManager.getInstance().addObserver(this);
         player.registerObserver(this);
-        progressUI.addObserver(this);
         inventoryUI.addObserver(this);
         battleUI.getCurrentState().addObserver(this);
 
@@ -265,22 +270,17 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
             case PROFILE_LOADED:
                 //int hpMaxVal = profileManager.getProperty("currentPlayerHPMax", Integer.class);
                 //int hpVal = profileManager.getProperty("currentPlayerHP", Integer.class);
-                //boolean firstTime = hpVal<0?true:false;
-                int hpVal = 3;
-                int hpMaxVal = 10;
-                boolean firstTime = progressUI.getHPValue()<0?true:false;
+                boolean firstTime = numberOfHearts<0?true:false;
 
                 if( firstTime ){
-                    //int hpVal = 3;
-                    //int hpMaxVal = 10;
-                    progressUI.setHPValueMax(hpMaxVal);
-                    progressUI.setHPValue(hpVal);
+                    maxNumberOfHearts = 5;
+                    numberOfHearts = 3;
                 }else{
-                    progressUI.setHPValueMax(hpMaxVal);
-                    progressUI.setHPValue(hpVal);
+                    //maxNumberOfHearts = hpMaxVal;
+                    //numberOfHearts = hpVal;
                 }
 
-                showHearts(hpVal);
+                showHearts();
 
                 if( firstTime ){
                     //add default items if first time
@@ -306,7 +306,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 break;
         }
     }
-
 
     @Override
     public void onNotify(String value, ComponentEvent event) {
@@ -405,20 +404,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
     }
 
     @Override
-    public void onNotify(int value, StatusEvent event) {
-        switch(event) {
-            case UPDATED_HP:
-                ProfileManager.getInstance().setProperty("currentPlayerHP", progressUI.getHPValue());
-                break;
-            case UPDATED_MAX_HP:
-                ProfileManager.getInstance().setProperty("currentPlayerHPMax", progressUI.getHPValueMax());
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
     public void onNotify(String itemInfo, InventoryEvent event) {
         switch(event){
             case ITEM_CONSUMED:
@@ -431,8 +416,17 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 //Gdx.app.log(TAG, "typeValue is: " + typeValue);
 
                 if( InventoryItem.doesRestoreHP(type) ){
-                    progressUI.addHPValue(value);
-                    showHearts(progressUI.getHPValue());
+                    numberOfHearts = MathUtils.clamp(numberOfHearts + value, 0, maxNumberOfHearts);
+                    ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                    showHearts();
+                }
+                else if( InventoryItem.doesIncreaseMaxHP(type) ){
+                    maxNumberOfHearts++;
+                    numberOfHearts++;
+                    showHearts();
+                    ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                    ProfileManager.getInstance().setProperty("currentPlayerHPMax", maxNumberOfHearts);
+
                 }
                 else if(InventoryItem.doesIncreaseHiraganaLvl(type)){
                     LetterLvlCounter.allHiraganaMemorised();
@@ -440,6 +434,14 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 }
                 else if(InventoryItem.doesDecreaseHiraganaLvl(type)){
                     LetterLvlCounter.allHiraganaNotMemorised();
+                    progressUI.updateTable();
+                }
+                else if(InventoryItem.doesIncreaseKatakanaLvl(type)){
+                    LetterLvlCounter.allKatakanaMemorised();
+                    progressUI.updateTable();
+                }
+                else if(InventoryItem.doesDecreaseKatakanaLvl(type)){
+                    LetterLvlCounter.allKatakanaNotMemorised();
                     progressUI.updateTable();
                 }
 
@@ -465,11 +467,10 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
             case LETTER_ANSWERED_INCORRECTLY:
                 LetterLvlCounter.decreaseLvl(answeredLetter, 1);
                 progressUI.updateTable();
-
-                hpVal = progressUI.getHPValue() - 1;
-                progressUI.setHPValue(hpVal);
-                showHearts(hpVal);
-                if( hpVal <= 0 ){
+                numberOfHearts--;
+                showHearts();
+                ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                if( numberOfHearts <= 0 ){
                     battleUI.setVisible(false);
                     MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
                 }
@@ -479,10 +480,10 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 battleUI.setVisible(false);
                 break;
             case PLAYER_HIT_DAMAGE:
-                hpVal = progressUI.getHPValue() - 1;
-                progressUI.setHPValue(hpVal);
-                showHearts(hpVal);
-                if( hpVal <= 0 ){
+                numberOfHearts--;
+                showHearts();
+                ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                if( numberOfHearts <= 0 ){
                     battleUI.setVisible(false);
                     MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
                 }
@@ -492,12 +493,12 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         }
     }
 
-    public void showHearts(int hpVal){
-        //Gdx.app.log(TAG, "hpVal is: " + hpVal);
+
+    public void showHearts(){
         for (int i = 0; i<all_health_heart.size; i++) {
             all_health_heart.get(i).setVisible(false);
         }
-        for (int j = 0; j <hpVal; j++) {
+        for (int j = 0; j < numberOfHearts; j++) {
             all_health_heart.get(j).setVisible(true);
         }
     }
@@ -507,3 +508,4 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
     }
 
 }
+

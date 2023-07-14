@@ -50,7 +50,7 @@ public class KanaLettersFactory {
     }
 
     public KanaLetter getKatakanaLetter(String katakanaNameID){
-        KanaLetter kanaLetter = new KanaLetter(hiraganaLettersTable.get(katakanaNameID));
+        KanaLetter kanaLetter = new KanaLetter(katakanaLettersTable.get(katakanaNameID));
         kanaLetter.setDrawable(new TextureRegionDrawable(Utility.LARGE_KATAKANA_TEXTUREATLAS.
                 findRegion(kanaLetter.getKatakanaEquivalent())));
         kanaLetter.setScaling(Scaling.none);

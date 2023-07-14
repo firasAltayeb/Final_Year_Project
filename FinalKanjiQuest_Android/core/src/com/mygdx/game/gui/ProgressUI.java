@@ -1,13 +1,11 @@
 package com.mygdx.game.gui;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.japanese.KanaLetter;
 import com.mygdx.game.japanese.KanaLettersFactory;
 import com.mygdx.game.japanese.KanjiLetter;
@@ -17,7 +15,7 @@ import com.mygdx.game.tools.Utility;
 
 import java.util.ArrayList;
 
-public class ProgressUI extends Window implements ProgressSubject {
+public class ProgressUI extends Window{
 
     private final static String TAG = ProgressUI.class.getSimpleName();
 
@@ -38,10 +36,6 @@ public class ProgressUI extends Window implements ProgressSubject {
     private Image equivalent;
     private float menuItemWindowWidth;
     private float menuItemWindowHeight;
-    private Array<ProgressObserver> observers;
-
-    private int hpCurrentMax = -1;
-    private int hpVal = -1;
 
     public ProgressUI(float width, float height){
         super("Progress", Utility.GUI_SKINS);
@@ -49,7 +43,6 @@ public class ProgressUI extends Window implements ProgressSubject {
 
         menuItemWindowWidth = width;
         menuItemWindowHeight = height;
-        observers = new Array<ProgressObserver>();
 
         this.pad(this.getPadTop() + menuItemWindowHeight / 15, 10,
                 menuItemWindowHeight / 75, 10);
@@ -147,7 +140,7 @@ public class ProgressUI extends Window implements ProgressSubject {
             else {
                 counter += tempInt;
                 if (counter >= 428) {
-                    LetterLvlCounter.allHiraganaMemorised();
+                    LetterLvlCounter.allKatakanaMemorised();
                 }
                 if (tempInt >= 3) {
                     tempString = "memorised";
@@ -179,7 +172,7 @@ public class ProgressUI extends Window implements ProgressSubject {
             kanjiLetter = kanjiLettersList.get(i);
             tempString = kanjiLetter.getKanjiNameID();
             tempInt = LetterLvlCounter.getKanjiLvlTable().get(tempString);
-            equivalent = new Image(Utility.MEDIUM_KANJI_TEXTUREATLAS.findRegion(tempString));
+            equivalent = new Image(Utility.SMALL_KANJI_TEXTUREATLAS.findRegion(tempString));
 
             if(LetterLvlCounter.areAllKanjiMemorised()) {
                 tempString = "memorised";
@@ -188,7 +181,7 @@ public class ProgressUI extends Window implements ProgressSubject {
             else {
                 counter += tempInt;
                 if (counter >= 175) {
-                    LetterLvlCounter.allHiraganaMemorised();
+                    LetterLvlCounter.allKanjiMemorised();
                 }
                 if (tempInt >= 5) {
                     tempString = "memorised";
@@ -208,61 +201,6 @@ public class ProgressUI extends Window implements ProgressSubject {
         ScrollPane scrollPane = new ScrollPane(table);
         this.add(scrollPane).fill().expand();
         this.setSize(menuItemWindowWidth, menuItemWindowHeight);
-    }
-
-    //HP
-    public int getHPValue(){
-        return hpVal;
-    }
-
-    public void subtractHPValue(int hpValue){
-        hpVal = MathUtils.clamp(hpVal - hpValue, 0, hpCurrentMax);
-        notify(hpVal, ProgressObserver.StatusEvent.UPDATED_HP);
-    }
-
-    public void addHPValue(int hpValue){
-        hpVal = MathUtils.clamp(hpVal + hpValue, 0, hpCurrentMax);
-        notify(hpVal, ProgressObserver.StatusEvent.UPDATED_HP);
-    }
-
-    public void setHPValue(int hpValue){
-        this.hpVal = hpValue;
-        notify(hpVal, ProgressObserver.StatusEvent.UPDATED_HP);
-    }
-
-    public void setHPValueMax(int maxHPValue){
-        this.hpCurrentMax = maxHPValue;
-        notify(hpCurrentMax, ProgressObserver.StatusEvent.UPDATED_MAX_HP);
-    }
-
-    public int getHPValueMax(){
-        return hpCurrentMax;
-    }
-
-
-    //Implement
-    @Override
-    public void addObserver(ProgressObserver progressObserver) {
-        observers.add(progressObserver);
-    }
-
-    @Override
-    public void removeObserver(ProgressObserver progressObserver) {
-        observers.removeValue(progressObserver, true);
-    }
-
-    @Override
-    public void removeAllObservers() {
-        for(ProgressObserver observer: observers){
-            observers.removeValue(observer, true);
-        }
-    }
-
-    @Override
-    public void notify(int value, ProgressObserver.StatusEvent event) {
-        for(ProgressObserver observer: observers){
-            observer.onNotify(value, event);
-        }
     }
 
 

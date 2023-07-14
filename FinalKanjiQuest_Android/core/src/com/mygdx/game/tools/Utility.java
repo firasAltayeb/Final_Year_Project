@@ -25,7 +25,7 @@ public final class Utility {
     private final static String GUI_SHEET_PATH = "gui/gui_sheet.atlas";
     private final static String GUI_SKINS_PATH = "gui/large_gui_skins.json";
     private final static String ITEMS_SHEET_PATH = "items/large_items_sheet.txt";
-    private final static String HIRO_SHEET_PATH = "sprites/chara/large_hiro_sheet.txt";
+    private final static String HIRO_SHEET_PATH = "sprites/chara/xlarge_hiro_sheet.txt";
 
     private final static String LARGE_HIRAGANA_SHEET_PATH = "japanese/hiragana/large_hiragana_sheet.txt";
     private final static String LARGE_KATAKANA_SHEET_PATH = "japanese/katakana/large_katakana_sheet.txt";
@@ -68,20 +68,6 @@ public final class Utility {
         } else {
             Gdx.app.debug(TAG, "Asset is not loaded; Nothing to unload " + assetFileNamePath);
         }
-    }
-
-    //wraps the progress of AssetManager as a percentage of completion
-    public static float loadCompleted(){
-        return assetManager.getProgress();
-    }
-
-    //wraps the number of assets left to load from the AssetManager queue
-    public static int numberAssetsQueued(){
-        return assetManager.getQueuedAssets();
-    }
-
-    public static boolean updateAssetLoading(){
-        return assetManager.update();
     }
 
     public static boolean isAssetLoaded(String fileName){

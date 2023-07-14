@@ -25,8 +25,8 @@ public class InventoryItem extends Image {
         ITEM_RESTORE_HEALTH(1),
         ITEM_INCREASE_MAX_HP(2),
         ITEM_INCREASE_HIRAGANA_LVL(4),
-        ITEM_INCREASE_KATAKANA_LVL(8),
-        ITEM_DECREASE_HIRAGANA_LVL(16),
+        ITEM_DECREASE_HIRAGANA_LVL(8),
+        ITEM_INCREASE_KATAKANA_LVL(16),
         ITEM_DECREASE_KATAKANA_LVL(32);
 
 
@@ -86,14 +86,21 @@ public class InventoryItem extends Image {
         return ((itemUseType & ItemUseType.ITEM_RESTORE_HEALTH.getValue()) == ItemUseType.ITEM_RESTORE_HEALTH.getValue());
     }
 
+    public static boolean doesIncreaseMaxHP(int itemUseType){
+        return ((itemUseType & ItemUseType.ITEM_INCREASE_MAX_HP.getValue()) == ItemUseType.ITEM_INCREASE_MAX_HP.getValue());
+    }
     public static boolean doesIncreaseHiraganaLvl(int itemUseType){
         return ((itemUseType & ItemUseType.ITEM_INCREASE_HIRAGANA_LVL.getValue()) == ItemUseType.ITEM_INCREASE_HIRAGANA_LVL.getValue());
     }
-
     public static boolean doesDecreaseHiraganaLvl(int itemUseType){
         return ((itemUseType & ItemUseType.ITEM_DECREASE_HIRAGANA_LVL.getValue()) == ItemUseType.ITEM_DECREASE_HIRAGANA_LVL.getValue());
     }
-
+    public static boolean doesIncreaseKatakanaLvl(int itemUseType){
+        return ((itemUseType & ItemUseType.ITEM_INCREASE_KATAKANA_LVL.getValue()) == ItemUseType.ITEM_INCREASE_KATAKANA_LVL.getValue());
+    }
+    public static boolean doesDecreaseKatakanaLvl(int itemUseType){
+        return ((itemUseType & ItemUseType.ITEM_DECREASE_KATAKANA_LVL.getValue()) == ItemUseType.ITEM_DECREASE_KATAKANA_LVL.getValue());
+    }
 
     public boolean isSameItem(InventoryItem candidateInventoryItem){
         return itemNameID == candidateInventoryItem.getItemNameID();

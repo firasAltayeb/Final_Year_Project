@@ -24,7 +24,6 @@ public class InventorySlot extends Stack {
         defaultBackground.add(image);
 
         defaultBackground.setName("background");
-        numItemsLabel.setName("numitems");
 
         this.add(defaultBackground);
         this.add(numItemsLabel);
@@ -40,7 +39,7 @@ public class InventorySlot extends Stack {
     }
 
     public void add(Array<Actor> array) {
-        for( Actor actor : array) {
+        for( Actor actor : array){
             super.add(actor);
         }
     }

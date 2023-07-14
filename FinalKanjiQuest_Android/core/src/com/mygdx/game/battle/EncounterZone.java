@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.JsonValue;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class MonsterZone {
+public class EncounterZone {
     private String zoneID;
     private String monsters;
 
@@ -41,7 +41,7 @@ public class MonsterZone {
         Array<String> monster;
 
         for (JsonValue jsonVal : list) {
-            MonsterZone zone = json.readValue(MonsterZone.class, jsonVal);
+            EncounterZone zone = json.readValue(EncounterZone.class, jsonVal);
 
             temp = zone.getMonsters();
             monster = new Array<>();

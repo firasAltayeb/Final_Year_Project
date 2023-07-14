@@ -32,7 +32,7 @@ public class BattleUI extends Window implements BattleObserver {
     private ArrayList<KanjiLetter> kanjiLettersList;
     
     private BattleState battleState = null;
-    private final float checkTimer = 5;
+    private final float checkTimer = 3;
     private float battleTimer = 0;
 
     private Image hiro;
@@ -118,6 +118,26 @@ public class BattleUI extends Window implements BattleObserver {
                 texture = new Texture(Gdx.files.internal("sprites/maps/forest.png"));
                 this.background(new TextureRegionDrawable(new TextureRegion(texture)));
                 break;
+            case 2:
+                texture = new Texture(Gdx.files.internal("sprites/maps/cave.png"));
+                this.background(new TextureRegionDrawable(new TextureRegion(texture)));
+                break;
+            case 3:
+                texture = new Texture(Gdx.files.internal("sprites/maps/coast.png"));
+                this.background(new TextureRegionDrawable(new TextureRegion(texture)));
+                break;
+            case 4:
+                texture = new Texture(Gdx.files.internal("sprites/maps/ice_forest.png"));
+                this.background(new TextureRegionDrawable(new TextureRegion(texture)));
+                break;
+            case 5:
+                texture = new Texture(Gdx.files.internal("sprites/maps/desert_temple.png"));
+                this.background(new TextureRegionDrawable(new TextureRegion(texture)));
+                break;
+            case 6:
+                texture = new Texture(Gdx.files.internal("sprites/maps/lava.png"));
+                this.background(new TextureRegionDrawable(new TextureRegion(texture)));
+                break;
             default: break;
         }
 
@@ -140,6 +160,7 @@ public class BattleUI extends Window implements BattleObserver {
     @Override
     public void onNotify(String letterToAnswer, BattleEvent event) {
         int randomVal;
+        int randomChoice;
         KanjiLetter tempKanji;
         switch(event){
             case KANJI_ADDED:
@@ -158,13 +179,23 @@ public class BattleUI extends Window implements BattleObserver {
                 Image equivalent;
                 String splitPortion;
                 int indexOfFullStop;
+                randomChoice = MathUtils.random(1,2);
+
+
+
                 firstInnerTableEquivalent = kanjiToAnswer.getHiraganaEquivalent();
                 for (int j = 0; j < firstInnerTableEquivalent.length(); j++) {
                     if (firstInnerTableEquivalent.charAt(j) == '.') {
                         try {
                             indexOfFullStop = firstInnerTableEquivalent.indexOf('.', j + 1);
                             splitPortion = firstInnerTableEquivalent.substring(j + 1, indexOfFullStop);
-                            equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(splitPortion));
+                            if(randomChoice == 1) {
+                                equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(splitPortion));
+                            } else {
+                                kanaToAnswer = KanaLettersFactory.getInstance().getHiraganaLetter(splitPortion);
+                                equivalent = new Image(Utility.SMALL_KATAKANA_TEXTUREATLAS.
+                                        findRegion(kanaToAnswer.getKatakanaEquivalent()));
+                            }
                             innerTableOne.add(equivalent).left();
                         } catch (Exception e) {
                         }
@@ -181,7 +212,13 @@ public class BattleUI extends Window implements BattleObserver {
                         try {
                             indexOfFullStop = secondInnerTableEquivalent.indexOf('.', j + 1);
                             splitPortion = secondInnerTableEquivalent.substring(j + 1, indexOfFullStop);
-                            equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(splitPortion));
+                            if(randomChoice == 1) {
+                                equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(splitPortion));
+                            } else {
+                                kanaToAnswer = KanaLettersFactory.getInstance().getHiraganaLetter(splitPortion);
+                                equivalent = new Image(Utility.SMALL_KATAKANA_TEXTUREATLAS.
+                                        findRegion(kanaToAnswer.getKatakanaEquivalent()));
+                            }
                             innerTableTwo.add(equivalent).left();
                         } catch (Exception e) {
                         }
@@ -198,7 +235,13 @@ public class BattleUI extends Window implements BattleObserver {
                         try {
                             indexOfFullStop = thirdInnerTableEquivalent.indexOf('.', j + 1);
                             splitPortion = thirdInnerTableEquivalent.substring(j + 1, indexOfFullStop);
-                            equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(splitPortion));
+                            if(randomChoice == 1) {
+                                equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(splitPortion));
+                            } else {
+                                kanaToAnswer = KanaLettersFactory.getInstance().getHiraganaLetter(splitPortion);
+                                equivalent = new Image(Utility.SMALL_KATAKANA_TEXTUREATLAS.
+                                        findRegion(kanaToAnswer.getKatakanaEquivalent()));
+                            }
                             innerTableThree.add(equivalent).left();
                         } catch (Exception e) {
                         }
@@ -215,7 +258,13 @@ public class BattleUI extends Window implements BattleObserver {
                         try {
                             indexOfFullStop = fourthInnerTableEquivalent.indexOf('.', j + 1);
                             splitPortion = fourthInnerTableEquivalent.substring(j + 1, indexOfFullStop);
-                            equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(splitPortion));
+                            if(randomChoice == 1) {
+                                equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(splitPortion));
+                            } else {
+                                kanaToAnswer = KanaLettersFactory.getInstance().getHiraganaLetter(splitPortion);
+                                equivalent = new Image(Utility.SMALL_KATAKANA_TEXTUREATLAS.
+                                        findRegion(kanaToAnswer.getKatakanaEquivalent()));
+                            }
                             innerTableFour.add(equivalent).left();
                         } catch (Exception e) {
                         }
@@ -242,23 +291,57 @@ public class BattleUI extends Window implements BattleObserver {
                 equivalentImageOptionOne.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionOne.getRomajiEquivalent())));
                 Gdx.app.log(TAG, "equivalentImageOptionOne is " + equivalentImageOptionOne.getRomajiEquivalent());
 
-                randomVal = MathUtils.random(0,107);
+                randomVal = MathUtils.random(0,106);
                 equivalentImageOptionTwo = kanaLettersList.get(randomVal);
                 equivalentImageOptionTwo.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionTwo.getRomajiEquivalent())));
                 Gdx.app.log(TAG, "equivalentImageOptionTwo is " + equivalentImageOptionTwo.getRomajiEquivalent());
 
-                randomVal = MathUtils.random(0,107);
+                randomVal = MathUtils.random(0,106);
                 equivalentImageOptionThree = kanaLettersList.get(randomVal);
                 equivalentImageOptionThree.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionThree.getRomajiEquivalent())));
-                Gdx.app.log(TAG, "equivalentImageOptionTwo is " + equivalentImageOptionThree.getRomajiEquivalent());
+                Gdx.app.log(TAG, "equivalentImageOptionThree is " + equivalentImageOptionThree.getRomajiEquivalent());
 
-                randomVal = MathUtils.random(0,107);
+                randomVal = MathUtils.random(0,106);
                 equivalentImageOptionFour = kanaLettersList.get(randomVal);
                 equivalentImageOptionFour.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionFour.getRomajiEquivalent())));
-                Gdx.app.log(TAG, "equivalentImageOptionTwo is " + equivalentImageOptionFour.getRomajiEquivalent());
+                Gdx.app.log(TAG, "equivalentImageOptionFour is " + equivalentImageOptionFour.getRomajiEquivalent());
 
                 randomizeOrder(false);
-                addHiraganaImageListeners();
+                addKanaImageListeners();
+
+                break;
+            case KATAKANA_ADDED:
+                bottomTable.clear();
+                equivalentImageOptionOne.clear();
+                equivalentImageOptionTwo.clear();
+                equivalentImageOptionThree.clear();
+                equivalentImageOptionFour.clear();
+
+                Gdx.app.log(TAG, "Kana ToAnswer is " + letterToAnswer);
+                kanaToAnswer = KanaLettersFactory.getInstance().getKatakanaLetter(letterToAnswer);
+                imageToAnswer.setDrawable(new TextureRegionDrawable(Utility.LARGE_KATAKANA_TEXTUREATLAS.findRegion(kanaToAnswer.getKatakanaEquivalent())));
+
+                equivalentImageOptionOne = kanaToAnswer;
+                equivalentImageOptionOne.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(equivalentImageOptionOne.getHiraganaEquivalent())));
+                Gdx.app.log(TAG, "equivalentImageOptionOne is " + equivalentImageOptionOne.getHiraganaEquivalent());
+
+                randomVal = MathUtils.random(0,106);
+                equivalentImageOptionTwo = kanaLettersList.get(randomVal);
+                equivalentImageOptionTwo.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(equivalentImageOptionTwo.getHiraganaEquivalent())));
+                Gdx.app.log(TAG, "equivalentImageOptionTwo is " + equivalentImageOptionTwo.getHiraganaEquivalent());
+
+                randomVal = MathUtils.random(0,106);
+                equivalentImageOptionThree = kanaLettersList.get(randomVal);
+                equivalentImageOptionThree.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(equivalentImageOptionThree.getHiraganaEquivalent())));
+                Gdx.app.log(TAG, "equivalentImageOptionThree is " + equivalentImageOptionThree.getHiraganaEquivalent());
+
+                randomVal = MathUtils.random(0,106);
+                equivalentImageOptionFour = kanaLettersList.get(randomVal);
+                equivalentImageOptionFour.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(equivalentImageOptionFour.getHiraganaEquivalent())));
+                Gdx.app.log(TAG, "equivalentImageOptionFour is " + equivalentImageOptionFour.getHiraganaEquivalent());
+
+                randomizeOrder(false);
+                addKanaImageListeners();
 
                 break;
             default:
@@ -390,12 +473,11 @@ public class BattleUI extends Window implements BattleObserver {
 
     }
 
-    public void addHiraganaImageListeners(){
+    public void addKanaImageListeners(){
         equivalentImageOptionOne.addListener(
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Gdx.app.log(TAG, equivalentImageOptionOne.getHiraganaEquivalent());
                         if(equivalentImageOptionOne.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
                             battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
                         else {
@@ -408,8 +490,7 @@ public class BattleUI extends Window implements BattleObserver {
         equivalentImageOptionTwo.addListener(
                 new ClickListener() {
                     @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        Gdx.app.log(TAG, equivalentImageOptionTwo.getHiraganaEquivalent());
+                    public void clicked(InputEvent event, float x, float y) {;
                         if(equivalentImageOptionTwo.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
                             battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
                         else {
@@ -422,7 +503,6 @@ public class BattleUI extends Window implements BattleObserver {
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Gdx.app.log(TAG, equivalentImageOptionThree.getHiraganaEquivalent());
                         if(equivalentImageOptionThree.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
                             battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
                         else {
@@ -435,7 +515,6 @@ public class BattleUI extends Window implements BattleObserver {
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        Gdx.app.log(TAG, equivalentImageOptionFour.getHiraganaEquivalent());
                         if(equivalentImageOptionFour.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
                             battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
                         else {

@@ -7,7 +7,7 @@ public class InventoryItemLocation {
     public InventoryItemLocation(){
     }
 
-    public InventoryItemLocation(int locationIndex, String itemNameAtLocation){
+    public InventoryItemLocation( int locationIndex, String itemNameAtLocation){
         this.locationIndex = locationIndex;
         this.itemNameAtLocation = itemNameAtLocation;
     }

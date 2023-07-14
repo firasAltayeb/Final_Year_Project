@@ -10,10 +10,11 @@ public class BattleState extends BattleSubject {
     //TODO speak about this,
     private static final String TAG = BattleState.class.getSimpleName();
 
-    private String currentOpponent;
+
     private int currentZoneLevel = 0;
-    private final int chanceOfEncounter = 85;
+    private final int chanceOfEncounter = 60;
     private final int chanceOfEscape = 85;
+    private String currentLetter = "";
 
     public void setCurrentZoneLevel(int zoneLevel){
         currentZoneLevel = zoneLevel;
@@ -35,18 +36,58 @@ public class BattleState extends BattleSubject {
         }
     }
 
+    //TODO speak about this,
     public void setCurrentOpponent(){
         Gdx.app.debug(TAG, " Entered BATTLE ZONE: " + currentZoneLevel);
-        if(LetterLvlCounter.areAllHiraganaMemorised() == false){
-            int randomVal = MathUtils.random(0,106);
-            String letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getHiraganaEquivalent();
+        int randomVal;
+        String letterToAnswer;
+        int letterToAnswersLvl;
+        int cycleCounter;
+        if(!LetterLvlCounter.areAllHiraganaMemorised()){
+            cycleCounter = 0;
+            randomVal= MathUtils.random(0,106);
+            letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getHiraganaEquivalent();
             if (letterToAnswer == null) return;
-            this.currentOpponent = letterToAnswer;
+
+            letterToAnswersLvl = LetterLvlCounter.getHiraganaLvlTable().get(letterToAnswer);
+            while(letterToAnswersLvl >= 3 || currentLetter.equalsIgnoreCase(letterToAnswer)){
+                if(cycleCounter >= 106){break;} else {cycleCounter++;}
+
+                randomVal= MathUtils.random(0,106);
+                letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getHiraganaEquivalent();
+                letterToAnswersLvl = LetterLvlCounter.getHiraganaLvlTable().get(letterToAnswer);
+            }
+
+            this.currentLetter = letterToAnswer;
             notify(letterToAnswer, BattleObserver.BattleEvent.HIRAGANA_ADDED);
-        } else {
-            String letterToAnswer = MonsterFactory.getInstance().getRandomMonster(currentZoneLevel);
+        }
+        else if(!LetterLvlCounter.areAllKatakanaMemorised()){
+            cycleCounter = 0;
+            randomVal = MathUtils.random(0,106);
+            letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getKatakanaEquivalent();
             if (letterToAnswer == null) return;
-            this.currentOpponent = letterToAnswer;
+
+            letterToAnswersLvl = LetterLvlCounter.getKatakanaLvlTable().get(letterToAnswer);
+            while(letterToAnswersLvl >= 3 || currentLetter.equalsIgnoreCase(letterToAnswer)){
+                if(cycleCounter >= 106){break;} else {cycleCounter++;}
+                randomVal= MathUtils.random(0,106);
+                letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getKatakanaEquivalent();
+                letterToAnswersLvl = LetterLvlCounter.getKatakanaLvlTable().get(letterToAnswer);
+            }
+            this.currentLetter = letterToAnswer;
+            notify(letterToAnswer, BattleObserver.BattleEvent.KATAKANA_ADDED);
+        } else {
+            cycleCounter = 0;
+            letterToAnswer = EncounterFactory.getInstance().getRandomLetter(currentZoneLevel);
+            if (letterToAnswer == null) return;
+
+            letterToAnswersLvl = LetterLvlCounter.getKanjiLvlTable().get(letterToAnswer);
+            while(letterToAnswersLvl >= 5 || currentLetter.equalsIgnoreCase(letterToAnswer)){
+                if(cycleCounter >= 5){break;} else {cycleCounter++;}
+                letterToAnswer = EncounterFactory.getInstance().getRandomLetter(currentZoneLevel);
+                letterToAnswersLvl = LetterLvlCounter.getKanjiLvlTable().get(letterToAnswer);
+            }
+            this.currentLetter = letterToAnswer;
             notify(letterToAnswer, BattleObserver.BattleEvent.KANJI_ADDED);
         }
     }
@@ -54,7 +95,7 @@ public class BattleState extends BattleSubject {
     public void playerRuns(){
         int randomVal = MathUtils.random(1,100);
         if( chanceOfEscape > randomVal  ) {
-            notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_RUNNING);
+            notify(currentLetter, BattleObserver.BattleEvent.PLAYER_RUNNING);
         }else{
             playerHit();
             return;
@@ -62,11 +103,11 @@ public class BattleState extends BattleSubject {
     }
 
     public void playerHit(){
-        if( currentOpponent == null ){
+        if( currentLetter == null ){
             return;
         }
 
-        notify(currentOpponent, BattleObserver.BattleEvent.PLAYER_HIT_DAMAGE);
+        notify(currentLetter, BattleObserver.BattleEvent.PLAYER_HIT_DAMAGE);
 
         Gdx.app.debug(TAG, "PLayer lost health");
     }
@@ -77,11 +118,11 @@ public class BattleState extends BattleSubject {
 
 
     public void answeredIncorrectly(String answeredLetter){
-        if( currentOpponent == null ){
+        if( currentLetter == null ){
             return;
         }
 
-        notify(currentOpponent, BattleObserver.BattleEvent.LETTER_ANSWERED_INCORRECTLY);
+        notify(currentLetter, BattleObserver.BattleEvent.LETTER_ANSWERED_INCORRECTLY);
 
         Gdx.app.debug(TAG, "PLayer lost health");
     }

@@ -101,7 +101,7 @@ MEDIUM_POTION_BLUE
   orig: 96, 96
   offset: 0, 0
   index: -1
-NEGATIVE _K_RUNESTONE
+NEGATIVE_K_RUNESTONE
   rotate: false
   xy: 197, 295
   size: 96, 96

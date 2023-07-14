@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="82" height="94" tilewidth="16" tileheight="16" nextobjectid="282">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="82" height="94" tilewidth="16" tileheight="16" nextobjectid="284">
  <tileset firstgid="1" name="tileset1" tilewidth="16" tileheight="16" tilecount="1833" columns="39">
   <image source="../sprites/map_objects/tileset1.png" trans="ffffff" width="624" height="752"/>
  </tileset>
@@ -617,5 +617,8 @@
  <objectgroup name="MAP_PORTAL_LAYER">
   <object id="275" name="TOP_WORLD.LAVA_END" x="896" y="112" width="64" height="16"/>
   <object id="278" name="TOP_WORLD.LAVA_START" x="336" y="1376" width="64" height="16"/>
+ </objectgroup>
+ <objectgroup name="MAP_ENEMY_SPAWN_LAYER">
+  <object id="283" name="6" x="80" y="-4" width="1088" height="1508"/>
  </objectgroup>
 </map>

@@ -70,20 +70,6 @@ public final class Utility {
         }
     }
 
-    //wraps the progress of AssetManager as a percentage of completion
-    public static float loadCompleted(){
-        return assetManager.getProgress();
-    }
-
-    //wraps the number of assets left to load from the AssetManager queue
-    public static int numberAssetsQueued(){
-        return assetManager.getQueuedAssets();
-    }
-
-    public static boolean updateAssetLoading(){
-        return assetManager.update();
-    }
-
     public static boolean isAssetLoaded(String fileName){
         return assetManager.isLoaded(fileName);
     }

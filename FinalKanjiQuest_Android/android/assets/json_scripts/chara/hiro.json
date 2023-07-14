@@ -13,16 +13,91 @@ inventory : [
 		value: POTION_BLUE
 	},
 	{
+		value: POTION_BLUE
+	},
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
 		value: MEDIUM_POTION_BLUE
 	},
 	{
 		value: LARGE_POTION_BLUE
 	},
 	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+	{
+		value: HEART
+	},
+	{
+		value: HEART
+	},
+	{
+		value: HEART
+	},
+	{
+		value: HEART
+	},
+	{
+		value: HEART
+	},
+	{
+		value: H_RUNESTONE
+	},
+	{
+		value: H_RUNESTONE
+	},
+	{
 		value: H_RUNESTONE
 	},
 	{
 		value: NEGATIVE_H_RUNESTONE
+	},
+	{
+		value: NEGATIVE_H_RUNESTONE
+	},
+	{
+		value: NEGATIVE_H_RUNESTONE
+	},
+	{
+		value: K_RUNESTONE
+	},
+	{
+		value: K_RUNESTONE
+	},
+	{
+		value: K_RUNESTONE
+	},
+	{
+		value: NEGATIVE_K_RUNESTONE
+	},
+	{
+		value: NEGATIVE_K_RUNESTONE
+	},
+	{
+		value: NEGATIVE_K_RUNESTONE
 	},
 ]
 animationConfig: [

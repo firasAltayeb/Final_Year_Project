@@ -6,6 +6,7 @@ public interface BattleObserver {
     public static enum BattleEvent{
         KANJI_ADDED,
         HIRAGANA_ADDED,
+        KATAKANA_ADDED,
         LETTER_ANSWERED_CORRECTLY,
         LETTER_ANSWERED_INCORRECTLY,
         PLAYER_HIT_DAMAGE,
