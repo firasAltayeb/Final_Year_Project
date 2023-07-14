@@ -10,7 +10,6 @@ import com.mygdx.game.FinalKanjiQuest;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new FinalKanjiQuest(), config);
 
 		config.title = "FinalKanjiQuest";
 		// set to false so that we use the much more stable and  mature implementation of OpenGL ES
@@ -21,7 +20,6 @@ public class DesktopLauncher {
 		Application app = new LwjglApplication(new FinalKanjiQuest(),config);
 
 		Gdx.app = app;
-
 		// logging level that displays  all messages
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		//Gdx.app.setLogLevel(Application.LOG_INFO);

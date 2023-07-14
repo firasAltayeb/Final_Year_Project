@@ -28,7 +28,7 @@ public class MainGameScreen implements Screen {
         static float aspectRatio;
     }
 
-    private Playercontroller controller;
+    private PlayerController controller;
     private TextureRegion currentPlayerFrame;
     private Sprite currentPlayerSprite;
 
@@ -36,11 +36,12 @@ public class MainGameScreen implements Screen {
     private OrthographicCamera camera = null;
     private static MapManger mapManger;
 
-    private static Entity player;
 
     public MainGameScreen() {
         mapManger = new MapManger();
     }
+
+    private static Entity player;
 
     @Override
     public void show() {
@@ -51,7 +52,8 @@ public class MainGameScreen implements Screen {
         camera = new OrthographicCamera();
         // set to false so we have positive y facing up
         camera.setToOrtho(false, VIEWPORT.viewportWidth, VIEWPORT.viewportHeight);
-        mapRenderer = new OrthogonalTiledMapRenderer(mapManger.getCurrentMap(), mapManger.UNIT_SACLE);
+
+        mapRenderer = new OrthogonalTiledMapRenderer(mapManger.getCurrentMap(), MapManger.UNIT_SCALE);
         mapRenderer.setView(camera);
 
         Gdx.app.debug(TAG, "UniteScale value is: " + mapRenderer.getUnitScale());
@@ -61,9 +63,18 @@ public class MainGameScreen implements Screen {
                 mapManger.getPlayerStartUnitScaled().y);
 
         currentPlayerSprite = player.getFrameSprite();
+
+        //Gdx.app.debug(TAG, "currentSprite.y: "  + _currentPlayerSprite.getRegionHeight());
+
         controller = new PlayerController(player);
         Gdx.input.setInputProcessor(controller);
     }
+
+    @Override
+    public void hide() {
+
+    }
+
 
     @Override
     public void render(float delta) {
@@ -87,6 +98,9 @@ public class MainGameScreen implements Screen {
         }
 
         controller.update(delta);
+
+        //_mapRenderer.getBatch().enableBlending();
+        //_mapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
         mapRenderer.setView(camera);
         mapRenderer.render();
@@ -113,11 +127,6 @@ public class MainGameScreen implements Screen {
     }
 
     @Override
-    public void hide() {
-
-    }
-
-    @Override
     public void dispose() {
         player.dispose();
         controller.dispose();
@@ -126,11 +135,11 @@ public class MainGameScreen implements Screen {
     }
 
     private void setupViewport(int width, int height) {
-        //make the viewport a percentage of the total display area
+        //Make the viewport a percentage of the total display area
         VIEWPORT.virtualWidth = width;
         VIEWPORT.virtualHeight = height;
 
-        //current viewport dimensions
+        //Current viewport dimensions
         VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
         VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
 
@@ -139,29 +148,25 @@ public class MainGameScreen implements Screen {
         VIEWPORT.physicalHeight = Gdx.graphics.getHeight();
 
         //aspect ratio for current viewport
-        VIEWPORT.aspectRatio = (VIEWPORT.virtualWidth /
-                VIEWPORT.virtualHeight);
+        VIEWPORT.aspectRatio = (VIEWPORT.virtualWidth / VIEWPORT.virtualHeight);
 
         //update viewport if there could be skewing
-        if (VIEWPORT.physicalWidth / VIEWPORT.physicalHeight
-                >= VIEWPORT.aspectRatio){
-            //letterbox left and right
-            VIEWPORT.viewportWidth = VIEWPORT.viewportHeight *
-                    (VIEWPORT.physicalWidth / VIEWPORT.physicalHeight);
+        if( VIEWPORT.physicalWidth / VIEWPORT.physicalHeight >= VIEWPORT.aspectRatio){
+            //Letterbox left and right
+            VIEWPORT.viewportWidth = VIEWPORT.viewportHeight * (VIEWPORT.physicalWidth/VIEWPORT.physicalHeight);
             VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
-        } else {
+        }else{
             //letterbox above and below
             VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
-            VIEWPORT.viewportHeight = VIEWPORT.viewportWidth *
-                    (VIEWPORT.physicalHeight / VIEWPORT.physicalWidth);
+            VIEWPORT.viewportHeight = VIEWPORT.viewportWidth * (VIEWPORT.physicalHeight/VIEWPORT.physicalWidth);
         }
 
-        Gdx.app.debug(TAG, "WorldRenderer: virtual: (" +
-                VIEWPORT.virtualWidth + "," + VIEWPORT.virtualHeight + ")" );
-        Gdx.app.debug(TAG, "WorldRenderer: viewport: (" +
-                VIEWPORT.viewportWidth + "," + VIEWPORT.viewportHeight + ")" );
-        Gdx.app.debug(TAG, "WorldRenderer: physical: (" +
-                VIEWPORT.physicalWidth + "," + VIEWPORT.physicalHeight + ")" );
+        Gdx.app.debug(TAG, "WorldRenderer: virtual: (" + VIEWPORT.virtualWidth + ","
+                + VIEWPORT.virtualHeight + ")" );
+        Gdx.app.debug(TAG, "WorldRenderer: viewport: (" + VIEWPORT.viewportWidth + ","
+                + VIEWPORT.viewportHeight + ")" );
+        Gdx.app.debug(TAG, "WorldRenderer: physical: (" + VIEWPORT.physicalWidth + ","
+                + VIEWPORT.physicalHeight + ")" );
     }
 
     private boolean isCollisionWithMapLayer(Rectangle boundingBox){
@@ -175,7 +180,10 @@ public class MainGameScreen implements Screen {
 
         for (MapObject object : mapCollisionLayer.getObjects()){
             rectangle = ((RectangleMapObject) object).getRectangle();
+            //Gdx.app.debug(TAG, "Collision Rect (" + rectangle.x + "," + rectangle.y + ")");
+            //Gdx.app.debug(TAG, "Player Rect (" + boundingBox.x + "," + boundingBox.y + ")")
             if (boundingBox.overlaps(rectangle)){
+                //Gdx.app.debug(TAG, "Map Collision!");
                 return true;
             }
         }
@@ -195,6 +203,8 @@ public class MainGameScreen implements Screen {
         for (MapObject object : mapPortalLayer.getObjects()){
             if(object instanceof RectangleMapObject){
                 rectangle = ((RectangleMapObject)object).getRectangle();
+                //Gdx.app.debug(TAG, "Collision Rect (" + rectangle.x + "," + rectangle.y + ")");
+                //Gdx.app.debug(TAG, "Player Rect (" + boundingBox.x + "," + boundingBox.y + ")");
                 if(boundingBox.overlaps(rectangle)){
                     String mapName = object.getName();
                     if(mapName == null){

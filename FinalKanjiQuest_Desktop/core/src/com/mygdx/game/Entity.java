@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.Array;
 public class Entity {
 
     private static final String TAG = Entity.class.getSimpleName();
-    private static final String defaultSpritePath = "sprites/characters/hiro_sheet";
+    private static final String defaultSpritePath = "sprites/characters/hiro_sheet.png";
 
     private Vector2 velocity;
     private String entityID;
@@ -42,8 +42,8 @@ public class Entity {
     protected Sprite frameSprite = null;
     protected TextureRegion currentFrame = null;
 
-    public final int FRAME_WIDTH = 16;
-    public final int FRAME_HEIGHT = 16;
+    public final int FRAME_WIDTH = 19;
+    public final int FRAME_HEIGHT = 34;
     public static Rectangle boundingBox;
 
 
@@ -55,7 +55,13 @@ public class Entity {
         UP,RIGHT,DOWN,LEFT;
     }
 
+    public Entity(){
+        initEntity();
+    }
+
     public void initEntity(){
+        //Gdx.app.debug(TAG, "Construction" );
+
         this.entityID = UUID.randomUUID().toString();
         this.nextPlayerPosition = new Vector2();
         this.currentPlayerPosition = new Vector2();
@@ -70,6 +76,7 @@ public class Entity {
 
     public void update(float delta){
         frameTime = (frameTime + delta) % 5; //want to avoid overflow
+        //Gdx.app.debug(TAG, "frametime: " + _frameTime );
 
         //we want the hitbox to be at the feet for a better feel
         setBoundingBoxSize(0.4f, 0.6f);
@@ -81,6 +88,8 @@ public class Entity {
 
         this.nextPlayerPosition.x = startX;
         this.nextPlayerPosition.y = startY;
+
+        //Gdx.app.debug(TAG, "Calling INIT" );
     }
 
     public void setBoundingBoxSize(float percentageWidthReduced,
@@ -123,14 +132,13 @@ public class Entity {
         }
 
         boundingBox.set(minX, minY, width, height);
+        //Gdx.app.debug(TAG, "SETTING Bounding Box: (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 
     private void loadDefaultSprite(){
         Texture texture = Utility.getTextureAsset(defaultSpritePath);
-        TextureRegion [][] textureFrames = TextureRegion.split(texture,
-                FRAME_WIDTH, FRAME_HEIGHT);
-        frameSprite = new Sprite(textureFrames[0][0].getTexture(),
-                0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+        TextureRegion [][] textureFrames = TextureRegion.split(texture, FRAME_WIDTH, FRAME_HEIGHT);
+        frameSprite = new Sprite(textureFrames[0][0].getTexture(), 0, 0, FRAME_WIDTH, FRAME_HEIGHT);
         currentFrame = textureFrames[0][0];
     }
 
@@ -168,6 +176,12 @@ public class Entity {
                 }
             }
         }
+
+        walkDownAnimation = new Animation(0.25f, walkDownFrames, Animation.PlayMode.LOOP);
+        walkLeftAnimation = new Animation(0.25f, walkLeftFrames, Animation.PlayMode.LOOP);
+        walkRightAnimation = new Animation(0.25f, walkRightFrames, Animation.PlayMode.LOOP);
+        walkUpAnimation = new Animation(0.25f, walkUpFrames, Animation.PlayMode.LOOP);
+
     }
 
     public void dispose(){
