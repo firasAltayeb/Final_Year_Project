@@ -32,6 +32,7 @@ public class MainMenuScreen implements Screen {
 		TextButton exitButton = new TextButton("Exit", Utility.GUI_SKINS);
 
 		//Layout
+		title.setFontScale(2);
 		table.add(title).spaceBottom(75).row();
 		table.add(newGameButton).spaceBottom(10).row();
 		table.add(loadGameButton).spaceBottom(10).row();

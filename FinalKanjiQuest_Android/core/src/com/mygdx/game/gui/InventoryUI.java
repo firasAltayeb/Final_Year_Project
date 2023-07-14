@@ -1,5 +1,6 @@
 package com.mygdx.game.gui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -24,6 +25,7 @@ public class InventoryUI extends Window implements InventorySubject {
     private Table inventorySlotTable;
 
     private InventorySlot pressedSlot;
+    private InventorySlot slotToRemove;
     private Label itemDescription;
     private String description;
 
@@ -69,14 +71,22 @@ public class InventoryUI extends Window implements InventorySubject {
                                               super.touchUp(event, x, y, pointer, button);
 
                                               if (getTapCount() == 2) {
-                                                  InventorySlot slot = (InventorySlot) event.getListenerActor();
-                                                  if (slot.hasItem()) {
-                                                      InventoryItem item = slot.getTopInventoryItem();
-                                                      pressedSlot.addActor(item);
+                                                  slotToRemove = (InventorySlot) event.getListenerActor();
+                                                  if (slotToRemove.hasItem()) {
+                                                      InventoryItem item = slotToRemove.getTopInventoryItem();
+                                                      InventoryItem item2 = InventoryItemFactory.getInstance()
+                                                              .getInventoryItem(item.getItemTypeID());
+
+                                                      pressedSlot.addActor(item2);
+                                                      slotToRemove.addActor(item);
+
+                                                      Gdx.app.debug(TAG, "item.getItemTypeID is: " + item.getItemTypeID().toString());
+
                                                       description = item.getItemShortDescription();
                                                       final int mid = description.length() / 2;
                                                       itemDescription.setText(description.substring(0, mid) + "\n" +
                                                               description.substring(mid));
+
                                                   }
                                               }
 
@@ -99,12 +109,14 @@ public class InventoryUI extends Window implements InventorySubject {
                                             InventorySlot slot = (InventorySlot) event.getListenerActor();
                                             if (slot.hasItem()) {
                                                 InventoryItem item = slot.getTopInventoryItem();
-                                                     if (item.isConsumable()) {
-                                                         String itemInfo = item.getItemUseType() + Component.MESSAGE_TOKEN + item.getItemValue();
-                                                         InventoryUI.this.notify(itemInfo, InventoryObserver.InventoryEvent.ITEM_CONSUMED);
-                                                         slot.remove(item);
-                                                         itemDescription.setText("temp");
-                                                     }
+                                                if (item.isConsumable()) {
+                                                    String itemInfo = item.getItemUseType() + Component.MESSAGE_TOKEN + item.getItemValue();
+                                                    InventoryUI.this.notify(itemInfo, InventoryObserver.InventoryEvent.ITEM_CONSUMED);
+                                                    slot.remove(item);
+                                                    pressedSlot.clearAllInventoryItems(false);
+                                                    slotToRemove.clearAllInventoryItems(false  );
+                                                    itemDescription.setText("temp");
+                                                }
                                             }
                                         }
 
@@ -138,7 +150,7 @@ public class InventoryUI extends Window implements InventorySubject {
             inventorySlotTable.getCells().get(i).size(newMenuItemWindowWidth / 8, newMenuItemWindowHeight / 7.5f);
         }
 
-        this.setSize(newMenuItemWindowWidth, newMenuItemWindowHeight);
+        //this.setSize(newMenuItemWindowWidth, newMenuItemWindowHeight);
     }
 
 

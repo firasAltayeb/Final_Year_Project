@@ -30,6 +30,7 @@ public class NewGameScreen implements Screen {
 		Label profileName = new Label("Enter Profile Name: ", Utility.GUI_SKINS);
 		final TextField profileText = new TextField("", Utility.GUI_SKINS, "inventory");
 		profileText.setMaxLength(20);
+		profileText.setSize(stage.getWidth(),500);
 
 		final Dialog overwriteDialog = new Dialog("Overwrite?", Utility.GUI_SKINS, "solidbackground");
 		Label overwriteLabel = new Label("Overwrite existing profile name?", Utility.GUI_SKINS);
@@ -52,6 +53,7 @@ public class NewGameScreen implements Screen {
 		Table topTable = new Table();
 		topTable.setFillParent(true);
 		topTable.add(profileName).center();
+		topTable.row();
 		topTable.add(profileText).center();
 
 		Table bottomTable = new Table();

@@ -64,13 +64,6 @@ public class ProgressUI extends Window implements ProgressSubject {
         float newMenuItemWindowWidth = width;
         float newMenuItemWindowHeight = height;
 
-        //if(newMenuItemWindowWidth > menuItemWindowWidth &&
-        //        newMenuItemWindowHeight > menuItemWindowHeight){
-        //    for(int i = 0; i <= table.getCells().size-1; i++){
-        //
-        //    }
-        //}
-
         this.setSize(newMenuItemWindowWidth, newMenuItemWindowHeight);
     }
 

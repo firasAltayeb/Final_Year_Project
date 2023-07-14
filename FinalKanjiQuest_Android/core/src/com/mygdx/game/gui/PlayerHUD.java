@@ -76,13 +76,13 @@ public class PlayerHUD implements Screen, InventoryObserver, ProfileObserver, Pr
 
         menuButton = new TextButton("menu", Utility.GUI_SKINS);
         menuButton.setVisible(true);
-        menuButton.setSize(stage.getWidth()/10f,  stage.getHeight()/20f);
+        //menuButton.setSize(stage.getWidth()/10f,  stage.getHeight()/20f);
         menuButton.setPosition(stage.getWidth()/1.2f,  stage.getHeight()/6);
 
         menuListUI = new MenuListUI();
         menuListUI.setMovable(false);
         menuListUI.setVisible(false);
-        menuListUI.setSize(stage.getWidth()/5f,  stage.getHeight()/2.5f);
+        menuListUI.setSize(stage.getWidth()/2.5f,  stage.getHeight()/1.25f);
         menuListUI.setPosition(stage.getWidth()/1.27f, stage.getHeight()/2);
 
         progressUI = new ProgressUI(menuItemWindowWidth, menuItemWindowHeight);
@@ -217,20 +217,17 @@ public class PlayerHUD implements Screen, InventoryObserver, ProfileObserver, Pr
             all_health_heart.get(i).setPosition(width/ 60f + i * 25, height / 1.1f);
         }
 
-        menuButton.setPosition(width/1.2f,  height/6);
-        menuButton.setSize(width/10f,  height/20f);
-
-        menuListUI.setPosition(width/1.27f, height/2);
-        menuListUI.updateSize(width/5f, height/2.5f);
-
-        progressUI.setPosition(width/40, height/40);
-        progressUI.updateSize(width/1.35f, height/1.05f);
-
-        inventoryUI.setPosition(width/40, height/40);
+        //menuButton.setPosition(width/1.2f,  height/6);
+        //menuButton.setSize(width/10f,  height/20f);
+        //menuListUI.setPosition(width/1.27f, height/2);
+        //menuListUI.updateSize(width/5f, height/2.5f);
+        //progressUI.setPosition(width/40, height/40);
+        //progressUI.updateSize(width/1.35f, height/1.05f);
+        //inventoryUI.setPosition(width/40, height/40);
         inventoryUI.updateSize(width/1.35f, height/1.05f);
+        //MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+        //MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
 
-        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
-        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
         stage.getViewport().update(width, height, true);
 
     }

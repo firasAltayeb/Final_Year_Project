@@ -290,6 +290,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         }
     }
 
+
     public void showHearts(int hpVal){
         Gdx.app.log(TAG, "hpVal is: " + hpVal);
 
