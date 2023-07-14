@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 import com.mygdx.game.tools.Utility;
-import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -17,7 +17,7 @@ public class InventoryItemFactory {
     private Json json = new Json();
     private final String INVENTORY_ITEM = "json_scripts/inventory_items.json";
     private static InventoryItemFactory instance = null;
-    private Hashtable<ItemTypeID,InventoryItem> inventoryItemList;
+    private Hashtable<ItemNameID,InventoryItem> inventoryItemList;
 
     public static InventoryItemFactory getInstance() {
         if (instance == null) {
@@ -29,7 +29,7 @@ public class InventoryItemFactory {
 
     private InventoryItemFactory(){
         ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(INVENTORY_ITEM));
-        inventoryItemList = new Hashtable<ItemTypeID, InventoryItem>();
+        inventoryItemList = new Hashtable<ItemNameID, InventoryItem>();
 
         for (JsonValue jsonVal : list) {
             InventoryItem inventoryItem = json.readValue(InventoryItem.class, jsonVal);
@@ -37,8 +37,8 @@ public class InventoryItemFactory {
         }
     }
 
-    public InventoryItem getInventoryItem(ItemTypeID inventoryItemType){
-        InventoryItem item = new InventoryItem(inventoryItemList.get(inventoryItemType));
+    public InventoryItem getInventoryItem(ItemNameID inventoryItemName){
+        InventoryItem item = new InventoryItem(inventoryItemList.get(inventoryItemName));
         item.setDrawable(new TextureRegionDrawable(Utility.ITEMS_TEXTUREATLAS.findRegion(item.getItemNameID().toString())));
         item.setScaling(Scaling.none);
         return item;

@@ -33,10 +33,14 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
     private ProgressUI progressUI;
     private MenuListUI menuListUI;
+    private KanaUI hiraganaUI;
+    private KanaUI katakanaUI;
 
     private TextButton menuButton;
     private TextButton progressButton;
     private TextButton inventoryButton;
+    private TextButton hiraganaButton;
+    private TextButton katakanaButton;
 
     private Array<Image> all_health_heart;
     private Image health_heart;
@@ -89,11 +93,21 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         progressUI.setVisible(false);
         progressUI.setMovable(false);
 
-
         inventoryUI = new InventoryUI(menuItemWindowWidth, menuItemWindowHeight);
         inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         inventoryUI.setMovable(false);
         inventoryUI.setVisible(false);
+
+        hiraganaUI = new KanaUI(menuItemWindowWidth, menuItemWindowHeight, "hiragana");
+        hiraganaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        hiraganaUI.setMovable(false);
+        hiraganaUI.setVisible(false);
+
+        katakanaUI = new KanaUI(menuItemWindowWidth, menuItemWindowHeight, "katakana");
+        katakanaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        katakanaUI.setMovable(false);
+        katakanaUI.setVisible(false);
+
 
         Gdx.app.log(TAG, "all_health_heart.size is: " + all_health_heart.size);
 
@@ -105,6 +119,8 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         stage.addActor(menuListUI);
         stage.addActor(progressUI);
         stage.addActor(inventoryUI);
+        stage.addActor(hiraganaUI);
+        stage.addActor(katakanaUI);
 
         //Observers
         ProfileManager.getInstance().addObserver(this);
@@ -125,14 +141,18 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 }
                 progressUI.setVisible(false);
                 inventoryUI.setVisible(false);
+                katakanaUI.setVisible(false);
+                hiraganaUI.setVisible(false);
             }
         });
 
         progressButton =  menuListUI.getStatusButton();
         progressButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
-                progressUI.setVisible(progressUI.isVisible()?false:true);
                 inventoryUI.setVisible(false);
+                katakanaUI.setVisible(false);
+                hiraganaUI.setVisible(false);
+                progressUI.setVisible(progressUI.isVisible()?false:true);
             }
         });
 
@@ -140,7 +160,31 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         inventoryButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
                 progressUI.setVisible(false);
+                katakanaUI.setVisible(false);
+                hiraganaUI.setVisible(false);
                 inventoryUI.setVisible(inventoryUI.isVisible()?false:true);
+            }
+        });
+
+        hiraganaButton = menuListUI.getHiraganaButton();
+        hiraganaButton.addListener(new ClickListener() {
+            public void clicked (InputEvent event, float x, float y) {
+                progressUI.setVisible(false);
+                inventoryUI.setVisible(false);
+                katakanaUI.setVisible(false);
+                hiraganaUI.setVisible(false);
+                hiraganaUI.setVisible(hiraganaUI.isVisible()?false:true);
+
+            }
+        });
+
+        katakanaButton = menuListUI.getKatakanaButton();
+        katakanaButton.addListener(new ClickListener() {
+            public void clicked (InputEvent event, float x, float y) {
+                progressUI.setVisible(false);
+                inventoryUI.setVisible(false);
+                hiraganaUI.setVisible(false);
+                katakanaUI.setVisible(katakanaUI.isVisible()?false:true);
             }
         });
 

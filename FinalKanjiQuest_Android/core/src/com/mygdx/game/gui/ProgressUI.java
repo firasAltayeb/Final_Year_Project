@@ -38,27 +38,24 @@ public class ProgressUI extends Window implements ProgressSubject {
                 menuItemWindowHeight / 30, 10);
 
         Label text;
-        Image equivalent;
         table = new Table();
-        ArrayList<KanaLetter> kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
-        //Gdx.app.log(TAG, "kanaLettersList size is " + kanaLettersList.size() );
 
-        for(int i = 0; i < kanaLettersList.size()-1; i++){
+        for(int i = 0; i <= 41; i++){
+            text = new Label("firstText", Utility.GUI_SKINS, "list_text");
+            table.add(text).align(Align.left);
 
-            KanaLetter kanaLetter = kanaLettersList.get(i);
-            equivalent = new Image(Utility.LARGE_HIRAGANA_TEXTUREATLAS.findRegion(kanaLetter.getHiraganaEquivalent()));
-            table.add(equivalent).left();
-            text = new Label("romaji Equivalent: ", Utility.GUI_SKINS, "progress_list_text");
-            table.add(text).left();
-            equivalent = new Image(Utility.SMALL_ROMAJI_SHEET_TEXTUREATLAS.findRegion(kanaLetter.getRomajiEquivalent()));
-            table.add(equivalent).left();
-            text = new Label("katakana Equivalent: ", Utility.GUI_SKINS, "progress_list_text");
-            table.add(text);
-            equivalent = new Image(Utility.SMALL_KATAKANA_SHEET_TEXTUREATLAS.findRegion(kanaLetter.getKatakanaEquivalent()));
-            table.add(equivalent).left();
+            text = new Label("secondText", Utility.GUI_SKINS, "list_text");
+            table.add(text).align(Align.left);;
+
+            text = new Label("ThirdText", Utility.GUI_SKINS, "list_text");
+            table.add(text).align(Align.left);;
+
+            text = new Label("fourthText", Utility.GUI_SKINS, "list_text");
+            table.add(text).align(Align.left);;
 
             table.row();
         }
+
 
         //Gdx.app.debug(TAG, "scrollTable size " +  table.getCells().size);
         ScrollPane scrollPane = new ScrollPane(table);

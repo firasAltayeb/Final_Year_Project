@@ -9,10 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.components.Component;
-import com.mygdx.game.tools.Utility;
-import com.mygdx.game.inventory.*;
-import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
+import com.mygdx.game.inventory.InventoryItem;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
+import com.mygdx.game.inventory.InventoryItemFactory;
+import com.mygdx.game.inventory.InventoryItemLocation;
 import com.mygdx.game.inventory.InventorySlot;
+import com.mygdx.game.tools.Utility;
 
 public class InventoryUI extends Window implements InventorySubject {
 
@@ -51,15 +53,15 @@ public class InventoryUI extends Window implements InventorySubject {
         slotWidth = menuItemWindowWidth / 8;
         slotHeight = menuItemWindowHeight / 7.5f;
 
-        description = "temp text";
+        description = "";
         itemDescription = new Label("", Utility.GUI_SKINS, "list_text");
-        pressedSlot = new com.mygdx.game.inventory.InventorySlot();
+        pressedSlot = new InventorySlot();
         inventorySlotTable = new Table();
         inventorySlotTable.setName("Inventory_Slot_Table");
         //inventorySlotTable.setPosition(menuItemWindowWidth/1.5f,menuItemWindowHeight/2.6f);
 
         for (int i = 1; i <= numSlots; i++) {
-            com.mygdx.game.inventory.InventorySlot inventorySlot = new com.mygdx.game.inventory.InventorySlot();
+            InventorySlot inventorySlot = new InventorySlot();
 
             inventorySlotTable.add(inventorySlot).size(slotWidth, slotHeight);
 
@@ -69,7 +71,7 @@ public class InventoryUI extends Window implements InventorySubject {
                                               super.touchUp(event, x, y, pointer, button);
 
                                               if (getTapCount() == 2) {
-                                                  slotToRemove = (com.mygdx.game.inventory.InventorySlot) event.getListenerActor();
+                                                  slotToRemove = (InventorySlot) event.getListenerActor();
                                                   if (slotToRemove.hasItem()) {
                                                       InventoryItem item = slotToRemove.getTopInventoryItem();
                                                       InventoryItem item2 = InventoryItemFactory.getInstance()
@@ -110,7 +112,7 @@ public class InventoryUI extends Window implements InventorySubject {
                                         super.touchUp(event, x, y, pointer, button);
 
                                         if (getTapCount() == 2) {
-                                            com.mygdx.game.inventory.InventorySlot slot = (com.mygdx.game.inventory.InventorySlot) event.getListenerActor();
+                                            InventorySlot slot = (InventorySlot) event.getListenerActor();
                                             if (slot.hasItem()) {
                                                 InventoryItem item = slot.getTopInventoryItem();
                                                 if (item.isConsumable()) {
@@ -131,12 +133,10 @@ public class InventoryUI extends Window implements InventorySubject {
                                 }
         );
 
-
-       pressedSlot.setPosition(menuItemWindowWidth / 16f, menuItemWindowHeight / 1.35f);
-       pressedSlot.setSize(menuItemWindowWidth / 6, menuItemWindowHeight /7f);
-       itemDescription.setPosition(menuItemWindowWidth / 4f, menuItemWindowHeight / 1.25f);
-       inventorySlotTable.setPosition(menuItemWindowWidth / 2f, menuItemWindowHeight / 2.6f);
-
+        pressedSlot.setPosition(menuItemWindowWidth / 16f, menuItemWindowHeight / 1.35f);
+        pressedSlot.setSize(menuItemWindowWidth / 6, menuItemWindowHeight /7f);
+        itemDescription.setPosition(menuItemWindowWidth / 4f, menuItemWindowHeight / 1.25f);
+        inventorySlotTable.setPosition(menuItemWindowWidth / 2f, menuItemWindowHeight / 2.6f);
 
         this.addActor(pressedSlot);
         this.addActor(itemDescription);
@@ -150,7 +150,7 @@ public class InventoryUI extends Window implements InventorySubject {
         float newMenuItemWindowWidth = width;
         float newMenuItemWindowHeight = height;
 
-        pressedSlot.setPosition(newMenuItemWindowWidth / 8f, newMenuItemWindowHeight / 1.35f);
+        pressedSlot.setPosition(newMenuItemWindowWidth / 16f, newMenuItemWindowHeight / 1.35f);
         pressedSlot.setSize(newMenuItemWindowWidth / 6, newMenuItemWindowHeight /7f);
         itemDescription.setPosition(newMenuItemWindowWidth / 4f, newMenuItemWindowHeight / 1.25f);
         inventorySlotTable.setPosition(newMenuItemWindowWidth / 2f, newMenuItemWindowHeight / 2.6f);
@@ -169,12 +169,11 @@ public class InventoryUI extends Window implements InventorySubject {
         return inventorySlotTable;
     }
 
-
     public static Array<InventoryItemLocation> getInventory(Table targetTable) {
         Array<Cell> cells = targetTable.getCells();
         Array<InventoryItemLocation> items = new Array<InventoryItemLocation>();
         for (int i = 0; i < cells.size; i++) {
-            com.mygdx.game.inventory.InventorySlot inventorySlot = ((com.mygdx.game.inventory.InventorySlot) cells.get(i).getActor());
+            InventorySlot inventorySlot = ((InventorySlot) cells.get(i).getActor());
             if (inventorySlot == null) continue;
             int numItems = inventorySlot.getNumItems();
             if (numItems > 0) {
@@ -192,9 +191,9 @@ public class InventoryUI extends Window implements InventorySubject {
         Array<Cell> cells = targetTable.getCells();
         for(int i = 0; i < inventoryItems.size; i++){
             InventoryItemLocation itemLocation = inventoryItems.get(i);
-            ItemTypeID itemTypeID = ItemTypeID.valueOf(itemLocation.getItemTypeAtLocation());
-            com.mygdx.game.inventory.InventorySlot inventorySlot =  ((com.mygdx.game.inventory.InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
-            InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemTypeID);
+            ItemNameID itemNameID = ItemNameID.valueOf(itemLocation.getItemNameAtLocation());
+            InventorySlot inventorySlot =  ((InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
+            InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemNameID);
             inventorySlot.add(item);
 
         }
@@ -203,7 +202,7 @@ public class InventoryUI extends Window implements InventorySubject {
     public static void clearInventoryItems(Table targetTable){
         Array<Cell> cells = targetTable.getCells();
         for( int i = 0; i < cells.size; i++){
-            com.mygdx.game.inventory.InventorySlot inventorySlot = (com.mygdx.game.inventory.InventorySlot)cells.get(i).getActor();
+            InventorySlot inventorySlot = (InventorySlot)cells.get(i).getActor();
             if( inventorySlot == null ) continue;
             inventorySlot.clearAllInventoryItems(false);
         }
