@@ -90,7 +90,6 @@ public class PlayerController implements InputProcessor {
             this.quitReleased();
         }
         return true;
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -143,10 +142,8 @@ public class PlayerController implements InputProcessor {
         return false;
     }
 
-    public void dispose(){
 
-    }
-
+    //presses
     public void leftPressed(){
         keys.put(Keys.LEFT, true);
     }
@@ -179,8 +176,7 @@ public class PlayerController implements InputProcessor {
         mouseButtons.put(Mouse.DOACTION, true);
     }
 
-    //Releases
-
+    //releases
     public void leftReleased(){
         keys.put(Keys.LEFT, false);
     }

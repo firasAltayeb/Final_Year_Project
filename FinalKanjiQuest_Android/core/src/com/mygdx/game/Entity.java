@@ -4,7 +4,6 @@ package com.mygdx.game;
  * Created by firasAltayeb on 27/02/2017.
  */
 
-import java.util.UUID;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -13,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+
+import java.util.UUID;
 
 public class Entity {
 
@@ -60,7 +61,7 @@ public class Entity {
     }
 
     public void initEntity(){
-        //Gdx.app.debug(TAG, "Construction" );
+        //Gdx.app.log(TAG, "Construction" );
 
         this.entityID = UUID.randomUUID().toString();
         this.nextPlayerPosition = new Vector2();
@@ -76,7 +77,7 @@ public class Entity {
 
     public void update(float delta){
         frameTime = (frameTime + delta) % 5; //want to avoid overflow
-        //Gdx.app.debug(TAG, "frametime: " + _frameTime );
+        //Gdx.app.log(TAG, "frametime: " + _frameTime );
 
         //we want the hitbox to be at the feet for a better feel
         setBoundingBoxSize(0.4f, 0.6f);
@@ -89,7 +90,7 @@ public class Entity {
         this.nextPlayerPosition.x = startX;
         this.nextPlayerPosition.y = startY;
 
-        //Gdx.app.debug(TAG, "Calling INIT" );
+        //Gdx.app.log(TAG, "Calling INIT" );
     }
 
     public void setBoundingBoxSize(float percentageWidthReduced,
@@ -115,7 +116,7 @@ public class Entity {
         }
 
         if(width == 0 || height == 0){
-            Gdx.app.debug(TAG, "Width and Height are 0!! " + width +
+            Gdx.app.log(TAG, "Width and Height are 0!! " + width +
             ":" + height);
         }
 
@@ -132,7 +133,7 @@ public class Entity {
         }
 
         boundingBox.set(minX, minY, width, height);
-        //Gdx.app.debug(TAG, "SETTING Bounding Box: (" + minX + "," + minY + ")  width: " + width + " height: " + height);
+        //Gdx.app.log(TAG, "SETTING Bounding Box: (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 
     private void loadDefaultSprite(){
@@ -155,10 +156,10 @@ public class Entity {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                //Gdx.app.debug(TAG, "Got frame " + i + "," + j + " from " + sourceImage);
+                //Gdx.app.log(TAG, "Got frame " + i + "," + j + " from " + sourceImage);
                 TextureRegion region = textureFrames[i][j];
                 if (region == null) {
-                    Gdx.app.debug(TAG, "Got null animation frame " + i + "," + j);
+                    Gdx.app.log(TAG, "Got null animation frame " + i + "," + j);
                 }
                 switch (i) {
                     case 0:
@@ -236,15 +237,15 @@ public class Entity {
 
     public void setNextPositionToCurrent(){
         setCurrentPosition(nextPlayerPosition.x, nextPlayerPosition.y);
-        //Gdx.app.debug(TAG, "Setting nextPosition as Current: (" + _nextPlayerPosition.x + "," + _nextPlayerPosition.y + ")");
+        //Gdx.app.log(TAG, "Setting nextPosition as Current: (" + _nextPlayerPosition.x + "," + _nextPlayerPosition.y + ")");
     }
 
     public void calculateNextPosition(Direction currentDirection, float deltaTime){
         float testX = currentPlayerPosition.x;
         float testY = currentPlayerPosition.y;
 
-        //Gdx.app.debug(TAG, "calculateNextPosition:: Current Position: (" + _currentPlayerPosition.x + "," + _currentPlayerPosition.y + ")"  );
-        //Gdx.app.debug(TAG, "calculateNextPosition:: Current Direction: " + _currentDirection  );
+        //Gdx.app.log(TAG, "calculateNextPosition:: Current Position: (" + _currentPlayerPosition.x + "," + _currentPlayerPosition.y + ")"  );
+        //Gdx.app.log(TAG, "calculateNextPosition:: Current Direction: " + _currentDirection  );
 
         //currentVelocity * scalar quantity
         velocity.scl(deltaTime);

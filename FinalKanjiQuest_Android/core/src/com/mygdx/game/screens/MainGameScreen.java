@@ -56,7 +56,7 @@ public class MainGameScreen implements Screen {
         mapRenderer = new OrthogonalTiledMapRenderer(mapManger.getCurrentMap(), MapManger.UNIT_SCALE);
         mapRenderer.setView(camera);
 
-        Gdx.app.debug(TAG, "UniteScale value is: " + mapRenderer.getUnitScale());
+        Gdx.app.log(TAG, "UniteScale value is: " + mapRenderer.getUnitScale());
 
         player = new Entity();
         player.init(mapManger.getPlayerStartUnitScaled().x,
@@ -64,7 +64,7 @@ public class MainGameScreen implements Screen {
 
         currentPlayerSprite = player.getFrameSprite();
 
-        //Gdx.app.debug(TAG, "currentSprite.y: "  + _currentPlayerSprite.getRegionHeight());
+        //Gdx.app.log(TAG, "currentSprite.y: "  + _currentPlayerSprite.getRegionHeight());
 
         controller = new PlayerController(player);
         Gdx.input.setInputProcessor(controller);
@@ -153,19 +153,19 @@ public class MainGameScreen implements Screen {
         //update viewport if there could be skewing
         if( VIEWPORT.physicalWidth / VIEWPORT.physicalHeight >= VIEWPORT.aspectRatio){
             //Letterbox left and right
-            VIEWPORT.viewportWidth = VIEWPORT.viewportHeight * (VIEWPORT.physicalWidth/VIEWPORT.physicalHeight);
+            VIEWPORT.viewportWidth = VIEWPORT.viewportHeight * (VIEWPORT.physicalWidth/ VIEWPORT.physicalHeight);
             VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
         }else{
             //letterbox above and below
             VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
-            VIEWPORT.viewportHeight = VIEWPORT.viewportWidth * (VIEWPORT.physicalHeight/VIEWPORT.physicalWidth);
+            VIEWPORT.viewportHeight = VIEWPORT.viewportWidth * (VIEWPORT.physicalHeight/ VIEWPORT.physicalWidth);
         }
 
-        Gdx.app.debug(TAG, "WorldRenderer: virtual: (" + VIEWPORT.virtualWidth + ","
+        Gdx.app.log(TAG, "WorldRenderer: virtual: (" + VIEWPORT.virtualWidth + ","
                 + VIEWPORT.virtualHeight + ")" );
-        Gdx.app.debug(TAG, "WorldRenderer: viewport: (" + VIEWPORT.viewportWidth + ","
+        Gdx.app.log(TAG, "WorldRenderer: viewport: (" + VIEWPORT.viewportWidth + ","
                 + VIEWPORT.viewportHeight + ")" );
-        Gdx.app.debug(TAG, "WorldRenderer: physical: (" + VIEWPORT.physicalWidth + ","
+        Gdx.app.log(TAG, "WorldRenderer: physical: (" + VIEWPORT.physicalWidth + ","
                 + VIEWPORT.physicalHeight + ")" );
     }
 
@@ -180,10 +180,10 @@ public class MainGameScreen implements Screen {
 
         for (MapObject object : mapCollisionLayer.getObjects()){
             rectangle = ((RectangleMapObject) object).getRectangle();
-            //Gdx.app.debug(TAG, "Collision Rect (" + rectangle.x + "," + rectangle.y + ")");
-            //Gdx.app.debug(TAG, "Player Rect (" + boundingBox.x + "," + boundingBox.y + ")")
+            //Gdx.app.log(TAG, "Collision Rect (" + rectangle.x + "," + rectangle.y + ")");
+            //Gdx.app.log(TAG, "Player Rect (" + boundingBox.x + "," + boundingBox.y + ")")
             if (boundingBox.overlaps(rectangle)){
-                //Gdx.app.debug(TAG, "Map Collision!");
+                //Gdx.app.log(TAG, "Map Collision!");
                 return true;
             }
         }
@@ -203,8 +203,8 @@ public class MainGameScreen implements Screen {
         for (MapObject object : mapPortalLayer.getObjects()){
             if(object instanceof RectangleMapObject){
                 rectangle = ((RectangleMapObject)object).getRectangle();
-                //Gdx.app.debug(TAG, "Collision Rect (" + rectangle.x + "," + rectangle.y + ")");
-                //Gdx.app.debug(TAG, "Player Rect (" + boundingBox.x + "," + boundingBox.y + ")");
+                //Gdx.app.log(TAG, "Collision Rect (" + rectangle.x + "," + rectangle.y + ")");
+                //Gdx.app.log(TAG, "Player Rect (" + boundingBox.x + "," + boundingBox.y + ")");
                 if(boundingBox.overlaps(rectangle)){
                     String mapName = object.getName();
                     if(mapName == null){
@@ -217,7 +217,7 @@ public class MainGameScreen implements Screen {
                             mapManger.getPlayerStartUnitScaled().y);
                     mapRenderer.setMap(mapManger.getCurrentMap());
 
-                    Gdx.app.debug(TAG, "Portal Activated");
+                    Gdx.app.log(TAG, "Portal Activated");
                     return true;
                 }
             }
