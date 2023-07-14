@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="14" height="11" tilewidth="16" tileheight="16" nextobjectid="23">
  <tileset firstgid="1" name="inside" tilewidth="16" tileheight="16" tilecount="1680" columns="48">
-  <image source="../objects/inside.png" trans="ffffff" width="768" height="560"/>
+  <image source="../map_objects/inside.png" trans="ffffff" width="768" height="560"/>
   <terraintypes>
    <terrain name="carpoet1" tile="-1"/>
    <terrain name="carpet2" tile="-1"/>

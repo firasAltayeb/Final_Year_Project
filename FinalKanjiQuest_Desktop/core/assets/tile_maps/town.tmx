@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="78" height="55" tilewidth="16" tileheight="16" backgroundcolor="#005500" nextobjectid="685">
  <tileset firstgid="1" name="tileset1" tilewidth="16" tileheight="16" tilecount="1833" columns="39">
-  <image source="../objects/tileset1.png" trans="ffffff" width="624" height="752"/>
+  <image source="../map_objects/tileset1.png" trans="ffffff" width="624" height="752"/>
   <terraintypes>
    <terrain name="Dirt-Grass" tile="107"/>
    <terrain name="Rock-Grass" tile="146"/>
@@ -44,16 +44,16 @@
   <tile id="270" terrain="3,,,"/>
  </tileset>
  <tileset firstgid="1834" name="outside" tilewidth="16" tileheight="16" tilecount="1248" columns="52">
-  <image source="../objects/outside.png" trans="ffffff" width="832" height="384"/>
+  <image source="../map_objects/outside.png" trans="ffffff" width="832" height="384"/>
  </tileset>
  <tileset firstgid="3082" name="house" tilewidth="16" tileheight="16" tilecount="2448" columns="72">
-  <image source="../objects/house.png" trans="ffffff" width="1152" height="544"/>
+  <image source="../map_objects/house.png" trans="ffffff" width="1152" height="544"/>
   <terraintypes>
    <terrain name="New Terrain" tile="-1"/>
   </terraintypes>
  </tileset>
  <tileset firstgid="5530" name="inside" tilewidth="16" tileheight="16" tilecount="1680" columns="48">
-  <image source="../objects/inside.png" trans="ffffff" width="768" height="560"/>
+  <image source="../map_objects/inside.png" trans="ffffff" width="768" height="560"/>
  </tileset>
  <layer name="Terrain_One" width="78" height="55">
   <data encoding="csv">

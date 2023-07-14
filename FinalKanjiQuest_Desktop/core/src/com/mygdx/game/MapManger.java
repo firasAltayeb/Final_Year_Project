@@ -54,13 +54,13 @@ public class MapManger {
         playerStart = new Vector2(0,0);
         mapTable = new Hashtable();
 
-        mapTable.put(TOWN, "maps/town.tmx" );
-        mapTable.put(ARMORER, "maps/armorer.tmx" );
-        mapTable.put(LIBRARY, "maps/library.tmx" );
-        mapTable.put(HERBALIST, "maps/herbalist.tmx" );
-        mapTable.put(HOUSE_ONE, "maps/house_one.tmx" );
-        mapTable.put(INN_FIRST_FLOOR, "maps/inn_first_floor.tmx" );
-        mapTable.put(INN_SECOND_FLOOR, "maps/inn_second_floor.tmx" );
+        mapTable.put(TOWN, "tile_maps/town.tmx" );
+        mapTable.put(ARMORER, "tile_maps/armorer.tmx" );
+        mapTable.put(LIBRARY, "tile_maps/library.tmx" );
+        mapTable.put(HERBALIST, "tile_maps/herbalist.tmx" );
+        mapTable.put(HOUSE_ONE, "tile_maps/house_one.tmx" );
+        mapTable.put(INN_FIRST_FLOOR, "tile_maps/inn_first_floor.tmx" );
+        mapTable.put(INN_SECOND_FLOOR, "tile_maps/inn_second_floor.tmx" );
 
         playerStartLocationTable = new Hashtable<>();
         playerStartLocationTable.put(TOWN, playerStart.cpy());

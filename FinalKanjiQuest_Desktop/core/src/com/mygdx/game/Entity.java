@@ -89,7 +89,7 @@ public class Entity {
         //Gdx.app.debug(TAG, "frametime: " + frameTime );
 
         //we want the hitbox to be at the feet for a better feel
-        setBoundingBoxSize(0.4f, 0.6f);
+        setBoundingBoxSize(0.6f, 0.4f);
     }
 
     public void init(float startX, float startY){
@@ -102,23 +102,19 @@ public class Entity {
         //Gdx.app.debug(TAG, "Calling INIT" );
     }
 
-    public void setBoundingBoxSize(float percentageWidthReduced, float percentageHeightReduced){
+    public void setBoundingBoxSize(float widthPercentageToReduce, float heightPercentageToReduce){
         //update the current bounding box
         float width;
         float height;
 
-        // To get for e.g. 80% reduction, we pass .8f == (1 - .20)
-        float widthReductionAmount = 1.0f - percentageWidthReduced;
-        float heightReductionAmount = 1.0f - percentageHeightReduced;
-
-        if(widthReductionAmount > 0 && widthReductionAmount < 1){
-            width = FRAME_WIDTH * widthReductionAmount;
+        if(widthPercentageToReduce > 0 && widthPercentageToReduce < 1){
+            width = FRAME_WIDTH * widthPercentageToReduce;
         } else {
             width = FRAME_WIDTH;
         }
 
-        if(heightReductionAmount > 0 && heightReductionAmount < 1){
-            height = FRAME_WIDTH * heightReductionAmount;
+        if(heightPercentageToReduce > 0 && heightPercentageToReduce < 1){
+            height = FRAME_WIDTH * heightPercentageToReduce;
         } else {
             height = FRAME_WIDTH;
         }

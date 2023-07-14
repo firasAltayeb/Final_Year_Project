@@ -13,7 +13,7 @@ public class EntityFactory {
         NPC
     }
 
-    public static String PLAYER_CONFIG = "scripts/player.json";
+    public static String PLAYER_CONFIG = "json_scripts/player.json";
 
     public static Entity getEntity(EntityType entityType){
         Entity entity = null;
