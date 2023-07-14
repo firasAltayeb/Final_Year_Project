@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.Entity;
 import com.mygdx.game.MapManger;
 import com.mygdx.game.PlayerController;
 
@@ -199,11 +200,11 @@ public class MainGameScreen implements Screen {
                     if(mapName == null){
                         return false;
                     }
-                    mapManger.setClosestStartPositionFromScaledUnits
+                    mapManger.setClosestPlayerStartPositionFromScaledUnits
                             (player.getCurrentPosition());
                     mapManger.loadMap(mapName);
-                    player.init(mapManger.getPlayerStartUniScaled().x,
-                            mapManger.getPlayerStartUniScaled.y);
+                    player.init(mapManger.getPlayerStartUnitScaled().x,
+                            mapManger.getPlayerStartUnitScaled().y);
                     mapRenderer.setMap(mapManger.getCurrentMap());
 
                     Gdx.app.debug(TAG, "Portal Activated");
