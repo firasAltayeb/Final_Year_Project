@@ -54,6 +54,36 @@ public abstract class GraphicsComponent implements Component {
                     currentFrame = animation.getKeyFrame(frameTime);
                 }
                 break;
+            case DOWN_LEFT:
+                if (currentState == Entity.State.WALKING) {
+                    Animation animation = animations.get(Entity.AnimationType.WALK_DOWN_LEFT);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrame(frameTime);
+                } else if(currentState == Entity.State.IDLE) {
+                    Animation animation = animations.get(Entity.AnimationType.WALK_DOWN_LEFT);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrames()[0];
+                } else if(currentState == Entity.State.IMMOBILE) {
+                    Animation animation = animations.get(Entity.AnimationType.IMMOBILE);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrame(frameTime);
+                }
+                break;
+            case DOWN_RIGHT:
+                if (currentState == Entity.State.WALKING) {
+                    Animation animation = animations.get(Entity.AnimationType.WALK_DOWN_RIGHT);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrame(frameTime);
+                } else if(currentState == Entity.State.IDLE) {
+                    Animation animation = animations.get(Entity.AnimationType.WALK_DOWN_RIGHT);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrames()[0];
+                } else if(currentState == Entity.State.IMMOBILE) {
+                    Animation animation = animations.get(Entity.AnimationType.IMMOBILE);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrame(frameTime);
+                }
+                break;
             case LEFT:
                 if (currentState == Entity.State.WALKING) {
                     Animation animation = animations.get(Entity.AnimationType.WALK_LEFT);
@@ -76,6 +106,36 @@ public abstract class GraphicsComponent implements Component {
                     currentFrame = animation.getKeyFrame(frameTime);
                 } else if(currentState == Entity.State.IDLE) {
                     Animation animation = animations.get(Entity.AnimationType.WALK_UP);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrames()[0];
+                } else if(currentState == Entity.State.IMMOBILE) {
+                    Animation animation = animations.get(Entity.AnimationType.IMMOBILE);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrame(frameTime);
+                }
+                break;
+            case UP_LEFT:
+                if (currentState == Entity.State.WALKING) {
+                    Animation animation = animations.get(Entity.AnimationType.WALK_UP_LEFT);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrame(frameTime);
+                } else if(currentState == Entity.State.IDLE) {
+                    Animation animation = animations.get(Entity.AnimationType.WALK_UP_LEFT);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrames()[0];
+                } else if(currentState == Entity.State.IMMOBILE) {
+                    Animation animation = animations.get(Entity.AnimationType.IMMOBILE);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrame(frameTime);
+                }
+                break;
+            case UP_RIGHT:
+                if (currentState == Entity.State.WALKING) {
+                    Animation animation = animations.get(Entity.AnimationType.WALK_UP_RIGHT);
+                    if( animation == null ) return;
+                    currentFrame = animation.getKeyFrame(frameTime);
+                } else if(currentState == Entity.State.IDLE) {
+                    Animation animation = animations.get(Entity.AnimationType.WALK_UP_RIGHT);
                     if( animation == null ) return;
                     currentFrame = animation.getKeyFrames()[0];
                 } else if(currentState == Entity.State.IMMOBILE) {

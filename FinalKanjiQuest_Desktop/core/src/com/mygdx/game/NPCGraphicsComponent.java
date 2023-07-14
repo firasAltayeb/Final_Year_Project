@@ -103,7 +103,7 @@ public class NPCGraphicsComponent extends GraphicsComponent {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0.0f, 1.0f, 1.0f, 0.5f);
 
-        float width =  rect.getWidth() * Map.UNIT_SCALE*1.5f;
+        float width =  rect.getWidth() * Map.UNIT_SCALE*2f;
         float height = rect.getHeight() * Map.UNIT_SCALE/2f;
         float x = rect.x * Map.UNIT_SCALE - width/3;
         float y = rect.y * Map.UNIT_SCALE - height/1.5f;

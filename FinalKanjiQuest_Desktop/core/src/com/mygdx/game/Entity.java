@@ -18,8 +18,12 @@ public class Entity {
 
     public static enum Direction {
         UP,
+        UP_LEFT,
+        UP_RIGHT,
         RIGHT,
         DOWN,
+        DOWN_LEFT,
+        DOWN_RIGHT,
         LEFT;
 
         static public Direction getRandomNext() {
@@ -33,7 +37,19 @@ public class Entity {
                 return LEFT;
             }else if( this == UP){
                 return DOWN;
-            }else{
+            }else if( this == UP_LEFT){
+                return DOWN_RIGHT;
+            }
+            else if( this == UP_RIGHT){
+                return DOWN_LEFT;
+            }
+            else if( this == DOWN_LEFT){
+                return UP_RIGHT;
+            }
+            else if( this == DOWN_RIGHT){
+                return UP_LEFT;
+            }
+            else {
                 return UP;
             }
         }
@@ -55,7 +71,11 @@ public class Entity {
         WALK_LEFT,
         WALK_RIGHT,
         WALK_UP,
+        WALK_UP_LEFT,
+        WALK_UP_RIGHT,
         WALK_DOWN,
+        WALK_DOWN_LEFT,
+        WALK_DOWN_RIGHT,
         IDLE,
         IMMOBILE
     }

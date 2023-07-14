@@ -47,12 +47,23 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		}else if( keys.get(Keys.UP)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP));
-		}else if(keys.get(Keys.DOWN)){
+		}else if( keys.get(Keys.UP_LEFT)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP_LEFT));
+		}else if( keys.get(Keys.UP_RIGHT)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP_RIGHT));
+		} else if(keys.get(Keys.DOWN)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
-		}else if(keys.get(Keys.QUIT)){
-			Gdx.app.exit();
-		}else{
+		} else if(keys.get(Keys.DOWN_LEFT)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN_LEFT));
+		} else if(keys.get(Keys.DOWN_RIGHT)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN_RIGHT));
+		}
+		else{
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.IDLE));
 			if( currentDirection == null ){
 				entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
@@ -78,11 +89,21 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		if( keycode == Input.Keys.UP || keycode == Input.Keys.W){
 			this.upPressed();
 		}
-		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.S){
+		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.X){
 			this.downPressed();
 		}
 		if( keycode == Input.Keys.Q){
-			this.quitPressed();
+			this.upLeftPressed();
+
+		}if( keycode == Input.Keys.E){
+			this.upRightPressed();
+
+		}if( keycode == Input.Keys.C){
+			this.downRightPressed();
+
+		}if( keycode == Input.Keys.Z){
+			this.downLeftPressed();
+
 		}
 
 		return true;
@@ -99,11 +120,21 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		if( keycode == Input.Keys.UP || keycode == Input.Keys.W ){
 			this.upReleased();
 		}
-		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.S){
+		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.X){
 			this.downReleased();
 		}
 		if( keycode == Input.Keys.Q){
-			this.quitReleased();
+			this.upLeftReleased();
+
+		}if( keycode == Input.Keys.E){
+			this.upRightReleased();
+
+		}if( keycode == Input.Keys.C){
+			this.downRightReleased();
+
+		}if( keycode == Input.Keys.Z){
+			this.downLeftReleased();
+
 		}
 		return true;
 	}
@@ -174,8 +205,21 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	public void downPressed(){
 		keys.put(Keys.DOWN, true);
 	}
-	public void quitPressed(){
-		keys.put(Keys.QUIT, true);
+
+	public void upRightPressed(){
+		keys.put(Keys.UP_RIGHT, true);
+	}
+
+	public void upLeftPressed(){
+		keys.put(Keys.UP_LEFT, true);
+	}
+
+	public void downRightPressed(){
+		keys.put(Keys.DOWN_RIGHT, true);
+	}
+
+	public void downLeftPressed(){
+		keys.put(Keys.DOWN_LEFT, true);
 	}
 	
 	public void setClickedMouseCoordinates(int x,int y){
@@ -206,9 +250,21 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	public void downReleased(){
 		keys.put(Keys.DOWN, false);
 	}
-	
-	public void quitReleased(){
-		keys.put(Keys.QUIT, false);
+
+	public void upRightReleased(){
+		keys.put(Keys.UP_RIGHT, false);
+	}
+
+	public void upLeftReleased(){
+		keys.put(Keys.UP_LEFT, false);
+	}
+
+	public void downRightReleased(){
+		keys.put(Keys.DOWN_RIGHT, false);
+	}
+
+	public void downLeftReleased(){
+		keys.put(Keys.DOWN_LEFT, false);
 	}
 	
 	public void selectMouseButtonReleased(int x, int y){

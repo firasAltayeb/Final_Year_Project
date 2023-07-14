@@ -121,7 +121,7 @@ public abstract class PhysicsComponent implements Component{
 
         switch (currentDirection) {
             case LEFT :
-                testX -=  velocity.x;
+                testX -= velocity.x;
                 break;
             case RIGHT :
                 testX += velocity.x;
@@ -131,6 +131,22 @@ public abstract class PhysicsComponent implements Component{
                 break;
             case DOWN :
                 testY -= velocity.y;
+                break;
+            case DOWN_LEFT :
+                testX -= velocity.x;
+                testY -= velocity.y;
+                break;
+            case DOWN_RIGHT :
+                testX += velocity.x;
+                testY -= velocity.y;
+                break;
+            case UP_LEFT :
+                testX -= velocity.x;
+                testY += velocity.y;
+                break;
+            case UP_RIGHT :
+                testX += velocity.x;
+                testY += velocity.y;
                 break;
             default:
                 break;

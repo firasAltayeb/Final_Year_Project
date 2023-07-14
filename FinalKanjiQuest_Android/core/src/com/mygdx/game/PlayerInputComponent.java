@@ -10,7 +10,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	private final static String TAG = PlayerInputComponent.class.getSimpleName();
 	private Vector3 lastMouseCoordinates;
 	boolean doNothing;
-	boolean touchDownPressedCounter;
 	int screenWidth;
 	int screenHeight;
 	int touchDownX;
@@ -26,7 +25,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		touchDownX = 0;
 		touchDownY = 0;
 		doNothing = false;
-		touchDownPressedCounter = true;
 	}
 
 	@Override
@@ -60,12 +58,23 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		}else if( keys.get(Keys.UP)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP));
-		}else if(keys.get(Keys.DOWN)){
+		}else if( keys.get(Keys.UP_LEFT)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP_LEFT));
+		}else if( keys.get(Keys.UP_RIGHT)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP_RIGHT));
+		} else if(keys.get(Keys.DOWN)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
-		}else if(keys.get(Keys.QUIT)){
-			Gdx.app.exit();
-		}else{
+		} else if(keys.get(Keys.DOWN_LEFT)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN_LEFT));
+		} else if(keys.get(Keys.DOWN_RIGHT)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN_RIGHT));
+		}
+		else{
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.IDLE));
 			if( currentDirection == null ){
 				entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
@@ -82,36 +91,11 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if( keycode == Input.Keys.LEFT || keycode == Input.Keys.A){
-			this.leftPressed();
-		}
-		if( keycode == Input.Keys.RIGHT || keycode == Input.Keys.D){
-			this.rightPressed();
-		}
-		if( keycode == Input.Keys.UP || keycode == Input.Keys.W){
-			this.upPressed();
-		}
-		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.S){
-			this.downPressed();
-		}
-
 		return true;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		if( keycode == Input.Keys.LEFT || keycode == Input.Keys.A){
-			this.leftReleased();
-		}
-		if( keycode == Input.Keys.RIGHT || keycode == Input.Keys.D){
-			this.rightReleased();
-		}
-		if( keycode == Input.Keys.UP || keycode == Input.Keys.W ){
-			this.upReleased();
-		}
-		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.S){
-			this.downReleased();
-		}
 		return true;
 	}
 
@@ -125,25 +109,24 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		
 		touchDownX = screenX;
 		touchDownY = screenY;
+		this.selectMouseButtonPressed(screenX, screenY);
 		this.setClickedMouseCoordinates(screenX, screenY);
 		Gdx.app.log(TAG, "touch down : (x == " + touchDownX + ", y ==" + touchDownY + ")" );
 
 		//top left corner
-		//if((screenX >= 0 && screenX <= screenWidth/3) &&
-		//		(screenY >= 0 && screenY <= screenHeight/3)){
-		//	if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
-		//			keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) ||keys.get(Keys.DOWN_RIGHT) ||
-		//			keys.get(Keys.DOWN_LEFT)) {
-		//		doNothing = true;
-		//		touchDownPressedCounter = false;
-		//		Gdx.app.log(TAG, "top left doNothing is " + doNothing);
-		//		Gdx.app.log(TAG, "top left touchDownPressedCounter is " + touchDownPressedCounter);
-		//	}
-		//	else {
-		//		Gdx.app.log(TAG, "up left pressed ");
-		//		this.upLeftPressed();
-		//	}
-		//}
+		if((screenX >= 0 && screenX <= screenWidth/3) &&
+				(screenY >= 0 && screenY <= screenHeight/3)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) ||keys.get(Keys.DOWN_RIGHT) ||
+					keys.get(Keys.DOWN_LEFT)) {
+				doNothing = true;
+				Gdx.app.log(TAG, "top left doNothing is " + doNothing);
+			}
+			else {
+				Gdx.app.log(TAG, "up left pressed ");
+				this.upLeftPressed();
+			}
+		}
 
 		//top center
 		if((screenX >= screenWidth/3 && screenX <= screenWidth/1.5) &&
@@ -152,9 +135,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				touchDownPressedCounter = false;
 				Gdx.app.log(TAG, "up doNothing is " + doNothing);
-				Gdx.app.log(TAG, "up touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "up pressed ");
@@ -163,21 +144,19 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		}
 
 		//top right corner
-		//if((screenX >= screenWidth/1.5 && screenX <= screenWidth) &&
-		//		(screenY >= 0 && screenY <= screenHeight/3)){
-		//	if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
-		//			keys.get(Keys.LEFT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
-		//			keys.get(Keys.DOWN_LEFT)) {
-		//		doNothing = true;
-		//		touchDownPressedCounter = false;
-		//		Gdx.app.log(TAG, "top right doNothing is " + doNothing);
-		//		Gdx.app.log(TAG, "top right touchDownPressedCounter is " + touchDownPressedCounter);
-		//	}
-		//	else {
-		//		Gdx.app.log(TAG, "up right pressed ");
-		//		this.upRightPressed();
-		//	}
-		//}
+		if((screenX >= screenWidth/1.5 && screenX <= screenWidth) &&
+				(screenY >= 0 && screenY <= screenHeight/3)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
+					keys.get(Keys.DOWN_LEFT)) {
+				doNothing = true;
+				Gdx.app.log(TAG, "top right doNothing is " + doNothing);
+			}
+			else {
+				Gdx.app.log(TAG, "up right pressed ");
+				this.upRightPressed();
+			}
+		}
 
 		//center's left
 		if((screenX >= 0 && screenX <= screenWidth/3) &&
@@ -186,9 +165,8 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				touchDownPressedCounter = false;
 				Gdx.app.log(TAG, "left doNothing is " + doNothing);
-				Gdx.app.log(TAG, "left touchDownPressedCounter is " + touchDownPressedCounter);
+
 			}
 			else {
 				Gdx.app.log(TAG, "left pressed ");
@@ -200,11 +178,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 				(screenY >= screenHeight/3 && screenY <= screenHeight/1.5)){
 			//do nothing for now
 			doNothing = true;
-			touchDownPressedCounter = false;
 			Gdx.app.log(TAG, "center doNothing is " + doNothing);
-			Gdx.app.log(TAG, "center touchDownPressedCounter is " + touchDownPressedCounter);
-
-			this.selectMouseButtonPressed(screenX, screenY);
 		}
 
 		//center's right pressed
@@ -214,9 +188,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				touchDownPressedCounter = false;
 				Gdx.app.log(TAG, "right doNothing is " + doNothing);
-				Gdx.app.log(TAG, "right touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "right pressed ");
@@ -225,21 +197,19 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		}
 
 		//bottom left corner
-		//if((screenX >= 0 && screenX <= screenWidth/3) &&
-		//		(screenY >= screenHeight/1.5 && screenY <= screenHeight)){
-		//	if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
-		//			keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
-		//			keys.get(Keys.DOWN_RIGHT)) {
-		//		doNothing = true;
-		//		touchDownPressedCounter = false;
-		//		Gdx.app.log(TAG, "down left doNothing is " + doNothing);
-		//		Gdx.app.log(TAG, "down left touchDownPressedCounter is " + touchDownPressedCounter);
-		//	}
-		//	else {
-		//		Gdx.app.log(TAG, "down left pressed ");
-		//		this.downLeftPressed();
-		//	}
-		//}
+		if((screenX >= 0 && screenX <= screenWidth/3) &&
+				(screenY >= screenHeight/1.5 && screenY <= screenHeight)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
+					keys.get(Keys.DOWN_RIGHT)) {
+				doNothing = true;
+				Gdx.app.log(TAG, "down left doNothing is " + doNothing);
+			}
+			else {
+				Gdx.app.log(TAG, "down left pressed ");
+				this.downLeftPressed();
+			}
+		}
 
 		//bottom center
 		if((screenX >= screenWidth/3 && screenX <= screenWidth/1.5) &&
@@ -248,9 +218,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				touchDownPressedCounter = false;
 				Gdx.app.log(TAG, "down doNothing is " + doNothing);
-				Gdx.app.log(TAG, "down touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "down pressed ");
@@ -259,21 +227,19 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		}
 
 		//bottom right corner
-		//if((screenX >= screenWidth/1.5 && screenX <= screenWidth) &&
-		//		(screenY >= screenHeight/1.5 && screenY <= screenHeight)){
-		//	if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
-		//			keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
-		//			keys.get(Keys.DOWN_LEFT)) {
-		//		doNothing = true;
-		//		touchDownPressedCounter = false;
-		//		Gdx.app.log(TAG, "down right doNothing is " + doNothing);
-		//		Gdx.app.log(TAG, "down right touchDownPressedCounter is " + touchDownPressedCounter);
-		//	}
-		//	else {
-		//		Gdx.app.log(TAG, "down right pressed ");
-		//		this.downRightPressed();
-		//	}
-		//}
+		if((screenX >= screenWidth/1.5 && screenX <= screenWidth) &&
+				(screenY >= screenHeight/1.5 && screenY <= screenHeight)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
+					keys.get(Keys.DOWN_LEFT)) {
+				doNothing = true;
+				Gdx.app.log(TAG, "down right doNothing is " + doNothing);
+			}
+			else {
+				Gdx.app.log(TAG, "down right pressed ");
+				this.downRightPressed();
+			}
+		}
 
 		Gdx.app.log(TAG, "touch down returned" );
 
@@ -294,7 +260,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		}
 		else {
 			//Gdx.app.log(TAG, "hide() called" );
-			touchDownPressedCounter = true;
 			hide();
 		}
 
