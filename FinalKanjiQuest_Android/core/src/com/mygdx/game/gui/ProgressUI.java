@@ -99,6 +99,8 @@ public class ProgressUI extends Window{
                 counter += tempInt;
                 if (counter >= 428) {
                     LetterLvlCounter.setAllHiraganaMemorised(true);
+                    tempString = "memorised";
+                    text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
                 }
                 if (tempInt >= 3) {
                     tempString = "memorised";
@@ -141,6 +143,8 @@ public class ProgressUI extends Window{
                 counter += tempInt;
                 if (counter >= 428) {
                     LetterLvlCounter.setAllKatakanaMemorised(true);
+                    tempString = "memorised";
+                    text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
                 }
                 if (tempInt >= 3) {
                     tempString = "memorised";
@@ -182,6 +186,8 @@ public class ProgressUI extends Window{
                 counter += tempInt;
                 if (counter >= 175) {
                     LetterLvlCounter.setAllKanjiMemorised(true);
+                    tempString = "memorised";
+                    text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
                 }
                 if (tempInt >= 5) {
                     tempString = "memorised";

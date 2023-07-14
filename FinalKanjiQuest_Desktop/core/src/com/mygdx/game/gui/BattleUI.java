@@ -23,16 +23,15 @@ import java.util.ArrayList;
 
 public class BattleUI extends Window implements BattleObserver {
 
-    //TODO speak about this,
     private final static String TAG = BattleUI.class.getSimpleName();
 
     private KanjiLetter kanjiToAnswer;
     private KanaLetter kanaToAnswer;
     private ArrayList<KanaLetter> kanaLettersList;
     private ArrayList<KanjiLetter> kanjiLettersList;
-    
+
     private BattleState battleState = null;
-    private final float checkTimer = 2.5f;
+    private final float checkTimer = 3;
     private float battleTimer = 0;
 
     private Image hiro;
@@ -52,7 +51,7 @@ public class BattleUI extends Window implements BattleObserver {
     private String secondInnerTableEquivalent;
     private String thirdInnerTableEquivalent;
     private String fourthInnerTableEquivalent;
-    
+
     private KanaLetter equivalentImageOptionOne;
     private KanaLetter equivalentImageOptionTwo;
     private KanaLetter equivalentImageOptionThree;
@@ -63,7 +62,7 @@ public class BattleUI extends Window implements BattleObserver {
 
     public BattleUI(){
         super("", Utility.GUI_SKINS, "solid_background");
-        
+
         battleTimer = 0;
         battleState = new BattleState();
         battleState.addObserver(this);
@@ -156,6 +155,7 @@ public class BattleUI extends Window implements BattleObserver {
     public BattleState getCurrentState(){
         return battleState;
     }
+
 
     @Override
     public void onNotify(String letterToAnswer, BattleEvent event) {
@@ -287,7 +287,7 @@ public class BattleUI extends Window implements BattleObserver {
                 kanaToAnswer = KanaLettersFactory.getInstance().getHiraganaLetter(letterToAnswer);
                 imageToAnswer.setDrawable(new TextureRegionDrawable(Utility.LARGE_HIRAGANA_TEXTUREATLAS.findRegion(kanaToAnswer.getHiraganaEquivalent())));
 
-                equivalentImageOptionOne = kanaToAnswer;
+                equivalentImageOptionOne = KanaLettersFactory.getInstance().getHiraganaLetter(letterToAnswer);
                 equivalentImageOptionOne.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_ROMAJI_TEXTUREATLAS.findRegion(equivalentImageOptionOne.getRomajiEquivalent())));
                 Gdx.app.log(TAG, "equivalentImageOptionOne is " + equivalentImageOptionOne.getRomajiEquivalent());
 
@@ -307,7 +307,7 @@ public class BattleUI extends Window implements BattleObserver {
                 Gdx.app.log(TAG, "equivalentImageOptionFour is " + equivalentImageOptionFour.getRomajiEquivalent());
 
                 randomizeOrder(false);
-                addKanaImageListeners();
+                addKanaImageListeners(letterToAnswer);
 
                 break;
             case KATAKANA_ADDED:
@@ -321,7 +321,7 @@ public class BattleUI extends Window implements BattleObserver {
                 kanaToAnswer = KanaLettersFactory.getInstance().getKatakanaLetter(letterToAnswer);
                 imageToAnswer.setDrawable(new TextureRegionDrawable(Utility.LARGE_KATAKANA_TEXTUREATLAS.findRegion(kanaToAnswer.getKatakanaEquivalent())));
 
-                equivalentImageOptionOne = kanaToAnswer;
+                equivalentImageOptionOne = KanaLettersFactory.getInstance().getKatakanaLetter(letterToAnswer);
                 equivalentImageOptionOne.setDrawable(new TextureRegionDrawable(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(equivalentImageOptionOne.getHiraganaEquivalent())));
                 Gdx.app.log(TAG, "equivalentImageOptionOne is " + equivalentImageOptionOne.getHiraganaEquivalent());
 
@@ -341,7 +341,7 @@ public class BattleUI extends Window implements BattleObserver {
                 Gdx.app.log(TAG, "equivalentImageOptionFour is " + equivalentImageOptionFour.getHiraganaEquivalent());
 
                 randomizeOrder(false);
-                addKanaImageListeners();
+                addKanaImageListeners(letterToAnswer);
 
                 break;
             default:
@@ -473,17 +473,17 @@ public class BattleUI extends Window implements BattleObserver {
 
     }
 
-    public void addKanaImageListeners(){
+    public void addKanaImageListeners(final String letterToAnswer){
         equivalentImageOptionOne.addListener(
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        if(equivalentImageOptionOne.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
-                            battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
-                        else {
-                            battleState.answeredIncorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        if(equivalentImageOptionOne.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent())) {
+                            Gdx.app.log(TAG, "Kana Answered is " + letterToAnswer);
+                            battleState.answeredCorrectly(letterToAnswer);
+                        } else {
+                            battleState.answeredIncorrectly(letterToAnswer);
                         }
-
                     }
                 }
         );
@@ -491,10 +491,11 @@ public class BattleUI extends Window implements BattleObserver {
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {;
-                        if(equivalentImageOptionTwo.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
-                            battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
-                        else {
-                            battleState.answeredIncorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        if(equivalentImageOptionTwo.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent())) {
+                            Gdx.app.log(TAG, "Kana Answered is " + letterToAnswer);
+                            battleState.answeredCorrectly(letterToAnswer);
+                        } else {
+                            battleState.answeredIncorrectly(letterToAnswer);
                         }
                     }
                 }
@@ -503,10 +504,11 @@ public class BattleUI extends Window implements BattleObserver {
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        if(equivalentImageOptionThree.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
-                            battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
-                        else {
-                            battleState.answeredIncorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        if(equivalentImageOptionThree.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent())) {
+                            Gdx.app.log(TAG, "Kana Answered is " + letterToAnswer);
+                            battleState.answeredCorrectly(letterToAnswer);
+                        } else {
+                            battleState.answeredIncorrectly(letterToAnswer);
                         }
                     }
                 }
@@ -515,10 +517,11 @@ public class BattleUI extends Window implements BattleObserver {
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        if(equivalentImageOptionFour.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent()))
-                            battleState.answeredCorrectly(kanaToAnswer.getHiraganaEquivalent());
-                        else {
-                            battleState.answeredIncorrectly(kanaToAnswer.getHiraganaEquivalent());
+                        if(equivalentImageOptionFour.getHiraganaEquivalent().equalsIgnoreCase(kanaToAnswer.getHiraganaEquivalent())) {
+                            Gdx.app.log(TAG, "Kana Answered is " + letterToAnswer);
+                            battleState.answeredCorrectly(letterToAnswer);
+                        } else {
+                            battleState.answeredIncorrectly(letterToAnswer);
                         }
                     }
                 }

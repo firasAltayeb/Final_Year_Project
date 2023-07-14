@@ -43,7 +43,6 @@ public class MnemonicsUI extends Window{
 
         ArrayList<KanjiLetter> kanjiLettersList = KanjiLettersFactory.getInstance().getKanjiLettersList();
 
-        //TODO speak about this,
         for(int i = 0; i < kanjiLettersList.size(); i++){
 
             if (i == 0) {

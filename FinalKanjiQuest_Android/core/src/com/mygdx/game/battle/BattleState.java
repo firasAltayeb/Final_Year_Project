@@ -12,7 +12,7 @@ public class BattleState extends BattleSubject {
 
 
     private int currentZoneLevel = 0;
-    private final int chanceOfEncounter = 55;
+    private final int chanceOfEncounter = 60;
     private final int chanceOfEscape = 85;
     private String currentLetter = "";
 

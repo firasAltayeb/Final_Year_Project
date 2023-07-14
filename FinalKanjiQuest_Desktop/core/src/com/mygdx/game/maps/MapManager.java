@@ -24,7 +24,7 @@ public class MapManager implements ProfileObserver {
         ProfileManager.getInstance().addObserver(this);
     }
 
-    @Override //TODO speak about this
+    @Override
     public void onNotify(ProfileManager profileManager, ProfileEvent event) {
         switch(event){
             case PROFILE_LOADED:

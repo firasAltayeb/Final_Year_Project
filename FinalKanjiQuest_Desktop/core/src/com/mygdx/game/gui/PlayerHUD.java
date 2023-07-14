@@ -98,7 +98,6 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
         menuItemWindowHeight = stage.getHeight()/1.05f;
 
         all_health_heart = new Array<Image>();
-        //TODO speak about this
         for (int i = 0; i<10; i++) {
             health_heart = new Image(Utility.ITEMS_TEXTUREATLAS.findRegion("HEALTH_HEART"));
             health_heart.setPosition(health_heart.getWidth() * all_health_heart.size + i, stage.getHeight() - health_heart.getHeight());
@@ -386,7 +385,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 
     }
 
-    @Override //TODO speak about this in the report
+    @Override
     public void resize(int width, int height) {
         menuItemsXaxis = 0;
         menuItemsYaxis = height/40;
@@ -419,10 +418,6 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 
         mnemonicsUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         mnemonicsUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
-
-        if(width > 1280 && height > 720){
-            MainGameScreen.setGameState(MainGameScreen.GameState.LOADING);
-        }
 
         stage.getViewport().update(width, height, true);
     }
@@ -532,6 +527,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
         switch (event) {
             case LETTER_ANSWERED_CORRECTLY:
                 notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_SUCCESS);
+                Gdx.app.log(TAG, "Kana Answered is " + answeredLetter);
                 LetterLvlCounter.increaseLvl(answeredLetter, 1);
                 progressUI.updateTable();
 
@@ -549,6 +545,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                 ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                 if( numberOfHearts <= 0 ){
                     //notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
+                    mapManager.disableCurrentmapMusic();
                     battleUI.setVisible(false);
                     MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);
                 }

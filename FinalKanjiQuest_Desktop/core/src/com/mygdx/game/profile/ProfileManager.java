@@ -67,7 +67,7 @@ public class ProfileManager extends ProfileSubject {
                 profiles.put(file.nameWithoutExtension(), file);
             }
         }else{
-            //TODO: try external directory here
+            //try external directory here
             return;
         }
     }

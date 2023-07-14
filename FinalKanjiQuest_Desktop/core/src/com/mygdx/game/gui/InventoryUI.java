@@ -83,7 +83,7 @@ public class InventoryUI extends Window implements InventorySubject {
 
                                                       //Gdx.app.debug(TAG, "item.getItemNameID is: " + item.getItemNameID().toString());
 
-                                                      //TODO speak about this,
+
                                                       description = item.getItemShortDescription();
 
                                                       int mid;

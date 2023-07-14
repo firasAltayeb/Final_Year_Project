@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.audio.AudioManager;
 import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.audio.AudioSubject;
@@ -46,6 +47,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
     private Camera camera;
     private Entity player;
     private Json json;
+    private FinalKanjiQuest game;
 
     private MenuListUI menuListUI;
     private ProgressUI progressUI;
@@ -79,13 +81,14 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 
     private Array<AudioObserver> observers;
 
-    public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer, MapManager mapMgr) {
+    public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer, MapManager mapMgr, FinalKanjiQuest fkq) {
         this.camera = camera;
         this.player = player;
         viewport = new ScreenViewport(this.camera);
         stage = new Stage(viewport);
         json = new Json();
         mapManager = mapMgr;
+        this.game = fkq;
 
         observers = new Array<AudioObserver>();
 
@@ -428,6 +431,14 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 
     @Override
     public void pause() {
+        if( player != null ){
+            player.unregisterObservers();
+            player.dispose();
+        }
+        if( stage != null ){
+            stage.dispose();
+        }
+
 
     }
 
@@ -443,8 +454,14 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 
     @Override
     public void dispose() {
-        stage.dispose();
-        player.dispose();
+        if( player != null ){
+            player.unregisterObservers();
+            player.dispose();
+        }
+        if( stage != null ){
+            stage.clear();
+            stage.dispose();
+        }
     }
 
     @Override

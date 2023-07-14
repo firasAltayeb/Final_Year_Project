@@ -42,7 +42,6 @@ public class KanjiUI extends Window{
 
         ArrayList<KanjiLetter> kanjiLettersList = KanjiLettersFactory.getInstance().getKanjiLettersList();
 
-        //TODO speak about this,
         for (int i = 0; i < kanjiLettersList.size(); i++) {
 
             if (i == 0) {
@@ -101,22 +100,19 @@ public class KanjiUI extends Window{
                 innerTable = new Table();
             }
 
-            KanjiLetter kanjiLetter = kanjiLettersList.get(i);
 
-            //Gdx.app.log(TAG, "kanjiLetter.getKanjiNameID() is " + kanjiLetter.getKanjiNameID());
+            KanjiLetter kanjiLetter = kanjiLettersList.get(i);
 
             equivalent = new Image(Utility.MEDIUM_KANJI_TEXTUREATLAS.findRegion(kanjiLetter.getKanjiNameID()));
             innerTable.add(equivalent).left();
             text = new Label("Kanji meaning: " + kanjiLetter.getKanjiMeaning() + "\n" + "hiragana Equivalent: ", Utility.GUI_SKINS, "list_text");
             innerTable.add(text).left();
 
-            //TODO speak about this,
             temp = kanjiLetter.getHiraganaEquivalent();
 
             for (int j = 0; j < temp.length(); j++) {
                 if (temp.charAt(j) == '.') {
                     try {
-                        //Gdx.app.log(TAG, "j is: " + j);
                         indexOfFullStop = temp.indexOf('.', j + 1);
                         split = temp.substring(j + 1, indexOfFullStop);
                         equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(split));

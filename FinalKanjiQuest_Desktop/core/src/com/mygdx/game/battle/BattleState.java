@@ -7,12 +7,12 @@ import com.mygdx.game.japanese.LetterLvlCounter;
 
 public class BattleState extends BattleSubject {
 
-    //TODO speak about this,
+
     private static final String TAG = BattleState.class.getSimpleName();
 
 
     private int currentZoneLevel = 0;
-    private final int chanceOfEncounter = 65;
+    private final int chanceOfEncounter = 60;
     private final int chanceOfEscape = 85;
     private String currentLetter = "";
 
@@ -36,7 +36,7 @@ public class BattleState extends BattleSubject {
         }
     }
 
-    //TODO speak about this,
+
     public void setCurrentOpponent(){
         Gdx.app.debug(TAG, " Entered BATTLE ZONE: " + currentZoneLevel);
         int randomVal;
@@ -116,14 +116,9 @@ public class BattleState extends BattleSubject {
         notify(answeredLetter, BattleObserver.BattleEvent.LETTER_ANSWERED_CORRECTLY);
     }
 
-
     public void answeredIncorrectly(String answeredLetter){
-        if( currentLetter == null ){
-            return;
-        }
-
-        notify(currentLetter, BattleObserver.BattleEvent.LETTER_ANSWERED_INCORRECTLY);
-
+        notify(answeredLetter, BattleObserver.BattleEvent.LETTER_ANSWERED_INCORRECTLY);
         Gdx.app.debug(TAG, "PLayer lost health");
     }
+
 }

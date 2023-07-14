@@ -1,5 +1,6 @@
 package com.mygdx.game.gui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -99,15 +100,16 @@ public class ProgressUI extends Window{
                 counter += tempInt;
                 if (counter >= 428) {
                     LetterLvlCounter.setAllHiraganaMemorised(true);
+                    tempString = "memorised";
+                    text = new Label(tempString + "", Utility.GUI_SKINS, "progress_list_text");
                 }
-                if (tempInt >= 3) {
+                else if (tempInt >= 3) {
                     tempString = "memorised";
                     text = new Label(tempString + "", Utility.GUI_SKINS, "progress_list_text");
                 } else {
                     tempString = "Lvl: " + LetterLvlCounter.getHiraganaLvlTable().get(tempString);
                     text = new Label(tempString, Utility.GUI_SKINS, "list_text");
                 }
-                //Gdx.app.debug(TAG, "hiraganaLvlCounter is " + hiraganaLvlCounter);
             }
 
             hiraganaTable.add(equivalent).left();
@@ -141,11 +143,14 @@ public class ProgressUI extends Window{
                 counter += tempInt;
                 if (counter >= 428) {
                     LetterLvlCounter.setAllKatakanaMemorised(true);
+                    tempString = "memorised";
+                    text = new Label(tempString + "", Utility.GUI_SKINS, "progress_list_text");
                 }
-                if (tempInt >= 3) {
+                else if (tempInt >= 3) {
                     tempString = "memorised";
                     text = new Label(tempString + "", Utility.GUI_SKINS, "progress_list_text");
                 } else {
+                    //Gdx.app.log(TAG, "Kana " + tempString +  " is " + LetterLvlCounter.getKatakanaLvlTable().get(tempString));
                     tempString = "Lvl: " + LetterLvlCounter.getKatakanaLvlTable().get(tempString);
                     text = new Label(tempString, Utility.GUI_SKINS, "list_text");
                 }
@@ -182,6 +187,8 @@ public class ProgressUI extends Window{
                 counter += tempInt;
                 if (counter >= 175) {
                     LetterLvlCounter.setAllKanjiMemorised(true);
+                    tempString = "memorised";
+                    text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
                 }
                 if (tempInt >= 5) {
                     tempString = "memorised";

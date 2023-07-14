@@ -53,8 +53,8 @@ public class MainGameScreen extends GameScreen {
 	private Entity player;
 	private PlayerHUD playerHUD;
 
-	public MainGameScreen(FinalKanjiQuest game){
-		this.game = game;
+	public MainGameScreen(FinalKanjiQuest fkq){
+		this.game = fkq;
 		mapMgr = new MapManager();
 		json = new Json();
 
@@ -75,7 +75,7 @@ public class MainGameScreen extends GameScreen {
 
 
 		multiplexer = new InputMultiplexer();
-		playerHUD = new PlayerHUD(hudCamera, player, multiplexer, mapMgr);
+		playerHUD = new PlayerHUD(hudCamera, player, multiplexer, mapMgr, fkq);
 	}
 
 	@Override
@@ -153,8 +153,12 @@ public class MainGameScreen extends GameScreen {
 			mapRenderer.dispose();
 		}
 
-		game.dispose();
-		playerHUD.dispose();
+		if( game != null ){
+			game.dispose();
+		}
+		if( playerHUD != null ){
+			playerHUD.dispose();
+		}
 		AudioManager.getInstance().dispose();
 	}
 
@@ -170,13 +174,17 @@ public class MainGameScreen extends GameScreen {
 			player.dispose();
 		}
 
-		if( mapRenderer != null ){
-			mapRenderer.dispose();
+		//if( mapRenderer != null ){
+		//	mapRenderer.dispose();
+		//}
+
+		if( game != null ){
+			game.dispose();
 		}
 
-
-		game.dispose();
-		playerHUD.dispose();
+		if( playerHUD != null ){
+			playerHUD.dispose();
+		}
 		AudioManager.getInstance().dispose();
 	}
 

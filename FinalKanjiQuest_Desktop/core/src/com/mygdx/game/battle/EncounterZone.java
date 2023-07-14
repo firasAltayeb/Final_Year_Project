@@ -32,7 +32,7 @@ public class EncounterZone {
         Json json = new Json();
         Hashtable<String, Array<String>> monsterZones = new Hashtable<String, Array<String>>();
 
-        //TODO talk about this,
+
         ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(configFilePath));
 
         String temp;
