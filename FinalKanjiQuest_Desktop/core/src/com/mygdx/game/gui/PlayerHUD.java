@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.MnemonicsUI;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.Utility;
@@ -36,6 +37,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private KanaUI hiraganaUI;
     private KanaUI katakanaUI;
     private KanjiUI kanjiUI;
+    private MnemonicsUI mnemonicsUI;
 
     private TextButton menuButton;
     private TextButton progressButton;
@@ -43,6 +45,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private TextButton hiraganaButton;
     private TextButton katakanaButton;
     private TextButton kanjiButton;
+    private TextButton mnemonicsButton;
 
     private Array<Image> all_health_heart;
     private Image health_heart;
@@ -100,12 +103,12 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         inventoryUI.setMovable(false);
         inventoryUI.setVisible(false);
 
-        hiraganaUI = new KanaUI(menuItemWindowWidth, menuItemWindowHeight, "hiragana");
+        hiraganaUI = new KanaUI(menuItemWindowWidth, menuItemWindowHeight, "Hiragana");
         hiraganaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         hiraganaUI.setMovable(false);
         hiraganaUI.setVisible(false);
 
-        katakanaUI = new KanaUI(menuItemWindowWidth, menuItemWindowHeight, "katakana");
+        katakanaUI = new KanaUI(menuItemWindowWidth, menuItemWindowHeight, "Katakana");
         katakanaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         katakanaUI.setMovable(false);
         katakanaUI.setVisible(false);
@@ -114,6 +117,11 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         kanjiUI.setMovable(false);
         kanjiUI.setVisible(false);
+
+        mnemonicsUI = new MnemonicsUI(menuItemWindowWidth, menuItemWindowHeight);
+        mnemonicsUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        mnemonicsUI.setMovable(false);
+        mnemonicsUI.setVisible(false);
 
 
         Gdx.app.log(TAG, "all_health_heart.size is: " + all_health_heart.size);
@@ -129,6 +137,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         stage.addActor(hiraganaUI);
         stage.addActor(katakanaUI);
         stage.addActor(kanjiUI);
+        stage.addActor(mnemonicsUI);
 
         //Observers
         ProfileManager.getInstance().addObserver(this);
@@ -151,6 +160,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 inventoryUI.setVisible(false);
                 katakanaUI.setVisible(false);
                 hiraganaUI.setVisible(false);
+                mnemonicsUI.setVisible(false);
                 kanjiUI.setVisible(false);
             }
         });
@@ -162,6 +172,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 katakanaUI.setVisible(false);
                 hiraganaUI.setVisible(false);
                 kanjiUI.setVisible(false);
+                mnemonicsUI.setVisible(false);
                 progressUI.setVisible(progressUI.isVisible()?false:true);
             }
         });
@@ -173,6 +184,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 katakanaUI.setVisible(false);
                 hiraganaUI.setVisible(false);
                 kanjiUI.setVisible(false);
+                mnemonicsUI.setVisible(false);
                 inventoryUI.setVisible(inventoryUI.isVisible()?false:true);
             }
         });
@@ -184,6 +196,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 inventoryUI.setVisible(false);
                 katakanaUI.setVisible(false);
                 kanjiUI.setVisible(false);
+                mnemonicsUI.setVisible(false);
                 hiraganaUI.setVisible(hiraganaUI.isVisible()?false:true);
 
             }
@@ -196,6 +209,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 inventoryUI.setVisible(false);
                 hiraganaUI.setVisible(false);
                 kanjiUI.setVisible(false);
+                mnemonicsUI.setVisible(false);
                 katakanaUI.setVisible(katakanaUI.isVisible()?false:true);
             }
         });
@@ -207,7 +221,20 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 inventoryUI.setVisible(false);
                 hiraganaUI.setVisible(false);
                 katakanaUI.setVisible(false);
+                mnemonicsUI.setVisible(false);
                 kanjiUI.setVisible(kanjiUI.isVisible()?false:true);
+            }
+        });
+
+        mnemonicsButton = menuListUI.getMnemonicsButton();
+        mnemonicsButton.addListener(new ClickListener() {
+            public void clicked (InputEvent event, float x, float y) {
+                progressUI.setVisible(false);
+                inventoryUI.setVisible(false);
+                hiraganaUI.setVisible(false);
+                katakanaUI.setVisible(false);
+                kanjiUI.setVisible(false);
+                mnemonicsUI.setVisible(mnemonicsUI.isVisible()?false:true);
             }
         });
 
@@ -299,8 +326,9 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         kanjiUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 
-        kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
-        kanjiUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+        mnemonicsUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        mnemonicsUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
 
         MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
         MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);

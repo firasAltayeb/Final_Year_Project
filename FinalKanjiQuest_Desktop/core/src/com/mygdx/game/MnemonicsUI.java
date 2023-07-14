@@ -1,4 +1,4 @@
-package com.mygdx.game.gui;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -7,15 +7,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.japanese.KanaLetter;
-import com.mygdx.game.japanese.KanaLettersFactory;
+import com.mygdx.game.gui.ProgressUI;
 import com.mygdx.game.japanese.KanjiLetter;
 import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.tools.Utility;
 
 import java.util.ArrayList;
 
-public class KanjiUI extends Window{
+public class MnemonicsUI extends Window{
 
     private final static String TAG = ProgressUI.class.getSimpleName();
 
@@ -24,8 +23,8 @@ public class KanjiUI extends Window{
     float menuItemWindowWidth;
     float menuItemWindowHeight;
 
-    public KanjiUI(float width, float height){
-        super("Kanji", Utility.GUI_SKINS);
+    public MnemonicsUI(float width, float height){
+        super("Mnemonics", Utility.GUI_SKINS);
         this.getTitleLabel().setAlignment(Align.center);
 
         menuItemWindowWidth = width;
@@ -36,12 +35,11 @@ public class KanjiUI extends Window{
 
         Label text;
         String temp;
-        String split;
+        String toSplit;
         int indexOfFullStop;
         Image equivalent;
         innerTable = new Table();
         table = new Table();
-
 
         ArrayList<KanjiLetter> kanjiLettersList = KanjiLettersFactory.getInstance().getKanjiLettersList();
 
@@ -67,27 +65,17 @@ public class KanjiUI extends Window{
             KanjiLetter kanjiLetter = kanjiLettersList.get(i);
             equivalent = new Image(Utility.MEDIUM_KANJI_TEXTUREATLAS.findRegion(kanjiLetter.getKanjiNameID()));
             innerTable.add(equivalent).left();
-            text = new Label("Kanji meaning: " + kanjiLetter.getKanjiMeaning() + "\n" + "hiragana Equivalent: ", Utility.GUI_SKINS, "list_text");
+
+            toSplit = kanjiLetter.getKanjiMnemonic();
+
+            int mid;
+            int spaceAfterMid;
+            mid = toSplit.length()/2;
+            spaceAfterMid = toSplit.indexOf(" ", mid);
+            text = new Label(toSplit.substring(0, spaceAfterMid) + "\n" +
+                    toSplit.substring(spaceAfterMid), Utility.GUI_SKINS, "list_text");
+
             innerTable.add(text);
-
-            //TODO speak about this,
-            temp = kanjiLetter.getHiraganaEquivalent();
-
-            for(int j = 0; j < temp.length(); j++){
-                if (temp.charAt(j) == '.')
-                {
-                    try {
-                        Gdx.app.log(TAG, "j is: " + j);
-                        indexOfFullStop = temp.indexOf('.', j + 1);
-                        split = temp.substring(j + 1, indexOfFullStop);
-                        equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(split));
-                        innerTable.add(equivalent).left();
-                    } catch (Exception e){}
-
-                }
-
-            }
-
             innerTable.row();
         }
 

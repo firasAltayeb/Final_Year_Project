@@ -22,7 +22,7 @@ public class KanaUI extends Window{
     float menuItemWindowHeight;
 
     public KanaUI(float width, float height, String temp){
-        super("Progress", Utility.GUI_SKINS);
+        super(temp, Utility.GUI_SKINS);
         this.getTitleLabel().setAlignment(Align.center);
 
         menuItemWindowWidth = width;
