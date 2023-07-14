@@ -7,7 +7,11 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.Component;
 import com.mygdx.game.Entity;
+import com.mygdx.game.EntityConfig;
+import com.mygdx.game.EntityFactory;
+import com.sun.org.apache.bcel.internal.generic.PUSH;
 
 public class MapManager {
     private static final String TAG = MapManager.class.getSimpleName();
@@ -88,6 +92,5 @@ public class MapManager {
     public void setMapChanged(boolean hasMapChanged){
         this.mapChanged = hasMapChanged;
     }
-
 
 }

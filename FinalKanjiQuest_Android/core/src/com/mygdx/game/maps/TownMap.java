@@ -21,8 +21,10 @@ public class TownMap extends Map {
     public TownMap(){
         super(MapFactory.MapType.TOWN, mapPath);
 
+        EntityConfig walkaroundOneConfig = Entity.getEntityConfig(walkaround_one);
+
         for( Vector2 position: npcStartPositions){
-            mapEntities.add(initEntity(Entity.getEntityConfig(walkaround_one), position));
+            mapEntities.add(initEntity(walkaroundOneConfig, position));
         }
 
         //Special cases
@@ -45,24 +47,5 @@ public class TownMap extends Map {
         }
     }
 
-    private Entity initEntity(EntityConfig entityConfig, Vector2 position){
-        Entity entity = EntityFactory.getEntity(EntityFactory.EntityType.NPC);
-        entity.setEntityConfig(entityConfig);
 
-        entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, json.toJson(entity.getEntityConfig()));
-        entity.sendMessage(Component.MESSAGE.INIT_START_POSITION, json.toJson(position));
-        entity.sendMessage(Component.MESSAGE.INIT_STATE, json.toJson(entity.getEntityConfig().getState()));
-        entity.sendMessage(Component.MESSAGE.INIT_DIRECTION, json.toJson(entity.getEntityConfig().getDirection()));
-
-        return entity;
-    }
-
-    private Entity initSpecialEntity(EntityConfig entityConfig){
-        Vector2 position = new Vector2(0,0);
-
-        if( specialNPCStartPositions.containsKey(entityConfig.getEntityID()) ) {
-             position = specialNPCStartPositions.get(entityConfig.getEntityID());
-        }
-        return initEntity(entityConfig, position);
-    }
 }

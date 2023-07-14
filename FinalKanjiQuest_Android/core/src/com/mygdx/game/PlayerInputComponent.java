@@ -124,7 +124,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 			}
 			else {
 				Gdx.app.log(TAG, "up left pressed ");
-				this.upLeftPressed();
+				keys.put(Keys.UP_LEFT, true);
 			}
 		}
 
@@ -139,7 +139,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 			}
 			else {
 				Gdx.app.log(TAG, "up pressed ");
-				this.upPressed();
+				keys.put(Keys.UP, true);
 			}
 		}
 
@@ -154,7 +154,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 			}
 			else {
 				Gdx.app.log(TAG, "up right pressed ");
-				this.upRightPressed();
+				keys.put(Keys.UP_RIGHT, true);
 			}
 		}
 
@@ -170,7 +170,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 			}
 			else {
 				Gdx.app.log(TAG, "left pressed ");
-				this.leftPressed();
+				keys.put(Keys.LEFT, true);
 			}
 		}
 		//center
@@ -192,7 +192,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 			}
 			else {
 				Gdx.app.log(TAG, "right pressed ");
-				this.rightPressed();
+				keys.put(Keys.RIGHT, true);
 			}
 		}
 
@@ -207,7 +207,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 			}
 			else {
 				Gdx.app.log(TAG, "down left pressed ");
-				this.downLeftPressed();
+				keys.put(Keys.DOWN_LEFT, true);
 			}
 		}
 
@@ -222,7 +222,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 			}
 			else {
 				Gdx.app.log(TAG, "down pressed ");
-				this.downPressed();
+				keys.put(Keys.DOWN, true);;
 			}
 		}
 
@@ -237,7 +237,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 			}
 			else {
 				Gdx.app.log(TAG, "down right pressed ");
-				this.downRightPressed();
+				keys.put(Keys.DOWN_RIGHT, true);;
 			}
 		}
 
@@ -281,39 +281,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	@Override
 	public boolean scrolled(int amount) {
 		return false;
-	}
-
-	//Key presses
-	public void leftPressed(){
-		keys.put(Keys.LEFT, true);
-	}
-
-	public void rightPressed(){
-		keys.put(Keys.RIGHT, true);
-	}
-
-	public void upPressed(){
-		keys.put(Keys.UP, true);
-	}
-
-	public void downPressed(){
-		keys.put(Keys.DOWN, true);
-	}
-
-	public void upRightPressed(){
-		keys.put(Keys.UP_RIGHT, true);
-	}
-
-	public void upLeftPressed(){
-		keys.put(Keys.UP_LEFT, true);
-	}
-
-	public void downRightPressed(){
-		keys.put(Keys.DOWN_RIGHT, true);
-	}
-
-	public void downLeftPressed(){
-		keys.put(Keys.DOWN_LEFT, true);
 	}
 
 	public void setClickedMouseCoordinates(int x,int y){

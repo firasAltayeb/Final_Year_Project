@@ -142,7 +142,7 @@ public class Entity {
         this.entityConfig = entityConfig;
     }
 
-    static public EntityConfig getEntityConfig(String configFilePath){
+    public static EntityConfig getEntityConfig(String configFilePath){
         Json json = new Json();
         return json.fromJson(EntityConfig.class, Gdx.files.internal(configFilePath));
     }
