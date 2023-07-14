@@ -24,7 +24,7 @@ public final class Utility {
 
     private final static String GUI_SHEET_PATH = "gui/gui_sheet.atlas";
     private final static String GUI_SKINS_PATH = "gui/gui_skins.json";
-    private final static String ITEMS_SHEET_PATH = "items/items_sheet.txt";
+    private final static String ITEMS_SHEET_PATH = "items/medium_items_sheet.txt";
 
     private final static String LARGE_HIRAGANA_SHEET_PATH = "japanese/hiragana/large_hiragana_sheet.txt";
     private final static String LARGE_KATAKANA_SHEET_PATH = "japanese/katakana/large_katakana_sheet.txt";

@@ -24,8 +24,11 @@ public class InventoryItem extends Image {
     public enum ItemUseType{
         ITEM_RESTORE_HEALTH(1),
         ITEM_INCREASE_MAX_HP(2),
-        ITEM_INCREASE_KATAKANA_LVL(4),
-        ITEM_INCREASE_HIRAGANA_LVL(8);
+        ITEM_INCREASE_HIRAGANA_LVL(4),
+        ITEM_INCREASE_KATAKANA_LVL(8),
+        ITEM_DECREASE_HIRAGANA_LVL(16),
+        ITEM_DECREASE_KATAKANA_LVL(32);
+
 
         private int itemUseType;
 
@@ -41,8 +44,8 @@ public class InventoryItem extends Image {
     public enum ItemNameID {
         ARROW_DOWN,ARROW_DOWN_SMALL,ARROW_UP,
         ARROW_UP_SMALL,DIAMOND,EGG,EMERALD,
-        GOLDEN_SKULL,H_RUNESTONE,HEALTH_HEART,
-        HEART,K_RUNESTONE,LARGE_POTION_BLUE,
+        GOLDEN_SKULL,H_RUNESTONE,NEGATIVE_H_RUNESTONE,HEALTH_HEART,
+        HEART,K_RUNESTONE,NEGATIVE_K_RUNESTONE,LARGE_POTION_BLUE,
         MEDIUM_POTION_BLUE,POTION_BLUE,
         PYRAMID, NONE;
     }
@@ -82,6 +85,15 @@ public class InventoryItem extends Image {
     public static boolean doesRestoreHP(int itemUseType){
         return ((itemUseType & ItemUseType.ITEM_RESTORE_HEALTH.getValue()) == ItemUseType.ITEM_RESTORE_HEALTH.getValue());
     }
+
+    public static boolean doesIncreaseHiraganaLvl(int itemUseType){
+        return ((itemUseType & ItemUseType.ITEM_INCREASE_HIRAGANA_LVL.getValue()) == ItemUseType.ITEM_INCREASE_HIRAGANA_LVL.getValue());
+    }
+
+    public static boolean doesDecreaseHiraganaLvl(int itemUseType){
+        return ((itemUseType & ItemUseType.ITEM_DECREASE_HIRAGANA_LVL.getValue()) == ItemUseType.ITEM_DECREASE_HIRAGANA_LVL.getValue());
+    }
+
 
     public boolean isSameItem(InventoryItem candidateInventoryItem){
         return itemNameID == candidateInventoryItem.getItemNameID();

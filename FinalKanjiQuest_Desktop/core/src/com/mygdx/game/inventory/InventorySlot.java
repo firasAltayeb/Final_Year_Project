@@ -32,48 +32,24 @@ public class InventorySlot extends Stack {
     @Override
     public void add(Actor actor) {
         super.add(actor);
-
-        //if( numItemsLabel == null ){
-        //    return;
-        //}
-        //
-        //if( !actor.equals(defaultBackground) && !actor.equals(numItemsLabel) ) {
-        //    incrementItemCount(true);
-        //}
     }
 
     public void remove(Actor actor) {
         super.removeActor(actor);
-
-        //if( numItemsLabel == null ){
-        //    return;
-        //}
-        //
-        //if( !actor.equals(defaultBackground) && !actor.equals(numItemsLabel) ) {
-        //    decrementItemCount(true);
-        //}
     }
 
     public void add(Array<Actor> array) {
         for( Actor actor : array){
             super.add(actor);
-
-            //if( numItemsLabel == null ){
-            //    return;
-            //}
-            //if( !actor.equals(defaultBackground) && !actor.equals(numItemsLabel) ) {
-            //    incrementItemCount(true);
-            //}
         }
     }
 
-    public void clearAllInventoryItems(boolean sendRemoveNotifications) {
+    public void clearAllInventoryItems() {
         if( hasItem() ){
             SnapshotArray<Actor> arrayChildren = this.getChildren();
             int numInventoryItems =  getNumItems();
 
             for(int i = 0; i < numInventoryItems; i++) {
-                //decrementItemCount(sendRemoveNotifications);
                 arrayChildren.pop();
             }
         }

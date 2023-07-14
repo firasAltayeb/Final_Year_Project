@@ -65,6 +65,11 @@
 		romajiEquivalent: romajiSu
 	},
 	{
+		hiraganaEquivalent: hiraganaSe
+		katakanaEquivalent: katakanaSe
+		romajiEquivalent: romajiSe
+	},
+	{
 		hiraganaEquivalent: hiraganaSo
 		katakanaEquivalent: katakanaSo
 		romajiEquivalent: romajiSo
@@ -195,6 +200,36 @@
 		romajiEquivalent: romajiRo
 	},
 	{
+		hiraganaEquivalent: hiraganaYa
+		katakanaEquivalent: katakanaYa
+		romajiEquivalent: romajiYa
+	},
+	{
+		hiraganaEquivalent: hiraganaYu
+		katakanaEquivalent: katakanaYu
+		romajiEquivalent: romajiYu
+	},
+	{
+		hiraganaEquivalent: hiraganaYo
+		katakanaEquivalent: katakanaYo
+		romajiEquivalent: romajiYo
+	},
+	{
+		hiraganaEquivalent: hiraganaWa
+		katakanaEquivalent: katakanaWa
+		romajiEquivalent: romajiWa
+	},
+	{
+		hiraganaEquivalent: hiraganaWo
+		katakanaEquivalent: katakanaWo
+		romajiEquivalent: romajiWo
+	},
+	{
+		hiraganaEquivalent: hiraganaN
+		katakanaEquivalent: katakanaN
+		romajiEquivalent: romajiN
+	},
+	{
 		hiraganaEquivalent: hiraganaGa
 		katakanaEquivalent: katakanaGa
 		romajiEquivalent: romajiGa
@@ -318,31 +353,6 @@
 		hiraganaEquivalent: hiraganaPo
 		katakanaEquivalent: katakanaPo
 		romajiEquivalent: romajiPo
-	},
-	{
-		hiraganaEquivalent: hiraganaYa
-		katakanaEquivalent: katakanaYa
-		romajiEquivalent: romajiYa
-	},
-	{
-		hiraganaEquivalent: hiraganaYu
-		katakanaEquivalent: katakanaYu
-		romajiEquivalent: romajiYu
-	},
-	{
-		hiraganaEquivalent: hiraganaYo
-		katakanaEquivalent: katakanaYo
-		romajiEquivalent: romajiYo
-	},
-	{
-		hiraganaEquivalent: hiraganaWa
-		katakanaEquivalent: katakanaWa
-		romajiEquivalent: romajiWa
-	},
-	{
-		hiraganaEquivalent: hiraganaWo
-		katakanaEquivalent: katakanaWo
-		romajiEquivalent: romajiWo
 	},
 	{
 		hiraganaEquivalent: hiraganaKya

@@ -1,6 +1,7 @@
 package com.mygdx.game.japanese;
 
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
@@ -146,7 +147,9 @@ public class LetterLvlCounter {
 
          katakanaNLvl = 1;
 
+     private static boolean allHiraganaMemorised = false;
      private static Hashtable<String, Integer> hiraganaLvlTable;
+
 
      public static Hashtable<String, Integer> getHiraganaLvlTable(){
 
@@ -192,7 +195,13 @@ public class LetterLvlCounter {
           hiraganaLvlTable.put("hiraganaRu", hiraganaRuLvl);
           hiraganaLvlTable.put("hiraganaRe", hiraganaReLvl);
           hiraganaLvlTable.put("hiraganaRo", hiraganaRoLvl);
+          hiraganaLvlTable.put("hiraganaYu", hiraganaYuLvl);
+          hiraganaLvlTable.put("hiraganaYo", hiraganaYoLvl);
+          hiraganaLvlTable.put("hiraganaWa", hiraganaWaLvl);
+          hiraganaLvlTable.put("hiraganaWo", hiraganaWoLvl);
+
           hiraganaLvlTable.put("hiraganaN", hiraganaNLvl);
+
           hiraganaLvlTable.put("hiraganaGa", hiraganaGaLvl);
           hiraganaLvlTable.put("hiraganaGi", hiraganaGiLvl);
           hiraganaLvlTable.put("hiraganaGu", hiraganaGuLvl);
@@ -219,10 +228,6 @@ public class LetterLvlCounter {
           hiraganaLvlTable.put("hiraganaPe", hiraganaPeLvl);
           hiraganaLvlTable.put("hiraganaPo", hiraganaPoLvl);
           hiraganaLvlTable.put("hiraganaYa", hiraganaYaLvl);
-          hiraganaLvlTable.put("hiraganaYu", hiraganaYuLvl);
-          hiraganaLvlTable.put("hiraganaYo", hiraganaYoLvl);
-          hiraganaLvlTable.put("hiraganaWa", hiraganaWaLvl);
-          hiraganaLvlTable.put("hiraganaWo", hiraganaWoLvl);
           hiraganaLvlTable.put("hiraganaKya", hiraganaKyaLvl);
           hiraganaLvlTable.put("hiraganaKyu", hiraganaKyuLvl);
           hiraganaLvlTable.put("hiraganaKyo", hiraganaKyoLvl);
@@ -305,6 +310,11 @@ public class LetterLvlCounter {
                case "hiraganaRu":      hiraganaRuLvl++;     break;
                case "hiraganaRe":      hiraganaReLvl++;     break;
                case "hiraganaRo":      hiraganaRoLvl++;     break;
+               case "hiraganaYa":      hiraganaYaLvl++;     break;
+               case "hiraganaYu":      hiraganaYuLvl++;     break;
+               case "hiraganaYo":      hiraganaYoLvl++;     break;
+               case "hiraganaWa":      hiraganaWaLvl++;     break;
+               case "hiraganaWo":      hiraganaWoLvl++;     break;
                case "hiraganaN":       hiraganaNLvl++;      break;
                case "hiraganaGa":      hiraganaGaLvl++;     break;
                case "hiraganaGi":      hiraganaGiLvl++;     break;
@@ -331,12 +341,6 @@ public class LetterLvlCounter {
                case "hiraganaPu":      hiraganaPuLvl++;     break;
                case "hiraganaPe":      hiraganaPeLvl++;     break;
                case "hiraganaPo":      hiraganaPoLvl++;     break;
-               case "hiraganaYa":      hiraganaYaLvl++;     break;
-               case "hiraganaYu":      hiraganaYuLvl++;     break;
-               case "hiraganaYo":      hiraganaYoLvl++;     break;
-               case "hiraganaWa":      hiraganaWaLvl++;     break;
-               case "hiraganaWo":      hiraganaWoLvl++;     break;
-
                case "hiraganaKya":     hiraganaKyaLvl++;     break;
                case "hiraganaKyu":     hiraganaKyuLvl++;     break;
                case "hiraganaKyo":     hiraganaKyoLvl++;     break;
@@ -376,5 +380,157 @@ public class LetterLvlCounter {
                default: break;
 
           }
+     }
+
+     public static boolean isAllHiraganaMemorised(){
+          return allHiraganaMemorised;
+     }
+
+     public static void setAllHiraganaMemorisedToTrue(){
+
+          allHiraganaMemorised = true;
+
+          hiraganaALvl = 3;      hiraganaKaLvl = 3;
+          hiraganaILvl = 3;      hiraganaKiLvl = 3;
+          hiraganaULvl = 3;      hiraganaKuLvl = 3;
+          hiraganaELvl = 3;      hiraganaKeLvl = 3;
+          hiraganaOLvl = 3;      hiraganaKoLvl = 3;
+
+          hiraganaSaLvl = 3;     hiraganaTaLvl = 3;
+          hiraganaShiLvl = 3;    hiraganaChiLvl = 3;
+          hiraganaSuLvl = 3;     hiraganaTsuLvl = 3;
+          hiraganaSeLvl = 3;     hiraganaTeLvl = 3;
+          hiraganaSoLvl = 3;     hiraganaToLvl = 3;
+
+          hiraganaNaLvl = 3;     hiraganaHaLvl = 3;
+          hiraganaNiLvl = 3;     hiraganaHiLvl = 3;
+          hiraganaNuLvl = 3;     hiraganaHuLvl = 3;
+          hiraganaNeLvl = 3;     hiraganaHeLvl = 3;
+          hiraganaNoLvl = 3;     hiraganaHoLvl = 3;
+
+          hiraganaMaLvl = 3;     hiraganaRaLvl = 3;
+          hiraganaMiLvl = 3;     hiraganaRiLvl = 3;
+          hiraganaMuLvl = 3;     hiraganaRuLvl = 3;
+          hiraganaMeLvl = 3;     hiraganaReLvl = 3;
+          hiraganaMoLvl = 3;     hiraganaRoLvl = 3;
+
+          hiraganaNLvl  = 3;
+
+          hiraganaGaLvl = 3;     hiraganaZaLvl = 3;
+          hiraganaGiLvl = 3;     hiraganaJiLvl = 3;
+          hiraganaGuLvl = 3;     hiraganaZuLvl = 3;
+          hiraganaGeLvl = 3;     hiraganaZeLvl = 3;
+          hiraganaGoLvl = 3;     hiraganaZoLvl = 3;
+
+          hiraganaDaLvl = 3;     hiraganaBaLvl = 3;
+          hiraganaDiLvl = 3;     hiraganaBiLvl = 3;
+          hiraganaDuLvl = 3;     hiraganaBuLvl = 3;
+          hiraganaDeLvl = 3;     hiraganaBeLvl = 3;
+          hiraganaDoLvl = 3;     hiraganaBoLvl = 3;
+
+          hiraganaPaLvl = 3;     hiraganaYaLvl = 3;
+          hiraganaPiLvl = 3;     hiraganaYuLvl = 3;
+          hiraganaPuLvl = 3;     hiraganaYoLvl = 3;
+          hiraganaPeLvl = 3;     hiraganaWaLvl = 3;
+          hiraganaPoLvl = 3;     hiraganaWoLvl = 3;
+
+          hiraganaKyaLvl = 3;    hiraganaShaLvl = 3;
+          hiraganaKyuLvl = 3;    hiraganaShuLvl = 3;
+          hiraganaKyoLvl = 3;    hiraganaShoLvl = 3;
+
+          hiraganaChaLvl = 3;    hiraganaHyaLvl = 3;
+          hiraganaChuLvl = 3;    hiraganaHyuLvl = 3;
+          hiraganaChoLvl = 3;    hiraganaHyoLvl = 3;
+
+          hiraganaNyaLvl = 3;    hiraganaMyaLvl = 3;
+          hiraganaNyuLvl = 3;    hiraganaMyuLvl = 3;
+          hiraganaNyoLvl = 3;    hiraganaMyoLvl = 3;
+
+          hiraganaRyaLvl = 3;    hiraganaGyaLvl = 3;
+          hiraganaRyuLvl = 3;    hiraganaGyuLvl = 3;
+          hiraganaRyoLvl = 3;    hiraganaGyoLvl = 3;
+
+          hiraganaJyaLvl = 3;    hiraganaDyaLvl = 3;
+          hiraganaJyuLvl = 3;    hiraganaDyuLvl = 3;
+          hiraganaJyoLvl = 3;    hiraganaDyoLvl = 3;
+
+          hiraganaByaLvl = 3;    hiraganaPyaLvl = 3;
+          hiraganaByuLvl = 3;    hiraganaPyuLvl = 3;
+          hiraganaByoLvl = 3;    hiraganaPyoLvl = 3;
+
+     }
+
+     public static void setAllHiraganaMemorisedToFalse(){
+
+          allHiraganaMemorised = false;
+
+          hiraganaALvl = 1;      hiraganaKaLvl = 1;
+          hiraganaILvl = 1;      hiraganaKiLvl = 1;
+          hiraganaULvl = 1;      hiraganaKuLvl = 1;
+          hiraganaELvl = 1;      hiraganaKeLvl = 1;
+          hiraganaOLvl = 1;      hiraganaKoLvl = 1;
+
+          hiraganaSaLvl = 1;     hiraganaTaLvl = 1;
+          hiraganaShiLvl = 1;    hiraganaChiLvl = 1;
+          hiraganaSuLvl = 1;     hiraganaTsuLvl = 1;
+          hiraganaSeLvl = 1;     hiraganaTeLvl = 1;
+          hiraganaSoLvl = 1;     hiraganaToLvl = 1;
+
+          hiraganaNaLvl = 1;     hiraganaHaLvl = 1;
+          hiraganaNiLvl = 1;     hiraganaHiLvl = 1;
+          hiraganaNuLvl = 1;     hiraganaHuLvl = 1;
+          hiraganaNeLvl = 1;     hiraganaHeLvl = 1;
+          hiraganaNoLvl = 1;     hiraganaHoLvl = 1;
+
+          hiraganaMaLvl = 1;     hiraganaRaLvl = 1;
+          hiraganaMiLvl = 1;     hiraganaRiLvl = 1;
+          hiraganaMuLvl = 1;     hiraganaRuLvl = 1;
+          hiraganaMeLvl = 1;     hiraganaReLvl = 1;
+          hiraganaMoLvl = 1;     hiraganaRoLvl = 1;
+
+          hiraganaNLvl  = 1;
+
+          hiraganaGaLvl = 1;     hiraganaZaLvl = 1;
+          hiraganaGiLvl = 1;     hiraganaJiLvl = 1;
+          hiraganaGuLvl = 1;     hiraganaZuLvl = 1;
+          hiraganaGeLvl = 1;     hiraganaZeLvl = 1;
+          hiraganaGoLvl = 1;     hiraganaZoLvl = 1;
+
+          hiraganaDaLvl = 1;     hiraganaBaLvl = 1;
+          hiraganaDiLvl = 1;     hiraganaBiLvl = 1;
+          hiraganaDuLvl = 1;     hiraganaBuLvl = 1;
+          hiraganaDeLvl = 1;     hiraganaBeLvl = 1;
+          hiraganaDoLvl = 1;     hiraganaBoLvl = 1;
+
+          hiraganaPaLvl = 1;     hiraganaYaLvl = 1;
+          hiraganaPiLvl = 1;     hiraganaYuLvl = 1;
+          hiraganaPuLvl = 1;     hiraganaYoLvl = 1;
+          hiraganaPeLvl = 1;     hiraganaWaLvl = 1;
+          hiraganaPoLvl = 1;     hiraganaWoLvl = 1;
+
+          hiraganaKyaLvl = 1;    hiraganaShaLvl = 1;
+          hiraganaKyuLvl = 1;    hiraganaShuLvl = 1;
+          hiraganaKyoLvl = 1;    hiraganaShoLvl = 1;
+
+          hiraganaChaLvl = 1;    hiraganaHyaLvl = 1;
+          hiraganaChuLvl = 1;    hiraganaHyuLvl = 1;
+          hiraganaChoLvl = 1;    hiraganaHyoLvl = 1;
+
+          hiraganaNyaLvl = 1;    hiraganaMyaLvl = 1;
+          hiraganaNyuLvl = 1;    hiraganaMyuLvl = 1;
+          hiraganaNyoLvl = 1;    hiraganaMyoLvl = 1;
+
+          hiraganaRyaLvl = 1;    hiraganaGyaLvl = 1;
+          hiraganaRyuLvl = 1;    hiraganaGyuLvl = 1;
+          hiraganaRyoLvl = 1;    hiraganaGyoLvl = 1;
+
+          hiraganaJyaLvl = 1;    hiraganaDyaLvl = 1;
+          hiraganaJyuLvl = 1;    hiraganaDyuLvl = 1;
+          hiraganaJyoLvl = 1;    hiraganaDyoLvl = 1;
+
+          hiraganaByaLvl = 1;    hiraganaPyaLvl = 1;
+          hiraganaByuLvl = 1;    hiraganaPyuLvl = 1;
+          hiraganaByoLvl = 1;    hiraganaPyoLvl = 1;
+
      }
 }

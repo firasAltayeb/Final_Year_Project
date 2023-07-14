@@ -18,6 +18,12 @@ inventory : [
 	{
 		value: LARGE_POTION_BLUE
 	},
+	{
+		value: H_RUNESTONE
+	},
+	{
+		value: NEGATIVE_H_RUNESTONE
+	},
 ]
 animationConfig: [
 	{

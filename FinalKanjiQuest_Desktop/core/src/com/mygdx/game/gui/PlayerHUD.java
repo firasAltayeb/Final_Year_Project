@@ -98,6 +98,8 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         progressUI.setVisible(false);
         progressUI.setMovable(false);
 
+        //Gdx.app.debug(TAG, "All hiragana memorised is " + LetterLvlCounter.isAllHiraganaMemorised());
+
         inventoryUI = new InventoryUI(menuItemWindowWidth, menuItemWindowHeight);
         inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         inventoryUI.setMovable(false);
@@ -374,24 +376,30 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     }
 
     @Override
-    public void onNotify(String value, InventoryEvent event) {
+    public void onNotify(String itemInfo, InventoryEvent event) {
         switch(event){
             case ITEM_CONSUMED:
-                String[] strings = value.split(Component.MESSAGE_TOKEN);
+                String[] strings = itemInfo.split(Component.MESSAGE_TOKEN);
                 if( strings.length != 2) return;
 
                 int type = Integer.parseInt(strings[0]);
-                int typeValue = Integer.parseInt(strings[1]);
+                int value = Integer.parseInt(strings[1]);
 
                 //Gdx.app.log(TAG, "typeValue is: " + typeValue);
 
                 if( InventoryItem.doesRestoreHP(type) ){
-                    progressUI.addHPValue(typeValue);
+                    progressUI.addHPValue(value);
+                    showHearts(progressUI.getHPValue());
+                }
+                else if(InventoryItem.doesIncreaseHiraganaLvl(type)){
+                    LetterLvlCounter.setAllHiraganaMemorisedToTrue();
+                    progressUI.updateTable();
+                }
+                else if(InventoryItem.doesDecreaseHiraganaLvl(type)){
+                    LetterLvlCounter.setAllHiraganaMemorisedToFalse();
+                    progressUI.updateTable();
                 }
 
-                showHearts(progressUI.getHPValue());
-                LetterLvlCounter.increaseLvl("hiraganaA");
-                progressUI.updateTable();
 
                 break;
             default:
