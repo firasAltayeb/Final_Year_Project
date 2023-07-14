@@ -1,0 +1,27 @@
+[
+{
+	itemAttributes: 5
+	itemUseType: 1
+	itemUseTypeValue: 10
+	itemTypeID: SCROLL01
+	itemShortDescription: Scroll that restores 10HP
+	itemValue: 10
+},
+{
+	itemAttributes: 5
+	itemUseType: 1
+	itemUseTypeValue: 50
+	itemTypeID: SCROLL02
+	itemShortDescription: Scroll that restores 50HP
+	itemValue: 50
+},
+{
+	itemAttributes: 5
+	itemUseType: 1
+	itemUseTypeValue: 100
+	itemTypeID: SCROLL03
+	itemShortDescription: Scroll that restores 100HP
+	itemValue: 100
+},
+
+]

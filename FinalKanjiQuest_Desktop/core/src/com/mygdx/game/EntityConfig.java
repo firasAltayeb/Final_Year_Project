@@ -6,13 +6,16 @@ import com.mygdx.game.Entity.AnimationType;
 
 
 public class EntityConfig {
-    Array<AnimationConfig> animationConfig;
-    Entity.State state = Entity.State.IDLE;
-    Entity.Direction direction = Entity.Direction.DOWN;
     String entityID;
+    Entity.State state;
+    Entity.Direction direction;
 
-    EntityConfig(){
+    Array<ItemTypeID> inventory;
+    Array<AnimationConfig> animationConfig;
+
+    public EntityConfig(){
         animationConfig = new Array<AnimationConfig>();
+        inventory = new Array<ItemTypeID>();
     }
 
     public String getEntityID() {
@@ -37,6 +40,14 @@ public class EntityConfig {
 
     public void setState(Entity.State state) {
         this.state = state;
+    }
+
+    public Array<ItemTypeID> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Array<ItemTypeID> inventory) {
+        this.inventory = inventory;
     }
 
     public Array<AnimationConfig> getAnimationConfig() {

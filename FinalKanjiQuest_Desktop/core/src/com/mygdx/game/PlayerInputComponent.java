@@ -13,6 +13,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 
 	public PlayerInputComponent(){
 		//Gdx.app.debug(TAG, "Construction" );
+		Gdx.input.setInputProcessor(this);
 		this.lastMouseCoordinates = new Vector3();
 	}
 
@@ -38,11 +39,12 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	@Override
 	public void update(Entity entity, float delta){
 		//Keyboard input
-		if(keys.get(Keys.PAUSE)) {
-			System.out.println("INPUT PAUSED");
-			MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
-			pauseReleased();
-		}else if( keys.get(Keys.LEFT)){
+		//if(keys.get(Keys.PAUSE)) {
+		//	System.out.println("INPUT PAUSED");
+		//	MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+		//	pauseReleased();
+		//}
+		if( keys.get(Keys.LEFT)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.LEFT));
 		}else if( keys.get(Keys.RIGHT)){

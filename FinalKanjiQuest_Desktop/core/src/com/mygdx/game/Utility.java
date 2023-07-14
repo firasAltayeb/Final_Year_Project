@@ -8,9 +8,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public final class Utility {
 
@@ -19,6 +21,14 @@ public final class Utility {
     private static final String TAG = Utility.class.getSimpleName();
     // a nice convenience class for  managing file handles when resolving paths
     private static InternalFileHandleResolver filepathResolver = new InternalFileHandleResolver();
+
+    private final static String GUI_SHEET_PATH = "skins/gui_sheet.atlas";
+    private final static String GUI_SKINS_PATH = "skins/gui_skins.json";
+    private final static String ITEMS_TEXTURE_ATLAS_PATH = "skins/items.atlas";
+
+    public static TextureAtlas GUI_SHEET_TEXTUREATLAS = new TextureAtlas(GUI_SHEET_PATH);
+    public static TextureAtlas ITEMS_TEXTUREATLAS = new TextureAtlas(ITEMS_TEXTURE_ATLAS_PATH);
+    public static Skin GUI_SKINS = new Skin(Gdx.files.internal(GUI_SKINS_PATH), GUI_SHEET_TEXTUREATLAS);
 
     public static void unloadAsset (java.lang.String assetFileNamePath){
         // once the asset manger is done loading

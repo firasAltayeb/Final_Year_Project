@@ -2,6 +2,23 @@
 entityID : PLAYER_START
 state : IDLE
 direction : DOWN
+inventory : [
+	{
+		value: SCROLL01
+	},
+	{
+		value: SCROLL02
+	},
+	{
+		value: SCROLL03
+	},
+	{
+		value: SCROLL01
+	},
+	{
+		value: SCROLL02
+	},
+]
 animationConfig: [
 	{
 		frameDuration: 0.25
