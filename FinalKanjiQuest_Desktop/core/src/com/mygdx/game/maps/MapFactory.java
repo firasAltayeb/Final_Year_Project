@@ -22,7 +22,10 @@ public class MapFactory {
         INN_SECOND_FLOOR,
         TOP_WORLD,
         FOREST,
-        CAVE
+        CAVE,
+        COAST,
+        ICE_FOREST,
+        DESERT_TEMPLE
     }
 
     public static Map getMap(MapType mapType){
@@ -97,6 +100,27 @@ public class MapFactory {
                 if( map == null ){
                     map = new CaveMap();
                     mapTable.put(MapType.CAVE, map);
+                }
+                break;
+            case COAST:
+                map = mapTable.get(MapType.COAST);
+                if( map == null ){
+                    map = new CoastMap();
+                    mapTable.put(MapType.COAST, map);
+                }
+                break;
+            case ICE_FOREST:
+                map = mapTable.get(MapType.ICE_FOREST);
+                if( map == null ){
+                    map = new IceForestMap();
+                    mapTable.put(MapType.ICE_FOREST, map);
+                }
+                break;
+            case DESERT_TEMPLE:
+                map = mapTable.get(MapType.DESERT_TEMPLE);
+                if( map == null ){
+                    map = new DesertTempleMap();
+                    mapTable.put(MapType.DESERT_TEMPLE, map);
                 }
                 break;
             default:

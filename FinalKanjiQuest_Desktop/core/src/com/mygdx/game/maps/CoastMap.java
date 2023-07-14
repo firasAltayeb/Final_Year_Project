@@ -3,11 +3,11 @@ package com.mygdx.game.maps;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.tools.Entity;
 
-public class CaveMap extends Map {
-    private static String mapPath = "tilemaps/cave.tmx";
+public class CoastMap extends Map {
+    private static String mapPath = "tilemaps/coast.tmx";
 
-    public CaveMap(){
-        super(MapFactory.MapType.CAVE, mapPath);
+    public CoastMap(){
+        super(MapFactory.MapType.COAST, mapPath);
     }
 
     @Override

@@ -1163,7 +1163,6 @@
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
   <object id="318" name="TOP_WORLD.FOREST_START" x="720" y="1664" width="112" height="16"/>
-  <object id="319" x="601.333" y="1600.67"/>
   <object id="321" name="TOP_WORLD.CAVE_START" x="496" y="160" width="96" height="16"/>
  </objectgroup>
 </map>

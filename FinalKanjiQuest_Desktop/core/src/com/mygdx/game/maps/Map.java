@@ -93,31 +93,7 @@ public abstract class Map {
         specialNPCStartPositions = getSpecialNPCStartPositions();
     }
 
-    public Array<Entity> getMapEntities(){
-        return mapEntities;
-    }
-
-    public Vector2 getPlayerStart() {
-        return playerStart;
-    }
-
-    public void setPlayerStart(Vector2 playerStart) {
-        this.playerStart = playerStart;
-    }
-
     public abstract void updateMapEntities(MapManager mapMgr, Batch batch, float delta);
-
-    public MapLayer getCollisionLayer(){
-        return collisionLayer;
-    }
-
-    public MapLayer getPortalLayer(){
-        return portalLayer;
-    }
-
-    public TiledMap getCurrentTiledMap() {
-        return currentMap;
-    }
 
     private Array<Vector2> getNPCStartPositions(){
         Array<Vector2> npcStartPositions = new Array<Vector2>();
@@ -239,6 +215,30 @@ public abstract class Map {
     public void setSpecificPortal(String  specificPortal){
         //Gdx.app.debug(TAG, "portalProperties are not null");
         this.specificPortal = specificPortal;
+    }
+
+    public Array<Entity> getMapEntities(){
+        return mapEntities;
+    }
+
+    public Vector2 getPlayerStart() {
+        return playerStart;
+    }
+
+    public void setPlayerStart(Vector2 playerStart) {
+        this.playerStart = playerStart;
+    }
+
+    public MapLayer getCollisionLayer(){
+        return collisionLayer;
+    }
+
+    public MapLayer getPortalLayer(){
+        return portalLayer;
+    }
+
+    public TiledMap getCurrentTiledMap() {
+        return currentMap;
     }
 
 }
