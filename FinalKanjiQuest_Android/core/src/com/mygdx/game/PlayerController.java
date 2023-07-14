@@ -3,11 +3,9 @@ package com.mygdx.game;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.math.Vector3;
 
 
 public class PlayerController implements InputProcessor {
@@ -22,10 +20,6 @@ public class PlayerController implements InputProcessor {
 	private static Map<Keys, Boolean> keys = new HashMap<Keys, Boolean>();
 	int screenWidth;
 	int screenHeight;
-//	boolean upPressedFirst;
-//	boolean downPressedFirst;
-//	boolean leftPressedFirst;
-//	boolean rightPressedFirst;
 
 
 	//initialize the hashmap for inputs
@@ -37,6 +31,10 @@ public class PlayerController implements InputProcessor {
 	}
 
 	private Entity player;
+	boolean actLeft;
+	boolean actRight;
+	boolean actUp;
+	boolean actDown;
 
 	public PlayerController(Entity player) {
 		//Gdx.app.log(TAG, "Construction" );
@@ -44,11 +42,11 @@ public class PlayerController implements InputProcessor {
 
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
+		actLeft  = false;
+		actRight = false;
+		actUp    = false;
+		actDown  = false;
 
-//		upPressedFirst = false;
-//		downPressedFirst = false;
-//		leftPressedFirst = false;
-//		rightPressedFirst=false;
 	}
 
 	@Override
@@ -91,44 +89,50 @@ public class PlayerController implements InputProcessor {
 		return false;
 	}
 
-	//TODO Speak about this in report
+	//TODO Speak about this in report - corners for UP & Down
+	// majority of the right and left side are for the corresponding directions
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		Gdx.app.log(TAG, "touch down : ( x == " + screenX + ", y ==" + screenY + ")" );
+		//Gdx.app.log(TAG, "touch down : ( x == " + screenX + ", y ==" + screenY + ")" );
 		//Gdx.app.log(TAG, "Screen Width : " + Gdx.graphics.getWidth());
 		//Gdx.app.log(TAG, "Screen Height : " + Gdx.graphics.getHeight());
 
 		if((screenX >= 0 && screenX <= screenWidth/2) &&
-				(screenY >= 0 && screenY <= screenHeight/2)){
-			this.upPressed();
-//			if(downPressedFirst == false && leftPressedFirst == false
-//					&& rightPressedFirst == false){
-//				upPressedFirst = true;
-//			}
+				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT)) {
+					//do nothing
+			} else {
+				this.leftPressed();
+				actLeft = true;
+			}
 		}
 		if((screenX >= screenWidth/2 && screenX <= screenWidth) &&
-				(screenY >= 0 && screenY <= screenHeight/2)){
-			this.downPressed();
-//			if(upPressedFirst == false && leftPressedFirst == false
-//					&& rightPressedFirst == false){
-//				downPressedFirst = true;
-//			}
+				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
+			if (keys.get(Keys.DOWN) || keys.get(Keys.UP) || keys.get(Keys.LEFT)){
+					//do nothing
+			} else {
+				this.rightPressed();
+				actRight = true;
+			}
 		}
-		if((screenX >= 0 && screenX <= screenWidth/2) &&
-				(screenY >= screenHeight/2 && screenY <= screenHeight)){
-			this.leftPressed();
-//			if(upPressedFirst == false && downPressedFirst == false
-//					&& rightPressedFirst == false){
-//				leftPressedFirst = true;
-//			}
+
+		if((screenX >= 0 && screenX <= screenWidth) &&
+				(screenY >= 0 && screenY <= screenHeight/4)){
+			if (keys.get(Keys.DOWN) || keys.get(Keys.LEFT) || keys.get(Keys.RIGHT)){
+					//do nothing
+			} else {
+				this.upPressed();
+				actUp = true;
+			}
 		}
-		if((screenX >= screenWidth/2 && screenX <= screenWidth) &&
-				(screenY >= screenHeight/2 && screenY <= screenHeight)){
-			this.rightPressed();
-//			if(upPressedFirst == false && downPressedFirst == false
-//					&& leftPressedFirst == false){
-//				rightPressedFirst = true;
-//			}
+		if((screenX >= 0 && screenX <= screenWidth) &&
+				(screenY >= screenHeight/1.3 && screenY <= screenHeight)){
+			if (keys.get(Keys.UP) || keys.get(Keys.LEFT)  || keys.get(Keys.RIGHT)){
+					//do nothing
+			} else {
+				this.downPressed();
+				actDown = true;
+			}
 		}
 
 		return true;
@@ -136,29 +140,49 @@ public class PlayerController implements InputProcessor {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		Gdx.app.log(TAG, "touch up : ( x == " + screenX + ", y ==" + screenY + ")" );
+		//Gdx.app.log(TAG, "touch up : ( x == " + screenX + ", y ==" + screenY + ")" );
 
-		if(keys.get(Keys.UP)){ //&& upPressedFirst == true){
-			upReleased();
-		}
-		if( keys.get(Keys.DOWN)){ //&&downPressedFirst == true){
-			downReleased();
-		}
-		if( keys.get(Keys.LEFT)){ //&&leftPressedFirst == true){
-			leftReleased();
-		}
-		if(keys.get(Keys.RIGHT)){ //&&rightPressedFirst == true){
-			rightReleased();
+		if((screenX >= 0 && screenX <= screenWidth/2) &&
+				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
+			if (actLeft == true){
+				hide();
+				doNotAct();
+			}
 		}
 
-//		upPressedFirst = false;
-//		downPressedFirst =false;
-//		leftPressedFirst =false;
-//		rightPressedFirst =false;
+		if((screenX >= screenWidth/2 && screenX <= screenWidth) &&
+				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
+			if (actRight == true){
+				hide();
+				doNotAct();
+			}
+		}
+
+		if((screenX >= 0 && screenX <= screenWidth) &&
+				(screenY >= 0 && screenY <= screenHeight/4)){
+			if (actUp == true){
+				hide();
+				doNotAct();
+
+			}
+		}
+		if((screenX >= 0 && screenX <= screenWidth) &&
+				(screenY >= screenHeight/1.3 && screenY <= screenHeight)){
+			if (actDown == true){
+				hide();
+				doNotAct();
+			}
+		}
 
 		return true;
 	}
 
+	public void doNotAct(){
+		actLeft = false;
+		actRight = false;
+		actUp = false;
+		actDown = false;
+	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
@@ -174,7 +198,6 @@ public class PlayerController implements InputProcessor {
 	public boolean scrolled(int amount) {
 		return false;
 	}
-
 
 
 	//Key presses
@@ -221,6 +244,7 @@ public class PlayerController implements InputProcessor {
 		keys.put(Keys.RIGHT, false);
 		keys.put(Keys.UP, false);
 		keys.put(Keys.DOWN, false);
+
 	}
 
 	private void processInput(float delta){
