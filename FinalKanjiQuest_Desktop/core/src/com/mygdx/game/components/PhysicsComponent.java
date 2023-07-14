@@ -211,9 +211,6 @@ public abstract class PhysicsComponent implements Component{
                 boundingBox.setCenter(minX + origWidth/2, minY + origHeight/2);
                 break;
         }
-
-        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + tools.getEntityConfig().getEntityID() +
-        // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 
     protected void updateBoundingBoxPosition(Vector2 position){
@@ -240,8 +237,5 @@ public abstract class PhysicsComponent implements Component{
                 boundingBox.setCenter(minX + Entity.FRAME_WIDTH/2, minY + Entity.FRAME_HEIGHT/2);
                 break;
         }
-
-        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + tools.getEntityConfig().getEntityID() +
-        // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 }

@@ -382,7 +382,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 int type = Integer.parseInt(strings[0]);
                 int typeValue = Integer.parseInt(strings[1]);
 
-                Gdx.app.log(TAG, "typeValue is: " + typeValue);
+                //Gdx.app.log(TAG, "typeValue is: " + typeValue);
 
                 if( InventoryItem.doesRestoreHP(type) ){
                     progressUI.addHPValue(typeValue);
@@ -397,7 +397,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     }
 
     public void showHearts(int hpVal){
-        Gdx.app.log(TAG, "hpVal is: " + hpVal);
+        //Gdx.app.log(TAG, "hpVal is: " + hpVal);
 
         for (int i = 0; i<hpVal; i++) {
             all_health_heart.get(i).setVisible(true);

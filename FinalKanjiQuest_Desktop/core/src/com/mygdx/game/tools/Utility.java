@@ -126,7 +126,7 @@ public final class Utility {
             assetManager.load(textureFilenamePath, Texture.class);
             //until loading screen is added, block
             assetManager.finishLoadingAsset(textureFilenamePath);
-            Gdx.app.debug(TAG, "Texture loaded: " + textureFilenamePath);
+            //Gdx.app.debug(TAG, "Texture loaded: " + textureFilenamePath);
         } else{
             Gdx.app.debug(TAG, "Texture doesn't exist: " + textureFilenamePath);
         }

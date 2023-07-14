@@ -1,6 +1,7 @@
 package com.mygdx.game.maps;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.MapProperties;
 import com.mygdx.game.tools.Entity;
 
 public class ArmorerMap extends Map {

@@ -9,8 +9,8 @@ currentPlayerHP: {
 }
 currentMapStartPoistion: {
 	class: com.badlogic.gdx.math.Vector2
-	x: 256
-	y: 496
+	x: 118
+	y: 44.5
 }
 playerInventory: [
 	{
@@ -40,6 +40,6 @@ playerInventory: [
 ]
 currentMapType: {
 	class: java.lang.String
-	value: TOWN
+	value: INN_SECOND_FLOOR
 }
 }

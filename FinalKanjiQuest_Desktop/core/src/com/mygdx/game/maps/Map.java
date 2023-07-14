@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
@@ -21,6 +22,7 @@ public abstract class Map {
     private static final String TAG = Map.class.getSimpleName();
 
     public final static float UNIT_SCALE  = 1/16f;
+    public static String specificPortal;
 
     //Map layers
     protected final static String COLLISION_LAYER = "MAP_COLLISION_LAYER";
@@ -177,45 +179,40 @@ public abstract class Map {
         return playerStart;
     }
 
-    public void setClosestStartPositionFromScaledUnits(Vector2 position){
-        if( UNIT_SCALE <= 0 )
-            return;
-
-        convertedUnits.set(position.x/UNIT_SCALE, position.y/UNIT_SCALE);
-
-        setClosestStartPosition(convertedUnits);
-    }
-
-    private void setClosestStartPosition(final Vector2 position){
-         Gdx.app.debug(TAG, "setClosestStartPosition INPUT: (" + position.x + "," + position.y + ") " + currentMapType.toString());
+    public void setClosestStartPosition(final Vector2 position) {
+        Gdx.app.debug(TAG, "setClosestStartPosition INPUT: (" + position.x + "," + position.y + ") " + currentMapType.toString());
 
         //Get last known position on this map
-        playerStartPositionRect.set(0,0);
-        closestPlayerStartPosition.set(0,0);
+        playerStartPositionRect.set(0, 0);
+        closestPlayerStartPosition.set(0, 0);
         float shortestDistance = 0f;
 
         //Go through all player start positions and choose closest to last known position
-        for( MapObject object: spawnsLayer.getObjects()){
+        for (MapObject object : spawnsLayer.getObjects()) {
             String objectName = object.getName();
 
-            if( objectName == null || objectName.isEmpty() ){
+            if (objectName == null || objectName.isEmpty()) {
                 continue;
             }
 
-            if( objectName.equalsIgnoreCase(PLAYER_START) ){
-                ((RectangleMapObject)object).getRectangle().getPosition(playerStartPositionRect);
-                float distance = position.dst2(playerStartPositionRect);
+            ((RectangleMapObject) object).getRectangle().getPosition(playerStartPositionRect);
 
-                Gdx.app.debug(TAG, "DISTANCE: " + distance + " for " + currentMapType.toString());
-
-                if( distance < shortestDistance || shortestDistance == 0 ){
+            if (objectName.equalsIgnoreCase(PLAYER_START)) {
+                closestPlayerStartPosition.set(playerStartPositionRect);
+                playerStart = closestPlayerStartPosition.cpy();
+            }
+            else if (specificPortal != null) {
+                //Gdx.app.debug(TAG, "specificPortal is not null");
+                if (specificPortal.equalsIgnoreCase(objectName)) {
+                    Gdx.app.debug(TAG, "specificPortal " + specificPortal + " activated");
                     closestPlayerStartPosition.set(playerStartPositionRect);
-                    shortestDistance = distance;
-                    Gdx.app.debug(TAG, "closest START is: (" + closestPlayerStartPosition.x + "," + closestPlayerStartPosition.y + ") " +  currentMapType.toString());
+                    playerStart = closestPlayerStartPosition.cpy();
+                    return;
                 }
             }
         }
-        playerStart =  closestPlayerStartPosition.cpy();
+
+
     }
 
     public Entity initEntity(EntityConfig entityConfig, Vector2 position){
@@ -237,6 +234,11 @@ public abstract class Map {
             position = specialNPCStartPositions.get(entityConfig.getEntityID());
         }
         return initEntity(entityConfig, position);
+    }
+
+    public void setSpecificPortal(String  specificPortal){
+        //Gdx.app.debug(TAG, "portalProperties are not null");
+        this.specificPortal = specificPortal;
     }
 
 }

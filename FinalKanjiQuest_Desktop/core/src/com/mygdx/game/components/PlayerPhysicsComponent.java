@@ -28,7 +28,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     public PlayerPhysicsComponent(){
         boundingBoxLocation = BoundingBoxLocation.BOTTOM_CENTER;
         initBoundingBox(0.6f, 0.4f);
-        super.velocity.set(6f,6f);
+        super.velocity.set(15f,15f);
 
         mouseSelectCoordinates = new Vector3(0,0,0);
         selectionRay = new Ray(new Vector3(), new Vector3());
@@ -128,22 +128,41 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
         Rectangle rectangle = null;
 
         for( MapObject object: mapPortalLayer.getObjects()){
+
             if(object instanceof RectangleMapObject) {
                 rectangle = ((RectangleMapObject)object).getRectangle();
 
                 if (boundingBox.overlaps(rectangle) ){
-                    String mapName = object.getName();
-                    if( mapName == null ) {
+
+                    //TODO speak about this,
+                    String mapName;
+                    String specificPortal;
+                    String temp = object.getName();
+                    if( temp == null) {
                         return false;
                     }
 
-                    mapMgr.setClosestStartPositionFromScaledUnits(currentEntityPosition);
+                    if(temp.contains(".")) {
+                        mapName = temp.substring(0, temp.indexOf('.'));
+                        specificPortal = temp.substring(temp.indexOf('.')+1);
+                        Gdx.app.log(TAG, "mapName is " + mapName);
+                        Gdx.app.log(TAG, "specificPortal is " + specificPortal);
+                    }
+                    else {
+                        specificPortal = "PLAYER_STAR";
+                        mapName = temp;
+                    }
+
+                    mapMgr.setSpecificPortal(specificPortal);
                     mapMgr.loadMap(MapFactory.MapType.valueOf(mapName));
+
 
                     currentEntityPosition.x = mapMgr.getPlayerStartUnitScaled().x;
                     currentEntityPosition.y = mapMgr.getPlayerStartUnitScaled().y;
                     nextEntityPosition.x = mapMgr.getPlayerStartUnitScaled().x;
                     nextEntityPosition.y = mapMgr.getPlayerStartUnitScaled().y;
+
+                    //mapMgr.setClosestStartPositionFromScaledUnits(currentEntityPosition);
 
                     Gdx.app.debug(TAG, "Portal Activated");
                     return true;

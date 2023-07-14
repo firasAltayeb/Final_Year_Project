@@ -124,6 +124,6 @@
   <object id="24" name="HERBALIST" x="96" y="87.5" width="16" height="14.5"/>
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
-  <object id="20" name="TOWN" x="96" y="160" width="32" height="16"/>
+  <object id="20" name="TOWN.HERBALIST_START" x="96" y="160" width="32" height="16"/>
  </objectgroup>
 </map>

@@ -103,7 +103,7 @@ public class KanjiUI extends Window{
 
             KanjiLetter kanjiLetter = kanjiLettersList.get(i);
 
-            Gdx.app.log(TAG, "kanjiLetter.getKanjiNameID() is " + kanjiLetter.getKanjiNameID());
+            //Gdx.app.log(TAG, "kanjiLetter.getKanjiNameID() is " + kanjiLetter.getKanjiNameID());
 
             equivalent = new Image(Utility.MEDIUM_KANJI_TEXTUREATLAS.findRegion(kanjiLetter.getKanjiNameID()));
             innerTable.add(equivalent).left();
