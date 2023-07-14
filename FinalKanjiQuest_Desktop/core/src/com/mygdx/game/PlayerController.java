@@ -295,25 +295,25 @@ public class PlayerController implements InputProcessor {
             player.setDirection(Entity.Direction.DOWN, delta);
         }
         else if(keys.get(Keys.UP_RIGHT)){
-            //Gdx.app.debug(TAG, "DOWN key");
+            //Gdx.app.debug(TAG, "E key");
             player.calculateNextPosition(Entity.Direction.UP_RIGHT, delta);
             player.setState(Entity.State.WALKING);
             player.setDirection(Entity.Direction.UP_RIGHT, delta);
         }
         else if(keys.get(Keys.UP_LEFT)){
-            //Gdx.app.debug(TAG, "DOWN key");
+            //Gdx.app.debug(TAG, "Q key");
             player.calculateNextPosition(Entity.Direction.UP_LEFT, delta);
             player.setState(Entity.State.WALKING);
             player.setDirection(Entity.Direction.UP_LEFT, delta);
         }
         else if(keys.get(Keys.DOWN_RIGHT)){
-            //Gdx.app.debug(TAG, "DOWN key");
+            //Gdx.app.debug(TAG, "C key");
             player.calculateNextPosition(Entity.Direction.DOWN_RIGHT, delta);
             player.setState(Entity.State.WALKING);
             player.setDirection(Entity.Direction.DOWN_RIGHT, delta);
         }
         else if(keys.get(Keys.DOWN_LEFT)){
-            //Gdx.app.debug(TAG, "DOWN key");
+            //Gdx.app.debug(TAG, "Z key");
             player.calculateNextPosition(Entity.Direction.DOWN_LEFT, delta);
             player.setState(Entity.State.WALKING);
             player.setDirection(Entity.Direction.DOWN_LEFT, delta);

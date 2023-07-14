@@ -29,12 +29,20 @@ public class Entity {
     private Animation walkLeftAnimation;
     private Animation walkRightAnimation;
     private Animation walkUpAnimation;
+    private Animation walkUpRightAnimation;
+    private Animation walkUpLeftAnimation;
     private Animation walkDownAnimation;
+    private Animation walkDownRightAnimation;
+    private Animation walkDownLeftAnimation;
 
     private Array<TextureRegion> walkLeftFrames;
     private Array<TextureRegion> walkRightFrames;
     private Array<TextureRegion> walkUpFrames;
+    private Array<TextureRegion> walkUpRightFrames;
+    private Array<TextureRegion> walkUpLeftFrames;
     private Array<TextureRegion> walkDownFrames;
+    private Array<TextureRegion> walkDownRightFrames;
+    private Array<TextureRegion> walkDownLeftFrames;
 
     protected Vector2 nextPlayerPosition;
     protected Vector2 currentPlayerPosition;
@@ -53,7 +61,9 @@ public class Entity {
     }
 
     public enum Direction {
-        UP,RIGHT,DOWN,LEFT;
+        UP,RIGHT,DOWN,LEFT,
+        UP_RIGHT, UP_LEFT,
+        DOWN_RIGHT, DOWN_LEFT;
     }
 
     public Entity(){
@@ -68,7 +78,7 @@ public class Entity {
         this.currentPlayerPosition = new Vector2();
         this.boundingBox = new Rectangle();
         //Player speed
-        this.velocity = new Vector2(4f, 4f);
+        this.velocity = new Vector2(6f, 6f);
 
         Utility.loadTextureAsset(defaultSpritePath);
         loadDefaultSprite();
@@ -148,40 +158,60 @@ public class Entity {
         Texture texture = Utility.getTextureAsset(defaultSpritePath);
         TextureRegion[][] textureFrames = TextureRegion.split(texture, FRAME_WIDTH, FRAME_HEIGHT);
 
-        walkDownFrames = new Array<TextureRegion>(4);
         walkLeftFrames = new Array<TextureRegion>(4);
         walkRightFrames = new Array<TextureRegion>(4);
         walkUpFrames = new Array<TextureRegion>(4);
+        walkUpRightFrames = new Array<TextureRegion>(4);
+        walkUpLeftFrames = new Array<TextureRegion>(4);
+        walkDownFrames = new Array<TextureRegion>(4);
+        walkDownRightFrames = new Array<TextureRegion>(4);
+        walkDownLeftFrames = new Array<TextureRegion>(4);
 
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 4; j++) {
-                //Gdx.app.log(TAG, "Got frame " + i + "," + j + " from " + sourceImage);
+                //Gdx.app.debug(TAG, "Got frame " + i + "," + j + " from " + sourceImage);
                 TextureRegion region = textureFrames[i][j];
                 if (region == null) {
-                    Gdx.app.log(TAG, "Got null animation frame " + i + "," + j);
+                    Gdx.app.debug(TAG, "Got null animation frame " + i + "," + j);
                 }
                 switch (i) {
                     case 0:
-                        walkUpFrames.insert(j, region);
-                        break;
-                    case 1:
                         walkDownFrames.insert(j, region);
                         break;
+                    case 1:
+                        walkDownLeftFrames.insert(j, region);
+                        break;
                     case 2:
-                        walkLeftFrames.insert(j, region);
+                        walkDownRightFrames.insert(j, region);
                         break;
                     case 3:
+                        walkLeftFrames.insert(j, region);
+                        break;
+                    case 4:
                         walkRightFrames.insert(j, region);
+                        break;
+                    case 5:
+                        walkUpFrames.insert(j, region);
+                        break;
+                    case 6:
+                        walkUpLeftFrames.insert(j, region);
+                        break;
+                    case 7:
+                        walkUpRightFrames.insert(j, region);
                         break;
                 }
             }
         }
 
-        walkDownAnimation = new Animation(0.25f, walkDownFrames, Animation.PlayMode.LOOP);
         walkLeftAnimation = new Animation(0.25f, walkLeftFrames, Animation.PlayMode.LOOP);
         walkRightAnimation = new Animation(0.25f, walkRightFrames, Animation.PlayMode.LOOP);
         walkUpAnimation = new Animation(0.25f, walkUpFrames, Animation.PlayMode.LOOP);
+        walkUpRightAnimation = new Animation(0.25f, walkUpRightFrames, Animation.PlayMode.LOOP);
+        walkUpLeftAnimation = new Animation(0.25f, walkUpLeftFrames, Animation.PlayMode.LOOP);
+        walkDownAnimation = new Animation(0.25f, walkDownFrames, Animation.PlayMode.LOOP);
+        walkDownRightAnimation = new Animation(0.25f, walkDownLeftFrames, Animation.PlayMode.LOOP); ;
+        walkDownLeftAnimation = new Animation(0.25f, walkDownRightFrames, Animation.PlayMode.LOOP);
 
     }
 
@@ -230,6 +260,18 @@ public class Entity {
             case RIGHT :
                 currentFrame = walkRightAnimation.getKeyFrame(frameTime);
                 break;
+            case UP_RIGHT :
+                currentFrame = walkUpRightAnimation.getKeyFrame(frameTime);
+                break;
+            case UP_LEFT :
+                currentFrame = walkUpLeftAnimation.getKeyFrame(frameTime);
+                break;
+            case DOWN_RIGHT :
+                currentFrame = walkDownRightAnimation.getKeyFrame(frameTime);
+                break;
+            case DOWN_LEFT :
+                currentFrame = walkDownLeftAnimation.getKeyFrame(frameTime);
+                break;
             default:
                 break;
         }
@@ -262,6 +304,22 @@ public class Entity {
                 break;
             case DOWN :
                 testY -= velocity.y;
+                break;
+            case DOWN_RIGHT :
+                testX += velocity.x;
+                testY -= velocity.y;
+                break;
+            case DOWN_LEFT :
+                testX -= velocity.x;
+                testY -= velocity.y;
+                break;
+            case UP_RIGHT :
+                testX += velocity.x;
+                testY += velocity.y;
+                break;
+            case UP_LEFT :
+                testX -= velocity.x;
+                testY += velocity.y;
                 break;
             default:
                 break;

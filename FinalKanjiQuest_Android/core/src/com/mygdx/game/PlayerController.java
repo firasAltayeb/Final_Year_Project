@@ -13,7 +13,8 @@ public class PlayerController implements InputProcessor {
 	private final static String TAG = PlayerController.class.getSimpleName();
 
 	enum Keys {
-		LEFT, RIGHT, UP, DOWN
+		LEFT, RIGHT, UP, DOWN,
+		UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
 	}
 
 
@@ -24,11 +25,15 @@ public class PlayerController implements InputProcessor {
 
 	//initialize the hashmap for inputs
 	static {
-		keys.put(Keys.UP, false);
-		keys.put(Keys.DOWN, false);
 		keys.put(Keys.LEFT, false);
 		keys.put(Keys.RIGHT, false);
-	}
+		keys.put(Keys.UP, false);
+		keys.put(Keys.DOWN, false);
+		keys.put(Keys.UP_RIGHT, false);
+		keys.put(Keys.UP_LEFT, false);
+		keys.put(Keys.DOWN_RIGHT, false);
+		keys.put(Keys.DOWN_LEFT, false);
+	};
 
 	private Entity player;
 	boolean doNothing;
@@ -57,6 +62,19 @@ public class PlayerController implements InputProcessor {
 		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.S){
 			this.downPressed();
 		}
+		if( keycode == Input.Keys.Q){
+			this.upLeftPressed();
+
+		}if( keycode == Input.Keys.E){
+			this.upRightPressed();
+
+		}if( keycode == Input.Keys.C){
+			this.downRightPressed();
+
+		}if( keycode == Input.Keys.Z){
+			this.downLeftPressed();
+
+		}
 
 		return true;
 	}
@@ -75,6 +93,19 @@ public class PlayerController implements InputProcessor {
 		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.S){
 			this.downReleased();
 		}
+		if( keycode == Input.Keys.Q){
+			this.upLeftReleased();
+
+		}if( keycode == Input.Keys.E){
+			this.upRightReleased();
+
+		}if( keycode == Input.Keys.C){
+			this.downRightReleased();
+
+		}if( keycode == Input.Keys.Z){
+			this.downLeftReleased();
+
+		}
 		return true;
 	}
 
@@ -83,47 +114,137 @@ public class PlayerController implements InputProcessor {
 		return false;
 	}
 
-	//TODO Speak about this in report - corners for UP & Down
-	//TODO majority of the right and left side are for the corresponding directions
+	//TODO mention in report
+	//TODO corners for UP & Down
+	//TODO majority of the right and left side are for their corresponding directions
+	//TODO mention how later decided to add diagonal movement
+	//TODO if statements are used to stop users from stopping movement - second finger touch
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		//Gdx.app.log(TAG, "touch down : ( x == " + screenX + ", y ==" + screenY + ")" );
 		//Gdx.app.log(TAG, "Screen Width : " + Gdx.graphics.getWidth());
 		//Gdx.app.log(TAG, "Screen Height : " + Gdx.graphics.getHeight());
 
-		if((screenX >= 0 && screenX <= screenWidth/2) &&
-				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
-			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT)) {
+		//top left corner
+		if((screenX >= 0 && screenX <= screenWidth/3) &&
+				(screenY >= 0 && screenY <= screenHeight/3)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) ||keys.get(Keys.DOWN_RIGHT) ||
+					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-			} else {
+				Gdx.app.log(TAG, "doNothing is " + doNothing);
+			}
+			else {
+				Gdx.app.log(TAG, "up left pressed" );
+				Gdx.app.log(TAG, "doNothing is " + doNothing);
+				this.upLeftPressed();
+			}
+		}
+
+		//top center
+		if((screenX >= screenWidth/3 && screenX <= screenWidth/1.5) &&
+				(screenY >= 0 && screenY <= screenHeight/3)){
+			if (keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
+					keys.get(Keys.DOWN_LEFT)) {
+				doNothing = true;
+				Gdx.app.log(TAG, "up doNothing is " + doNothing);
+			}
+			else {
+				this.upPressed();
+			}
+		}
+
+		//top right corner
+		if((screenX >= screenWidth/1.5 && screenX <= screenWidth) &&
+				(screenY >= 0 && screenY <= screenHeight/3)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
+					keys.get(Keys.DOWN_LEFT)) {
+				doNothing = true;
+				Gdx.app.log(TAG, "upright doNothing is " + doNothing);
+			}
+			else {
+				this.upRightPressed();
+			}
+		}
+
+		//center's left
+		if((screenX >= 0 && screenX <= screenWidth/3) &&
+				(screenY >= screenHeight/3 && screenY <= screenHeight/1.5)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
+					keys.get(Keys.DOWN_LEFT)) {
+				doNothing = true;
+				Gdx.app.log(TAG, "left doNothing is " + doNothing);
+			}
+			else {
 				this.leftPressed();
 			}
 		}
-		if((screenX >= screenWidth/2 && screenX <= screenWidth) &&
-				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
-			if (keys.get(Keys.DOWN) || keys.get(Keys.UP) || keys.get(Keys.LEFT)){
+		//center
+		if((screenX >= screenWidth/3  && screenX <= screenWidth/1.5) &&
+				(screenY >= screenHeight/3 && screenY <= screenHeight/1.5)){
+			//do nothing for now
+		}
+
+		//center's right pressed
+		if((screenX >= screenWidth/1.5 && screenX <= screenWidth) &&
+				(screenY >= screenHeight/3 && screenY <= screenHeight/1.5)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.LEFT) ||
+					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
+					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-			} else {
+				Gdx.app.log(TAG, " right doNothing is " + doNothing);
+			}
+			else {
 				this.rightPressed();
 			}
 		}
 
-		if((screenX >= 0 && screenX <= screenWidth) &&
-				(screenY >= 0 && screenY <= screenHeight/4)){
-			if (keys.get(Keys.DOWN) || keys.get(Keys.LEFT) || keys.get(Keys.RIGHT)){
+		//bottom left corner
+		if((screenX >= 0 && screenX <= screenWidth/3) &&
+				(screenY >= screenHeight/1.5 && screenY <= screenHeight)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
+					keys.get(Keys.DOWN_RIGHT)) {
 				doNothing = true;
-			} else {
-				this.upPressed();
+				Gdx.app.log(TAG, " down left doNothing is " + doNothing);
+			}
+			else {
+				this.downLeftPressed();
 			}
 		}
-		if((screenX >= 0 && screenX <= screenWidth) &&
-				(screenY >= screenHeight/1.3 && screenY <= screenHeight)){
-			if (keys.get(Keys.UP) || keys.get(Keys.LEFT)  || keys.get(Keys.RIGHT)){
+
+		//bottom center
+		if((screenX >= screenWidth/3 && screenX <= screenWidth/1.5) &&
+				(screenY >= screenHeight/1.5 && screenY <= screenHeight)){
+			if (keys.get(Keys.UP) || keys.get(Keys.RIGHT) || keys.get(Keys.LEFT) ||
+					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
+					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-			} else {
+				Gdx.app.log(TAG, "down doNothing is " + doNothing);
+			}
+			else {
 				this.downPressed();
 			}
 		}
+
+		//bottom right corner
+		if((screenX >= screenWidth/1.5 && screenX <= screenWidth) &&
+				(screenY >= screenHeight/1.5 && screenY <= screenHeight)){
+			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT) ||
+					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
+					keys.get(Keys.DOWN_LEFT)) {
+				doNothing = true;
+				Gdx.app.log(TAG, "bottom doNothing is " + doNothing);
+			}
+			else {
+				this.downRightPressed();
+			}
+		}
+
+		Gdx.app.log(TAG, "touch down returned" );
 
 		return true;
 	}
@@ -132,9 +253,16 @@ public class PlayerController implements InputProcessor {
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		//Gdx.app.log(TAG, "touch up : ( x == " + screenX + ", y ==" + screenY + ")" );
 
+		Gdx.app.log(TAG, "touch up inaction" );
+
+		Gdx.app.log(TAG, "do nothing " + doNothing);
+
 		if(doNothing){
 			// do nothing
-		}else {
+			Gdx.app.log(TAG, "doing nothing" );
+		}
+		else {
+			Gdx.app.log(TAG, "hide() called" );
 			hide();
 		}
 
@@ -177,6 +305,22 @@ public class PlayerController implements InputProcessor {
 		keys.put(Keys.DOWN, true);
 	}
 
+	public void upRightPressed(){
+		keys.put(Keys.UP_RIGHT, true);
+	}
+
+	public void upLeftPressed(){
+		keys.put(Keys.UP_LEFT, true);
+	}
+
+	public void downRightPressed(){
+		keys.put(Keys.DOWN_RIGHT, true);
+	}
+
+	public void downLeftPressed(){
+		keys.put(Keys.DOWN_LEFT, true);
+	}
+
 	//Releases
 	public void leftReleased(){
 		keys.put(Keys.LEFT, false);
@@ -194,17 +338,36 @@ public class PlayerController implements InputProcessor {
 		keys.put(Keys.DOWN, false);
 	}
 
+	public void upRightReleased(){
+		keys.put(Keys.UP_RIGHT, false);
+	}
+
+	public void upLeftReleased(){
+		keys.put(Keys.UP_LEFT, false);
+	}
+
+	public void downRightReleased(){
+		keys.put(Keys.DOWN_RIGHT, false);
+	}
+
+	public void downLeftReleased(){
+		keys.put(Keys.DOWN_LEFT, false);
+	}
 
 	public void update(float delta){
 		processInput(delta);
 	}
 
 	public static void hide(){
+		Gdx.app.log(TAG, "hide() inaction" );
 		keys.put(Keys.LEFT, false);
 		keys.put(Keys.RIGHT, false);
 		keys.put(Keys.UP, false);
 		keys.put(Keys.DOWN, false);
-
+		keys.put(Keys.UP_RIGHT, false);
+		keys.put(Keys.UP_LEFT, false);
+		keys.put(Keys.DOWN_RIGHT, false);
+		keys.put(Keys.DOWN_LEFT, false);
 	}
 
 	private void processInput(float delta){
@@ -230,7 +393,32 @@ public class PlayerController implements InputProcessor {
 			player.calculateNextPosition(Entity.Direction.DOWN, delta);
 			player.setState(Entity.State.WALKING);
 			player.setDirection(Entity.Direction.DOWN, delta);
-		}else{
+		}
+		else if(keys.get(Keys.UP_RIGHT)){
+			//Gdx.app.debug(TAG, "E key");
+			player.calculateNextPosition(Entity.Direction.UP_RIGHT, delta);
+			player.setState(Entity.State.WALKING);
+			player.setDirection(Entity.Direction.UP_RIGHT, delta);
+		}
+		else if(keys.get(Keys.UP_LEFT)){
+			//Gdx.app.debug(TAG, "Q key");
+			player.calculateNextPosition(Entity.Direction.UP_LEFT, delta);
+			player.setState(Entity.State.WALKING);
+			player.setDirection(Entity.Direction.UP_LEFT, delta);
+		}
+		else if(keys.get(Keys.DOWN_RIGHT)){
+			//Gdx.app.debug(TAG, "C key");
+			player.calculateNextPosition(Entity.Direction.DOWN_RIGHT, delta);
+			player.setState(Entity.State.WALKING);
+			player.setDirection(Entity.Direction.DOWN_RIGHT, delta);
+		}
+		else if(keys.get(Keys.DOWN_LEFT)){
+			//Gdx.app.debug(TAG, "Z key");
+			player.calculateNextPosition(Entity.Direction.DOWN_LEFT, delta);
+			player.setState(Entity.State.WALKING);
+			player.setDirection(Entity.Direction.DOWN_LEFT, delta);
+		}
+		else{
 			player.setState(Entity.State.IDLE);
 		}
 
