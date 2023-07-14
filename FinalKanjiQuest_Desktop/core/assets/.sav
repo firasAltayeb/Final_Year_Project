@@ -9,8 +9,8 @@ currentPlayerHP: {
 }
 currentMapStartPoistion: {
 	class: com.badlogic.gdx.math.Vector2
-	x: 1040
-	y: 560
+	x: 768
+	y: 144
 }
 playerInventory: [
 	{
@@ -37,9 +37,19 @@ playerInventory: [
 		locationIndex: 4
 		itemNameAtLocation: LARGE_POTION_BLUE
 	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 5
+		itemNameAtLocation: H_RUNESTONE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 6
+		itemNameAtLocation: NEGATIVE_H_RUNESTONE
+	}
 ]
 currentMapType: {
 	class: java.lang.String
-	value: TOWN
+	value: FOREST
 }
 }

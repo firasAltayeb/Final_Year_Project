@@ -125,7 +125,6 @@ public class KanjiUI extends Window{
                     }
 
                 }
-
             }
 
             innerTable.row();

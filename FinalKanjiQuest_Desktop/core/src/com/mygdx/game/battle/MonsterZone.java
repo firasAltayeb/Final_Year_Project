@@ -1,16 +1,18 @@
 package com.mygdx.game.battle;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.tools.Utility;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class MonsterZone {
     private String zoneID;
-    private Array<MonsterFactory.MonsterEntityType> monsters;
+    private String monsters;
 
     public String getZoneID() {
         return zoneID;
@@ -20,23 +22,44 @@ public class MonsterZone {
         this.zoneID = zoneID;
     }
 
-    public Array<MonsterFactory.MonsterEntityType> getMonsters() {
+    public String getMonsters() {
         return monsters;
     }
 
-    public void setMonsters(Array<MonsterFactory.MonsterEntityType> monsters) {
+    public void setMonsters(String monsters) {
         this.monsters = monsters;
     }
 
-    static public Hashtable<String, Array<MonsterFactory.MonsterEntityType>> getMonsterZones(String configFilePath){
+    static public Hashtable<String, Array<String>> getMonsterZones(String configFilePath){
         Json json = new Json();
-        Hashtable<String, Array<MonsterFactory.MonsterEntityType>> monsterZones = new Hashtable<String, Array<MonsterFactory.MonsterEntityType>>();
+        Hashtable<String, Array<String>> monsterZones = new Hashtable<String, Array<String>>();
 
         ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(configFilePath));
 
+        String temp;
+        String split;
+        int indexOfFullStop;
+        Array<String> monster;
+
         for (JsonValue jsonVal : list) {
             MonsterZone zone = json.readValue(MonsterZone.class, jsonVal);
-            monsterZones.put(zone.getZoneID(), zone.getMonsters());
+
+            temp = zone.getMonsters();
+            monster = new Array<>();
+
+            for (int j = 0; j < temp.length(); j++) {
+                if (temp.charAt(j) == '.') {
+                    try {
+                        indexOfFullStop = temp.indexOf('.', j + 1);
+                        split = temp.substring(j + 1, indexOfFullStop);
+                        monster.add(split);
+                    } catch (Exception e) {
+                    }
+
+                }
+            }
+
+            monsterZones.put(zone.getZoneID(), monster);
         }
 
         return monsterZones;

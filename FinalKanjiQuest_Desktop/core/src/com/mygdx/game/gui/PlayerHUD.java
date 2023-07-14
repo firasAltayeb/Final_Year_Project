@@ -10,11 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Entity;
+import com.mygdx.game.tools.OnScreenController;
 import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem;
 import com.mygdx.game.inventory.InventoryItemLocation;
@@ -31,13 +33,16 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private Viewport viewport;
     private Camera camera;
     private Entity player;
+    private Json json;
 
-    private ProgressUI progressUI;
     private MenuListUI menuListUI;
+    private ProgressUI progressUI;
+    private InventoryUI inventoryUI;
     private KanaUI hiraganaUI;
     private KanaUI katakanaUI;
     private KanjiUI kanjiUI;
     private MnemonicsUI mnemonicsUI;
+    private OnScreenController controllerUI;
 
     private TextButton menuButton;
     private TextButton progressButton;
@@ -46,23 +51,23 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private TextButton katakanaButton;
     private TextButton kanjiButton;
     private TextButton mnemonicsButton;
+    private TextButton controllerButton;
 
     private Array<Image> all_health_heart;
     private Image health_heart;
-
 
     private float menuItemsXaxis;
     private float menuItemsYaxis;
     private float menuItemWindowWidth;
     private float menuItemWindowHeight;
 
-    private InventoryUI inventoryUI;
 
     public PlayerHUD(Camera camera, final Entity player, final InputMultiplexer multiplexer) {
         this.camera = camera;
         this.player = player;
         viewport = new ScreenViewport(this.camera);
         stage = new Stage(viewport);
+        json = new Json();
 
         multiplexer.addProcessor(this.getStage());
         multiplexer.addProcessor(player.getInputProcessor());
@@ -124,6 +129,10 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         mnemonicsUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         mnemonicsUI.setMovable(false);
         mnemonicsUI.setVisible(false);
+
+        //controllerUI = new OnScreenController(stage);
+        //controllerUI.getTableDirectional().setPosition(stage.getWidth()/4f,  stage.getHeight()/12);
+        //controllerUI.getTableDirectional().setVisible(false);
 
 
         Gdx.app.log(TAG, "all_health_heart.size is: " + all_health_heart.size);
@@ -240,6 +249,19 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
             }
         });
 
+        //controllerButton = menuListUI.getControllerButton();
+        //controllerButton.addListener(new ClickListener() {
+        //    public void clicked (InputEvent event, float x, float y) {
+        //        progressUI.setVisible(false);
+        //        inventoryUI.setVisible(false);
+        //        hiraganaUI.setVisible(false);
+        //        katakanaUI.setVisible(false);
+        //        kanjiUI.setVisible(false);
+        //        mnemonicsUI.setVisible(false);
+        //        controllerUI.getTableDirectional().setVisible( controllerUI.getTableDirectional().isVisible()?false:true);
+        //    }
+        //});
+        //
         //stage.setDebugAll(true);
     }
 
@@ -294,8 +316,15 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
     @Override
     public void render(float delta) {
+        //if(controllerUI.isDownPressed()){
+        //    player.sendMessage(Component.MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+        //    player.sendMessage(Component.MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
+        //}
+        //player.updateInput(delta);
+
         stage.act(delta);
         stage.draw();
+
     }
 
     @Override //TODO speak about this in the report

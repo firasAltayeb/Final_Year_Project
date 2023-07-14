@@ -16,5 +16,5 @@ public interface BattleObserver {
         NONE
     }
 
-    void onNotify(final Entity enemyEntity, BattleEvent event);
+    void onNotify(final String enemyMonster, BattleEvent event);
 }

@@ -18,9 +18,9 @@ public class BattleSubject {
         observers.removeValue(battleObserver, true);
     }
 
-    protected void notify(final Entity entity, BattleObserver.BattleEvent event){
+    protected void notify(final String monster, BattleObserver.BattleEvent event){
         for(BattleObserver observer: observers){
-            observer.onNotify(entity, event);
+            observer.onNotify(monster, event);
         }
     }
 }

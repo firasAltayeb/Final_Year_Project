@@ -71,14 +71,6 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
         batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1.2f, 2);
         batch.end();
 
-//        Used to graphically debug boundingboxes
-//        Rectangle rect = tools.getCurrentBoundingBox();
-//        shapeRenderer.setProjectionMatrix(camera.combined);
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-//        shapeRenderer.setColor(Color.RED);
-//        shapeRenderer.rect(rect.getX() * Map.UNIT_SCALE , rect.getY() * Map.UNIT_SCALE, rect.getWidth() * Map.UNIT_SCALE, rect.getHeight()*Map.UNIT_SCALE);
-//        shapeRenderer.end();
-
     }
 
     @Override

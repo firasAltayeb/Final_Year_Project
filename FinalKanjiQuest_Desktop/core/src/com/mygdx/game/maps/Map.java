@@ -95,6 +95,27 @@ public abstract class Map {
 
     public abstract void updateMapEntities(MapManager mapMgr, Batch batch, float delta);
 
+    public Entity initSpecialEntity(EntityConfig entityConfig){
+        Vector2 position = new Vector2(0,0);
+
+        if( specialNPCStartPositions.containsKey(entityConfig.getEntityID()) ) {
+            position = specialNPCStartPositions.get(entityConfig.getEntityID());
+        }
+        return initEntity(entityConfig, position);
+    }
+
+    public Entity initEntity(EntityConfig entityConfig, Vector2 position){
+        Entity entity = EntityFactory.getEntity(EntityFactory.EntityType.NPC);
+        entity.setEntityConfig(entityConfig);
+
+        entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, json.toJson(entity.getEntityConfig()));
+        entity.sendMessage(Component.MESSAGE.INIT_START_POSITION, json.toJson(position));
+        entity.sendMessage(Component.MESSAGE.INIT_STATE, json.toJson(entity.getEntityConfig().getState()));
+        entity.sendMessage(Component.MESSAGE.INIT_DIRECTION, json.toJson(entity.getEntityConfig().getDirection()));
+
+        return entity;
+    }
+
     private Array<Vector2> getNPCStartPositions(){
         Array<Vector2> npcStartPositions = new Array<Vector2>();
 
@@ -149,12 +170,6 @@ public abstract class Map {
         return specialNPCStartPositions;
     }
 
-    public Vector2 getPlayerStartUnitScaled(){
-        Vector2 playerStart = this.playerStart.cpy();
-        playerStart.set(this.playerStart.x * UNIT_SCALE, this.playerStart.y * UNIT_SCALE);
-        return playerStart;
-    }
-
     //TODO speak about this
     public void setClosestStartPosition(final Vector2 position) {
         Gdx.app.debug(TAG, "setClosestStartPosition INPUT: (" + position.x + "," + position.y + ") " + currentMapType.toString());
@@ -192,27 +207,6 @@ public abstract class Map {
 
     }
 
-    public Entity initEntity(EntityConfig entityConfig, Vector2 position){
-        Entity entity = EntityFactory.getEntity(EntityFactory.EntityType.NPC);
-        entity.setEntityConfig(entityConfig);
-
-        entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, json.toJson(entity.getEntityConfig()));
-        entity.sendMessage(Component.MESSAGE.INIT_START_POSITION, json.toJson(position));
-        entity.sendMessage(Component.MESSAGE.INIT_STATE, json.toJson(entity.getEntityConfig().getState()));
-        entity.sendMessage(Component.MESSAGE.INIT_DIRECTION, json.toJson(entity.getEntityConfig().getDirection()));
-
-        return entity;
-    }
-
-    public Entity initSpecialEntity(EntityConfig entityConfig){
-        Vector2 position = new Vector2(0,0);
-
-        if( specialNPCStartPositions.containsKey(entityConfig.getEntityID()) ) {
-            position = specialNPCStartPositions.get(entityConfig.getEntityID());
-        }
-        return initEntity(entityConfig, position);
-    }
-
     public void setSpecificPortal(String  specificPortal){
         //Gdx.app.debug(TAG, "portalProperties are not null");
         this.specificPortal = specificPortal;
@@ -223,6 +217,12 @@ public abstract class Map {
     }
 
     public Vector2 getPlayerStart() {
+        return playerStart;
+    }
+
+    public Vector2 getPlayerStartUnitScaled(){
+        Vector2 playerStart = this.playerStart.cpy();
+        playerStart.set(this.playerStart.x * UNIT_SCALE, this.playerStart.y * UNIT_SCALE);
         return playerStart;
     }
 
