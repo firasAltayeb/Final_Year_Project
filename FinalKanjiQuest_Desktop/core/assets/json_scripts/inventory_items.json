@@ -1,27 +1,27 @@
 [
 {
-	itemAttributes: 5
+	itemAttributes: 1
 	itemUseType: 1
-	itemUseTypeValue: 10
-	itemTypeID: SCROLL01
-	itemShortDescription: Scroll that restores 10HP
-	itemValue: 10
+	itemUseTypeValue: 1
+	itemTypeID: POTION_BLUE
+	itemShortDescription: A small potion that recovers 1 heart
+	itemValue: 1
 },
 {
-	itemAttributes: 5
+	itemAttributes: 1
 	itemUseType: 1
-	itemUseTypeValue: 50
-	itemTypeID: SCROLL02
-	itemShortDescription: Scroll that restores 50HP
-	itemValue: 50
+	itemUseTypeValue: 1
+	itemTypeID: MEDIUM_POTION_BLUE
+	itemShortDescription: A medium potion that recovers 3 hearts
+	itemValue: 3
 },
 {
-	itemAttributes: 5
+	itemAttributes: 1
 	itemUseType: 1
-	itemUseTypeValue: 100
-	itemTypeID: SCROLL03
-	itemShortDescription: Scroll that restores 100HP
-	itemValue: 100
+	itemUseTypeValue: 1
+	itemTypeID: LARGE_POTION_BLUE
+	itemShortDescription: A Large potion that recovers 5 hearts
+	itemValue: 5
 },
 
 ]

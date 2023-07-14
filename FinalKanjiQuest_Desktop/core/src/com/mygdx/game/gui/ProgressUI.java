@@ -18,22 +18,22 @@ public class ProgressUI extends Window implements ProgressSubject {
     float menuItemWindowHeight;
     private Array<ProgressObserver> observers;
 
-    private int hpCurrentMax = 10;
+    private int hpCurrentMax = -1;
     private int hpVal = -1;
 
     public ProgressUI(float width, float height){
         super("Status", Utility.GUI_SKINS);
+        this.getTitleLabel().setAlignment(Align.center);
 
         menuItemWindowWidth = width;
         menuItemWindowHeight = height;
+        observers = new Array<ProgressObserver>();
 
-        this.pad(this.getPadTop() + menuItemWindowHeight / 20, menuItemWindowWidth / 20,
-                menuItemWindowHeight / 20, menuItemWindowWidth / 20);
+        this.pad(this.getPadTop() + menuItemWindowHeight / 30, menuItemWindowWidth / 30,
+                menuItemWindowHeight / 30, menuItemWindowWidth / 30);
 
         Label text;
         table = new Table();
-
-        observers = new Array<ProgressObserver>();
 
         for(int i = 0; i <= 41; i++){
             text = new Label("firstText " + i, Utility.GUI_SKINS);
@@ -97,6 +97,7 @@ public class ProgressUI extends Window implements ProgressSubject {
 
     public void setHPValueMax(int maxHPValue){
         this.hpCurrentMax = maxHPValue;
+        notify(hpCurrentMax, ProgressObserver.StatusEvent.UPDATED_MAX_HP);
     }
 
     public int getHPValueMax(){

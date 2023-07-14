@@ -3,11 +3,9 @@ package com.mygdx.game.gui;
 
 public interface ProgressObserver {
     public static enum StatusEvent {
-        UPDATED_GP,
         UPDATED_LEVEL,
         UPDATED_HP,
-        UPDATED_MP,
-        UPDATED_XP
+        UPDATED_MAX_HP,
     }
 
     void onNotify(final int value, StatusEvent event);

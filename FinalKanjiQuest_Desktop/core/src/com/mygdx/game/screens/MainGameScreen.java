@@ -95,13 +95,16 @@ public class MainGameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		if( gameState == GameState.PAUSED ){
+			player.updateInput(delta);
+			playerHUD.render(delta);
+			return;
+		}
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		mapRenderer.setView(camera);
-
-		//mapRenderer.getBatch().enableBlending();
-		//mapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
 		if( mapMgr.hasMapChanged() ){
 			mapRenderer.setMap(mapMgr.getCurrentTiledMap());

@@ -20,7 +20,7 @@ public class InventorySlot extends Stack {
 
     public InventorySlot(){
         defaultBackground = new Stack();
-        Image image = new Image(new NinePatch(Utility.GUI_SHEET_TEXTUREATLAS.createPatch("dialog")));
+        Image image = new Image(new NinePatch(Utility.GUI_TEXTUREATLAS.createPatch("dialog")));
 
         numItemsLabel = new Label(String.valueOf(numItemsVal), Utility.GUI_SKINS, "inventory-item-count");
         numItemsLabel.setAlignment(Align.bottomRight);

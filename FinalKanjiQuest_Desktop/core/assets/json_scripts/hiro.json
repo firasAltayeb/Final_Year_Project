@@ -4,19 +4,19 @@ state : IDLE
 direction : DOWN
 inventory : [
 	{
-		value: SCROLL01
+		value: POTION_BLUE
 	},
 	{
-		value: SCROLL02
+		value: POTION_BLUE
 	},
 	{
-		value: SCROLL03
+		value: POTION_BLUE
 	},
 	{
-		value: SCROLL01
+		value: MEDIUM_POTION_BLUE
 	},
 	{
-		value: SCROLL02
+		value: LARGE_POTION_BLUE
 	},
 ]
 animationConfig: [

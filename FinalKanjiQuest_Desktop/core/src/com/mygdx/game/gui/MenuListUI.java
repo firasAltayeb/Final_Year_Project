@@ -2,9 +2,10 @@ package com.mygdx.game.gui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.Utility;
 
-public class MenuList extends Window {
+public class MenuListUI extends Window {
 
     private TextButton statusButton;
     private TextButton inventoryButton;
@@ -12,8 +13,9 @@ public class MenuList extends Window {
     private TextButton hiraganaButton;
     private TextButton katakanaButton;
 
-    public MenuList(){
+    public MenuListUI(){
         super("Menu", Utility.GUI_SKINS);
+        this.getTitleLabel().setAlignment(Align.center);
 
         statusButton = new TextButton("status", Utility.GUI_SKINS);
         inventoryButton = new TextButton("inventory", Utility.GUI_SKINS);
