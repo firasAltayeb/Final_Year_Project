@@ -74,8 +74,119 @@ public class MapManger {
         playerStartPositionRect = new Vector2(0, 0);
         closestPlayerStartPosition = new Vector2(0, 0);
         convertedUnits = new Vector2(0, 0);
+    }
+
+    public void loadMap(String mapName){
+        playerStart.set(0, 0);
+
+        String mapFullPath = mapTable.get(mapName);
+
+        if (mapFullPath == null || mapFullPath.isEmpty()){
+            Gdx.app.debug(TAG, "Map is invalid");
+            return;
+        }
+
+        if (currentMap != null){
+            currentMap.dispose();
+        }
+
+        Utility.loadMapAsset(mapFullPath);
+        if (Utility.isAssetLoaded(mapFullPath)){
+            currentMap = Utility.getMapAsset(mapFullPath);
+            currentMapName = mapName;
+        } else {
+            Gdx.app.debug(TAG, "Map not loaded");
+            return;
+        }
+
+        collisionLayer = currentMap.getLayers().get(MAP_COLLISION_LAYER);
+        if(collisionLayer == null){
+            Gdx.app.debug(TAG, "No collision layer!");
+        }
+
+        portalLayer = currentMap.getLayers().get(MAP_PORTAL_LAYER);
+        if(portalLayer == null){
+            Gdx.app.debug(TAG, "No portal layer!");
+        }
+
+        spawnsLayer = currentMap.getLayers().get(MAP_SPAWNS_LAYER);
+        if(spawnsLayer == null){
+            Gdx.app.debug(TAG, "No spawns layer!");
+        } else {
+            Vector2 start = playerStartLocationTable.get(currentMapName);
+            // If yes = player location not cached yet = first time map loaded
+            if (start.isZero()){
+                //chach player closest location
+                setClosestStartPosition(playerStart);
+                start = playerStartLocationTable.get(currentMapName);
+            }
+            playerStart.set(start.x, start.y);
+        }
+
+        Gdx.app.debug(TAG, "Player Start: (" + playerStart.x +
+        ", "  + playerStart.y + ")");
 
     }
-    
+
+    public TiledMap getCurrentMap(){
+        if (currentMap == null){
+            currentMapName = TOWN_OF_BEGINNINGS;
+            loadMap(currentMapName);
+        }
+        return  currentMap;
+    }
+
+    public MapLayer getCollisionLayer(){
+        return collisionLayer;
+    }
+
+    public MapLayer getSpawnsLayer() {
+        return spawnsLayer;
+    }
+
+    public MapLayer getPortalLayer() {
+        return portalLayer;
+    }
+
+    public Vector2 getPlayerStartUnitScaled(){
+        Vector2 scaledPlayerStart = playerStart.cpy();
+        scaledPlayerStart.set(playerStart.x * UNIT_SCALE,
+                playerStart.y * UNIT_SCALE);
+        return  playerStart;
+    }
+
+    private void setClosestStartPosition(final  Vector2 position) {
+        //get last known position on this map
+        playerStartPositionRect.set(0, 0);
+        closestPlayerStartPosition.set(0, 0);
+        float shortestDistance = 0f;
+
+        //Go through all playerStartPositions & pick closest to last know position
+        for (MapObject object : spawnsLayer.getObjects()) {
+            ((RectangleMapObject) object).getRectangle().
+                    getPosition(playerStartPositionRect);
+            float distance = position.dst2(playerStartPositionRect);
+
+            if (distance < shortestDistance || shortestDistance == 0) {
+                closestPlayerStartPosition.set(playerStartPositionRect);
+                shortestDistance = distance;
+                playerStartLocationTable.put(currentMapName,
+                        closestPlayerStartPosition.cpy());
+            }
+        }
+    }
+
+    //scaled unit coordinate back to pixel coordinate
+    public void setClosestPlayerStartPositionFromScaledUnits(Vector2 position){
+        if (UNIT_SCALE <= 0)
+            return;
+
+        convertedUnits.set(position.x/UNIT_SCALE,
+                position.y/UNIT_SCALE);
+        setClosestStartPosition(convertedUnits);
+    }
+
+
+
 
 }

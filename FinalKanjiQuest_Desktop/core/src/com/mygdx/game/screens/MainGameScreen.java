@@ -11,7 +11,6 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.Entity;
 import com.mygdx.game.MapManger;
 import com.mygdx.game.PlayerController;
 
