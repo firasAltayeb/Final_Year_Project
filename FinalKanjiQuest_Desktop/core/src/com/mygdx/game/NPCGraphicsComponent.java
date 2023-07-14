@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.EntityConfig.AnimationConfig;
+import com.mygdx.game.maps.Map;
+import com.mygdx.game.maps.MapManager;
 
 public class NPCGraphicsComponent extends GraphicsComponent {
 
@@ -101,10 +103,10 @@ public class NPCGraphicsComponent extends GraphicsComponent {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0.0f, 1.0f, 1.0f, 0.5f);
 
-        float width =  rect.getWidth() * Map.UNIT_SCALE*2f;
+        float width =  rect.getWidth() * Map.UNIT_SCALE*1.5f;
         float height = rect.getHeight() * Map.UNIT_SCALE/2f;
-        float x = rect.x * Map.UNIT_SCALE - width/4;
-        float y = rect.y * Map.UNIT_SCALE - height/2;
+        float x = rect.x * Map.UNIT_SCALE - width/3;
+        float y = rect.y * Map.UNIT_SCALE - height/1.5f;
 
         shapeRenderer.ellipse(x,y,width,height);
         shapeRenderer.end();

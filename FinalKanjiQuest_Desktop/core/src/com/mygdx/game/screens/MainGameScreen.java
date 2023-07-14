@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.Json;
 import com.mygdx.game.Component;
 import com.mygdx.game.Entity;
 import com.mygdx.game.EntityFactory;
-import com.mygdx.game.Map;
-import com.mygdx.game.MapManager;
+import com.mygdx.game.maps.Map;
+import com.mygdx.game.maps.MapManager;
 
 public class MainGameScreen implements Screen {
 

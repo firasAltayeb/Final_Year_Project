@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.maps.MapManager;
 
 public class NPCPhysicsComponent extends PhysicsComponent {
 
@@ -11,6 +12,7 @@ public class NPCPhysicsComponent extends PhysicsComponent {
     public NPCPhysicsComponent(){
         boundingBoxLocation = BoundingBoxLocation.CENTER;
         initBoundingBox(0.6f, 0.4f);
+        super.velocity.set(3f,3f);
     }
 
     @Override

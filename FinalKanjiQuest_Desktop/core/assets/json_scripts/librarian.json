@@ -1,0 +1,20 @@
+{
+entityID : LIBRARIAN
+state : IMMOBILE
+direction : DOWN
+animationConfig: [
+	{
+	    frameDuration: 1.0
+		animationType: IMMOBILE
+		texturePaths: [
+			sprites/librarian_sheet.png
+		]
+		gridPoints: [
+			{
+				x: 0
+				y: 0
+			}
+		]
+	}	
+]
+}	

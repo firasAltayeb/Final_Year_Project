@@ -10,6 +10,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.maps.Map;
+import com.mygdx.game.maps.MapFactory;
+import com.mygdx.game.maps.MapManager;
 
 public class PlayerPhysicsComponent extends PhysicsComponent {
 
@@ -19,11 +22,12 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     private Vector3 mouseSelectCoordinates;
     private boolean isMouseSelectEnabled = false;
     private Ray selectionRay;
-    private float selectRayMaximumDistance = 32.0f;
+    private float selectRayMaximumDistance = 30.0f;
 
     public PlayerPhysicsComponent(){
         boundingBoxLocation = BoundingBoxLocation.BOTTOM_CENTER;
         initBoundingBox(0.6f, 0.4f);
+        super.velocity.set(6f,6f);
 
         mouseSelectCoordinates = new Vector3(0,0,0);
         selectionRay = new Ray(new Vector3(), new Vector3());
