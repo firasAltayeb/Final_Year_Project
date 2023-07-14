@@ -6,39 +6,38 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
-import com.packtpub.libgdx.bludbourne.Utility;
-import com.packtpub.libgdx.bludbourne.gui.InventoryItem.ItemTypeID;
-
 import java.util.ArrayList;
 import java.util.Hashtable;
+import com.mygdx.game.Utility;
+import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 
 public class InventoryItemFactory {
 
-    private Json _json = new Json();
+    private Json json = new Json();
     private final String INVENTORY_ITEM = "scripts/inventory_items.json";
-    private static InventoryItemFactory _instance = null;
-    private Hashtable<ItemTypeID,InventoryItem> _inventoryItemList;
+    private static InventoryItemFactory instance = null;
+    private Hashtable<ItemTypeID,InventoryItem> inventoryItemList;
 
     public static InventoryItemFactory getInstance() {
-        if (_instance == null) {
-            _instance = new InventoryItemFactory();
+        if (instance == null) {
+            instance = new InventoryItemFactory();
         }
 
-        return _instance;
+        return instance;
     }
 
     private InventoryItemFactory(){
-        ArrayList<JsonValue> list = _json.fromJson(ArrayList.class, Gdx.files.internal(INVENTORY_ITEM));
-        _inventoryItemList = new Hashtable<ItemTypeID, InventoryItem>();
+        ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(INVENTORY_ITEM));
+        inventoryItemList = new Hashtable<ItemTypeID, InventoryItem>();
 
         for (JsonValue jsonVal : list) {
-            InventoryItem inventoryItem = _json.readValue(InventoryItem.class, jsonVal);
-            _inventoryItemList.put(inventoryItem.getItemTypeID(), inventoryItem);
+            InventoryItem inventoryItem = json.readValue(InventoryItem.class, jsonVal);
+            inventoryItemList.put(inventoryItem.getItemTypeID(), inventoryItem);
         }
     }
 
     public InventoryItem getInventoryItem(ItemTypeID inventoryItemType){
-        InventoryItem item = new InventoryItem(_inventoryItemList.get(inventoryItemType));
+        InventoryItem item = new InventoryItem(inventoryItemList.get(inventoryItemType));
         item.setDrawable(new TextureRegionDrawable(Utility.ITEMS_TEXTUREATLAS.findRegion(item.getItemTypeID().toString())));
         item.setScaling(Scaling.none);
         return item;

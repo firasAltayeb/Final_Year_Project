@@ -35,14 +35,14 @@ public class InventoryItem extends Image {
         ARMOR_CHEST(512),
         ARMOR_FEET(1024);
 
-        private int _itemUseType;
+        private int itemUseType;
 
         ItemUseType(int itemUseType){
-            this._itemUseType = itemUseType;
+            this.itemUseType = itemUseType;
         }
 
         public int getValue(){
-            return _itemUseType;
+            return itemUseType;
         }
     }
 
