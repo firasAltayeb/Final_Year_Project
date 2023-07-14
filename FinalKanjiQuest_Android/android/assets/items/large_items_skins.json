@@ -1,5 +1,0 @@
-{
-	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
-		"health_heart": { "imageUp": "HEALTH_HEART", "imageChecked": "HEALTH_HEART" },
-	},
-}

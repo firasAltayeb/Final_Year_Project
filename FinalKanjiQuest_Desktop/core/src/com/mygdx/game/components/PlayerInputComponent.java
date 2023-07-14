@@ -102,19 +102,21 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.X){
 			this.downPressed();
 		}
-		if( keycode == Input.Keys.Q){
+
+		if( keycode == Input.Keys.Y){
 			this.upLeftPressed();
 
-		}if( keycode == Input.Keys.E){
+		}if( keycode == Input.Keys.I){
 			this.upRightPressed();
 
-		}if( keycode == Input.Keys.C){
-			this.downRightPressed();
-
-		}if( keycode == Input.Keys.Z){
+		}if( keycode == Input.Keys.N){
 			this.downLeftPressed();
+
+		}if( keycode == Input.Keys.COMMA){
+			this.downRightPressed();
 		}
-		if( keycode == Input.Keys.O){
+
+		if( keycode == Input.Keys.Q){
 			this.quitPressed();
 		}
 		if( keycode == Input.Keys.P ){
@@ -127,27 +129,34 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	@Override
 	public boolean keyUp(int keycode) {
 		if( keycode == Input.Keys.LEFT || keycode == Input.Keys.A){
-			this.leftReleased();
+				this.leftReleased();
 		}
 		if( keycode == Input.Keys.RIGHT || keycode == Input.Keys.D){
-			this.rightReleased();
+				this.rightReleased();
 		}
-		if( keycode == Input.Keys.UP || keycode == Input.Keys.W ){
-			this.upReleased();
+		if( keycode == Input.Keys.UP || keycode == Input.Keys.W){
+				this.upReleased();
 		}
 		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.X){
-			this.downReleased();
+				this.downReleased();
 		}
-		if( keycode == Input.Keys.Q){
+
+
+		if( keycode == Input.Keys.Y){
 			this.upLeftReleased();
-		}if( keycode == Input.Keys.E){
+
+		}if( keycode == Input.Keys.I){
 			this.upRightReleased();
-		}if( keycode == Input.Keys.C){
-			this.downRightReleased();
-		}if( keycode == Input.Keys.Z){
+
+		}if( keycode == Input.Keys.N){
 			this.downLeftReleased();
+
+		}if( keycode == Input.Keys.COMMA){
+			this.downRightReleased();
 		}
-		if( keycode == Input.Keys.O){
+
+
+		if( keycode == Input.Keys.Q){
 			this.quitReleased();
 		}
 		if( keycode == Input.Keys.P ){

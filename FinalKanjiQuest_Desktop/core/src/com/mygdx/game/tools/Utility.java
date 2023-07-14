@@ -25,12 +25,10 @@ public final class Utility {
     private final static String GUI_SHEET_PATH = "gui/gui_sheet.atlas";
     private final static String GUI_SKINS_PATH = "gui/gui_skins.json";
     private final static String ITEMS_SHEET_PATH = "items/items_sheet.txt";
-    private final static String ITEMS_SKINS_PATH = "items/items_skins.json";
 
     public static TextureAtlas GUI_TEXTUREATLAS = new TextureAtlas(GUI_SHEET_PATH);
     public static TextureAtlas ITEMS_TEXTUREATLAS = new TextureAtlas(ITEMS_SHEET_PATH);
     public static Skin GUI_SKINS = new Skin(Gdx.files.internal(GUI_SKINS_PATH), GUI_TEXTUREATLAS);
-    public static Skin ITEMS_SKINS = new Skin(Gdx.files.internal(ITEMS_SKINS_PATH), ITEMS_TEXTUREATLAS);
 
     public static void unloadAsset (java.lang.String assetFileNamePath){
         // once the asset manger is done loading

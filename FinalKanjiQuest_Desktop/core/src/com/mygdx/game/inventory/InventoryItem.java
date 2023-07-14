@@ -9,14 +9,14 @@ public class InventoryItem extends Image {
         CONSUMABLE(1),
         STACKABLE(2);
 
-        private int _attribute;
+        private int attribute;
 
         ItemAttribute(int attribute){
-            this._attribute = attribute;
+            this.attribute = attribute;
         }
 
         public int getValue(){
-            return _attribute;
+            return attribute;
         }
 
     }

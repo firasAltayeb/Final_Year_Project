@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -38,8 +39,8 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private TextButton progressButton;
     private TextButton inventoryButton;
 
-    private Array<ImageButton> all_health_heart;
-    private ImageButton health_heart;
+    private Array<Image> all_health_heart;
+    private Image health_heart;
 
 
     private float menuItemsXaxis;
@@ -64,13 +65,13 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         menuItemWindowWidth = stage.getWidth()/1.4f;
         menuItemWindowHeight = stage.getHeight()/1.05f;
 
-        all_health_heart = new Array<ImageButton>();
+        all_health_heart = new Array<Image>();
 
         //TODO speak about this
         for (int i = 0; i<10; i++) {
-            health_heart = new ImageButton(Utility.ITEMS_SKINS, "health_heart");
-            health_heart.setVisible(false);
+            health_heart = new Image(Utility.ITEMS_TEXTUREATLAS.findRegion("HEALTH_HEART"));
             health_heart.setPosition(health_heart.getWidth() * i, stage.getHeight() - health_heart.getHeight());
+            health_heart.setVisible(false);
             all_health_heart.add(health_heart);
         }
 
@@ -213,9 +214,10 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         menuItemWindowWidth = width/1.4f;
         menuItemWindowHeight = height/1.05f;
 
-        //TODO speak about this
+        Gdx.app.log(TAG, "resize height is: " + height);
+
         for (int i = 0; i<10; i++) {
-            health_heart.setPosition(health_heart.getWidth() * i, height - health_heart.getHeight());
+            all_health_heart.get(i).setPosition(health_heart.getWidth() * i, height - health_heart.getHeight());
         }
 
         menuButton.setPosition(width/1.2f,  height/12);
