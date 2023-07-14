@@ -274,6 +274,12 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         inventoryUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 
+        hiraganaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        hiraganaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
+        katakanaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        katakanaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
         MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
         MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
         stage.getViewport().update(width, height, true);

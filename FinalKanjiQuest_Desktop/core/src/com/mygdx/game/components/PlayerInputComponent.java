@@ -99,7 +99,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		if( keycode == Input.Keys.UP || keycode == Input.Keys.W){
 			this.upPressed();
 		}
-		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.X){
+		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.S){
 			this.downPressed();
 		}
 
@@ -137,7 +137,7 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		if( keycode == Input.Keys.UP || keycode == Input.Keys.W){
 				this.upReleased();
 		}
-		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.X){
+		if( keycode == Input.Keys.DOWN || keycode == Input.Keys.S){
 				this.downReleased();
 		}
 
