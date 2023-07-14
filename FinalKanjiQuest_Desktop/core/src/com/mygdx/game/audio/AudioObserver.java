@@ -2,19 +2,22 @@ package com.mygdx.game.audio;
 
 public interface AudioObserver {
     public static enum AudioTypeEvent{
-        MUSIC_TITLE("audio/10112013.wav"),
-        MUSIC_TOWN("audio/Magic Town_0.mp3"),
-        MUSIC_TOPWORLD("audio/n3535n5n335n35nj.ogg"),
-        MUSIC_CASTLEDOOM("audio/Dark chamber.mp3"),
-        MUSIC_BATTLE("audio/Random Battle.mp3"),
-        MUSIC_INTRO_CUTSCENE("audio/Takeover_5.mp3"),
-        MUSIC_LEVEL_UP_FANFARE("audio/4 Open Surge score jingle - B.ogg"),
-        SOUND_CREATURE_PAIN("audio/27780_SFX_CreatureGruntInPain1.wav"),
-        SOUND_PLAYER_PAIN("audio/27678_SFX_ComicalSoundsTiredGrunt1.wav"),
-        SOUND_PLAYER_WAND_ATTACK("audio/26230_SFX_ProductionElementReverseWhoosh19.wav"),
-        SOUND_EATING("audio/17661_SFX_HumanEatingPotatoChips1.wav"),
-        SOUND_DRINKING("audio/27677_SFX_ComicalSoundsSwallowLiquid1.wav"),
-        SOUND_COIN_RUSTLE("audio/00954_SFX_MoneyCoinsDumpedInHand_final.wav"),
+        MUSIC_TITLE("audio/title_music.wav"),
+        MUSIC_TOPWORLD("audio/topworld_music.ogg"),
+        MUSIC_TOWN("audio/town_music.mp3"),
+        MUSIC_BATTLE("audio/random_battle.mp3"),
+        MUSIC_FOREST("audio/forest_music.mp3"),
+        MUSIC_CAVE("audio/cave_music.mp3"),
+        MUSIC_COAST("audio/coast_music.mp3"),
+        MUSIC_ICE_FOREST("audio/ice_forest_music.mp3"),
+        MUSIC_DESERT_TEMPLE("audio/desert_temple_music.mp3"),
+        MUSIC_LAVA("audio/lava_music.mp3"),
+        SOUND_PLAYER_PAIN("audio/player_hit.wav"),
+        SOUND_EATING("audio/eating_sound.wav"),
+        SOUND_DRINKING("audio/liquid_drinking.wav"),
+        SOUND_SUCCESS("audio/success.wav"),
+        SOUND_LVL_UP("audio/level_up.wav"),
+        SOUND_LVL_DOWN("audio/level_down.wav"),
         NONE("");
 
         private String audioFullFilePath;

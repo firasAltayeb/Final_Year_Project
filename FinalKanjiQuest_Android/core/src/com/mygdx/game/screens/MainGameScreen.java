@@ -144,6 +144,18 @@ public class MainGameScreen extends GameScreen {
 
 	@Override
 	public void pause() {
+		if( player != null ){
+			player.unregisterObservers();
+			player.dispose();
+		}
+
+		if( mapRenderer != null ){
+			mapRenderer.dispose();
+		}
+
+		AudioManager.getInstance().dispose();
+		playerHUD.dispose();
+
 		setGameState(GameState.SAVING);
 	}
 

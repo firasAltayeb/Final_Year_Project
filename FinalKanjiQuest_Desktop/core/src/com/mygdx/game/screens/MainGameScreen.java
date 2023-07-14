@@ -49,14 +49,14 @@ public class MainGameScreen extends GameScreen {
 
 
 	private Json json;
-	private FinalKanjiQuest game;
+	private final FinalKanjiQuest game;
 	private InputMultiplexer multiplexer;
 
 	private Entity player;
 	private PlayerHUD playerHUD;
 
-	public MainGameScreen(FinalKanjiQuest game){
-		this.game = game;
+	public MainGameScreen(FinalKanjiQuest fkq){
+		this.game = fkq;
 		mapMgr = new MapManager();
 		json = new Json();
 

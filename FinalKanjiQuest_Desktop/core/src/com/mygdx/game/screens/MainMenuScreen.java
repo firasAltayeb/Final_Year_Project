@@ -19,13 +19,13 @@ import com.mygdx.game.tools.Utility;
 public class MainMenuScreen extends GameScreen {
 
 	private Stage stage;
-	private FinalKanjiQuest game;
+	private final FinalKanjiQuest game;
 
     private Texture texture;
     private Sprite backgroundSprite;
 
-	public MainMenuScreen(FinalKanjiQuest game){
-		this.game = game;
+	public MainMenuScreen(FinalKanjiQuest fkq){
+		this.game = fkq;
 
 		//creation
 		stage = new Stage();

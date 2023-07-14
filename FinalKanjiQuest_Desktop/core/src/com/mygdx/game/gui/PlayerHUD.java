@@ -277,13 +277,12 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 
         //Music/Sound loading
         notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
-        notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_LEVEL_UP_FANFARE);
-        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_COIN_RUSTLE);
-        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_CREATURE_PAIN);
         notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
-        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_PLAYER_WAND_ATTACK);
         notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_EATING);
         notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_DRINKING);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_SUCCESS);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_LVL_UP);
+        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_LVL_DOWN);
     }
 
     @Override
@@ -476,18 +475,23 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                     ProfileManager.getInstance().setProperty("currentPlayerHPMax", maxNumberOfHearts);
                 }
                 else if(InventoryItem.doesIncreaseHiraganaLvl(type)){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_LVL_UP);
                     LetterLvlCounter.setAllHiraganaMemorised(true);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseHiraganaLvl(type)){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_LVL_DOWN);
                     LetterLvlCounter.setAllHiraganaMemorised(false);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesIncreaseKatakanaLvl(type)){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_LVL_UP);
+
                     LetterLvlCounter.setAllKatakanaMemorised(true);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseKatakanaLvl(type)){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_LVL_DOWN);
                     LetterLvlCounter.setAllKatakanaMemorised(false);
                     progressUI.updateTable();
                 }
@@ -527,6 +531,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
         int hpVal;
         switch (event) {
             case LETTER_ANSWERED_CORRECTLY:
+                notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_SUCCESS);
                 LetterLvlCounter.increaseLvl(answeredLetter, 1);
                 progressUI.updateTable();
 

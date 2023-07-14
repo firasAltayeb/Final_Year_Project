@@ -22,15 +22,15 @@ import com.mygdx.game.profile.ProfileManager;
 public class NewGameScreen extends GameScreen {
 
 	private Stage stage;
-	private FinalKanjiQuest game;
+	private final FinalKanjiQuest game;
 
 	private Texture texture;
 	private Sprite backgroundSprite;
 	private final TextField profileText;
 	private final Table middleTable;
 
-	public NewGameScreen(FinalKanjiQuest game){
-		this.game = game;
+	public NewGameScreen(FinalKanjiQuest fkq){
+		this.game = fkq;
 		stage = new Stage();
 
 		//TopTable

@@ -693,7 +693,7 @@
   <object id="435" name="DESERT_TEMPLE.TEMPLE_START" x="609" y="436.166" width="15.5833" height="36.0833"/>
   <object id="436" name="LAVA.LAVA_START" x="466.333" y="515.167" width="12.5" height="40"/>
   <object id="437" name="LAVA.LAVA_START" x="469.167" y="555.083" width="42.4166" height="9"/>
-  <object id="447" name="TOWN" x="678.5" y="912.5" width="32" height="16"/>
+  <object id="447" name="TOWN.TOWN_START" x="678.5" y="912.5" width="32" height="16"/>
   <object id="456" name="DESERT_TEMPLE.TEMPLE_END" x="591.708" y="435.708" width="15.5833" height="36.0833"/>
   <object id="460" name="LAVA.LAVA_END" x="469.292" y="565.25" width="42.4166" height="9"/>
   <object id="462" name="LAVA.LAVA_END" x="453.125" y="515" width="12" height="40"/>

@@ -22,14 +22,14 @@ import com.mygdx.game.profile.ProfileManager;
 
 public class LoadGameScreen extends GameScreen {
     private Stage stage;
-	private FinalKanjiQuest game;
+	private final FinalKanjiQuest game;
 
 	private Texture texture;
 	private Sprite backgroundSprite;
 	private final List listItems;
 
-	public LoadGameScreen(FinalKanjiQuest game){
-		this.game = game;
+	public LoadGameScreen(FinalKanjiQuest fkq){
+		this.game = fkq;
 
 		texture = new Texture(Gdx.files.internal("sprites/maps/topworld.png"));
 		backgroundSprite = new Sprite(texture);

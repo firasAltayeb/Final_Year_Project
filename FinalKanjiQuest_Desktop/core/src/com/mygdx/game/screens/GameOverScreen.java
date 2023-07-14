@@ -16,12 +16,12 @@ import com.mygdx.game.tools.Utility;
 
 public class GameOverScreen extends GameScreen {
     private Stage stage;
-    private FinalKanjiQuest game;
+    private final FinalKanjiQuest game;
     //private static final String DEATH_MESSAGE = "You have fought bravely, but alas, you have fallen during your epic struggle.";
     private static final String GAMEOVER = "Game Over";
 
-    public GameOverScreen(FinalKanjiQuest game){
-        this.game = game;
+    public GameOverScreen(FinalKanjiQuest fkq){
+        this.game = fkq;
 
         //create
         stage = new Stage();

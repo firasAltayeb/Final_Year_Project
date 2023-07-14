@@ -33,7 +33,6 @@ import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
 import com.mygdx.game.tools.Entity;
-import com.mygdx.game.tools.OnScreenController;
 import com.mygdx.game.tools.Utility;
 
 import java.util.ArrayList;
@@ -279,11 +278,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
 
         //Music/Sound loading
         notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
-        notify(AudioObserver.AudioCommand.MUSIC_LOAD, AudioObserver.AudioTypeEvent.MUSIC_LEVEL_UP_FANFARE);
-        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_COIN_RUSTLE);
-        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_CREATURE_PAIN);
         notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
-        notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_PLAYER_WAND_ATTACK);
         notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_EATING);
         notify(AudioObserver.AudioCommand.SOUND_LOAD, AudioObserver.AudioTypeEvent.SOUND_DRINKING);
     }
@@ -373,27 +368,6 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                 //ProfileManager.setProperty("allKatakanaMemorised", false);
                 //ProfileManager.setProperty("allKanjiMemorised", false);
 
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void onNotify(String value, ComponentEvent event) {
-        switch(event) {
-            case ENEMY_SPAWN_LOCATION_CHANGED:
-                String enemyZoneID = value;
-                Gdx.app.debug(TAG, "ENEMY_SPAWN_LOCATION_CHANGED " + enemyZoneID);
-                battleUI.battleZoneTriggered(Integer.parseInt(enemyZoneID));
-                break;
-            case PLAYER_HAS_MOVED:
-                //Gdx.app.debug(TAG, "PLAYER_HAS_MOVED ");
-                if (battleUI.isBattleReady()) {
-                    MainGameScreen.setGameState(MainGameScreen.GameState.SAVING);
-                    battleUI.toBack();
-                    battleUI.setVisible(true);
-                }
                 break;
             default:
                 break;
@@ -500,23 +474,50 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                     //ProfileManager.getInstance().setProperty("currentPlayerHPMax", maxNumberOfHearts);
                 }
                 else if(InventoryItem.doesIncreaseHiraganaLvl(type)){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_LVL_UP);
                     LetterLvlCounter.setAllHiraganaMemorised(true);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseHiraganaLvl(type)){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_LVL_DOWN);
                     LetterLvlCounter.setAllHiraganaMemorised(false);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesIncreaseKatakanaLvl(type)){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_LVL_UP);
+
                     LetterLvlCounter.setAllKatakanaMemorised(true);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseKatakanaLvl(type)){
+                    notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_LVL_DOWN);
                     LetterLvlCounter.setAllKatakanaMemorised(false);
                     progressUI.updateTable();
                 }
 
+                break;
+            default:
+                break;
+        }
+    }
 
+    @Override
+    public void onNotify(String value, ComponentEvent event) {
+        switch(event) {
+            case ENEMY_SPAWN_LOCATION_CHANGED:
+                String enemyZoneID = value;
+                Gdx.app.debug(TAG, "ENEMY_SPAWN_LOCATION_CHANGED " + enemyZoneID);
+                battleUI.battleZoneTriggered(Integer.parseInt(enemyZoneID));
+                break;
+            case PLAYER_HAS_MOVED:
+                //Gdx.app.debug(TAG, "PLAYER_HAS_MOVED ");
+                if (battleUI.isBattleReady()) {
+                    MainGameScreen.setGameState(MainGameScreen.GameState.SAVING);
+                    mapManager.disableCurrentmapMusic();
+                    notify(AudioObserver.AudioCommand.MUSIC_PLAY_LOOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
+                    battleUI.toBack();
+                    battleUI.setVisible(true);
+                }
                 break;
             default:
                 break;
@@ -528,10 +529,12 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
         int hpVal;
         switch (event) {
             case LETTER_ANSWERED_CORRECTLY:
+                notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_SUCCESS);
                 LetterLvlCounter.increaseLvl(answeredLetter, 1);
                 progressUI.updateTable();
 
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
                 mapManager.enableCurrentmapMusic();
                 battleUI.setVisible(false);
                 break;
@@ -541,7 +544,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                 progressUI.updateTable();
                 numberOfHearts--;
                 showHearts();
-                //ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                 if( numberOfHearts <= 0 ){
                     notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
                     battleUI.setVisible(false);
@@ -557,7 +560,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                 notify(AudioObserver.AudioCommand.SOUND_PLAY_ONCE, AudioObserver.AudioTypeEvent.SOUND_PLAYER_PAIN);
                 numberOfHearts--;
                 showHearts();
-                //ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
+                ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                 if( numberOfHearts <= 0 ){
                     battleUI.setVisible(false);
                     MainGameScreen.setGameState(MainGameScreen.GameState.GAME_OVER);

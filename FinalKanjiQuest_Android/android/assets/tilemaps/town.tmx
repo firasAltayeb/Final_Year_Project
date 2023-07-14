@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="55" tilewidth="16" tileheight="16" backgroundcolor="#005500" nextobjectid="719">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="55" tilewidth="16" tileheight="16" backgroundcolor="#005500" nextobjectid="720">
  <tileset firstgid="1" name="tileset1" tilewidth="16" tileheight="16" tilecount="1833" columns="39">
   <image source="../sprites/map_objects/tileset1.png" trans="ffffff" width="624" height="752"/>
   <terraintypes>
@@ -758,13 +758,13 @@
   <object id="251" name="LIBRARY_START" x="864" y="224" width="16" height="16"/>
   <object id="252" name="INN_FIRST_FLOOR_START" x="544" y="528" width="16" height="16"/>
   <object id="254" name="HERBALIST_START" x="784" y="640" width="16" height="16"/>
-  <object id="256" name="PLAYER_START" x="1040" y="304" width="16" height="16"/>
+  <object id="256" name="TOWN_START" x="1040" y="304" width="16" height="16"/>
   <object id="690" name="NPC_START" x="352" y="640" width="16" height="16"/>
   <object id="691" name="NPC_START" x="912" y="480" width="16" height="16"/>
-  <object id="693" name="WALKAROUND_FOUR" x="688" y="288" width="16" height="16"/>
   <object id="695" name="WALKAROUND_TWO" x="688" y="544" width="16" height="16"/>
   <object id="696" name="WALKAROUND_THREE" x="272" y="288" width="16" height="16"/>
   <object id="697" name="INN_CLARK" x="285.333" y="384.333" width="16" height="16"/>
+  <object id="719" name="PLAYER_START" x="688" y="288" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="MAP_PORTAL_LAYER">
   <object id="201" name="LIBRARY" x="864" y="176" width="16" height="32"/>

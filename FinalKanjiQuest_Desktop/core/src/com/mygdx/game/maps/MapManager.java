@@ -42,6 +42,36 @@ public class MapManager implements ProfileObserver {
                     MapFactory.getMap(MapFactory.MapType.TOWN).setPlayerStart(townMapStartPosition);
                 }
 
+                Vector2 armorerMapStartPosition = profileManager.getProperty("armorerMapStartPosition", Vector2.class);
+                if( armorerMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.ARMORER).setPlayerStart(armorerMapStartPosition);
+                }
+
+                Vector2 libraryMapStartPosition = profileManager.getProperty("libraryMapStartPosition", Vector2.class);
+                if( libraryMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.LIBRARY).setPlayerStart(libraryMapStartPosition);
+                }
+
+                Vector2 herbShopMapStartPosition = profileManager.getProperty("herbShopMapStartPosition", Vector2.class);
+                if( herbShopMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.HERB_SHOP).setPlayerStart(herbShopMapStartPosition);
+                }
+
+                Vector2 houseOneStartPosition = profileManager.getProperty("houseOneStartPosition", Vector2.class);
+                if( houseOneStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.HOUSE_ONE).setPlayerStart(houseOneStartPosition);
+                }
+
+                Vector2 innFirstFloorMapStartPosition = profileManager.getProperty("innFirstFloorMapStartPosition", Vector2.class);
+                if( innFirstFloorMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.INN_FIRST_FLOOR).setPlayerStart(innFirstFloorMapStartPosition);
+                }
+
+                Vector2 innSecondFloorMapStartPosition = profileManager.getProperty("innSecondFloorMapStartPosition", Vector2.class);
+                if( innFirstFloorMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.INN_SECOND_FLOOR).setPlayerStart(innSecondFloorMapStartPosition);
+                }
+
                 Vector2 topWorldMapStartPosition = profileManager.getProperty("topWorldMapStartPosition", Vector2.class);
                 if( topWorldMapStartPosition != null ){
                     MapFactory.getMap(MapFactory.MapType.TOP_WORLD).setPlayerStart(topWorldMapStartPosition);
@@ -51,10 +81,25 @@ public class MapManager implements ProfileObserver {
                 if( forestMapStartPosition != null ){
                     MapFactory.getMap(MapFactory.MapType.FOREST).setPlayerStart(forestMapStartPosition);
                 }
-
                 Vector2 caveMapStartPosition = profileManager.getProperty("caveMapStartPosition", Vector2.class);
                 if( caveMapStartPosition != null ){
                     MapFactory.getMap(MapFactory.MapType.CAVE).setPlayerStart(caveMapStartPosition);
+                }
+                Vector2 coastMapStartPosition = profileManager.getProperty("coastMapStartPosition", Vector2.class);
+                if( coastMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.COAST).setPlayerStart(coastMapStartPosition);
+                }
+                Vector2 iceForestMapStartPosition = profileManager.getProperty("iceForestMapStartPosition", Vector2.class);
+                if( iceForestMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.ICE_FOREST).setPlayerStart(iceForestMapStartPosition);
+                }
+                Vector2 desertTempleMapStartPosition = profileManager.getProperty("desertTempleMapStartPosition", Vector2.class);
+                if( desertTempleMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.DESERT_TEMPLE).setPlayerStart(desertTempleMapStartPosition);
+                }
+                Vector2 lavaMapStartPosition = profileManager.getProperty("lavaMapStartPosition", Vector2.class);
+                if( lavaMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.LAVA).setPlayerStart(lavaMapStartPosition);
                 }
 
                 break;
@@ -64,9 +109,20 @@ public class MapManager implements ProfileObserver {
                 }
 
                 profileManager.setProperty("townMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOWN).getPlayerStart() );
+                profileManager.setProperty("armorerMapStartPosition", MapFactory.getMap(MapFactory.MapType.ARMORER).getPlayerStart() );
+                profileManager.setProperty("libraryMapStartPosition", MapFactory.getMap(MapFactory.MapType.LIBRARY).getPlayerStart() );
+                profileManager.setProperty("herbShopMapStartPosition", MapFactory.getMap(MapFactory.MapType.HERB_SHOP).getPlayerStart() );
+                profileManager.setProperty("houseOneStartPosition", MapFactory.getMap(MapFactory.MapType.HOUSE_ONE).getPlayerStart() );
+                profileManager.setProperty("innFirstFloorMapStartPosition", MapFactory.getMap(MapFactory.MapType.INN_FIRST_FLOOR).getPlayerStart() );
+                profileManager.setProperty("innSecondFloorMapStartPosition", MapFactory.getMap(MapFactory.MapType.INN_SECOND_FLOOR).getPlayerStart() );
                 profileManager.setProperty("topWorldMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOP_WORLD).getPlayerStart() );
                 profileManager.setProperty("forestMapStartPosition", MapFactory.getMap(MapFactory.MapType.FOREST).getPlayerStart() );
                 profileManager.setProperty("caveMapStartPosition", MapFactory.getMap(MapFactory.MapType.CAVE).getPlayerStart() );
+                profileManager.setProperty("coastMapStartPosition", MapFactory.getMap(MapFactory.MapType.COAST).getPlayerStart() );
+                profileManager.setProperty("iceForestMapStartPosition", MapFactory.getMap(MapFactory.MapType.ICE_FOREST).getPlayerStart() );
+                profileManager.setProperty("desertTempleMapStartPosition", MapFactory.getMap(MapFactory.MapType.DESERT_TEMPLE).getPlayerStart() );
+                profileManager.setProperty("lavaMapStartPosition", MapFactory.getMap(MapFactory.MapType.LAVA).getPlayerStart() );
+
 
 
                 break;
@@ -77,9 +133,19 @@ public class MapManager implements ProfileObserver {
                 MapFactory.clearCache();
 
                 profileManager.setProperty("townMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOWN).getPlayerStart() );
+                profileManager.setProperty("armorerMapStartPosition", MapFactory.getMap(MapFactory.MapType.ARMORER).getPlayerStart() );
+                profileManager.setProperty("libraryMapStartPosition", MapFactory.getMap(MapFactory.MapType.LIBRARY).getPlayerStart() );
+                profileManager.setProperty("herbShopMapStartPosition", MapFactory.getMap(MapFactory.MapType.HERB_SHOP).getPlayerStart() );
+                profileManager.setProperty("houseOneStartPosition", MapFactory.getMap(MapFactory.MapType.HOUSE_ONE).getPlayerStart() );
+                profileManager.setProperty("innFirstFloorMapStartPosition", MapFactory.getMap(MapFactory.MapType.INN_FIRST_FLOOR).getPlayerStart() );
+                profileManager.setProperty("innSecondFloorMapStartPosition", MapFactory.getMap(MapFactory.MapType.INN_SECOND_FLOOR).getPlayerStart() );
                 profileManager.setProperty("topWorldMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOP_WORLD).getPlayerStart() );
                 profileManager.setProperty("forestMapStartPosition", MapFactory.getMap(MapFactory.MapType.FOREST).getPlayerStart() );
                 profileManager.setProperty("caveMapStartPosition", MapFactory.getMap(MapFactory.MapType.CAVE).getPlayerStart() );
+                profileManager.setProperty("coastMapStartPosition", MapFactory.getMap(MapFactory.MapType.COAST).getPlayerStart() );
+                profileManager.setProperty("iceForestMapStartPosition", MapFactory.getMap(MapFactory.MapType.ICE_FOREST).getPlayerStart() );
+                profileManager.setProperty("desertTempleMapStartPosition", MapFactory.getMap(MapFactory.MapType.DESERT_TEMPLE).getPlayerStart() );
+                profileManager.setProperty("lavaMapStartPosition", MapFactory.getMap(MapFactory.MapType.LAVA).getPlayerStart() );
 
                 break;
             default:
