@@ -40,32 +40,32 @@ public class KanaUI extends Window{
         ArrayList<KanaLetter> kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
         //Gdx.app.log(TAG, "kanaLettersList size is " + kanaLettersList.size() );
 
-        for(int i = 0; i < kanaLettersList.size()-1; i++){
+        for(int i = 0; i < kanaLettersList.size(); i++){
 
             if(this.kanaType.equalsIgnoreCase("hiragana")) {
                 KanaLetter kanaLetter = kanaLettersList.get(i);
                 equivalent = new Image(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(kanaLetter.getHiraganaEquivalent()));
                 table.add(equivalent).left();
-                text = new Label("romaji Equivalent: ", Utility.GUI_SKINS, "progress_list_text");
+                text = new Label("romaji" + "\n" + "Equivalent: ", Utility.GUI_SKINS, "list_text");
                 table.add(text).left();
-                equivalent = new Image(Utility.SMALL_ROMAJI_SHEET_TEXTUREATLAS.findRegion(kanaLetter.getRomajiEquivalent()));
+                equivalent = new Image(Utility.SMALL_ROMAJI_TEXTUREATLAS.findRegion(kanaLetter.getRomajiEquivalent()));
                 table.add(equivalent).left();
-                text = new Label("katakana Equivalent: ", Utility.GUI_SKINS, "progress_list_text");
+                text = new Label("katakana" + "\n" + "Equivalent: ", Utility.GUI_SKINS, "list_text");
                 table.add(text);
-                equivalent = new Image(Utility.SMALL_KATAKANA_SHEET_TEXTUREATLAS.findRegion(kanaLetter.getKatakanaEquivalent()));
+                equivalent = new Image(Utility.SMALL_KATAKANA_TEXTUREATLAS.findRegion(kanaLetter.getKatakanaEquivalent()));
                 table.add(equivalent).left();
             }
             else {
                 KanaLetter kanaLetter = kanaLettersList.get(i);
                 equivalent = new Image(Utility.MEDIUM_KATAKANA_TEXTUREATLAS.findRegion(kanaLetter.getKatakanaEquivalent()));
                 table.add(equivalent).left();
-                text = new Label("romaji Equivalent: ", Utility.GUI_SKINS, "progress_list_text");
+                text = new Label("romaji" + "\n" + "Equivalent: ", Utility.GUI_SKINS, "list_text");
                 table.add(text).left();
-                equivalent = new Image(Utility.SMALL_ROMAJI_SHEET_TEXTUREATLAS.findRegion(kanaLetter.getRomajiEquivalent()));
+                equivalent = new Image(Utility.SMALL_ROMAJI_TEXTUREATLAS.findRegion(kanaLetter.getRomajiEquivalent()));
                 table.add(equivalent).left();
-                text = new Label("katakana Equivalent: ", Utility.GUI_SKINS, "progress_list_text");
+                text = new Label("hiragana" + "\n" + "Equivalent: ", Utility.GUI_SKINS, "list_text");
                 table.add(text);
-                equivalent = new Image(Utility.SMALL_HIRAGANA_SHEET_TEXTUREATLAS.findRegion(kanaLetter.getHiraganaEquivalent()));
+                equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(kanaLetter.getHiraganaEquivalent()));
                 table.add(equivalent).left();
             }
 

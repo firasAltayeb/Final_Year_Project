@@ -35,12 +35,14 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
     private MenuListUI menuListUI;
     private KanaUI hiraganaUI;
     private KanaUI katakanaUI;
+    private KanjiUI kanjiUI;
 
     private TextButton menuButton;
     private TextButton progressButton;
     private TextButton inventoryButton;
     private TextButton hiraganaButton;
     private TextButton katakanaButton;
+    private TextButton kanjiButton;
 
     private Array<Image> all_health_heart;
     private Image health_heart;
@@ -108,6 +110,11 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         katakanaUI.setMovable(false);
         katakanaUI.setVisible(false);
 
+        kanjiUI = new KanjiUI(menuItemWindowWidth, menuItemWindowHeight);
+        kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        kanjiUI.setMovable(false);
+        kanjiUI.setVisible(false);
+
 
         Gdx.app.log(TAG, "all_health_heart.size is: " + all_health_heart.size);
 
@@ -121,6 +128,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         stage.addActor(inventoryUI);
         stage.addActor(hiraganaUI);
         stage.addActor(katakanaUI);
+        stage.addActor(kanjiUI);
 
         //Observers
         ProfileManager.getInstance().addObserver(this);
@@ -143,15 +151,17 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 inventoryUI.setVisible(false);
                 katakanaUI.setVisible(false);
                 hiraganaUI.setVisible(false);
+                kanjiUI.setVisible(false);
             }
         });
 
-        progressButton =  menuListUI.getStatusButton();
+        progressButton =  menuListUI.getProgressButton();
         progressButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
                 inventoryUI.setVisible(false);
                 katakanaUI.setVisible(false);
                 hiraganaUI.setVisible(false);
+                kanjiUI.setVisible(false);
                 progressUI.setVisible(progressUI.isVisible()?false:true);
             }
         });
@@ -162,6 +172,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 progressUI.setVisible(false);
                 katakanaUI.setVisible(false);
                 hiraganaUI.setVisible(false);
+                kanjiUI.setVisible(false);
                 inventoryUI.setVisible(inventoryUI.isVisible()?false:true);
             }
         });
@@ -172,7 +183,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 progressUI.setVisible(false);
                 inventoryUI.setVisible(false);
                 katakanaUI.setVisible(false);
-                hiraganaUI.setVisible(false);
+                kanjiUI.setVisible(false);
                 hiraganaUI.setVisible(hiraganaUI.isVisible()?false:true);
 
             }
@@ -184,15 +195,23 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
                 progressUI.setVisible(false);
                 inventoryUI.setVisible(false);
                 hiraganaUI.setVisible(false);
+                kanjiUI.setVisible(false);
                 katakanaUI.setVisible(katakanaUI.isVisible()?false:true);
             }
         });
 
-        //stage.setDebugAll(true);
-    }
+        kanjiButton = menuListUI.getKanjiButton();
+        kanjiButton.addListener(new ClickListener() {
+            public void clicked (InputEvent event, float x, float y) {
+                progressUI.setVisible(false);
+                inventoryUI.setVisible(false);
+                hiraganaUI.setVisible(false);
+                katakanaUI.setVisible(false);
+                kanjiUI.setVisible(kanjiUI.isVisible()?false:true);
+            }
+        });
 
-    public Stage getStage() {
-        return stage;
+        //stage.setDebugAll(true);
     }
 
     @Override
@@ -277,8 +296,11 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         hiraganaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         hiraganaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 
-        katakanaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
-        katakanaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+        kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        kanjiUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
+        kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        kanjiUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 
         MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
         MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
@@ -344,13 +366,16 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         }
     }
 
-
     public void showHearts(int hpVal){
         Gdx.app.log(TAG, "hpVal is: " + hpVal);
 
         for (int i = 0; i<hpVal; i++) {
             all_health_heart.get(i).setVisible(true);
         }
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 
 }

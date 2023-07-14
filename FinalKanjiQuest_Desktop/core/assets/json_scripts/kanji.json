@@ -1,0 +1,46 @@
+[
+	{
+		kanjiNameID : kanjiHa
+		kanjiMeaning : leaf
+		kanjiMnemonic : The tree with the greatest leafs laughs  last ((HA)) ((HA))
+		hiraganaEquivalent : .hiraganaHa.
+	},
+	{
+		kanjiNameID : kanjiHana
+		kanjiMeaning : flower
+		kanjiMnemonic : ((Hannah)) is so pretty. No can stop planting flower for ((Hannah))
+		hiraganaEquivalent : .hiraganaHa.hiraganaNa.
+	},
+	{
+		kanjiNameID : kanjiKi
+		kanjiMeaning : tree
+		kanjiMnemonic : Inorder to get to Narnia you have to go through the trees door. But first you need to find its ((key))
+		hiraganaEquivalent : .hiraganaKi.
+
+	},
+	{
+		kanjiNameID : kanjiMori
+		kanjiMeaning : forest
+		kanjiMnemonic : If you want to light a fire you will need ((more))than one tree?
+		hiraganaEquivalent : .hiraganaMo.hiraganaRi.
+	},
+	{
+		kanjiNameID : kanjiMushi
+		kanjiMeaning : bug
+		kanjiMnemonic : How does squishing insects sound like ((mush)).
+		hiraganaEquivalent : .hiraganaMu.hiraganaShi.
+	},
+	{
+		kanjiNameID : kanjiIshi
+		kanjiMeaning : stone
+		kanjiMnemonic : Breaking windows using a stone is surprisingly ((easy))
+		hiraganaEquivalent : .hiraganaI.hiraganaShi.
+	},
+	{
+		kanjiNameID : kanjiKaze
+		kanjiMeaning :  wind
+		kanjiMnemonic : Do you know the word kamikaze? It means "divine wind". The ((kaze)) part is the wind.
+		hiraganaEquivalent: .hiraganaKa.hiraganaZe.
+
+	},
+]

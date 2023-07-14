@@ -160,17 +160,4 @@ public class Entity {
         return json.fromJson(EntityConfig.class, Gdx.files.internal(configFilePath));
     }
 
-    static public Array<EntityConfig> getEntityConfigs(String configFilePath){
-        Json json = new Json();
-        Array<EntityConfig> configs = new Array<EntityConfig>();
-
-        ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(configFilePath));
-
-        for (JsonValue jsonVal : list) {
-            configs.add(json.readValue(EntityConfig.class, jsonVal));
-        }
-
-        return configs;
-    }
-
 }

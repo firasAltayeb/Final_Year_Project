@@ -1,5 +1,6 @@
 package com.mygdx.game.gui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -82,6 +83,7 @@ public class InventoryUI extends Window implements InventorySubject {
 
                                                       //Gdx.app.debug(TAG, "item.getItemNameID is: " + item.getItemNameID().toString());
 
+                                                      //TODO speak about this,
                                                       description = item.getItemShortDescription();
 
                                                       int mid;
@@ -90,8 +92,6 @@ public class InventoryUI extends Window implements InventorySubject {
                                                       spaceAfterMid = description.indexOf(" ", mid);
                                                       itemDescription.setText(description.substring(0, spaceAfterMid) + "\n" +
                                                               description.substring(spaceAfterMid));
-
-                                                      //if(description.length() - description.replace(" ", "").length()> 4){}
 
                                                   }
                                               }

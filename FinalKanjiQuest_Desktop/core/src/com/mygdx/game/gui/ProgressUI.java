@@ -1,5 +1,6 @@
 package com.mygdx.game.gui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,6 +12,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.mygdx.game.japanese.KanaLetter;
 import com.mygdx.game.japanese.KanaLettersFactory;
+import com.mygdx.game.japanese.KanjiLetter;
+import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.tools.Utility;
 import com.badlogic.gdx.utils.Array;
 
@@ -39,12 +42,14 @@ public class ProgressUI extends Window implements ProgressSubject {
         this.pad(this.getPadTop() + menuItemWindowHeight / 30, 10,
                 menuItemWindowHeight / 30, 10);
 
+
         Label text;
         table = new Table();
 
-        for(int i = 0; i <= 41; i++){
+        for(int i = 0; i < 41; i++){
+
             text = new Label("firstText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);
+            table.add(text).align(Align.left);;
 
             text = new Label("secondText", Utility.GUI_SKINS, "list_text");
             table.add(text).align(Align.left);;
