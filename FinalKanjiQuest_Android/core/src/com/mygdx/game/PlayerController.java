@@ -19,6 +19,9 @@ public class PlayerController implements InputProcessor {
 
 
 	private static Map<Keys, Boolean> keys = new HashMap<Keys, Boolean>();
+	private Entity player;
+	boolean doNothing;
+	boolean touchDownPressedCounter;
 	int screenWidth;
 	int screenHeight;
 	int touchDownX;
@@ -37,8 +40,7 @@ public class PlayerController implements InputProcessor {
 		keys.put(Keys.DOWN_LEFT, false);
 	};
 
-	private Entity player;
-	boolean doNothing;
+
 
 	public PlayerController(Entity player) {
 		//Gdx.app.log(TAG, "Construction" );
@@ -49,7 +51,7 @@ public class PlayerController implements InputProcessor {
 		touchDownX = 0;
 		touchDownY = 0;
 		doNothing = false;
-
+		touchDownPressedCounter = true;
 	}
 
 	@Override
@@ -131,8 +133,8 @@ public class PlayerController implements InputProcessor {
 
 		touchDownX = screenX;
 		touchDownY = screenY;
-		Gdx.app.log(TAG, "touchDownX " + screenX);
-		Gdx.app.log(TAG, "touchDownY " + screenY);
+		//Gdx.app.log(TAG, "touchDownX " + screenX);
+		//Gdx.app.log(TAG, "touchDownY " + screenY);
 
 		//top left corner
 		if((screenX >= 0 && screenX <= screenWidth/3) &&
@@ -141,7 +143,9 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
+				touchDownPressedCounter = false;
 				Gdx.app.log(TAG, "top left doNothing is " + doNothing);
+				Gdx.app.log(TAG, "top left touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "up left pressed ");
@@ -156,7 +160,9 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
+				touchDownPressedCounter = false;
 				Gdx.app.log(TAG, "up doNothing is " + doNothing);
+				Gdx.app.log(TAG, "up touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "up pressed ");
@@ -171,7 +177,9 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "upright doNothing is " + doNothing);
+				touchDownPressedCounter = false;
+				Gdx.app.log(TAG, "top right doNothing is " + doNothing);
+				Gdx.app.log(TAG, "top right touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "up right pressed ");
@@ -186,7 +194,9 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
+				touchDownPressedCounter = false;
 				Gdx.app.log(TAG, "left doNothing is " + doNothing);
+				Gdx.app.log(TAG, "left touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "left pressed ");
@@ -206,7 +216,9 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, " right doNothing is " + doNothing);
+				touchDownPressedCounter = false;
+				Gdx.app.log(TAG, "right doNothing is " + doNothing);
+				Gdx.app.log(TAG, "right touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "right pressed ");
@@ -221,7 +233,9 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
 					keys.get(Keys.DOWN_RIGHT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, " down left doNothing is " + doNothing);
+				touchDownPressedCounter = false;
+				Gdx.app.log(TAG, "down left doNothing is " + doNothing);
+				Gdx.app.log(TAG, "down left touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "down left pressed ");
@@ -236,7 +250,9 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||keys.get(Keys.DOWN_RIGHT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
+				touchDownPressedCounter = false;
 				Gdx.app.log(TAG, "down doNothing is " + doNothing);
+				Gdx.app.log(TAG, "down touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "down pressed ");
@@ -251,7 +267,9 @@ public class PlayerController implements InputProcessor {
 					keys.get(Keys.LEFT) || keys.get(Keys.UP_RIGHT) || keys.get(Keys.UP_LEFT) ||
 					keys.get(Keys.DOWN_LEFT)) {
 				doNothing = true;
-				Gdx.app.log(TAG, "bottom doNothing is " + doNothing);
+				touchDownPressedCounter = false;
+				Gdx.app.log(TAG, "down right doNothing is " + doNothing);
+				Gdx.app.log(TAG, "down right touchDownPressedCounter is " + touchDownPressedCounter);
 			}
 			else {
 				Gdx.app.log(TAG, "down right pressed ");
@@ -264,12 +282,13 @@ public class PlayerController implements InputProcessor {
 		return true;
 	}
 
+	//TODO ERROR - when left side is clicked followed by right side, if
+	//TODO left side is released, character will continue to walk left
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		//Gdx.app.log(TAG, "touch up : ( x == " + screenX + ", y ==" + screenY + ")" );
 
-		Gdx.app.log(TAG, "touch up inaction" );
-		Gdx.app.log(TAG, "do nothing " + doNothing);
+		Gdx.app.log(TAG, "touch up inaction, doNothing: " + doNothing);
 
 		if(doNothing){
 			// do nothing
@@ -277,6 +296,7 @@ public class PlayerController implements InputProcessor {
 		}
 		else {
 			//Gdx.app.log(TAG, "hide() called" );
+			touchDownPressedCounter = true;
 			hide();
 		}
 
@@ -288,47 +308,51 @@ public class PlayerController implements InputProcessor {
 
 	//mention how
 	//TODO this helps movement
+	//TODO because touch drag is sensitive, 50 pixels have to be change
+	//TODO before any movement is changed - requires swip
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-		Gdx.app.log(TAG, "touch dragged inaction" );
-		Gdx.app.log(TAG, "touchDownX " + screenX);
-		Gdx.app.log(TAG, "touchDownY " + screenY);
+		//Gdx.app.log(TAG, "touchDragged inaction, touchDownPressedCounter: " + touchDownPressedCounter);
+		//Gdx.app.log(TAG, "touchDownX " + screenX);
+		//Gdx.app.log(TAG, "touchDownY " + screenY);
 
 
-		if(screenX > touchDownX + 50){
-			hide();
-			rightPressed();
-		}
-		else if(screenX < touchDownX - 50){
-			hide();
-			leftPressed();
-		}
-		else if(screenY > touchDownY + 50){
-			hide();
-			downPressed();
-		}
-		else if(screenY < touchDownY - 50){
-			hide();
-			upPressed();
+		if(touchDownPressedCounter) {
+			if (screenX > touchDownX + 50) {
+				hide();
+				rightPressed();
+			} else if (screenX < touchDownX - 50) {
+				hide();
+				leftPressed();
+			} else if (screenY > touchDownY + 50) {
+				hide();
+				downPressed();
+			} else if (screenY < touchDownY - 50) {
+				hide();
+				upPressed();
+			}
+
+			//else if((screenX > touchDownX + 50) && (screenY > touchDownY + 50)){
+			//	hide();
+			//	downRightPressed();
+			//}
+			//else if((screenX > touchDownX + 50) && (screenY < touchDownY - 50)){
+			//	hide();
+			//	upRightPressed();
+			//}
+			//else if((screenX < touchDownX - 50) && (screenY > touchDownY + 50)){
+			//	hide();
+			//	downLeftPressed();
+			//}
+			//else if((screenX < touchDownX - 50) && (screenY < touchDownY - 50)){
+			//	hide();
+			//	upLeftReleased();
+			//}
 		}
 
-//		else if((screenX > touchDownX + 50) && (screenY > touchDownY + 50)){
-//			hide();
-//			downRightPressed();
-//		}
-//		else if((screenX > touchDownX + 50) && (screenY < touchDownY - 50)){
-//			hide();
-//			upRightPressed();
-//		}
-//		else if((screenX < touchDownX - 50) && (screenY > touchDownY + 50)){
-//			hide();
-//			downLeftPressed();
-//		}
-//		else if((screenX < touchDownX - 50) && (screenY < touchDownY - 50)){
-//			hide();
-//			upLeftReleased();
-//		}
+
+		//Gdx.app.log(TAG, "touchDragged inaction touchDownPressedCounter:" + touchDownPressedCounter);
 
 		touchDownX = screenX;
 		touchDownY = screenY;
