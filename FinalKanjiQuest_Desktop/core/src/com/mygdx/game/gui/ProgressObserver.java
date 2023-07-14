@@ -1,7 +1,7 @@
 package com.mygdx.game.gui;
 
 
-public interface StatusObserver {
+public interface ProgressObserver {
     public static enum StatusEvent {
         UPDATED_GP,
         UPDATED_LEVEL,

@@ -1,11 +1,12 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Json;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class InputComponent implements Component {
+public abstract class InputComponent implements Component, InputProcessor {
 
     protected Entity.Direction currentDirection = null;
     protected Entity.State currentState = null;

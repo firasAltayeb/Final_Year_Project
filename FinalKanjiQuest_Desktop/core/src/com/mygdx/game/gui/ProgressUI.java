@@ -9,19 +9,19 @@ import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.Utility;
 import com.badlogic.gdx.utils.Array;
 
-public class StatusUI extends Window implements StatusSubject{
+public class ProgressUI extends Window implements ProgressSubject {
 
-    private final static String TAG = StatusUI.class.getSimpleName();
+    private final static String TAG = ProgressUI.class.getSimpleName();
 
     Table table;
     float menuItemWindowWidth;
     float menuItemWindowHeight;
-    private Array<StatusObserver> observers;
+    private Array<ProgressObserver> observers;
 
     private int hpCurrentMax = -1;
     private int hpVal = -1;
 
-    public StatusUI(float width, float height){
+    public ProgressUI(float width, float height){
         super("Status", Utility.GUI_SKINS);
 
         menuItemWindowWidth = width;
@@ -33,7 +33,7 @@ public class StatusUI extends Window implements StatusSubject{
         Label text;
         table = new Table();
 
-        observers = new Array<StatusObserver>();
+        observers = new Array<ProgressObserver>();
 
         for(int i = 0; i <= 41; i++){
             text = new Label("firstText " + i, Utility.GUI_SKINS);
@@ -82,17 +82,17 @@ public class StatusUI extends Window implements StatusSubject{
 
     public void removeHPValue(int hpValue){
         hpVal = MathUtils.clamp(hpVal - hpValue, 0, hpCurrentMax);
-        notify(hpVal, StatusObserver.StatusEvent.UPDATED_HP);
+        notify(hpVal, ProgressObserver.StatusEvent.UPDATED_HP);
     }
 
     public void addHPValue(int hpValue){
         hpVal = MathUtils.clamp(hpVal + hpValue, 0, hpCurrentMax);
-        notify(hpVal, StatusObserver.StatusEvent.UPDATED_HP);
+        notify(hpVal, ProgressObserver.StatusEvent.UPDATED_HP);
     }
 
     public void setHPValue(int hpValue){
         this.hpVal = hpValue;
-        notify(hpVal, StatusObserver.StatusEvent.UPDATED_HP);
+        notify(hpVal, ProgressObserver.StatusEvent.UPDATED_HP);
     }
 
     public void setHPValueMax(int maxHPValue){
@@ -106,25 +106,25 @@ public class StatusUI extends Window implements StatusSubject{
 
     //Implement
     @Override
-    public void addObserver(StatusObserver statusObserver) {
-        observers.add(statusObserver);
+    public void addObserver(ProgressObserver progressObserver) {
+        observers.add(progressObserver);
     }
 
     @Override
-    public void removeObserver(StatusObserver statusObserver) {
-        observers.removeValue(statusObserver, true);
+    public void removeObserver(ProgressObserver progressObserver) {
+        observers.removeValue(progressObserver, true);
     }
 
     @Override
     public void removeAllObservers() {
-        for(StatusObserver observer: observers){
+        for(ProgressObserver observer: observers){
             observers.removeValue(observer, true);
         }
     }
 
     @Override
-    public void notify(int value, StatusObserver.StatusEvent event) {
-        for(StatusObserver observer: observers){
+    public void notify(int value, ProgressObserver.StatusEvent event) {
+        for(ProgressObserver observer: observers){
             observer.onNotify(value, event);
         }
     }
