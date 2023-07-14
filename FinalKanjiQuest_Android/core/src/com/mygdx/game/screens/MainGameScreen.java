@@ -153,10 +153,9 @@ public class MainGameScreen extends GameScreen {
 			mapRenderer.dispose();
 		}
 
-		AudioManager.getInstance().dispose();
+		game.dispose();
 		playerHUD.dispose();
-
-		setGameState(GameState.SAVING);
+		AudioManager.getInstance().dispose();
 	}
 
 	@Override
@@ -175,6 +174,9 @@ public class MainGameScreen extends GameScreen {
 			mapRenderer.dispose();
 		}
 
+
+		game.dispose();
+		playerHUD.dispose();
 		AudioManager.getInstance().dispose();
 	}
 

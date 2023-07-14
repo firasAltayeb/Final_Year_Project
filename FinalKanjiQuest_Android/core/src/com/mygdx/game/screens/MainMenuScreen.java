@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.FinalKanjiQuest.ScreenType;
+import com.mygdx.game.audio.AudioManager;
 import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.tools.Utility;
 
@@ -115,7 +116,12 @@ public class MainMenuScreen extends GameScreen {
 
 	@Override
 	public void pause() {
+		game.dispose();
+		stage.clear();
+		stage.dispose();
+		AudioManager.getInstance().dispose();
 	}
+
 
 	@Override
 	public void resume() {
@@ -123,7 +129,10 @@ public class MainMenuScreen extends GameScreen {
 
 	@Override
 	public void dispose() {
+		game.dispose();
+		stage.clear();
 		stage.dispose();
+		AudioManager.getInstance().dispose();
 	}
 	
 }

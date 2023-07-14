@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.FinalKanjiQuest;
+import com.mygdx.game.audio.AudioManager;
 import com.mygdx.game.audio.AudioObserver;
 import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.tools.Utility;
@@ -134,6 +135,10 @@ public class LoadGameScreen extends GameScreen {
 
 	@Override
 	public void pause() {
+		game.dispose();
+		stage.clear();
+		stage.dispose();
+		AudioManager.getInstance().dispose();
 	}
 
 	@Override
@@ -142,8 +147,10 @@ public class LoadGameScreen extends GameScreen {
 
 	@Override
 	public void dispose() {
+		game.dispose();
 		stage.clear();
 		stage.dispose();
+		AudioManager.getInstance().dispose();
 	}
 
 }
