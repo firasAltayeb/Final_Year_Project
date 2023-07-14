@@ -127,14 +127,10 @@ public class PlayerController implements InputProcessor {
 	//TODO if statements are used to stop users from stopping movement - second finger touch
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		//Gdx.app.log(TAG, "touch down : ( x == " + screenX + ", y ==" + screenY + ")" );
-		//Gdx.app.log(TAG, "Screen Width : " + Gdx.graphics.getWidth());
-		//Gdx.app.log(TAG, "Screen Height : " + Gdx.graphics.getHeight());
 
 		touchDownX = screenX;
 		touchDownY = screenY;
-		//Gdx.app.log(TAG, "touchDownX " + screenX);
-		//Gdx.app.log(TAG, "touchDownY " + screenY);
+		Gdx.app.log(TAG, "touch down : (x == " + touchDownX + ", y ==" + touchDownY + ")" );
 
 		//top left corner
 		if((screenX >= 0 && screenX <= screenWidth/3) &&
@@ -207,6 +203,10 @@ public class PlayerController implements InputProcessor {
 		if((screenX >= screenWidth/3  && screenX <= screenWidth/1.5) &&
 				(screenY >= screenHeight/3 && screenY <= screenHeight/1.5)){
 			//do nothing for now
+			doNothing = true;
+			touchDownPressedCounter = false;
+			Gdx.app.log(TAG, "center doNothing is " + doNothing);
+			Gdx.app.log(TAG, "center touchDownPressedCounter is " + touchDownPressedCounter);
 		}
 
 		//center's right pressed
@@ -277,7 +277,7 @@ public class PlayerController implements InputProcessor {
 			}
 		}
 
-		//Gdx.app.log(TAG, "touch down returned" );
+		Gdx.app.log(TAG, "touch down returned" );
 
 		return true;
 	}
@@ -313,22 +313,26 @@ public class PlayerController implements InputProcessor {
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-		//Gdx.app.log(TAG, "touchDragged inaction, touchDownPressedCounter: " + touchDownPressedCounter);
+		Gdx.app.log(TAG, "touchDragged inaction, touchDownPressedCounter: " + touchDownPressedCounter);
 		//Gdx.app.log(TAG, "touchDownX " + screenX);
 		//Gdx.app.log(TAG, "touchDownY " + screenY);
 
+		//for (int i=0; i<=3000; i++) {
+		//	//waste time
+		//}
 
+		//relative to screen size & not fixed
 		if(touchDownPressedCounter) {
-			if (screenX > touchDownX + 50) {
+			if (screenX > touchDownX + screenWidth/30) {
 				hide();
 				rightPressed();
-			} else if (screenX < touchDownX - 50) {
+			} else if (screenX < touchDownX - screenWidth/30) {
 				hide();
 				leftPressed();
-			} else if (screenY > touchDownY + 50) {
+			} else if (screenY > touchDownY + screenY/20) {
 				hide();
 				downPressed();
-			} else if (screenY < touchDownY - 50) {
+			} else if (screenY < touchDownY - screenY/20) {
 				hide();
 				upPressed();
 			}
