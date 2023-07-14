@@ -71,7 +71,58 @@ public class Entity {
         frameTime = (frameTime + delta) % 5; //want to avoid overflow
 
         //we want the hitbox to be at the feet for a better feel
-        setBoundingBox(0f, 0.5f);
+        setBoundingBoxSize(0f, 0.5f);
     }
+
+    public void init(float startX, float startY){
+        this.currentPlayerPosition.x = startX;
+        this.currentPlayerPosition.y = startY;
+
+        this.nextPlayerPosition.x = startX;
+        this.nextPlayerPosition.y = startY;
+    }
+
+    public void setBoundingBoxSize(float percentageWidthReduced,
+                                        float percentageHeightReduced){
+        //update the current bounding box
+        float width;
+        float height;
+
+        // To get 80% reduction, we pass .8f == (1 - .20)
+        float widthReductionAmount = 1.0f - percentageWidthReduced;
+        float heightReductionAmount = 1.0f - percentageHeightReduced;
+
+        if(widthReductionAmount > 0 && widthReductionAmount < 1){
+            width = FRAME_WIDTH * widthReductionAmount;
+        } else {
+            width = FRAME_WIDTH;
+        }
+
+        if(heightReductionAmount > 0 && heightReductionAmount < 1){
+            height = FRAME_WIDTH * heightReductionAmount;
+        } else {
+            height = FRAME_WIDTH;
+        }
+
+        if(width == 0 || height == 0){
+            Gdx.app.debug(TAG, "Width and Height are 0!! " + width +
+            ":" + height);
+        }
+
+        //need to account for the unitScale, since the map coordinates
+        //will be in pixels
+        float minX;
+        float minY;
+        if (MapManger.UNIT_SCALE > 0){
+            minX = nextPlayerPosition.x / MapManger.UNIT_SCALE;
+            minY = nextPlayerPosition.y / MapManger.UNIT_SCALE;
+        } else {
+            minX = nextPlayerPosition.x;
+            minY = nextPlayerPosition.y;
+        }
+
+        boundingBox.set(minX, minY, width, height);
+    }
+
 
 }

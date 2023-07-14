@@ -58,7 +58,7 @@ public class MainGameScreen implements Screen {
 
         player = new Entity();
         player.init(mapManger.getPlayerStartUnitScaled().x,
-                mapManger.getPlayerStartUnitScaled(), y);
+                mapManger.getPlayerStartUnitScaled().y);
 
         currentPlayerSprite = player.getFrameSprite();
         controller = new PlayerController(player);
