@@ -12,6 +12,7 @@ public class MenuListUI extends Window {
     private TextButton kanjiButton;
     private TextButton hiraganaButton;
     private TextButton katakanaButton;
+    private TextButton mnemonicsButton;
 
     public MenuListUI(){
         super("Menu", Utility.GUI_SKINS);
@@ -22,12 +23,13 @@ public class MenuListUI extends Window {
         kanjiButton = new TextButton("kanji", Utility.GUI_SKINS);
         hiraganaButton = new TextButton("hiragana", Utility.GUI_SKINS);
         katakanaButton = new TextButton("katakana", Utility.GUI_SKINS);
+        mnemonicsButton = new TextButton("mnemonics", Utility.GUI_SKINS);
 
         //Add to layout
         defaults().expand().fill();
 
         //account for the title padding
-        this.pad(this.getPadTop() + 10, 10, 10, 10);
+        this.pad(this.getPadTop() + 40, 10, 10, 10);
 
         this.add(statusButton);
         this.row();
@@ -42,6 +44,9 @@ public class MenuListUI extends Window {
         this.row();
 
         this.add(katakanaButton);
+        this.row();
+
+        this.add(mnemonicsButton);
 
         //this.debug();
         //this.pack();

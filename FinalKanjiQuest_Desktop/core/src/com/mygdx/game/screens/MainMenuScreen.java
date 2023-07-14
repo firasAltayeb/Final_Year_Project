@@ -29,9 +29,10 @@ public class MainMenuScreen implements Screen {
 		Label title = new Label("FKQ", Utility.GUI_SKINS);
 		TextButton newGameButton = new TextButton("New Game", Utility.GUI_SKINS);
 		TextButton loadGameButton = new TextButton("Load Game", Utility.GUI_SKINS);
-		TextButton exitButton = new TextButton("Exit",Utility.GUI_SKINS);
+		TextButton exitButton = new TextButton("Exit", Utility.GUI_SKINS);
 
 		//Layout
+		title.setFontScale(2);
 		table.add(title).spaceBottom(75).row();
 		table.add(newGameButton).spaceBottom(10).row();
 		table.add(loadGameButton).spaceBottom(10).row();

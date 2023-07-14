@@ -29,23 +29,23 @@ public class ProgressUI extends Window implements ProgressSubject {
         menuItemWindowHeight = height;
         observers = new Array<ProgressObserver>();
 
-        this.pad(this.getPadTop() + menuItemWindowHeight / 30, menuItemWindowWidth / 30,
-                menuItemWindowHeight / 30, menuItemWindowWidth / 30);
+        this.pad(this.getPadTop() + menuItemWindowHeight / 30, 10,
+                menuItemWindowHeight / 30, 10);
 
         Label text;
         table = new Table();
 
         for(int i = 0; i <= 41; i++){
-            text = new Label("firstText " + i, Utility.GUI_SKINS);
+            text = new Label("firstText", Utility.GUI_SKINS, "medium_size");
             table.add(text).align(Align.left);
-            //table.add(text).size(menuItemWindowWidth/4, menuItemWindowHeight/30).align(Align.left);
-            text = new Label("secondText " + i, Utility.GUI_SKINS);
+
+            text = new Label("secondText", Utility.GUI_SKINS, "medium_size");
             table.add(text).align(Align.left);;
 
-            text = new Label("thirdText " + i, Utility.GUI_SKINS);
+            text = new Label("ThirdText", Utility.GUI_SKINS, "medium_size");
             table.add(text).align(Align.left);;
 
-            text = new Label("fourthText " + i, Utility.GUI_SKINS);
+            text = new Label("fourthText", Utility.GUI_SKINS, "medium_size");
             table.add(text).align(Align.left);;
 
             table.row();
@@ -57,7 +57,7 @@ public class ProgressUI extends Window implements ProgressSubject {
         this.add(scrollPane).fill().expand();
 
         this.setSize(menuItemWindowWidth, menuItemWindowHeight);
-        this.debug();
+        //this.debug();
     }
 
     public void updateSize(float width, float height){

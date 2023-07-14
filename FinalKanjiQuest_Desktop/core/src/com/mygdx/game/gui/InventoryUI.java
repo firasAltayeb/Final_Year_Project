@@ -3,7 +3,6 @@ package com.mygdx.game.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -16,6 +15,7 @@ import com.mygdx.game.inventory.InventoryItem;
 import com.mygdx.game.inventory.InventoryItemFactory;
 import com.mygdx.game.inventory.InventoryItemLocation;
 import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
+import com.mygdx.game.inventory.InventorySlot;
 
 public class InventoryUI extends Window implements InventorySubject {
 
@@ -47,15 +47,15 @@ public class InventoryUI extends Window implements InventorySubject {
         menuItemWindowWidth = width;
         menuItemWindowHeight = height;
 
-        this.pad(this.getPadTop() + menuItemWindowHeight / 30, menuItemWindowWidth / 30,
-                menuItemWindowHeight / 30, menuItemWindowWidth / 30);
+        this.pad(this.getPadTop() + menuItemWindowHeight / 30, 10,
+                menuItemWindowHeight / 30, 10);
 
 
         slotWidth = menuItemWindowWidth / 8;
         slotHeight = menuItemWindowHeight / 7.5f;
 
         description = "temp";
-        itemDescription = new Label("temps", Utility.GUI_SKINS);
+        itemDescription = new Label("temps", Utility.GUI_SKINS, "small_size");
         pressedSlot = new InventorySlot();
         inventorySlotTable = new Table();
         inventorySlotTable.setName("Inventory_Slot_Table");
@@ -128,6 +128,11 @@ public class InventoryUI extends Window implements InventorySubject {
                                 }
         );
 
+        pressedSlot.setPosition(menuItemWindowWidth / 16f, menuItemWindowHeight / 1.35f);
+        pressedSlot.setSize(menuItemWindowWidth / 6, menuItemWindowHeight /7f);
+        itemDescription.setPosition(menuItemWindowWidth / 4f, menuItemWindowHeight / 1.25f);
+        inventorySlotTable.setPosition(menuItemWindowWidth / 2f, menuItemWindowHeight / 2.6f);
+
         this.addActor(pressedSlot);
         this.addActor(itemDescription);
         this.addActor(inventorySlotTable);
@@ -140,9 +145,9 @@ public class InventoryUI extends Window implements InventorySubject {
         float newMenuItemWindowWidth = width;
         float newMenuItemWindowHeight = height;
 
-        pressedSlot.setPosition(newMenuItemWindowWidth / 8f, newMenuItemWindowHeight / 1.35f);
+        pressedSlot.setPosition(newMenuItemWindowWidth / 16f, newMenuItemWindowHeight / 1.35f);
         pressedSlot.setSize(newMenuItemWindowWidth / 6, newMenuItemWindowHeight /7f);
-        itemDescription.setPosition(newMenuItemWindowWidth / 3.2f, newMenuItemWindowHeight / 1.25f);
+        itemDescription.setPosition(newMenuItemWindowWidth / 4f, newMenuItemWindowHeight / 1.25f);
         inventorySlotTable.setPosition(newMenuItemWindowWidth / 2f, newMenuItemWindowHeight / 2.6f);
 
         for (int i = 0; i <= inventorySlotTable.getCells().size - 1; i++) {

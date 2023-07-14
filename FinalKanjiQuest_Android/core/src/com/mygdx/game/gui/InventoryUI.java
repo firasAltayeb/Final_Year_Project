@@ -11,10 +11,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Component;
 import com.mygdx.game.Utility;
-import com.mygdx.game.inventory.InventoryItem;
+import com.mygdx.game.inventory.*;
 import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
-import com.mygdx.game.inventory.InventoryItemFactory;
-import com.mygdx.game.inventory.InventoryItemLocation;
+import com.mygdx.game.inventory.InventorySlot;
 
 public class InventoryUI extends Window implements InventorySubject {
 
@@ -46,22 +45,22 @@ public class InventoryUI extends Window implements InventorySubject {
         menuItemWindowWidth = width;
         menuItemWindowHeight = height;
 
-        this.pad(this.getPadTop() + menuItemWindowHeight / 30, menuItemWindowWidth / 30,
-                menuItemWindowHeight / 30, menuItemWindowWidth / 30);
+        this.pad(this.getPadTop() + menuItemWindowHeight / 30, 10,
+                menuItemWindowHeight / 30, 10);
 
 
         slotWidth = menuItemWindowWidth / 8;
         slotHeight = menuItemWindowHeight / 7.5f;
 
-        description = "temp";
-        itemDescription = new Label("temps", Utility.GUI_SKINS);
-        pressedSlot = new InventorySlot();
+        description = "temp text";
+        itemDescription = new Label("", Utility.GUI_SKINS, "medium_size");
+        pressedSlot = new com.mygdx.game.inventory.InventorySlot();
         inventorySlotTable = new Table();
         inventorySlotTable.setName("Inventory_Slot_Table");
         //inventorySlotTable.setPosition(menuItemWindowWidth/1.5f,menuItemWindowHeight/2.6f);
 
         for (int i = 1; i <= numSlots; i++) {
-            InventorySlot inventorySlot = new InventorySlot();
+            com.mygdx.game.inventory.InventorySlot inventorySlot = new com.mygdx.game.inventory.InventorySlot();
 
             inventorySlotTable.add(inventorySlot).size(slotWidth, slotHeight);
 
@@ -71,7 +70,7 @@ public class InventoryUI extends Window implements InventorySubject {
                                               super.touchUp(event, x, y, pointer, button);
 
                                               if (getTapCount() == 2) {
-                                                  slotToRemove = (InventorySlot) event.getListenerActor();
+                                                  slotToRemove = (com.mygdx.game.inventory.InventorySlot) event.getListenerActor();
                                                   if (slotToRemove.hasItem()) {
                                                       InventoryItem item = slotToRemove.getTopInventoryItem();
                                                       InventoryItem item2 = InventoryItemFactory.getInstance()
@@ -106,7 +105,7 @@ public class InventoryUI extends Window implements InventorySubject {
                                         super.touchUp(event, x, y, pointer, button);
 
                                         if (getTapCount() == 2) {
-                                            InventorySlot slot = (InventorySlot) event.getListenerActor();
+                                            com.mygdx.game.inventory.InventorySlot slot = (com.mygdx.game.inventory.InventorySlot) event.getListenerActor();
                                             if (slot.hasItem()) {
                                                 InventoryItem item = slot.getTopInventoryItem();
                                                 if (item.isConsumable()) {
@@ -115,7 +114,7 @@ public class InventoryUI extends Window implements InventorySubject {
                                                     slot.remove(item);
                                                     pressedSlot.clearAllInventoryItems(false);
                                                     slotToRemove.clearAllInventoryItems(false  );
-                                                    itemDescription.setText("temp");
+                                                    itemDescription.setText("");
                                                 }
                                             }
                                         }
@@ -127,12 +126,19 @@ public class InventoryUI extends Window implements InventorySubject {
                                 }
         );
 
+
+       pressedSlot.setPosition(menuItemWindowWidth / 16f, menuItemWindowHeight / 1.35f);
+       pressedSlot.setSize(menuItemWindowWidth / 6, menuItemWindowHeight /7f);
+       itemDescription.setPosition(menuItemWindowWidth / 4f, menuItemWindowHeight / 1.25f);
+       inventorySlotTable.setPosition(menuItemWindowWidth / 2f, menuItemWindowHeight / 2.6f);
+
+
         this.addActor(pressedSlot);
         this.addActor(itemDescription);
         this.addActor(inventorySlotTable);
 
         this.setSize(menuItemWindowWidth, menuItemWindowHeight);
-        this.debug();
+        //this.debug();
     }
 
     public void updateSize(float width, float height) {
@@ -141,7 +147,7 @@ public class InventoryUI extends Window implements InventorySubject {
 
         pressedSlot.setPosition(newMenuItemWindowWidth / 8f, newMenuItemWindowHeight / 1.35f);
         pressedSlot.setSize(newMenuItemWindowWidth / 6, newMenuItemWindowHeight /7f);
-        itemDescription.setPosition(newMenuItemWindowWidth / 3.2f, newMenuItemWindowHeight / 1.25f);
+        itemDescription.setPosition(newMenuItemWindowWidth / 4f, newMenuItemWindowHeight / 1.25f);
         inventorySlotTable.setPosition(newMenuItemWindowWidth / 2f, newMenuItemWindowHeight / 2.6f);
 
         for (int i = 0; i <= inventorySlotTable.getCells().size - 1; i++) {
@@ -150,7 +156,7 @@ public class InventoryUI extends Window implements InventorySubject {
             inventorySlotTable.getCells().get(i).size(newMenuItemWindowWidth / 8, newMenuItemWindowHeight / 7.5f);
         }
 
-        //this.setSize(newMenuItemWindowWidth, newMenuItemWindowHeight);
+        this.setSize(newMenuItemWindowWidth, newMenuItemWindowHeight);
     }
 
 
@@ -163,7 +169,7 @@ public class InventoryUI extends Window implements InventorySubject {
         Array<Cell> cells = targetTable.getCells();
         Array<InventoryItemLocation> items = new Array<InventoryItemLocation>();
         for (int i = 0; i < cells.size; i++) {
-            InventorySlot inventorySlot = ((InventorySlot) cells.get(i).getActor());
+            com.mygdx.game.inventory.InventorySlot inventorySlot = ((com.mygdx.game.inventory.InventorySlot) cells.get(i).getActor());
             if (inventorySlot == null) continue;
             int numItems = inventorySlot.getNumItems();
             if (numItems > 0) {
@@ -182,7 +188,7 @@ public class InventoryUI extends Window implements InventorySubject {
         for(int i = 0; i < inventoryItems.size; i++){
             InventoryItemLocation itemLocation = inventoryItems.get(i);
             ItemTypeID itemTypeID = ItemTypeID.valueOf(itemLocation.getItemTypeAtLocation());
-            InventorySlot inventorySlot =  ((InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
+            com.mygdx.game.inventory.InventorySlot inventorySlot =  ((com.mygdx.game.inventory.InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
             InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemTypeID);
             inventorySlot.add(item);
 
@@ -192,7 +198,7 @@ public class InventoryUI extends Window implements InventorySubject {
     public static void clearInventoryItems(Table targetTable){
         Array<Cell> cells = targetTable.getCells();
         for( int i = 0; i < cells.size; i++){
-            InventorySlot inventorySlot = (InventorySlot)cells.get(i).getActor();
+            com.mygdx.game.inventory.InventorySlot inventorySlot = (com.mygdx.game.inventory.InventorySlot)cells.get(i).getActor();
             if( inventorySlot == null ) continue;
             inventorySlot.clearAllInventoryItems(false);
         }

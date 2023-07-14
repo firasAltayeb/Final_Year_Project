@@ -1,4 +1,4 @@
-package com.mygdx.game.gui;
+package com.mygdx.game.inventory;
 
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,20 +16,16 @@ public class InventorySlot extends Stack {
     //All slots have this default image
     private Stack defaultBackground;
     private Label numItemsLabel;
-    private int numItemsVal = 0;
 
     public InventorySlot(){
         defaultBackground = new Stack();
         Image image = new Image(new NinePatch(Utility.GUI_TEXTUREATLAS.createPatch("dialog")));
 
-        numItemsLabel = new Label(String.valueOf(numItemsVal), Utility.GUI_SKINS, "inventory-item-count");
-        numItemsLabel.setAlignment(Align.bottomRight);
-        numItemsLabel.setVisible(false);
+        numItemsLabel = new Label("", Utility.GUI_SKINS);
 
         defaultBackground.add(image);
 
         defaultBackground.setName("background");
-        numItemsLabel.setName("numitems");
 
         this.add(defaultBackground);
         this.add(numItemsLabel);

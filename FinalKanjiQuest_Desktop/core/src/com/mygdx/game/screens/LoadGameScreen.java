@@ -27,7 +27,7 @@ public class LoadGameScreen implements Screen {
 		//create
 		stage = new Stage();
 		TextButton loadButton = new TextButton("Load", Utility.GUI_SKINS);
-		TextButton backButton = new TextButton("Back",Utility.GUI_SKINS);
+		TextButton backButton = new TextButton("Back", Utility.GUI_SKINS);
 
 		ProfileManager.getInstance().storeAllProfiles();
 		Array<String> list = ProfileManager.getInstance().getProfileList();

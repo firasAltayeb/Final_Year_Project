@@ -8,33 +8,33 @@
 		cyan: {  a: 1, b: 1, g: 0.9, r: 0.72 }
 	},
 	"com.badlogic.gdx.graphics.g2d.BitmapFont": {
-		"default-font": { "file": "fonts/SDS_6x6.fnt" },
-		"small-font" : { "file" : "fonts/SDS_6x6_small.fnt" },
+		"medium_font": { "file": "fonts/FKQ_medium.fnt" },
+		"small_font": { "file": "fonts/FKQ_small.fnt" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-		"default": { "font": "default-font" },
-		"inventory-item-count": { "font": "small-font" },
+		"default": { "font": "medium_font" },
+		"small_size": { "font": "small_font" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
-		"default": { "titleFont": "default-font", "background": "dialogDim" },
-		"solidbackground": { "titleFont": "default-font", "background": "dialog" },
+		"default": { "titleFont": "medium_font", "background": "dialogDim" },
+		"solid_background": { "titleFont": "medium_font", "background": "dialog" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
 		"inventory-button": { "imageUp": "inventory_button_closed", "imageChecked": "inventory_button_open" },
 		"quest-button": { "imageUp": "quest_book_off", "imageChecked": "quest_book_on" },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
-		default: { down: default-round-down, up: default-round, font: default-font, fontColor: white },
-		toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: white, downFontColor: red },
-		inventory: { down: default-round-down, up: default-round, font: default-font, fontColor: white, disabledFontColor: grey }
+		default: { down: default-round-down, up: default-round, font: medium_font, fontColor: white },
+		toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: medium_font, fontColor: white, downFontColor: red },
+		inventory: { down: default-round-down, up: default-round, font: medium_font, fontColor: white, disabledFontColor: grey }
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
-		default: { fontColorUnselected: white, selection: default-rect-pad, fontColorSelected: black, font: default-font },
-		inventory: { fontColorUnselected: white, selection: default-rect-pad, fontColorSelected: black, font: default-font },
+		default: { fontColorUnselected: white, selection: default-rect-pad, fontColorSelected: black, font: medium_font },
+		inventory: { fontColorUnselected: white, selection: default-rect-pad, fontColorSelected: black, font: medium_font },
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
-		default: { selection: selection, background: textfield, font: default-font, fontColor: white, cursor: cursor },
-		inventory: { selection: selection, background: textfield, font: default-font, fontColor: white, cursor: cursor }
+		default: { selection: selection, background: textfield, font: medium_font, fontColor: white, cursor: cursor },
+		inventory: { selection: selection, background: textfield, font: medium_font, fontColor: white, cursor: cursor }
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { vScroll: default-scroll, hScrollKnob: default-round-large, background: default-rect, hScroll: default-scroll, vScrollKnob: default-round-large },

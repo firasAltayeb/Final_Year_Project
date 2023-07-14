@@ -59,10 +59,9 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         multiplexer.addProcessor(player.getInputProcessor());
         Gdx.input.setInputProcessor(multiplexer);
 
-
-        menuItemsXaxis = stage.getWidth()/40;
+        menuItemsXaxis = 0;
         menuItemsYaxis = stage.getHeight()/40;
-        menuItemWindowWidth = stage.getWidth()/1.35f;
+        menuItemWindowWidth = stage.getWidth()/1.4f;
         menuItemWindowHeight = stage.getHeight()/1.05f;
 
         all_health_heart = new Array<ImageButton>();
@@ -75,25 +74,25 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         }
 
         menuButton = new TextButton("menu", Utility.GUI_SKINS);
+        menuButton.setPosition(stage.getWidth()/1.2f,  stage.getHeight()/12);
         menuButton.setVisible(true);
-        menuButton.setSize(stage.getWidth()/10f,  stage.getHeight()/20f);
-        menuButton.setPosition(stage.getWidth()/1.2f,  stage.getHeight()/6);
 
         menuListUI = new MenuListUI();
+        menuListUI.setSize(stage.getWidth()/3.4f,  stage.getHeight()/1.4f);
+        menuListUI.setPosition(stage.getWidth()/1.27f, stage.getHeight()/2);
         menuListUI.setMovable(false);
         menuListUI.setVisible(false);
-        menuListUI.setSize(stage.getWidth()/5f,  stage.getHeight()/2.5f);
-        menuListUI.setPosition(stage.getWidth()/1.27f, stage.getHeight()/2);
 
         progressUI = new ProgressUI(menuItemWindowWidth, menuItemWindowHeight);
+        progressUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         progressUI.setVisible(false);
         progressUI.setMovable(false);
-        progressUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+
 
         inventoryUI = new InventoryUI(menuItemWindowWidth, menuItemWindowHeight);
+        inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         inventoryUI.setMovable(false);
         inventoryUI.setVisible(false);
-        inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
 
         Gdx.app.log(TAG, "all_health_heart.size is: " + all_health_heart.size);
 
@@ -206,25 +205,27 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         stage.draw();
     }
 
-    //TODO speak about this in the report
-    @Override
+    @Override //TODO speak about this in the report
     public void resize(int width, int height) {
+        menuItemsXaxis = 0;
+        menuItemsYaxis = height/40;
+        menuItemWindowWidth = width/1.4f;
+        menuItemWindowHeight = height/1.05f;
 
         for (int i = 0; i<all_health_heart.size; i++) {
             all_health_heart.get(i).setPosition(width/ 60f + i * 25, height / 1.1f);
         }
 
-        menuButton.setPosition(width/1.2f,  height/6);
-        menuButton.setSize(width/10f,  height/20f);
+        menuButton.setPosition(width/1.2f,  height/12);
 
         menuListUI.setPosition(width/1.27f, height/2);
-        menuListUI.updateSize(width/5f, height/2.5f);
+        menuListUI.updateSize(width/3.4f, height/1.4f);
 
-        progressUI.setPosition(width/40, height/40);
-        progressUI.updateSize(width/1.35f, height/1.05f);
+        progressUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        progressUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 
-        inventoryUI.setPosition(width/40, height/40);
-        inventoryUI.updateSize(width/1.35f, height/1.05f);
+        inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        inventoryUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 
         MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
         MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
