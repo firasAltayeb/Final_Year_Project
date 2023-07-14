@@ -7,7 +7,7 @@ animationConfig: [
 	    frameDuration: 1.0
 		animationType: IMMOBILE
 		texturePaths: [
-			sprites/blacksmith_sheet.png
+			sprites/chara/blacksmith_sheet.png
 		]
 		gridPoints: [
 			{

@@ -7,7 +7,7 @@ animationConfig: [
 	    frameDuration: 1.0
 		animationType: IMMOBILE
 		texturePaths: [
-			sprites/herbalist_sheet.png
+			sprites/chara/herbalist_sheet.png
 		]
 		gridPoints: [
 			{

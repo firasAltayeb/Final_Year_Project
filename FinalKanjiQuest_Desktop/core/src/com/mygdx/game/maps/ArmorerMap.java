@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.tools.Entity;
 
 public class ArmorerMap extends Map {
-    private static String mapPath = "tile_maps/armorer.tmx";
+    private static String mapPath = "tilemaps/armorer.tmx";
     private static String blacksmith = "json_scripts/blacksmith.json";
 
     public ArmorerMap(){

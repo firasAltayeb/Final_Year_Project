@@ -7,7 +7,7 @@ animationConfig: [
 		frameDuration: 0.25
 		animationType: WALK_DOWN
 		texturePaths: [
-			sprites/walkaround_one_sheet.png
+			sprites/chara/walkaround_one_sheet.png
 		]
 		gridPoints: [
 			{
@@ -33,7 +33,7 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_LEFT
 		texturePaths: [
-			sprites/walkaround_one_sheet.png
+			sprites/chara/walkaround_one_sheet.png
 		]
 		gridPoints: [
 			{
@@ -59,7 +59,7 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_RIGHT
 		texturePaths: [
-			sprites/walkaround_one_sheet.png
+			sprites/chara/walkaround_one_sheet.png
 		]
 		gridPoints: [
 			{
@@ -85,7 +85,8 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_UP
 		texturePaths: [
-			sprites/walkaround_one_sheet.png
+			sprites/chara/walkaround_one_sheet.png
+			sprites/chara/walkaround_one_sheet.png
 		]
 		gridPoints: [
 			{

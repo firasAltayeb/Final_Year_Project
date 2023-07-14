@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.tools.Entity;
 
 public class HouseOneMap extends Map {
-    private static String mapPath = "tile_maps/house_one.tmx";
+    private static String mapPath = "tilemaps/house_one.tmx";
     private static String librarian = "json_scripts/librarian.json";
     private static String walkaround_four = "json_scripts/walkaround_four.json";
 

@@ -31,7 +31,7 @@ public class NewGameScreen implements Screen {
 		stage = new Stage();
 
 		//TopTable
-		texture = new Texture(Gdx.files.internal("sprites/topworld.png"));
+		texture = new Texture(Gdx.files.internal("sprites/maps/topworld.png"));
 		backgroundSprite = new Sprite(texture);
 
 		Label profileName = new Label("Enter Profile Name: ", Utility.GUI_SKINS);

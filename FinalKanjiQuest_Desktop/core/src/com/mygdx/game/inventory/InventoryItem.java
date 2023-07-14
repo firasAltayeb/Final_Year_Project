@@ -49,19 +49,17 @@ public class InventoryItem extends Image {
 
     private int itemAttributes;
     private int itemUseType;
-    private int itemUseTypeValue;
-    private ItemTypeID itemTypeID;
+    private ItemTypeID itemNameID;
     private String itemShortDescription;
-    private int itemValue;
+    private int itemUseValue;
 
-    public InventoryItem(TextureRegion textureRegion, int itemAttributes, ItemTypeID itemTypeID, int itemUseType, int itemUseTypeValue, int itemValue){
+    public InventoryItem(TextureRegion textureRegion, int itemAttributes, ItemTypeID itemNameID, int itemUseType, int itemUseValue){
         super(textureRegion);
 
-        this.itemTypeID = itemTypeID;
+        this.itemNameID = itemNameID;
         this.itemAttributes = itemAttributes;
         this.itemUseType = itemUseType;
-        this.itemUseTypeValue = itemUseTypeValue;
-        this.itemValue = itemValue;
+        this.itemUseValue = itemUseValue;
     }
 
     public InventoryItem(){
@@ -70,12 +68,11 @@ public class InventoryItem extends Image {
 
     public InventoryItem(InventoryItem inventoryItem){
         super();
-        this.itemTypeID = inventoryItem.getItemTypeID();
+        this.itemNameID = inventoryItem.getItemNameID();
         this.itemAttributes = inventoryItem.getItemAttributes();
         this.itemUseType = inventoryItem.getItemUseType();
-        this.itemUseTypeValue = inventoryItem.getItemUseTypeValue();
         this.itemShortDescription = inventoryItem.getItemShortDescription();
-        this.itemValue = inventoryItem.getItemValue();
+        this.itemUseValue = inventoryItem.getItemUseValue();
     }
 
     public boolean isConsumable(){
@@ -86,20 +83,12 @@ public class InventoryItem extends Image {
         return ((itemUseType & ItemUseType.ITEM_RESTORE_HEALTH.getValue()) == ItemUseType.ITEM_RESTORE_HEALTH.getValue());
     }
 
-    public int getItemUseTypeValue() {
-        return itemUseTypeValue;
+    public int getItemUseValue() {
+        return itemUseValue;
     }
 
-    public void setItemUseTypeValue(int itemUseTypeValue) {
-        this.itemUseTypeValue = itemUseTypeValue;
-    }
-
-    public int getItemValue() {
-        return itemValue;
-    }
-
-    public void setItemValue(int itemValue) {
-        this.itemValue = itemValue;
+    public void setItemUseValue(int itemUseValue) {
+        this.itemUseValue = itemUseValue;
     }
 
     public int getItemAttributes() {
@@ -110,12 +99,12 @@ public class InventoryItem extends Image {
         this.itemAttributes = itemAttributes;
     }
 
-    public ItemTypeID getItemTypeID() {
-        return itemTypeID;
+    public ItemTypeID getItemNameID() {
+        return itemNameID;
     }
 
-    public void setItemTypeID(ItemTypeID itemTypeID) {
-        this.itemTypeID = itemTypeID;
+    public void setItemNameID(ItemTypeID itemNameID) {
+        this.itemNameID = itemNameID;
     }
 
     public int getItemUseType() {
@@ -135,7 +124,7 @@ public class InventoryItem extends Image {
     }
 
     public boolean isSameItemType(InventoryItem candidateInventoryItem){
-        return itemTypeID == candidateInventoryItem.getItemTypeID();
+        return itemNameID == candidateInventoryItem.getItemNameID();
     }
 
 }

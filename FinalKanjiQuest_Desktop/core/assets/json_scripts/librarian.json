@@ -7,7 +7,7 @@ animationConfig: [
 	    frameDuration: 1.0
 		animationType: IMMOBILE
 		texturePaths: [
-			sprites/librarian_sheet.png
+			sprites/chara/librarian_sheet.png
 		]
 		gridPoints: [
 			{

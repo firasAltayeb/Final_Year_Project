@@ -32,13 +32,13 @@ public class InventoryItemFactory {
 
         for (JsonValue jsonVal : list) {
             InventoryItem inventoryItem = json.readValue(InventoryItem.class, jsonVal);
-            inventoryItemList.put(inventoryItem.getItemTypeID(), inventoryItem);
+            inventoryItemList.put(inventoryItem.getItemNameID(), inventoryItem);
         }
     }
 
     public InventoryItem getInventoryItem(ItemTypeID inventoryItemType){
         InventoryItem item = new InventoryItem(inventoryItemList.get(inventoryItemType));
-        item.setDrawable(new TextureRegionDrawable(Utility.ITEMS_TEXTUREATLAS.findRegion(item.getItemTypeID().toString())));
+        item.setDrawable(new TextureRegionDrawable(Utility.ITEMS_TEXTUREATLAS.findRegion(item.getItemNameID().toString())));
         item.setScaling(Scaling.none);
         return item;
     }

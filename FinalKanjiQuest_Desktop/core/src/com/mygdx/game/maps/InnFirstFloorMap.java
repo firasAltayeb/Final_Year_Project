@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.tools.Entity;
 
 public class InnFirstFloorMap extends Map {
-    private static String mapPath = "tile_maps/inn_first_floor.tmx";
+    private static String mapPath = "tilemaps/inn_first_floor.tmx";
     private static String herbalist = "json_scripts/herbalist.json";
 
     InnFirstFloorMap(){

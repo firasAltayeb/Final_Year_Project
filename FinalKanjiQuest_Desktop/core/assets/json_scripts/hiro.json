@@ -24,7 +24,7 @@ animationConfig: [
 		frameDuration: 0.25
 		animationType: WALK_DOWN
 		texturePaths: [
-			sprites/hiro_sheet.png
+			sprites/chara/hiro_sheet.png
 		]
 		gridPoints: [
 			{
@@ -50,7 +50,7 @@ animationConfig: [
 		frameDuration: 0.25
 		animationType: WALK_DOWN_LEFT
 		texturePaths: [
-			sprites/hiro_sheet.png
+			sprites/chara/hiro_sheet.png
 		]
 		gridPoints: [
 			{
@@ -76,7 +76,7 @@ animationConfig: [
 		frameDuration: 0.25
 		animationType: WALK_DOWN_RIGHT
 		texturePaths: [
-			sprites/hiro_sheet.png
+			sprites/chara/hiro_sheet.png
 		]
 		gridPoints: [
 			{
@@ -102,7 +102,7 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_LEFT
 		texturePaths: [
-			sprites/hiro_sheet.png
+			sprites/chara/hiro_sheet.png
 		]
 		gridPoints: [
 			{
@@ -128,7 +128,7 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_RIGHT
 		texturePaths: [
-			sprites/hiro_sheet.png
+			sprites/chara/hiro_sheet.png
 		]
 		gridPoints: [
 			{
@@ -154,7 +154,7 @@ animationConfig: [
 	    frameDuration: 0.25
 		animationType: WALK_UP
 		texturePaths: [
-			sprites/hiro_sheet.png
+			sprites/chara/hiro_sheet.png
 		]
 		gridPoints: [
 			{
@@ -180,7 +180,7 @@ animationConfig: [
 		frameDuration: 0.25
 		animationType: WALK_UP_LEFT
 		texturePaths: [
-			sprites/hiro_sheet.png
+			sprites/chara/hiro_sheet.png
 		]
 		gridPoints: [
 			{
@@ -206,7 +206,7 @@ animationConfig: [
 		frameDuration: 0.25
 		animationType: WALK_UP_RIGHT
 		texturePaths: [
-			sprites/hiro_sheet.png
+			sprites/chara/hiro_sheet.png
 		]
 		gridPoints: [
 			{

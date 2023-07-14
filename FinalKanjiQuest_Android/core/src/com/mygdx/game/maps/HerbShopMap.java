@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.tools.Entity;
 
 public class HerbShopMap extends Map {
-    private static String mapPath = "tile_maps/herb_shop.tmx";
+    private static String mapPath = "tilemaps/herb_shop.tmx";
     private static String herbalist = "json_scripts/herbalist.json";
 
     HerbShopMap(){

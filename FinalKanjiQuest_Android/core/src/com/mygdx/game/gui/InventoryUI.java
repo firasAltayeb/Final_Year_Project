@@ -73,12 +73,12 @@ public class InventoryUI extends Window implements InventorySubject {
                                                   if (slotToRemove.hasItem()) {
                                                       InventoryItem item = slotToRemove.getTopInventoryItem();
                                                       InventoryItem item2 = InventoryItemFactory.getInstance()
-                                                              .getInventoryItem(item.getItemTypeID());
+                                                              .getInventoryItem(item.getItemNameID());
 
                                                       pressedSlot.addActor(item2);
                                                       slotToRemove.addActor(item);
 
-                                                      //Gdx.app.debug(TAG, "item.getItemTypeID is: " + item.getItemTypeID().toString());
+                                                      //Gdx.app.debug(TAG, "item.getItemNameID is: " + item.getItemNameID().toString());
 
                                                       description = item.getItemShortDescription();
 
@@ -114,7 +114,7 @@ public class InventoryUI extends Window implements InventorySubject {
                                             if (slot.hasItem()) {
                                                 InventoryItem item = slot.getTopInventoryItem();
                                                 if (item.isConsumable()) {
-                                                    String itemInfo = item.getItemUseType() + Component.MESSAGE_TOKEN + item.getItemValue();
+                                                    String itemInfo = item.getItemUseType() + Component.MESSAGE_TOKEN + item.getItemUseValue();
                                                     InventoryUI.this.notify(itemInfo, InventoryObserver.InventoryEvent.ITEM_CONSUMED);
                                                     slot.remove(item);
                                                     pressedSlot.clearAllInventoryItems(false);
@@ -180,7 +180,7 @@ public class InventoryUI extends Window implements InventorySubject {
             if (numItems > 0) {
                 items.add(new InventoryItemLocation(
                         i,
-                        inventorySlot.getTopInventoryItem().getItemTypeID().toString()));
+                        inventorySlot.getTopInventoryItem().getItemNameID().toString()));
             }
         }
         return items;

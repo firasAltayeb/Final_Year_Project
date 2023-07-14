@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.tools.Entity;
 
 public class LibraryMap extends Map {
-    private static String mapPath = "tile_maps/library.tmx";
+    private static String mapPath = "tilemaps/library.tmx";
     private static String librarian = "json_scripts/librarian.json";
 
     LibraryMap(){

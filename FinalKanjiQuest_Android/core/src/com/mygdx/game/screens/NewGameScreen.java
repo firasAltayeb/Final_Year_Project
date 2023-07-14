@@ -15,8 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.FinalKanjiQuest.ScreenType;
-import com.mygdx.game.tools.Utility;
 import com.mygdx.game.profile.ProfileManager;
+import com.mygdx.game.tools.Utility;
 
 public class NewGameScreen implements Screen {
 
@@ -31,7 +31,7 @@ public class NewGameScreen implements Screen {
 		stage = new Stage();
 
 		//TopTable
-		texture = new Texture(Gdx.files.internal("sprites/topworld.png"));
+		texture = new Texture(Gdx.files.internal("sprites/maps/topworld.png"));
 		backgroundSprite = new Sprite(texture);
 
 		Label profileName = new Label("Enter Profile Name: ", Utility.GUI_SKINS);
@@ -50,17 +50,17 @@ public class NewGameScreen implements Screen {
 		TextButton cancelButton = new TextButton("Cancel", Utility.GUI_SKINS, "inventory");
 		TextButton overwriteButton = new TextButton("Overwrite", Utility.GUI_SKINS, "inventory");
 
-		final Table middleTable = new Dialog("Overwrite?", Utility.GUI_SKINS);
-		middleTable.setWidth(Gdx.graphics.getWidth()/1.05f);
-		middleTable.setHeight(Gdx.graphics.getHeight()/4);
-		middleTable.setPosition(Gdx.graphics.getWidth()/40f, Gdx.graphics.getHeight()/4);
+		final Table midddleTable = new Dialog("Overwrite?", Utility.GUI_SKINS);
+		midddleTable.setWidth(Gdx.graphics.getWidth()/1.05f);
+		midddleTable.setHeight(Gdx.graphics.getHeight()/4);
+		midddleTable.setPosition(Gdx.graphics.getWidth()/40f, Gdx.graphics.getHeight()/4);
 
-		middleTable.row();
-		middleTable.add(overwriteLabel).top().left();
-		middleTable.row();
-		middleTable.add(overwriteButton).bottom().left();
-		middleTable.add(cancelButton).bottom().right();
-		middleTable.setVisible(false);
+		midddleTable.row();
+		midddleTable.add(overwriteLabel).left();
+		midddleTable.row();
+		midddleTable.add(overwriteButton).bottom().left();
+		midddleTable.add(cancelButton).bottom().right();
+		midddleTable.setVisible(false);
 
 		//bottomTable
 		TextButton startButton = new TextButton("Start", Utility.GUI_SKINS);
@@ -74,7 +74,7 @@ public class NewGameScreen implements Screen {
 		bottomTable.add(backButton);
 
 		stage.addActor(topTable);
-		stage.addActor(middleTable);
+		stage.addActor(midddleTable);
 		stage.addActor(bottomTable);
 
 		//Listeners
@@ -82,7 +82,7 @@ public class NewGameScreen implements Screen {
 
 									 @Override
 									 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button ){
-										 middleTable.setVisible(false);
+										 midddleTable.setVisible(false);
 										 return true;
 									 }
 								 }
@@ -115,7 +115,7 @@ public class NewGameScreen implements Screen {
 
 										if( exists ){
 											//Pop up dialog for Overwrite
-											middleTable.setVisible(true);
+											midddleTable.setVisible(true);
 										}else{
 											ProfileManager.getInstance().writeProfileToStorage(messageText,"",false);
 											ProfileManager.getInstance().setCurrentProfile(messageText);
@@ -147,15 +147,15 @@ public class NewGameScreen implements Screen {
 			return;
 		}
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		stage.getBatch().begin();
 		stage.getBatch().draw(backgroundSprite, 0, 0, stage.getWidth(), stage.getHeight());
 		stage.getBatch().end();
 
 
-        stage.act(delta);
-        stage.draw();
+		stage.act(delta);
+		stage.draw();
 	}
 
 	@Override
@@ -186,7 +186,7 @@ public class NewGameScreen implements Screen {
 		stage.clear();
 		stage.dispose();
 	}
-	
+
 
 
 }

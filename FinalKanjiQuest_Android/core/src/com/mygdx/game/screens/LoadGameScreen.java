@@ -15,8 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.FinalKanjiQuest;
-import com.mygdx.game.tools.Utility;
 import com.mygdx.game.profile.ProfileManager;
+import com.mygdx.game.tools.Utility;
 
 
 public class LoadGameScreen implements Screen {
@@ -29,7 +29,7 @@ public class LoadGameScreen implements Screen {
 	public LoadGameScreen(FinalKanjiQuest game){
 		this.game = game;
 
-		texture = new Texture(Gdx.files.internal("sprites/topworld.png"));
+		texture = new Texture(Gdx.files.internal("sprites/maps/topworld.png"));
 		backgroundSprite = new Sprite(texture);
 
 		//create

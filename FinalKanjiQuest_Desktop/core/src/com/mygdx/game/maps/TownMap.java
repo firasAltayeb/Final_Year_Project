@@ -8,7 +8,7 @@ import com.mygdx.game.components.PlayerPhysicsComponent;
 public class TownMap extends Map {
     private static final String TAG = PlayerPhysicsComponent.class.getSimpleName();
 
-    private static String mapPath = "tile_maps/town.tmx";
+    private static String mapPath = "tilemaps/town.tmx";
     private static String walkaround_one = "json_scripts/walkaround_one.json";
     private static String walkaround_two = "json_scripts/walkaround_two.json";
     private static String walkaround_three = "json_scripts/walkaround_three.json";
