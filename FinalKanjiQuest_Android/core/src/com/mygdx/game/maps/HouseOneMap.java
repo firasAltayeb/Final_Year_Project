@@ -5,8 +5,8 @@ import com.mygdx.game.tools.Entity;
 
 public class HouseOneMap extends Map {
     private static String mapPath = "tilemaps/house_one.tmx";
-    private static String librarian = "json_scripts/librarian.json";
-    private static String walkaround_four = "json_scripts/walkaround_four.json";
+    private static String librarian = "json_scripts/chara/librarian.json";
+    private static String walkaround_four = "json_scripts/chara/walkaround_four.json";
 
     HouseOneMap(){
         super(MapFactory.MapType.HOUSE_ONE, mapPath);

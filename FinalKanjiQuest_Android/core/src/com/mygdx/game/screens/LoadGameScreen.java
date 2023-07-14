@@ -39,7 +39,7 @@ public class LoadGameScreen implements Screen {
 
 		ProfileManager.getInstance().storeAllProfiles();
 		Array<String> list = ProfileManager.getInstance().getProfileList();
-		final List listItems = new List(Utility.GUI_SKINS, "inventory");
+		final List listItems = new List(Utility.GUI_SKINS);
 		listItems.setItems(list);
 		ScrollPane scrollPane = new ScrollPane(listItems);
 
@@ -79,13 +79,15 @@ public class LoadGameScreen implements Screen {
 		loadButton.addListener(new InputListener() {
 								   @Override
 								   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-									   String fileName = listItems.getSelected().toString();
-									   if (fileName != null) {
-										   FileHandle file = ProfileManager.getInstance().getProfileFile(fileName);
-										   if (file != null) {
-											   ProfileManager.getInstance().setCurrentProfile(fileName);
-											   ProfileManager.getInstance().loadProfile();
-											   LoadGameScreen.this.game.setScreen(LoadGameScreen.this.game.getScreenType(FinalKanjiQuest.ScreenType.MainGame));
+									   if(listItems.getSelected() != null) {
+										   String fileName = listItems.getSelected().toString();
+										   if (fileName != null) {
+											   FileHandle file = ProfileManager.getInstance().getProfileFile(fileName);
+											   if (file != null) {
+												   ProfileManager.getInstance().setCurrentProfile(fileName);
+												   ProfileManager.getInstance().loadProfile();
+												   LoadGameScreen.this.game.setScreen(LoadGameScreen.this.game.getScreenType(FinalKanjiQuest.ScreenType.MainGame));
+											   }
 										   }
 									   }
 									   return true;

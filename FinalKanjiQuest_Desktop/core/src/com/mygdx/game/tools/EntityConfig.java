@@ -3,7 +3,7 @@ package com.mygdx.game.tools;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.tools.Entity.AnimationType;
-import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 
 
 public class EntityConfig {
@@ -11,12 +11,12 @@ public class EntityConfig {
     Entity.State state;
     Entity.Direction direction;
 
-    Array<ItemTypeID> inventory;
+    Array<ItemNameID> inventory;
     Array<AnimationConfig> animationConfig;
 
     public EntityConfig(){
         animationConfig = new Array<AnimationConfig>();
-        inventory = new Array<ItemTypeID>();
+        inventory = new Array<ItemNameID>();
     }
 
     public String getEntityID() {
@@ -43,11 +43,11 @@ public class EntityConfig {
         this.state = state;
     }
 
-    public Array<ItemTypeID> getInventory() {
+    public Array<ItemNameID> getInventory() {
         return inventory;
     }
 
-    public void setInventory(Array<ItemTypeID> inventory) {
+    public void setInventory(Array<ItemNameID> inventory) {
         this.inventory = inventory;
     }
 

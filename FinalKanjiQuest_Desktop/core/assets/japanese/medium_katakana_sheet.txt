@@ -1,0 +1,754 @@
+medium_katakana_sheet.png
+size: 1020, 902
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+katakanaA
+  rotate: false
+  xy: 1, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaBa
+  rotate: false
+  xy: 103, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaBe
+  rotate: false
+  xy: 205, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaBi
+  rotate: false
+  xy: 307, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaBo
+  rotate: false
+  xy: 409, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaBu
+  rotate: false
+  xy: 511, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaBya
+  rotate: false
+  xy: 613, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaByo
+  rotate: false
+  xy: 715, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaByu
+  rotate: false
+  xy: 817, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaCha
+  rotate: false
+  xy: 919, 1
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaChi
+  rotate: false
+  xy: 1, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaCho
+  rotate: false
+  xy: 103, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaChu
+  rotate: false
+  xy: 205, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaDa
+  rotate: false
+  xy: 307, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaDe
+  rotate: false
+  xy: 409, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaDi
+  rotate: false
+  xy: 511, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaDo
+  rotate: false
+  xy: 613, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaDu
+  rotate: false
+  xy: 715, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaDya
+  rotate: false
+  xy: 817, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaDyo
+  rotate: false
+  xy: 919, 83
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaDyu
+  rotate: false
+  xy: 1, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaE
+  rotate: false
+  xy: 103, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaGa
+  rotate: false
+  xy: 205, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaGe
+  rotate: false
+  xy: 307, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaGi
+  rotate: false
+  xy: 409, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaGo
+  rotate: false
+  xy: 511, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaGu
+  rotate: false
+  xy: 613, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaGya
+  rotate: false
+  xy: 715, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaGyo
+  rotate: false
+  xy: 817, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaGyu
+  rotate: false
+  xy: 919, 165
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaHa
+  rotate: false
+  xy: 1, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaHe
+  rotate: false
+  xy: 103, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaHi
+  rotate: false
+  xy: 205, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaHo
+  rotate: false
+  xy: 307, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaHu
+  rotate: false
+  xy: 409, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaHya
+  rotate: false
+  xy: 511, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaHyo
+  rotate: false
+  xy: 613, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaHyu
+  rotate: false
+  xy: 715, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaI
+  rotate: false
+  xy: 817, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaJi
+  rotate: false
+  xy: 919, 247
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaJya
+  rotate: false
+  xy: 1, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaJyo
+  rotate: false
+  xy: 103, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaJyu
+  rotate: false
+  xy: 205, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaKa
+  rotate: false
+  xy: 307, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaKe
+  rotate: false
+  xy: 409, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaKi
+  rotate: false
+  xy: 511, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaKo
+  rotate: false
+  xy: 613, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaKu
+  rotate: false
+  xy: 715, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaKya
+  rotate: false
+  xy: 817, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaKyo
+  rotate: false
+  xy: 919, 329
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaKyu
+  rotate: false
+  xy: 1, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaMa
+  rotate: false
+  xy: 103, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaMe
+  rotate: false
+  xy: 205, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaMi
+  rotate: false
+  xy: 307, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaMo
+  rotate: false
+  xy: 409, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaMu
+  rotate: false
+  xy: 511, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaMya
+  rotate: false
+  xy: 613, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaMyo
+  rotate: false
+  xy: 715, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaMyu
+  rotate: false
+  xy: 817, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaN
+  rotate: false
+  xy: 919, 411
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaNa
+  rotate: false
+  xy: 1, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaNe
+  rotate: false
+  xy: 103, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaNi
+  rotate: false
+  xy: 205, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaNo
+  rotate: false
+  xy: 307, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaNu
+  rotate: false
+  xy: 409, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaNya
+  rotate: false
+  xy: 511, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaNyo
+  rotate: false
+  xy: 613, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaNyu
+  rotate: false
+  xy: 715, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaO
+  rotate: false
+  xy: 817, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaPa
+  rotate: false
+  xy: 919, 493
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaPe
+  rotate: false
+  xy: 1, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaPi
+  rotate: false
+  xy: 103, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaPo
+  rotate: false
+  xy: 205, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaPu
+  rotate: false
+  xy: 307, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaPya
+  rotate: false
+  xy: 409, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaPyo
+  rotate: false
+  xy: 511, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaPyu
+  rotate: false
+  xy: 613, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaRa
+  rotate: false
+  xy: 715, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaRe
+  rotate: false
+  xy: 817, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaRi
+  rotate: false
+  xy: 919, 575
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaRo
+  rotate: false
+  xy: 1, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaRu
+  rotate: false
+  xy: 103, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaRya
+  rotate: false
+  xy: 205, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaRyo
+  rotate: false
+  xy: 307, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaRyu
+  rotate: false
+  xy: 409, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaSa
+  rotate: false
+  xy: 511, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaSe
+  rotate: false
+  xy: 613, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaSha
+  rotate: false
+  xy: 715, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaShi
+  rotate: false
+  xy: 817, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaSho
+  rotate: false
+  xy: 919, 657
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaShu
+  rotate: false
+  xy: 1, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaSo
+  rotate: false
+  xy: 103, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaSu
+  rotate: false
+  xy: 205, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaTa
+  rotate: false
+  xy: 307, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaTe
+  rotate: false
+  xy: 409, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaTo
+  rotate: false
+  xy: 511, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaTsu
+  rotate: false
+  xy: 613, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaU
+  rotate: false
+  xy: 715, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaWa
+  rotate: false
+  xy: 817, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaWo
+  rotate: false
+  xy: 919, 739
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaYa
+  rotate: false
+  xy: 1, 821
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaYo
+  rotate: false
+  xy: 103, 821
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaYu
+  rotate: false
+  xy: 205, 821
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaZa
+  rotate: false
+  xy: 307, 821
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaZe
+  rotate: false
+  xy: 409, 821
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaZo
+  rotate: false
+  xy: 511, 821
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+katakanaZu
+  rotate: false
+  xy: 613, 821
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1

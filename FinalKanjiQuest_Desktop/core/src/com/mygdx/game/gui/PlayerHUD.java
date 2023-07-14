@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
@@ -21,7 +20,7 @@ import com.mygdx.game.inventory.InventoryItemLocation;
 import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
-import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 
 public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, ProgressObserver {
 
@@ -174,7 +173,7 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
 
                 if( firstTime ){
                     //add default items if first time
-                    Array<ItemTypeID> items = player.getEntityConfig().getInventory();
+                    Array<ItemNameID> items = player.getEntityConfig().getInventory();
                     Array<InventoryItemLocation> itemLocations = new Array<InventoryItemLocation>();
                     for( int i = 0; i < items.size; i++){
                         itemLocations.add(new InventoryItemLocation(i, items.get(i).toString()));

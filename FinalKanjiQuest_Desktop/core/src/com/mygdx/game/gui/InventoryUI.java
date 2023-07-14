@@ -13,7 +13,7 @@ import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem;
 import com.mygdx.game.inventory.InventoryItemFactory;
 import com.mygdx.game.inventory.InventoryItemLocation;
-import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
+import com.mygdx.game.inventory.InventoryItem.ItemNameID;
 import com.mygdx.game.inventory.InventorySlot;
 
 public class InventoryUI extends Window implements InventorySubject {
@@ -191,9 +191,9 @@ public class InventoryUI extends Window implements InventorySubject {
         Array<Cell> cells = targetTable.getCells();
         for(int i = 0; i < inventoryItems.size; i++){
             InventoryItemLocation itemLocation = inventoryItems.get(i);
-            ItemTypeID itemTypeID = ItemTypeID.valueOf(itemLocation.getItemTypeAtLocation());
+            ItemNameID itemNameID = ItemNameID.valueOf(itemLocation.getItemNameAtLocation());
             InventorySlot inventorySlot =  ((InventorySlot)cells.get(itemLocation.getLocationIndex()).getActor());
-            InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemTypeID);
+            InventoryItem item = InventoryItemFactory.getInstance().getInventoryItem(itemNameID);
             inventorySlot.add(item);
 
         }

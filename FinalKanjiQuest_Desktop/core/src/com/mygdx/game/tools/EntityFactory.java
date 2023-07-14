@@ -20,7 +20,7 @@ public class EntityFactory {
         NPC
     }
 
-    public static String PLAYER_CONFIG = "json_scripts/hiro.json";
+    public static String PLAYER_CONFIG = "json_scripts/chara/hiro.json";
 
     public static Entity getEntity(EntityType entityType){
         Entity entity = null;

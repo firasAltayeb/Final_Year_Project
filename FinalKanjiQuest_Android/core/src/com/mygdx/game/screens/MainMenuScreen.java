@@ -35,7 +35,7 @@ public class MainMenuScreen implements Screen {
         backgroundSprite = new Sprite(texture);
 
 
-		Label title = new Label("FKQ", Utility.GUI_SKINS, "title");
+		Label title = new Label("FKQ", Utility.GUI_SKINS, "title_text");
 		TextButton newGameButton = new TextButton("New Game", Utility.GUI_SKINS);
 		TextButton loadGameButton = new TextButton("Load Game", Utility.GUI_SKINS);
 		TextButton exitButton = new TextButton("Exit", Utility.GUI_SKINS);

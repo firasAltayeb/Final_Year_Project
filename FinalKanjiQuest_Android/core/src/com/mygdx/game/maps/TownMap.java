@@ -9,11 +9,11 @@ public class TownMap extends Map {
     private static final String TAG = PlayerPhysicsComponent.class.getSimpleName();
 
     private static String mapPath = "tilemaps/town.tmx";
-    private static String walkaround_one = "json_scripts/walkaround_one.json";
-    private static String walkaround_two = "json_scripts/walkaround_two.json";
-    private static String walkaround_three = "json_scripts/walkaround_three.json";
-    private static String walkaround_four = "json_scripts/walkaround_four.json";
-    private static String inn_clark = "json_scripts/inn_clark.json";
+    private static String walkaround_one = "json_scripts/chara/walkaround_one.json";
+    private static String walkaround_two = "json_scripts/chara/walkaround_two.json";
+    private static String walkaround_three = "json_scripts/chara/walkaround_three.json";
+    private static String walkaround_four = "json_scripts/chara/walkaround_four.json";
+    private static String inn_clark = "json_scripts/chara/inn_clark.json";
 
     public TownMap(){
         super(MapFactory.MapType.TOWN, mapPath);

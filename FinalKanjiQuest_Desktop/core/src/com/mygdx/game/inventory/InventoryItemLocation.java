@@ -2,22 +2,22 @@ package com.mygdx.game.inventory;
 
 public class InventoryItemLocation {
     private int locationIndex;
-    private String itemTypeAtLocation;
+    private String itemNameAtLocation;
 
     public InventoryItemLocation(){
     }
 
-    public InventoryItemLocation( int locationIndex, String itemTypeAtLocation){
+    public InventoryItemLocation( int locationIndex, String itemNameAtLocation){
         this.locationIndex = locationIndex;
-        this.itemTypeAtLocation = itemTypeAtLocation;
+        this.itemNameAtLocation = itemNameAtLocation;
     }
 
-    public String getItemTypeAtLocation() {
-        return itemTypeAtLocation;
+    public String getItemNameAtLocation() {
+        return itemNameAtLocation;
     }
 
-    public void setItemTypeAtLocation(String itemTypeAtLocation) {
-        this.itemTypeAtLocation = itemTypeAtLocation;
+    public void setItemNameAtLocation(String itemNameAtLocation) {
+        this.itemNameAtLocation = itemNameAtLocation;
     }
 
     public int getLocationIndex() {

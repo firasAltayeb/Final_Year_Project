@@ -35,7 +35,7 @@ public class NewGameScreen implements Screen {
 		backgroundSprite = new Sprite(texture);
 
 		Label profileName = new Label("Enter Profile Name: ", Utility.GUI_SKINS);
-		final TextField profileText = new TextField("", Utility.GUI_SKINS, "inventory");
+		final TextField profileText = new TextField("", Utility.GUI_SKINS);
 		profileText.setMaxLength(20);
 
 		Table topTable = new Table();
@@ -50,17 +50,17 @@ public class NewGameScreen implements Screen {
 		TextButton cancelButton = new TextButton("Cancel", Utility.GUI_SKINS, "inventory");
 		TextButton overwriteButton = new TextButton("Overwrite", Utility.GUI_SKINS, "inventory");
 
-		final Table midddleTable = new Dialog("Overwrite?", Utility.GUI_SKINS);
-		midddleTable.setWidth(Gdx.graphics.getWidth()/1.05f);
-		midddleTable.setHeight(Gdx.graphics.getHeight()/4);
-		midddleTable.setPosition(Gdx.graphics.getWidth()/40f, Gdx.graphics.getHeight()/4);
+		final Table middleTable = new Dialog("Overwrite?", Utility.GUI_SKINS);
+		middleTable.setWidth(Gdx.graphics.getWidth()/1.05f);
+		middleTable.setHeight(Gdx.graphics.getHeight()/4);
+		middleTable.setPosition(Gdx.graphics.getWidth()/40f, Gdx.graphics.getHeight()/4);
 
-		midddleTable.row();
-		midddleTable.add(overwriteLabel).left();
-		midddleTable.row();
-		midddleTable.add(overwriteButton).bottom().left();
-		midddleTable.add(cancelButton).bottom().right();
-		midddleTable.setVisible(false);
+		middleTable.row();
+		middleTable.add(overwriteLabel).left();
+		middleTable.row();
+		middleTable.add(overwriteButton).bottom().left();
+		middleTable.add(cancelButton).bottom().right();
+		middleTable.setVisible(false);
 
 		//bottomTable
 		TextButton startButton = new TextButton("Start", Utility.GUI_SKINS);
@@ -74,7 +74,7 @@ public class NewGameScreen implements Screen {
 		bottomTable.add(backButton);
 
 		stage.addActor(topTable);
-		stage.addActor(midddleTable);
+		stage.addActor(middleTable);
 		stage.addActor(bottomTable);
 
 		//Listeners
@@ -82,7 +82,7 @@ public class NewGameScreen implements Screen {
 
 									 @Override
 									 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button ){
-										 midddleTable.setVisible(false);
+										 middleTable.setVisible(false);
 										 return true;
 									 }
 								 }
@@ -115,7 +115,7 @@ public class NewGameScreen implements Screen {
 
 										if( exists ){
 											//Pop up dialog for Overwrite
-											midddleTable.setVisible(true);
+											middleTable.setVisible(true);
 										}else{
 											ProfileManager.getInstance().writeProfileToStorage(messageText,"",false);
 											ProfileManager.getInstance().setCurrentProfile(messageText);

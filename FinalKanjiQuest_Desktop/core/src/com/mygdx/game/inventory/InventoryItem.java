@@ -38,7 +38,7 @@ public class InventoryItem extends Image {
         }
     }
 
-    public enum ItemTypeID {
+    public enum ItemNameID {
         ARROW_DOWN,ARROW_DOWN_SMALL,ARROW_UP,
         ARROW_UP_SMALL,DIAMOND,EGG,EMERALD,
         GOLDEN_SKULL,H_RUNESTONE,HEALTH_HEART,
@@ -49,11 +49,11 @@ public class InventoryItem extends Image {
 
     private int itemAttributes;
     private int itemUseType;
-    private ItemTypeID itemNameID;
+    private ItemNameID itemNameID;
     private String itemShortDescription;
     private int itemUseValue;
 
-    public InventoryItem(TextureRegion textureRegion, int itemAttributes, ItemTypeID itemNameID, int itemUseType, int itemUseValue){
+    public InventoryItem(TextureRegion textureRegion, int itemAttributes, ItemNameID itemNameID, int itemUseType, int itemUseValue){
         super(textureRegion);
 
         this.itemNameID = itemNameID;
@@ -83,6 +83,10 @@ public class InventoryItem extends Image {
         return ((itemUseType & ItemUseType.ITEM_RESTORE_HEALTH.getValue()) == ItemUseType.ITEM_RESTORE_HEALTH.getValue());
     }
 
+    public boolean isSameItem(InventoryItem candidateInventoryItem){
+        return itemNameID == candidateInventoryItem.getItemNameID();
+    }
+
     public int getItemUseValue() {
         return itemUseValue;
     }
@@ -99,11 +103,11 @@ public class InventoryItem extends Image {
         this.itemAttributes = itemAttributes;
     }
 
-    public ItemTypeID getItemNameID() {
+    public ItemNameID getItemNameID() {
         return itemNameID;
     }
 
-    public void setItemNameID(ItemTypeID itemNameID) {
+    public void setItemNameID(ItemNameID itemNameID) {
         this.itemNameID = itemNameID;
     }
 
@@ -121,10 +125,6 @@ public class InventoryItem extends Image {
 
     public void setItemShortDescription(String itemShortDescription) {
         this.itemShortDescription = itemShortDescription;
-    }
-
-    public boolean isSameItemType(InventoryItem candidateInventoryItem){
-        return itemNameID == candidateInventoryItem.getItemNameID();
     }
 
 }

@@ -5,7 +5,7 @@ import com.mygdx.game.tools.Entity;
 
 public class LibraryMap extends Map{
     private static String mapPath = "tilemaps/library.tmx";
-    private static String librarian = "json_scripts/librarian.json";
+    private static String librarian = "json_scripts/chara/librarian.json";
 
     LibraryMap(){
         super(MapFactory.MapType.LIBRARY, mapPath);

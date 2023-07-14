@@ -5,13 +5,13 @@ package com.mygdx.game.tools;
  */
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public final class Utility {
@@ -26,11 +26,32 @@ public final class Utility {
     private final static String GUI_SKINS_PATH = "gui/gui_skins.json";
     private final static String ITEMS_SHEET_PATH = "items/items_sheet.txt";
 
+    private final static String LARGE_HIRAGANA_SHEET_PATH = "japanese/large_hiragana_sheet.txt";
+    private final static String LARGE_KATAKANA_SHEET_PATH = "japanese/large_katakana_sheet.txt";
+    private final static String LARGE_ROMAJI_SHEET_PATH = "japanese/large_romaji_sheet.txt";
+    private final static String MEDIUM_HIRAGANA_SHEET_PATH = "japanese/medium_hiragana_sheet.txt";
+    private final static String MEDIUM_KATAKANA_SHEET_PATH = "japanese/medium_katakana_sheet.txt";
+    private final static String MEDIUM_ROMAJI_SHEET_PATH = "japanese/medium_romaji_sheet.txt";
+    private final static String SMALL_HIRAGANA_SHEET_PATH = "japanese/small_hiragana_sheet.txt";
+    private final static String SMALL_KATAKANA_SHEET_PATH = "japanese/small_katakana_sheet.txt";
+    private final static String SMALL_ROMAJI_SHEET_PATH = "japanese/small_romaji_sheet.txt";
+
     public static TextureAtlas GUI_TEXTUREATLAS = new TextureAtlas(GUI_SHEET_PATH);
     public static TextureAtlas ITEMS_TEXTUREATLAS = new TextureAtlas(ITEMS_SHEET_PATH);
+
+    public static TextureAtlas LARGE_HIRAGANA_TEXTUREATLAS = new TextureAtlas(LARGE_HIRAGANA_SHEET_PATH);
+    public static TextureAtlas LARGE_KATAKANA_TEXTUREATLAS = new TextureAtlas(LARGE_KATAKANA_SHEET_PATH);
+    public static TextureAtlas LARGE_ROMAJI_TEXTUREATLAS = new TextureAtlas(LARGE_ROMAJI_SHEET_PATH);
+    public static TextureAtlas MEDIUM_HIRAGANA_TEXTUREATLAS = new TextureAtlas(MEDIUM_HIRAGANA_SHEET_PATH);
+    public static TextureAtlas MEDIUM_KATAKANA_TEXTUREATLAS = new TextureAtlas(MEDIUM_KATAKANA_SHEET_PATH);
+    public static TextureAtlas MEDIUM_ROMAJI_TEXTUREATLAS = new TextureAtlas(MEDIUM_ROMAJI_SHEET_PATH);
+    public static TextureAtlas SMALL_HIRAGANA_SHEET_TEXTUREATLAS = new TextureAtlas(SMALL_HIRAGANA_SHEET_PATH);
+    public static TextureAtlas SMALL_KATAKANA_SHEET_TEXTUREATLAS = new TextureAtlas(SMALL_KATAKANA_SHEET_PATH);
+    public static TextureAtlas SMALL_ROMAJI_SHEET_TEXTUREATLAS = new TextureAtlas(SMALL_ROMAJI_SHEET_PATH);
+
     public static Skin GUI_SKINS = new Skin(Gdx.files.internal(GUI_SKINS_PATH), GUI_TEXTUREATLAS);
 
-    public static void unloadAsset (java.lang.String assetFileNamePath){
+    public static void unloadAsset (String assetFileNamePath){
         // once the asset manger is done loading
         if(assetManager.isLoaded(assetFileNamePath)){
             assetManager.unload(assetFileNamePath);

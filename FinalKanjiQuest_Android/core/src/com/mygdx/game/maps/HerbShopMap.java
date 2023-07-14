@@ -5,7 +5,7 @@ import com.mygdx.game.tools.Entity;
 
 public class HerbShopMap extends Map {
     private static String mapPath = "tilemaps/herb_shop.tmx";
-    private static String herbalist = "json_scripts/herbalist.json";
+    private static String herbalist = "json_scripts/chara/herbalist.json";
 
     HerbShopMap(){
         super(MapFactory.MapType.HERB_SHOP, mapPath);

@@ -5,10 +5,10 @@ import com.mygdx.game.tools.Entity;
 
 public class InnFirstFloorMap extends Map {
     private static String mapPath = "tilemaps/inn_first_floor.tmx";
-    private static String herbalist = "json_scripts/herbalist.json";
+    private static String herbalist = "json_scripts/chara/herbalist.json";
 
     InnFirstFloorMap(){
-        super(MapFactory.MapType.HERB_SHOP, mapPath);
+        super(MapFactory.MapType.INN_FIRST_FLOOR, mapPath);
         mapEntities.add(initSpecialEntity(Entity.getEntityConfig(herbalist)));
     }
 

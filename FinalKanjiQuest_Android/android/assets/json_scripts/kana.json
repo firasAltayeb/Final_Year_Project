@@ -1,0 +1,18 @@
+[
+	{
+		hiraganaEquivalent: hiraganaA
+		katakanaEquivalent: katakanaA
+		romajiEquivalent: romajiA
+	},
+	{
+		hiraganaEquivalent: hiraganaI
+		katakanaEquivalent: katakanaI
+		romajiEquivalent: romajiI
+	},
+	{
+		hiraganaEquivalent: hiraganaE
+		katakanaEquivalent: katakanaE
+		romajiEquivalent: romajiE
+	},
+
+]

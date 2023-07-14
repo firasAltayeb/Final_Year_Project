@@ -5,7 +5,7 @@ import com.mygdx.game.tools.Entity;
 
 public class InnSecondFloorMap extends Map {
     private static String mapPath = "tilemaps/inn_second_floor.tmx";
-    private static String inn_clark = "json_scripts/inn_clark.json";
+    private static String inn_clark = "json_scripts/chara/inn_clark.json";
 
     InnSecondFloorMap(){
         super(MapFactory.MapType.INN_SECOND_FLOOR, mapPath);

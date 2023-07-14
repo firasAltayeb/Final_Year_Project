@@ -5,7 +5,7 @@ import com.mygdx.game.tools.Entity;
 
 public class ArmorerMap extends Map {
     private static String mapPath = "tilemaps/armorer.tmx";
-    private static String blacksmith = "json_scripts/blacksmith.json";
+    private static String blacksmith = "json_scripts/chara/blacksmith.json";
 
     public ArmorerMap(){
         super(MapFactory.MapType.ARMORER, mapPath);

@@ -1,13 +1,20 @@
 package com.mygdx.game.gui;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
+import com.mygdx.game.japanese.KanaLetter;
+import com.mygdx.game.japanese.KanaLettersFactory;
 import com.mygdx.game.tools.Utility;
 import com.badlogic.gdx.utils.Array;
+
+import java.util.ArrayList;
 
 public class ProgressUI extends Window implements ProgressSubject {
 
@@ -22,7 +29,7 @@ public class ProgressUI extends Window implements ProgressSubject {
     private int hpVal = -1;
 
     public ProgressUI(float width, float height){
-        super("Status", Utility.GUI_SKINS);
+        super("Progress", Utility.GUI_SKINS);
         this.getTitleLabel().setAlignment(Align.center);
 
         menuItemWindowWidth = width;
@@ -33,20 +40,24 @@ public class ProgressUI extends Window implements ProgressSubject {
                 menuItemWindowHeight / 30, 10);
 
         Label text;
+        Image equivalent;
         table = new Table();
+        ArrayList<KanaLetter> kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
+        //Gdx.app.log(TAG, "kanaLettersList size is " + kanaLettersList.size() );
 
-        for(int i = 0; i <= 41; i++){
-            text = new Label("firstText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);
+        for(int i = 0; i < kanaLettersList.size()-1; i++){
 
-            text = new Label("secondText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
-
-            text = new Label("ThirdText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
-
-            text = new Label("fourthText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
+            KanaLetter kanaLetter = kanaLettersList.get(i);
+            equivalent = new Image(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(kanaLetter.getHiraganaEquivalent()));
+            table.add(equivalent).left();
+            text = new Label("romaji Equivalent: ", Utility.GUI_SKINS, "progress_list_text");
+            table.add(text).left();
+            equivalent = new Image(Utility.SMALL_ROMAJI_SHEET_TEXTUREATLAS.findRegion(kanaLetter.getRomajiEquivalent()));
+            table.add(equivalent).left();
+            text = new Label("katakana Equivalent: ", Utility.GUI_SKINS, "progress_list_text");
+            table.add(text);
+            equivalent = new Image(Utility.SMALL_KATAKANA_SHEET_TEXTUREATLAS.findRegion(kanaLetter.getKatakanaEquivalent()));
+            table.add(equivalent).left();
 
             table.row();
         }

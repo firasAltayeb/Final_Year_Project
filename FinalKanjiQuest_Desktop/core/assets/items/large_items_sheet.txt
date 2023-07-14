@@ -1,0 +1,117 @@
+large_items_sheet.png
+size: 360, 490
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ARROW_DOWN
+  rotate: false
+  xy: 1, 1
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+ARROW_DOWN_SMALL
+  rotate: false
+  xy: 1, 99
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+ARROW_UP
+  rotate: false
+  xy: 1, 197
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+ARROW_UP_SMALL
+  rotate: false
+  xy: 1, 295
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+DIAMOND
+  rotate: false
+  xy: 1, 393
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+EGG
+  rotate: false
+  xy: 99, 1
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+EMERALD
+  rotate: false
+  xy: 99, 99
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+GOLDEN_SKULL
+  rotate: false
+  xy: 99, 197
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+H_RUNESTONE
+  rotate: false
+  xy: 99, 393
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+HEALTH_HEART
+  rotate: false
+  xy: 295, 1
+  size: 64, 68
+  orig: 64, 68
+  offset: 0, 0
+  index: -1
+HEART
+  rotate: false
+  xy: 99, 295
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+K_RUNESTONE
+  rotate: false
+  xy: 197, 1
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+LARGE_POTION_BLUE
+  rotate: false
+  xy: 197, 99
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+MEDIUM_POTION_BLUE
+  rotate: false
+  xy: 197, 197
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+POTION_BLUE
+  rotate: false
+  xy: 197, 295
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+PYRAMID
+  rotate: false
+  xy: 197, 393
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
