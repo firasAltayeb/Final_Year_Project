@@ -10,7 +10,7 @@ public class EntityFactory {
     public static enum EntityType{
         PLAYER,
         DEMO_PLAYER,
-        NPC
+        NPCg
     }
 
     public static String PLAYER_CONFIG = "scripts/player.json";
