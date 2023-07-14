@@ -23,8 +23,10 @@ public class ProgressUI extends Window implements ProgressSubject {
     private String tempString;
     private int tempInt;
     private int hiraganaLvlCounter;
+    private int katakanaLvlCounter;
     private Table table;
-    private Table innerTable;
+    private Table hiraganaTable;
+    private Table katakanaTable;
     private KanaLetter kanaLetter;
     private ArrayList<KanaLetter> kanaLettersList;
     private Image equivalent;
@@ -48,7 +50,8 @@ public class ProgressUI extends Window implements ProgressSubject {
 
 
         table = new Table();
-        innerTable = new Table();
+        hiraganaTable = new Table();
+        katakanaTable = new Table();
 
 
         kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
@@ -60,7 +63,7 @@ public class ProgressUI extends Window implements ProgressSubject {
         for(int i = 0; i < kanaLettersList.size(); i++) {
 
             if(i % 4 == 0 ){
-                innerTable.row();
+                hiraganaTable.row();
             }
 
             kanaLetter = kanaLettersList.get(i);
@@ -86,11 +89,51 @@ public class ProgressUI extends Window implements ProgressSubject {
                 //Gdx.app.debug(TAG, "hiraganaLvlCounter is " + hiraganaLvlCounter);
             }
 
-            innerTable.add(equivalent).left();
-            innerTable.add(text).left().padRight(this.getWidth()/10);
+            hiraganaTable.add(equivalent).left();
+            hiraganaTable.add(text).left().padRight(this.getWidth()/10);
         }
 
-        table.add(innerTable);
+        table.add(hiraganaTable);
+        table.row();
+
+        text = new Label("Katakana", Utility.GUI_SKINS);
+        table.add(text).left();
+        table.row();
+
+        for(int i = 0; i < kanaLettersList.size(); i++) {
+
+            if(i % 4 == 0 ){
+                katakanaTable.row();
+            }
+
+            kanaLetter = kanaLettersList.get(i);
+            tempString = kanaLetter.getKatakanaEquivalent();
+            tempInt = LetterLvlCounter.getKatakanaLvlTable().get(tempString);
+            equivalent = new Image(Utility.SMALL_KATAKANA_TEXTUREATLAS.findRegion(tempString));
+
+            //Gdx.app.debug(TAG, "tempString is " + tempString);
+
+            if(tempInt >= 3){
+                tempString = "memorised";
+                text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
+            } else {
+                tempString = "Lvl: " + LetterLvlCounter.getKatakanaLvlTable().get(tempString);
+                text = new Label(tempString, Utility.GUI_SKINS, "list_text");
+            }
+
+            if(!LetterLvlCounter.areAllKatakanaMemorised()) {
+                katakanaLvlCounter += tempInt;
+                if (katakanaLvlCounter >= 321) {
+                    LetterLvlCounter.setAllHiraganaMemorisedToTrue();
+                }
+                //Gdx.app.debug(TAG, "katakanaLvlCounter is " + katakanaLvlCounter);
+            }
+
+            katakanaTable.add(equivalent).left();
+            katakanaTable.add(text).left().padRight(this.getWidth()/10);
+        }
+
+        table.add(katakanaTable);
 
         ScrollPane scrollPane = new ScrollPane(table);
         this.add(scrollPane).fill().expand();
@@ -108,12 +151,13 @@ public class ProgressUI extends Window implements ProgressSubject {
 
     //TODO speak about this
     public void updateTable(){
-        innerTable.clear();
+        hiraganaTable.clear();
+        katakanaTable.clear();
         table.clear();
         this.clear();
 
         table = new Table();
-        innerTable = new Table();
+        hiraganaTable = new Table();
 
         text = new Label("Hiragana", Utility.GUI_SKINS);
         table.add(text).left();
@@ -122,7 +166,7 @@ public class ProgressUI extends Window implements ProgressSubject {
         for(int i = 0; i < kanaLettersList.size(); i++) {
 
             if(i % 4 == 0 ){
-                innerTable.row();
+                hiraganaTable.row();
             }
 
 
@@ -147,17 +191,56 @@ public class ProgressUI extends Window implements ProgressSubject {
                 }
             }
 
-            innerTable.add(equivalent).left();
-            innerTable.add(text).left().padRight(this.getWidth()/10);
+            hiraganaTable.add(equivalent).left();
+            hiraganaTable.add(text).left().padRight(this.getWidth()/10);
         }
 
-        table.add(innerTable);
+        table.add(hiraganaTable);
+        table.row();
+
+        text = new Label("Katakana", Utility.GUI_SKINS);
+        table.add(text).left();
+        table.row();
+
+        for(int i = 0; i < kanaLettersList.size(); i++) {
+
+            if(i % 4 == 0 ){
+                katakanaTable.row();
+            }
+
+            kanaLetter = kanaLettersList.get(i);
+            tempString = kanaLetter.getKatakanaEquivalent();
+            tempInt = LetterLvlCounter.getKatakanaLvlTable().get(tempString);
+            equivalent = new Image(Utility.SMALL_KATAKANA_TEXTUREATLAS.findRegion(tempString));
+
+            //Gdx.app.debug(TAG, "tempString is " + tempString);
+
+            if(tempInt >= 3){
+                tempString = "memorised";
+                text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
+            } else {
+                tempString = "Lvl: " + LetterLvlCounter.getKatakanaLvlTable().get(tempString);
+                text = new Label(tempString, Utility.GUI_SKINS, "list_text");
+            }
+
+            if(!LetterLvlCounter.areAllKatakanaMemorised()) {
+                katakanaLvlCounter += tempInt;
+                if (katakanaLvlCounter >= 321) {
+                    LetterLvlCounter.setAllHiraganaMemorisedToTrue();
+                }
+                //Gdx.app.debug(TAG, "katakanaLvlCounter is " + katakanaLvlCounter);
+            }
+
+            katakanaTable.add(equivalent).left();
+            katakanaTable.add(text).left().padRight(this.getWidth()/10);
+        }
+
+        table.add(katakanaTable);
 
         ScrollPane scrollPane = new ScrollPane(table);
         this.add(scrollPane).fill().expand();
         this.setSize(menuItemWindowWidth, menuItemWindowHeight);
     }
-
 
     //HP
     public int getHPValue(){
