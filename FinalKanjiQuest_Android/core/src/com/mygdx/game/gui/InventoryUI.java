@@ -46,7 +46,7 @@ public class InventoryUI extends Window implements InventorySubject {
         menuItemWindowWidth = width;
         menuItemWindowHeight = height;
 
-        this.pad(this.getPadTop() + menuItemWindowHeight / 30, 10,
+        this.pad(this.getPadTop() + menuItemWindowHeight / 15, 10,
                 menuItemWindowHeight / 30, 10);
 
 

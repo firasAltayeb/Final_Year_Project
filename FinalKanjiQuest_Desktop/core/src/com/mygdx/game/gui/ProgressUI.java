@@ -39,7 +39,7 @@ public class ProgressUI extends Window implements ProgressSubject {
         menuItemWindowHeight = height;
         observers = new Array<ProgressObserver>();
 
-        this.pad(this.getPadTop() + menuItemWindowHeight / 30, 10,
+        this.pad(this.getPadTop() + menuItemWindowHeight / 15, 10,
                 menuItemWindowHeight / 30, 10);
 
 

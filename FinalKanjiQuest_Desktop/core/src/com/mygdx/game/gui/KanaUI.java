@@ -30,7 +30,7 @@ public class KanaUI extends Window{
         kanaType = temp;
 
 
-        this.pad(this.getPadTop() + menuItemWindowHeight / 30, 10,
+        this.pad(this.getPadTop() + menuItemWindowHeight / 15, 10,
                 menuItemWindowHeight / 30, 10);
 
         Label text;
@@ -82,13 +82,6 @@ public class KanaUI extends Window{
     public void updateSize(float width, float height){
         float newMenuItemWindowWidth = width;
         float newMenuItemWindowHeight = height;
-
-        //if(newMenuItemWindowWidth > menuItemWindowWidth &&
-        //        newMenuItemWindowHeight > menuItemWindowHeight){
-        //    for(int i = 0; i <= table.getCells().size-1; i++){
-        //
-        //    }
-        //}
 
         this.setSize(newMenuItemWindowWidth, newMenuItemWindowHeight);
     }

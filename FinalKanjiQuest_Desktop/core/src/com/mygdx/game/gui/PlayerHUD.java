@@ -322,6 +322,9 @@ public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, Pr
         hiraganaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         hiraganaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 
+        katakanaUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        katakanaUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
+
         kanjiUI.setPosition(menuItemsXaxis, menuItemsYaxis);
         kanjiUI.updateSize(menuItemWindowWidth, menuItemWindowHeight);
 

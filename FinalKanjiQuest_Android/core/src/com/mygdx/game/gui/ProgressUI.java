@@ -27,14 +27,14 @@ public class ProgressUI extends Window implements ProgressSubject {
     private int hpVal = -1;
 
     public ProgressUI(float width, float height){
-        super("Status", Utility.GUI_SKINS);
+        super("Progress", Utility.GUI_SKINS);
         this.getTitleLabel().setAlignment(Align.center);
 
         menuItemWindowWidth = width;
         menuItemWindowHeight = height;
         observers = new Array<ProgressObserver>();
 
-        this.pad(this.getPadTop() + menuItemWindowHeight / 30, 10,
+        this.pad(this.getPadTop() + menuItemWindowHeight / 15, 10,
                 menuItemWindowHeight / 30, 10);
 
         Label text;

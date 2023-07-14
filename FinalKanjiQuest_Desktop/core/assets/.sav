@@ -1,0 +1,45 @@
+{
+currentPlayerHPMax: {
+	class: java.lang.Integer
+	value: 10
+}
+currentPlayerHP: {
+	class: java.lang.Integer
+	value: 3
+}
+currentMapStartPoistion: {
+	class: com.badlogic.gdx.math.Vector2
+	x: 256
+	y: 496
+}
+playerInventory: [
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		itemNameAtLocation: POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 1
+		itemNameAtLocation: POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 2
+		itemNameAtLocation: POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 3
+		itemNameAtLocation: MEDIUM_POTION_BLUE
+	}
+	{
+		class: com.mygdx.game.inventory.InventoryItemLocation
+		locationIndex: 4
+		itemNameAtLocation: LARGE_POTION_BLUE
+	}
+]
+currentMapType: {
+	class: java.lang.String
+	value: TOWN
+}
+}

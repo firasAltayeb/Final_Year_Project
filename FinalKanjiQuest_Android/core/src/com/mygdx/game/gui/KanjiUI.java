@@ -7,8 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.japanese.KanaLetter;
-import com.mygdx.game.japanese.KanaLettersFactory;
 import com.mygdx.game.japanese.KanjiLetter;
 import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.tools.Utility;
@@ -108,7 +106,7 @@ public class KanjiUI extends Window{
 
             Gdx.app.log(TAG, "kanjiLetter.getKanjiNameID() is " + kanjiLetter.getKanjiNameID());
 
-            equivalent = new Image(Utility.MEDIUM_KANJI_TEXTUREATLAS.findRegion(kanjiLetter.getKanjiNameID()));
+            equivalent = new Image(Utility.LARGE_KANJI_TEXTUREATLAS.findRegion(kanjiLetter.getKanjiNameID()));
             innerTable.add(equivalent).left();
             text = new Label("Kanji meaning: " + kanjiLetter.getKanjiMeaning() + "\n" + "hiragana Equivalent: ", Utility.GUI_SKINS, "list_text");
             innerTable.add(text).left();
@@ -122,7 +120,7 @@ public class KanjiUI extends Window{
                         Gdx.app.log(TAG, "j is: " + j);
                         indexOfFullStop = temp.indexOf('.', j + 1);
                         split = temp.substring(j + 1, indexOfFullStop);
-                        equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(split));
+                        equivalent = new Image(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(split));
                         innerTable.add(equivalent).left();
                     } catch (Exception e) {
                     }
