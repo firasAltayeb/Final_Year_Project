@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.utils.Json;
 import com.mygdx.game.Component;
 import com.mygdx.game.Entity;
 import com.mygdx.game.EntityFactory;
+import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
 
@@ -26,21 +28,30 @@ public class MainGameScreen implements Screen {
 		static float aspectRatio;
 	}
 
+	public static enum GameState {
+		RUNNING,
+		PAUSED
+	}
+	private static GameState gameState;
+
 	private OrthogonalTiledMapRenderer mapRenderer = null;
 	private OrthographicCamera camera = null;
+	private OrthographicCamera hudCamera = null;
 	private static MapManager mapMgr;
 	private Json json;
-
-	public MainGameScreen(){
-		mapMgr = new MapManager();
-		json = new Json();
-	}
+	private FinalKanjiQuest game;
+	private InputMultiplexer multiplexer;
 
 	private static Entity player;
+	private static PlayerHUD playerHUD;
 
-	@Override
-	public void show() {
-		//camera setup
+	public MainGameScreen(FinalKanjiQuest game){
+		this.game = game;
+		mapMgr = new MapManager();
+		json = new Json();
+
+		gameState = GameState.RUNNING;
+		//_camera setup
 		setupViewport(15, 15);
 
 		//get the current size
@@ -49,20 +60,46 @@ public class MainGameScreen implements Screen {
 
 		mapRenderer = new OrthogonalTiledMapRenderer(mapMgr.getCurrentTiledMap(), Map.UNIT_SCALE);
 		mapRenderer.setView(camera);
-
 		mapMgr.setCamera(camera);
 
 		Gdx.app.debug(TAG, "UnitScale value is: " + mapRenderer.getUnitScale());
 
 		player = EntityFactory.getEntity(EntityFactory.EntityType.PLAYER);
 		mapMgr.setPlayer(player);
+
+		hudCamera = new OrthographicCamera();
+		hudCamera.setToOrtho(false, VIEWPORT.physicalWidth, VIEWPORT.physicalHeight);
+
+		playerHUD = new PlayerHUD(hudCamera, player);
+
+		multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(playerHUD.getStage());
+		multiplexer.addProcessor(player.getInputProcessor());
+		Gdx.input.setInputProcessor(multiplexer);
+
+		ProfileManager.getInstance().addObserver(playerHUD);
+		ProfileManager.getInstance().addObserver(mapMgr);
 	}
 
 	@Override
-	public void hide() {}
+	public void show() {
+		gameState = GameState.RUNNING;
+		Gdx.input.setInputProcessor(multiplexer);
+	}
+
+	@Override
+	public void hide() {
+		gameState = GameState.PAUSED;
+		Gdx.input.setInputProcessor(null);
+	}
 
 	@Override
 	public void render(float delta) {
+		if( gameState == GameState.PAUSED ){
+			player.updateInput(delta);
+			return;
+		}
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -86,22 +123,53 @@ public class MainGameScreen implements Screen {
 		mapMgr.updateCurrentMapEntities(mapMgr, mapRenderer.getBatch(), delta );
 
 		player.update(mapMgr, mapRenderer.getBatch(), delta);
+		playerHUD.render(delta);
 	}
 
 	@Override
 	public void resize(int width, int height) {
+		setupViewport(15, 15);
+		camera.setToOrtho(false, VIEWPORT.viewportWidth, VIEWPORT.viewportHeight);
+		playerHUD.resize((int) VIEWPORT.physicalWidth, (int) VIEWPORT.physicalHeight);
 	}
 
 	@Override
-	public void pause() {}
+	public void pause() {
+		gameState = GameState.PAUSED;
+		ProfileManager.getInstance().saveProfile();
+	}
 
 	@Override
-	public void resume() {}
+	public void resume() {
+		gameState = GameState.RUNNING;
+		ProfileManager.getInstance().loadProfile();
+	}
 
 	@Override
 	public void dispose() {
 		player.dispose();
 		mapRenderer.dispose();
+	}
+
+	public static void setGameState(GameState state){
+		switch(state){
+			case RUNNING:
+				gameState = GameState.RUNNING;
+				break;
+			case PAUSED:
+				if( gameState == GameState.PAUSED ){
+					gameState = GameState.RUNNING;
+					ProfileManager.getInstance().loadProfile();
+				}else if( gameState == GameState.RUNNING ){
+					gameState = GameState.PAUSED;
+					ProfileManager.getInstance().saveProfile();
+				}
+				break;
+			default:
+				gameState = GameState.RUNNING;
+				break;
+		}
+
 	}
 
 	private void setupViewport(int width, int height){

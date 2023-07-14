@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.screens.MainGameScreen;
 
 public class PlayerInputComponent extends InputComponent implements InputProcessor {
 
@@ -13,7 +14,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	public PlayerInputComponent(){
 		//Gdx.app.debug(TAG, "Construction" );
 		this.lastMouseCoordinates = new Vector3();
-		Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
@@ -38,7 +38,11 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	@Override
 	public void update(Entity entity, float delta){
 		//Keyboard input
-		if( keys.get(Keys.LEFT)){
+		if(keys.get(Keys.PAUSE)) {
+			System.out.println("INPUT PAUSED");
+			MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+			pauseReleased();
+		}else if( keys.get(Keys.LEFT)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.LEFT));
 		}else if( keys.get(Keys.RIGHT)){
@@ -47,23 +51,25 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		}else if( keys.get(Keys.UP)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP));
-		}else if( keys.get(Keys.UP_LEFT)){
+		}else if(keys.get(Keys.DOWN)){
+			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
+			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
+		} else if( keys.get(Keys.UP_LEFT)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP_LEFT));
 		}else if( keys.get(Keys.UP_RIGHT)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.UP_RIGHT));
-		} else if(keys.get(Keys.DOWN)){
-			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
-			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
 		} else if(keys.get(Keys.DOWN_LEFT)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN_LEFT));
 		} else if(keys.get(Keys.DOWN_RIGHT)){
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.WALKING));
 			entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN_RIGHT));
-		}
-		else{
+		} else if(keys.get(Keys.QUIT)) {
+			quitReleased();
+			Gdx.app.exit();
+		} else{
 			entity.sendMessage(MESSAGE.CURRENT_STATE, json.toJson(Entity.State.IDLE));
 			if( currentDirection == null ){
 				entity.sendMessage(MESSAGE.CURRENT_DIRECTION, json.toJson(Entity.Direction.DOWN));
@@ -103,7 +109,12 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 
 		}if( keycode == Input.Keys.Z){
 			this.downLeftPressed();
-
+		}
+		if( keycode == Input.Keys.O){
+			this.quitPressed();
+		}
+		if( keycode == Input.Keys.P ){
+			this.pausePressed();
 		}
 
 		return true;
@@ -125,16 +136,18 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		}
 		if( keycode == Input.Keys.Q){
 			this.upLeftReleased();
-
 		}if( keycode == Input.Keys.E){
 			this.upRightReleased();
-
 		}if( keycode == Input.Keys.C){
 			this.downRightReleased();
-
 		}if( keycode == Input.Keys.Z){
 			this.downLeftReleased();
-
+		}
+		if( keycode == Input.Keys.O){
+			this.quitReleased();
+		}
+		if( keycode == Input.Keys.P ){
+			this.pauseReleased();
 		}
 		return true;
 	}
@@ -221,6 +234,14 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	public void downLeftPressed(){
 		keys.put(Keys.DOWN_LEFT, true);
 	}
+
+	public void quitPressed(){
+		keys.put(Keys.QUIT, true);
+	}
+
+	public void pausePressed() {
+		keys.put(Keys.PAUSE, true);
+	}
 	
 	public void setClickedMouseCoordinates(int x,int y){
 		lastMouseCoordinates.set(x, y, 0);
@@ -266,7 +287,13 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	public void downLeftReleased(){
 		keys.put(Keys.DOWN_LEFT, false);
 	}
-	
+
+	public void quitReleased(){
+		keys.put(Keys.QUIT, false);
+	}
+
+	public void pauseReleased() { keys.put(Keys.PAUSE, false);}
+
 	public void selectMouseButtonReleased(int x, int y){
 		mouseButtons.put(Mouse.SELECT, false);
 	}

@@ -323,50 +323,9 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 	public void selectMouseButtonPressed(int x, int y){
 		mouseButtons.put(Mouse.SELECT, true);
 	}
-
-	public void doActionMouseButtonPressed(int x, int y){
-		mouseButtons.put(Mouse.DOACTION, true);
-	}
-
-	//Releases
-	public void leftReleased(){
-		keys.put(Keys.LEFT, false);
-	}
-
-	public void rightReleased(){
-		keys.put(Keys.RIGHT, false);
-	}
-
-	public void upReleased(){
-		keys.put(Keys.UP, false);
-	}
-
-	public void downReleased(){
-		keys.put(Keys.DOWN, false);
-	}
-
-	public void upRightReleased(){
-		keys.put(Keys.UP_RIGHT, false);
-	}
-
-	public void upLeftReleased(){
-		keys.put(Keys.UP_LEFT, false);
-	}
-
-	public void downRightReleased(){
-		keys.put(Keys.DOWN_RIGHT, false);
-	}
-
-	public void downLeftReleased(){
-		keys.put(Keys.DOWN_LEFT, false);
-	}
 	
 	public void selectMouseButtonReleased(int x, int y){
 		mouseButtons.put(Mouse.SELECT, false);
-	}
-	
-	public void doActionMouseButtonReleased(int x, int y){
-		mouseButtons.put(Mouse.DOACTION, false);
 	}
 
 	public static void hide(){
@@ -379,7 +338,6 @@ public class PlayerInputComponent extends InputComponent implements InputProcess
 		keys.put(Keys.UP_LEFT, false);
 		keys.put(Keys.DOWN_RIGHT, false);
 		keys.put(Keys.DOWN_LEFT, false);
-		keys.put(Keys.QUIT, false);
 	}
 
 }

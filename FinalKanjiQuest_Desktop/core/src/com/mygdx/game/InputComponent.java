@@ -12,7 +12,7 @@ public abstract class InputComponent implements Component {
     protected Json json;
 
     protected enum Keys {
-        LEFT, RIGHT, UP, DOWN, QUIT,
+        LEFT, RIGHT, UP, DOWN, QUIT, PAUSE,
         UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
     }
 
@@ -34,6 +34,7 @@ public abstract class InputComponent implements Component {
         keys.put(Keys.DOWN_LEFT, false);
         keys.put(Keys.DOWN_RIGHT, false);
         keys.put(Keys.QUIT, false);
+        keys.put(Keys.PAUSE, false);
     };
 
     static {

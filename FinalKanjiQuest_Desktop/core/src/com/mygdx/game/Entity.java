@@ -128,6 +128,10 @@ public class Entity {
         graphicsComponent.update(this, mapMgr, batch, delta);
     }
 
+    public void updateInput(float delta){
+        inputComponent.update(this, delta);
+    }
+
     public void dispose(){
         for(Component component: components){
             component.dispose();
@@ -140,24 +144,6 @@ public class Entity {
 
     public void setEntityConfig(EntityConfig entityConfig){
         this.entityConfig = entityConfig;
-    }
-
-    static public EntityConfig getEntityConfig(String configFilePath){
-        Json json = new Json();
-        return json.fromJson(EntityConfig.class, Gdx.files.internal(configFilePath));
-    }
-
-    static public Array<EntityConfig> getEntityConfigs(String configFilePath){
-        Json json = new Json();
-        Array<EntityConfig> configs = new Array<EntityConfig>();
-
-        ArrayList<JsonValue> list = json.fromJson(ArrayList.class, Gdx.files.internal(configFilePath));
-
-        for (JsonValue jsonVal : list) {
-            configs.add(json.readValue(EntityConfig.class, jsonVal));
-        }
-
-        return configs;
     }
 
 }
