@@ -102,13 +102,12 @@ public class EntityOld {
         //Gdx.app.debug(TAG, "Calling INIT" );
     }
 
-    public void setBoundingBoxSize(float percentageWidthReduced,
-                                        float percentageHeightReduced){
+    public void setBoundingBoxSize(float percentageWidthReduced, float percentageHeightReduced){
         //update the current bounding box
         float width;
         float height;
 
-        // To get 80% reduction, we pass .8f == (1 - .20)
+        // To get for e.g. 80% reduction, we pass .8f == (1 - .20)
         float widthReductionAmount = 1.0f - percentageWidthReduced;
         float heightReductionAmount = 1.0f - percentageHeightReduced;
 
@@ -129,8 +128,7 @@ public class EntityOld {
             ":" + height);
         }
 
-        //need to account for the unitScale, since the map coordinates
-        //will be in pixels
+        //need to account for the unit_scale, since the map coordinates will be in pixels
         float minX;
         float minY;
         if (MapManger.UNIT_SCALE > 0){

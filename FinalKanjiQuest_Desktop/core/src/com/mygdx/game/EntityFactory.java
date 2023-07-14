@@ -10,7 +10,7 @@ public class EntityFactory {
     public static enum EntityType{
         PLAYER,
         DEMO_PLAYER,
-        NPCg
+        NPC
     }
 
     public static String PLAYER_CONFIG = "scripts/player.json";
@@ -24,7 +24,7 @@ public class EntityFactory {
                 //Linking entityConfig
                 entity.setEntityConfig(Entity.getEntityConfig(EntityFactory.PLAYER_CONFIG));
                 //Extracting info from entityConfig
-                entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, _json.toJson(entity.getEntityConfig()));
+                entity.sendMessage(Component.MESSAGE.LOAD_ANIMATIONS, json.toJson(entity.getEntityConfig()));
                 return entity;
             case DEMO_PLAYER:
                 entity = new Entity(new NPCInputComponent(), new PlayerPhysicsComponent(), new PlayerGraphicsComponent());
