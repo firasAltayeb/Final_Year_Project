@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.tools.Entity;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
 
@@ -106,7 +107,7 @@ public abstract class PhysicsComponent implements Component{
         this.currentEntityPosition.x = nextEntityPosition.x;
         this.currentEntityPosition.y = nextEntityPosition.y;
 
-        //Gdx.app.debug(TAG, "SETTING Current Position " + entity.getEntityConfig().getEntityID()
+        //Gdx.app.debug(TAG, "SETTING Current Position " + tools.getEntityConfig().getEntityID()
         // + ": (" + currentEntityPosition.x + "," + currentEntityPosition.y + ")");
         entity.sendMessage(MESSAGE.CURRENT_POSITION, json.toJson(currentEntityPosition));
     }
@@ -211,7 +212,7 @@ public abstract class PhysicsComponent implements Component{
                 break;
         }
 
-        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
+        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + tools.getEntityConfig().getEntityID() +
         // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 
@@ -240,7 +241,7 @@ public abstract class PhysicsComponent implements Component{
                 break;
         }
 
-        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
+        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + tools.getEntityConfig().getEntityID() +
         // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 }

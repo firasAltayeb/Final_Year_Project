@@ -1,9 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.tools.Entity;
 import com.mygdx.game.screens.MainGameScreen;
 
 public class PlayerInputComponent extends InputComponent implements InputProcessor {

@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.FinalKanjiQuest.ScreenType;
-import com.mygdx.game.Utility;
+import com.mygdx.game.tools.Utility;
 import com.mygdx.game.profile.ProfileManager;
 
 public class NewGameScreen implements Screen {
@@ -45,21 +45,22 @@ public class NewGameScreen implements Screen {
 		topTable.row();
 		topTable.add(profileText).fill();
 
-		//Dialog
+		//MiddleTable
 		Label overwriteLabel = new Label("Overwrite existing profile name?", Utility.GUI_SKINS);
 		TextButton cancelButton = new TextButton("Cancel", Utility.GUI_SKINS, "inventory");
 		TextButton overwriteButton = new TextButton("Overwrite", Utility.GUI_SKINS, "inventory");
 
-		final Table overwriteDialog = new Dialog("Overwrite?", Utility.GUI_SKINS);
-		overwriteDialog.setWidth(Gdx.graphics.getWidth()/1.05f);
-		overwriteDialog.setHeight(Gdx.graphics.getHeight()/4);
-		overwriteDialog.setPosition(Gdx.graphics.getWidth()/40f, Gdx.graphics.getHeight()/4);
+		final Table midddleTable = new Dialog("Overwrite?", Utility.GUI_SKINS);
+		midddleTable.setWidth(Gdx.graphics.getWidth()/1.05f);
+		midddleTable.setHeight(Gdx.graphics.getHeight()/4);
+		midddleTable.setPosition(Gdx.graphics.getWidth()/40f, Gdx.graphics.getHeight()/4);
 
-		overwriteDialog.add(overwriteLabel).bottom().left();
-		overwriteDialog.row();
-		overwriteDialog.add(overwriteButton).bottom().left();
-		overwriteDialog.add(cancelButton).bottom().right();
-		overwriteDialog.setVisible(false);
+		midddleTable.row();
+		midddleTable.add(overwriteLabel).left();
+		midddleTable.row();
+		midddleTable.add(overwriteButton).bottom().left();
+		midddleTable.add(cancelButton).bottom().right();
+		midddleTable.setVisible(false);
 
 		//bottomTable
 		TextButton startButton = new TextButton("Start", Utility.GUI_SKINS);
@@ -73,7 +74,7 @@ public class NewGameScreen implements Screen {
 		bottomTable.add(backButton);
 
 		stage.addActor(topTable);
-		stage.addActor(overwriteDialog);
+		stage.addActor(midddleTable);
 		stage.addActor(bottomTable);
 
 		//Listeners
@@ -81,7 +82,7 @@ public class NewGameScreen implements Screen {
 
 									 @Override
 									 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button ){
-										 overwriteDialog.setVisible(false);
+										 midddleTable.setVisible(false);
 										 return true;
 									 }
 								 }
@@ -114,7 +115,7 @@ public class NewGameScreen implements Screen {
 
 										if( exists ){
 											//Pop up dialog for Overwrite
-											overwriteDialog.setVisible(true);
+											midddleTable.setVisible(true);
 										}else{
 											ProfileManager.getInstance().writeProfileToStorage(messageText,"",false);
 											ProfileManager.getInstance().setCurrentProfile(messageText);

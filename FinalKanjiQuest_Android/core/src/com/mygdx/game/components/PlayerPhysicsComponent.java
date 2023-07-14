@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -18,7 +18,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
     private static final String TAG = PlayerPhysicsComponent.class.getSimpleName();
 
-    private Entity.State state;
+    private com.mygdx.game.tools.Entity.State state;
     private Vector3 mouseSelectCoordinates;
     private boolean isMouseSelectEnabled = false;
     private Ray selectionRay;
@@ -40,7 +40,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     @Override
     public void receiveMessage(String message) {
         //Gdx.app.debug(TAG, "Got message " + message);
-        String[] string = message.split(Component.MESSAGE_TOKEN);
+        String[] string = message.split(com.mygdx.game.components.Component.MESSAGE_TOKEN);
 
         if( string.length == 0 ) return;
 
@@ -50,9 +50,9 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
                 currentEntityPosition = json.fromJson(Vector2.class, string[1]);
                 nextEntityPosition.set(currentEntityPosition.x, currentEntityPosition.y);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_STATE.toString())) {
-                state = json.fromJson(Entity.State.class, string[1]);
+                state = json.fromJson(com.mygdx.game.tools.Entity.State.class, string[1]);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_DIRECTION.toString())) {
-                currentDirection = json.fromJson(Entity.Direction.class, string[1]);
+                currentDirection = json.fromJson(com.mygdx.game.tools.Entity.Direction.class, string[1]);
             } else if (string[0].equalsIgnoreCase(MESSAGE.INIT_SELECT_ENTITY.toString())) {
                 mouseSelectCoordinates = json.fromJson(Vector3.class, string[1]);
                 isMouseSelectEnabled = true;
@@ -61,7 +61,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     }
 
     @Override
-    public void update(Entity entity, MapManager mapMgr, float delta) {
+    public void update(com.mygdx.game.tools.Entity entity, MapManager mapMgr, float delta) {
         //We want the hitbox to be at the feet for a better feel
         updateBoundingBoxPosition(nextEntityPosition);
         updatePortalLayerActivation(mapMgr);
@@ -73,7 +73,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
         if (!isCollisionWithMapLayer(entity, mapMgr) &&
                 !isCollisionWithMapEntities(entity, mapMgr) &&
-                state == Entity.State.WALKING){
+                state == com.mygdx.game.tools.Entity.State.WALKING){
             setNextPositionToCurrent(entity);
 
             Camera camera = mapMgr.getCamera();
@@ -87,7 +87,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     }
 
     private void selectMapEntityCandidate(MapManager mapMgr){
-        Array<Entity> currentEntities = mapMgr.getCurrentMapEntities();
+        Array<com.mygdx.game.tools.Entity> currentEntities = mapMgr.getCurrentMapEntities();
 
         //Convert screen coordinates to world coordinates, then to unit scale coordinates
         mapMgr.getCamera().unproject(mouseSelectCoordinates);
@@ -96,7 +96,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
         //Gdx.app.debug(TAG, "Mouse Coordinates " + "(" + mouseSelectCoordinates.x + "," + mouseSelectCoordinates.y + ")");
 
-        for( Entity mapEntity : currentEntities ) {
+        for( com.mygdx.game.tools.Entity mapEntity : currentEntities ) {
             //Don't break, reset all entities
             mapEntity.sendMessage(MESSAGE.ENTITY_DESELECTED);
             Rectangle mapEntityBoundingBox = mapEntity.getCurrentBoundingBox();

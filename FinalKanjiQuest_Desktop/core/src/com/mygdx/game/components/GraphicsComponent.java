@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.tools.Entity;
+import com.mygdx.game.tools.Utility;
 import com.mygdx.game.maps.MapManager;
 
 import java.util.Hashtable;

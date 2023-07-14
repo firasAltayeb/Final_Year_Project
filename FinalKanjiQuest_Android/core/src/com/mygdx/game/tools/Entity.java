@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.components.GraphicsComponent;
+import com.mygdx.game.components.InputComponent;
 import com.mygdx.game.maps.MapManager;
 
 import java.util.ArrayList;
@@ -85,17 +87,17 @@ public class Entity {
     public static int FRAME_HEIGHT = 34;
 
     private static final int MAX_COMPONENTS = 5;
-    private Array<Component> components;
+    private Array<com.mygdx.game.components.Component> components;
 
-    private InputComponent inputComponent;
-    private GraphicsComponent graphicsComponent;
-    private PhysicsComponent physicsComponent;
+    private com.mygdx.game.components.InputComponent inputComponent;
+    private com.mygdx.game.components.GraphicsComponent graphicsComponent;
+    private com.mygdx.game.components.PhysicsComponent physicsComponent;
 
-    public Entity(InputComponent inputComponent, PhysicsComponent physicsComponent, GraphicsComponent graphicsComponent){
+    public Entity(InputComponent inputComponent, com.mygdx.game.components.PhysicsComponent physicsComponent, GraphicsComponent graphicsComponent){
         entityConfig = new EntityConfig();
         json = new Json();
 
-        components = new Array<Component>(MAX_COMPONENTS);
+        components = new Array<com.mygdx.game.components.Component>(MAX_COMPONENTS);
 
         this.inputComponent = inputComponent;
         this.physicsComponent = physicsComponent;
@@ -111,14 +113,14 @@ public class Entity {
     }
 
     //(String ...) means you can add as much String param as you want
-    public void sendMessage(Component.MESSAGE messageType, String ... args){
+    public void sendMessage(com.mygdx.game.components.Component.MESSAGE messageType, String ... args){
         String fullMessage = messageType.toString();
 
         for (String string : args) {
-            fullMessage += Component.MESSAGE_TOKEN + string;
+            fullMessage += com.mygdx.game.components.Component.MESSAGE_TOKEN + string;
         }
 
-        for(Component component: components){
+        for(com.mygdx.game.components.Component component: components){
             component.receiveMessage(fullMessage);
         }
     }
@@ -134,7 +136,7 @@ public class Entity {
     }
 
     public void dispose(){
-        for(Component component: components){
+        for(com.mygdx.game.components.Component component: components){
             component.dispose();
         }
     }

@@ -1,15 +1,15 @@
-package com.mygdx.game;
+package com.mygdx.game.tools;
 
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Entity.AnimationType;
+import com.mygdx.game.tools.Entity.AnimationType;
 import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 
 
 public class EntityConfig {
     String entityID;
-    Entity.State state;
-    Entity.Direction direction;
+    com.mygdx.game.tools.Entity.State state;
+    com.mygdx.game.tools.Entity.Direction direction;
 
     Array<ItemTypeID> inventory;
     Array<AnimationConfig> animationConfig;
@@ -27,19 +27,19 @@ public class EntityConfig {
         this.entityID = entityID;
     }
 
-    public Entity.Direction getDirection() {
+    public com.mygdx.game.tools.Entity.Direction getDirection() {
         return direction;
     }
 
-    public void setDirection(Entity.Direction direction) {
+    public void setDirection(com.mygdx.game.tools.Entity.Direction direction) {
         this.direction = direction;
     }
 
-    public Entity.State getState() {
+    public com.mygdx.game.tools.Entity.State getState() {
         return state;
     }
 
-    public void setState(Entity.State state) {
+    public void setState(com.mygdx.game.tools.Entity.State state) {
         this.state = state;
     }
 

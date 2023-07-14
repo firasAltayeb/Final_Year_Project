@@ -1,7 +1,14 @@
-package com.mygdx.game;
+package com.mygdx.game.tools;
 
 
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.components.Component;
+import com.mygdx.game.components.NPCGraphicsComponent;
+import com.mygdx.game.components.NPCInputComponent;
+import com.mygdx.game.components.NPCPhysicsComponent;
+import com.mygdx.game.components.PlayerGraphicsComponent;
+import com.mygdx.game.components.PlayerInputComponent;
+import com.mygdx.game.components.PlayerPhysicsComponent;
 
 public class EntityFactory {
 

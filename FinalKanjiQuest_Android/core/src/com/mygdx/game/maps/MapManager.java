@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Entity;
+import com.mygdx.game.tools.Entity;
 import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
 

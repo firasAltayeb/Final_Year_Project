@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Utility;
+import com.mygdx.game.tools.Utility;
 
 public class ProgressUI extends Window implements ProgressSubject {
 

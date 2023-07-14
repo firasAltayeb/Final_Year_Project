@@ -1,7 +1,7 @@
 package com.mygdx.game.maps;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.mygdx.game.Entity;
+import com.mygdx.game.tools.Entity;
 
 public class HerbShopMap extends Map {
     private static String mapPath = "tile_maps/herb_shop.tmx";

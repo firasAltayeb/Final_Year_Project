@@ -1,7 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.tools.Entity;
 
 import java.util.HashMap;
 import java.util.Map;

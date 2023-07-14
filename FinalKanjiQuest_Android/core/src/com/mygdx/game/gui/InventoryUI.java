@@ -1,6 +1,5 @@
 package com.mygdx.game.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -9,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Component;
-import com.mygdx.game.Utility;
+import com.mygdx.game.components.Component;
+import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.*;
 import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 import com.mygdx.game.inventory.InventorySlot;

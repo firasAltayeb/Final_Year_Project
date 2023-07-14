@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.tools.Entity;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapFactory;
 import com.mygdx.game.maps.MapManager;
@@ -107,7 +108,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
                 float distance =  selectionRay.origin.dst(selectionRay.direction);
 
                 if( distance <= selectRayMaximumDistance){
-                    //We have a valid entity selection
+                    //We have a valid tools selection
                     //Picked/Selected
                     Gdx.app.debug(TAG, "Selected Entity! " + mapEntity.getEntityConfig().getEntityID());
                     mapEntity.sendMessage(MESSAGE.ENTITY_SELECTED);

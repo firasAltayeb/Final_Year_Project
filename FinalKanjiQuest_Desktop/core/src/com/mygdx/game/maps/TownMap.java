@@ -2,14 +2,8 @@ package com.mygdx.game.maps;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Component;
-import com.mygdx.game.Entity;
-import com.mygdx.game.EntityConfig;
-import com.mygdx.game.EntityFactory;
-import com.mygdx.game.PlayerPhysicsComponent;
-import com.mygdx.game.maps.Map;
-import com.mygdx.game.maps.MapFactory;
-import com.mygdx.game.maps.MapManager;
+import com.mygdx.game.tools.Entity;
+import com.mygdx.game.components.PlayerPhysicsComponent;
 
 public class TownMap extends Map {
     private static final String TAG = PlayerPhysicsComponent.class.getSimpleName();

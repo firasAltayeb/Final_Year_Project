@@ -9,11 +9,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.mygdx.game.Component;
-import com.mygdx.game.Entity;
-import com.mygdx.game.EntityConfig;
-import com.mygdx.game.EntityFactory;
-import com.mygdx.game.Utility;
+import com.mygdx.game.components.Component;
+import com.mygdx.game.tools.Entity;
+import com.mygdx.game.tools.EntityConfig;
+import com.mygdx.game.tools.EntityFactory;
+import com.mygdx.game.tools.Utility;
 
 import java.util.Hashtable;
 

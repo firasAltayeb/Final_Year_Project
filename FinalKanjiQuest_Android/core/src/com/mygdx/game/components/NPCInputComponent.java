@@ -1,9 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.game.tools.Entity;
 
 public class NPCInputComponent extends InputComponent implements InputProcessor {
 

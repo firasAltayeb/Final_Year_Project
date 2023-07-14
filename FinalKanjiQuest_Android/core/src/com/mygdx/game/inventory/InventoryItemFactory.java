@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
-import com.mygdx.game.Utility;
+import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 
 import java.util.ArrayList;

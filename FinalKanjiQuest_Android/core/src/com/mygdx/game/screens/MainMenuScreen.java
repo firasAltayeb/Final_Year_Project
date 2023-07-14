@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.FinalKanjiQuest.ScreenType;
-import com.mygdx.game.Utility;
+import com.mygdx.game.tools.Utility;
 
 public class MainMenuScreen implements Screen {
 

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.maps.MapManager;
@@ -7,7 +7,7 @@ public class NPCPhysicsComponent extends PhysicsComponent {
 
     private static final String TAG = NPCPhysicsComponent.class.getSimpleName();
 
-    private Entity.State state;
+    private com.mygdx.game.tools.Entity.State state;
 
     public NPCPhysicsComponent(){
         boundingBoxLocation = BoundingBoxLocation.CENTER;
@@ -32,22 +32,22 @@ public class NPCPhysicsComponent extends PhysicsComponent {
                 currentEntityPosition = json.fromJson(Vector2.class, string[1]);
                 nextEntityPosition.set(currentEntityPosition.x, currentEntityPosition.y);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_STATE.toString())) {
-                state = json.fromJson(Entity.State.class, string[1]);
+                state = json.fromJson(com.mygdx.game.tools.Entity.State.class, string[1]);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_DIRECTION.toString())) {
-                currentDirection = json.fromJson(Entity.Direction.class, string[1]);
+                currentDirection = json.fromJson(com.mygdx.game.tools.Entity.Direction.class, string[1]);
             }
         }
     }
 
     @Override
-    public void update(Entity entity, MapManager mapMgr, float delta) {
+    public void update(com.mygdx.game.tools.Entity entity, MapManager mapMgr, float delta) {
         updateBoundingBoxPosition(nextEntityPosition);
 
-        if( state == Entity.State.IMMOBILE ) return;
+        if( state == com.mygdx.game.tools.Entity.State.IMMOBILE ) return;
 
         if (!isCollisionWithMapLayer(entity, mapMgr) &&
                 !isCollisionWithMapEntities(entity, mapMgr) &&
-                state == Entity.State.WALKING){
+                state == com.mygdx.game.tools.Entity.State.WALKING){
             setNextPositionToCurrent(entity);
         } else {
             updateBoundingBoxPosition(currentEntityPosition);
@@ -56,7 +56,7 @@ public class NPCPhysicsComponent extends PhysicsComponent {
     }
 
     @Override
-    protected boolean isCollisionWithMapEntities(Entity entity, MapManager mapMgr){
+    protected boolean isCollisionWithMapEntities(com.mygdx.game.tools.Entity entity, MapManager mapMgr){
         //Test against player
         if(isCollision(entity, mapMgr.getPlayer()) ) {
             return true;

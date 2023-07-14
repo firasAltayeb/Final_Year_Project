@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.EntityConfig.AnimationConfig;
+import com.mygdx.game.tools.Entity;
+import com.mygdx.game.tools.EntityConfig;
+import com.mygdx.game.tools.EntityConfig.AnimationConfig;
 import com.mygdx.game.maps.MapManager;
 
 
@@ -70,7 +72,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
         batch.end();
 
 //        Used to graphically debug boundingboxes
-//        Rectangle rect = entity.getCurrentBoundingBox();
+//        Rectangle rect = tools.getCurrentBoundingBox();
 //        shapeRenderer.setProjectionMatrix(camera.combined);
 //        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 //        shapeRenderer.setColor(Color.RED);

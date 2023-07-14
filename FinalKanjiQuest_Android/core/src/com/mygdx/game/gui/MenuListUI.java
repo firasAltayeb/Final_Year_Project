@@ -3,7 +3,7 @@ package com.mygdx.game.gui;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.Utility;
+import com.mygdx.game.tools.Utility;
 
 public class MenuListUI extends Window {
 

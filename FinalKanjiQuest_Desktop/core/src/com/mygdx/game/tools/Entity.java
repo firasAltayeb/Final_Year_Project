@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -8,6 +8,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.components.Component;
+import com.mygdx.game.components.GraphicsComponent;
+import com.mygdx.game.components.InputComponent;
+import com.mygdx.game.components.PhysicsComponent;
 import com.mygdx.game.maps.MapManager;
 
 import java.util.ArrayList;

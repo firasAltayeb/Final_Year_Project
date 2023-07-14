@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import com.mygdx.game.Utility;
+import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 
 public class InventoryItemFactory {

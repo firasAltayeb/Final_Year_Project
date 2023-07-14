@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.EntityConfig.AnimationConfig;
+import com.mygdx.game.tools.EntityConfig.AnimationConfig;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
 
@@ -45,17 +45,17 @@ public class NPCGraphicsComponent extends GraphicsComponent {
             } else if (string[0].equalsIgnoreCase(MESSAGE.INIT_START_POSITION.toString())) {
                 currentPosition = json.fromJson(Vector2.class, string[1]);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_STATE.toString())) {
-                currentState = json.fromJson(Entity.State.class, string[1]);
+                currentState = json.fromJson(com.mygdx.game.tools.Entity.State.class, string[1]);
             } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_DIRECTION.toString())) {
-                currentDirection = json.fromJson(Entity.Direction.class, string[1]);
+                currentDirection = json.fromJson(com.mygdx.game.tools.Entity.Direction.class, string[1]);
             }else if (string[0].equalsIgnoreCase(MESSAGE.LOAD_ANIMATIONS.toString())) {
-                EntityConfig entityConfig = json.fromJson(EntityConfig.class, string[1]);
-                Array<EntityConfig.AnimationConfig> animationConfigs = entityConfig.getAnimationConfig();
+                com.mygdx.game.tools.EntityConfig entityConfig = json.fromJson(com.mygdx.game.tools.EntityConfig.class, string[1]);
+                Array<AnimationConfig> animationConfigs = entityConfig.getAnimationConfig();
 
                 for( AnimationConfig animationConfig : animationConfigs ){
                     Array<String> textureNames = animationConfig.getTexturePaths();
                     Array<GridPoint2> points = animationConfig.getGridPoints();
-                    Entity.AnimationType animationType = animationConfig.getAnimationType();
+                    com.mygdx.game.tools.Entity.AnimationType animationType = animationConfig.getAnimationType();
                     float frameDuration = animationConfig.getFrameDuration();
                     Animation animation = null;
 
@@ -72,7 +72,7 @@ public class NPCGraphicsComponent extends GraphicsComponent {
     }
 
     @Override
-    public void update(Entity entity, MapManager mapMgr, Batch batch, float delta){
+    public void update(com.mygdx.game.tools.Entity entity, MapManager mapMgr, Batch batch, float delta){
         updateAnimations(delta);
 
         if(isSelected){
@@ -94,7 +94,7 @@ public class NPCGraphicsComponent extends GraphicsComponent {
 
     }
 
-    private void drawSelected(Entity entity, MapManager mapMgr){
+    private void drawSelected(com.mygdx.game.tools.Entity entity, MapManager mapMgr){
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Camera camera = mapMgr.getCamera();

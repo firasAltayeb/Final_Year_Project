@@ -1,17 +1,17 @@
-package com.mygdx.game;
+package com.mygdx.game.tools;
 
 /**
  * Created by Firas on 19/02/2017.
  */
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public final class Utility {
@@ -32,7 +32,7 @@ public final class Utility {
     public static Skin GUI_SKINS = new Skin(Gdx.files.internal(GUI_SKINS_PATH), GUI_TEXTUREATLAS);
     public static Skin ITEMS_SKINS = new Skin(Gdx.files.internal(ITEMS_SKINS_PATH), ITEMS_TEXTUREATLAS);
 
-    public static void unloadAsset (java.lang.String assetFileNamePath){
+    public static void unloadAsset (String assetFileNamePath){
         // once the asset manger is done loading
         if(assetManager.isLoaded(assetFileNamePath)){
             assetManager.unload(assetFileNamePath);

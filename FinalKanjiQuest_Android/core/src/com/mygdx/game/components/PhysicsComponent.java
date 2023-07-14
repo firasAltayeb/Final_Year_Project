@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
@@ -8,10 +8,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.tools.Entity;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
 
-public abstract class PhysicsComponent implements Component {
+public abstract class PhysicsComponent implements com.mygdx.game.components.Component {
 
     private static final String TAG = PhysicsComponent.class.getSimpleName();
 

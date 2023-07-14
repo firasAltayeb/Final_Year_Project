@@ -12,15 +12,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.Component;
-import com.mygdx.game.Entity;
-import com.mygdx.game.Utility;
+import com.mygdx.game.components.Component;
+import com.mygdx.game.tools.Entity;
+import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem;
 import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 import com.mygdx.game.inventory.InventoryItemLocation;
 import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
-import com.mygdx.game.screens.MainGameScreen;
 
 public class PlayerHUD implements Screen, InventoryObserver, ProfileObserver, ProgressObserver {
 

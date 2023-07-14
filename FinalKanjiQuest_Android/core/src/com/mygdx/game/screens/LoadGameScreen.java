@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.FinalKanjiQuest;
-import com.mygdx.game.Utility;
+import com.mygdx.game.tools.Utility;
 import com.mygdx.game.profile.ProfileManager;
 
 
