@@ -2,6 +2,7 @@ package com.mygdx.game.japanese;
 
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.Hashtable;
 
@@ -171,6 +172,9 @@ public class LetterLvlCounter {
      private static Hashtable<String, Integer> hiraganaLvlTable;
      private static Hashtable<String, Integer> katakanaLvlTable;
      private static Hashtable<String, Integer> kanjiLvlTable;
+     private static Array<Integer> hiraganaList;
+     private static Array<Integer> katakanaList;
+     private static Array<Integer> kanjiList;
 
      public static Hashtable<String, Integer> getHiraganaLvlTable(){
 
@@ -946,40 +950,546 @@ public class LetterLvlCounter {
           }
      }
 
-     public static boolean areAllHiraganaMemorised(){
+
+     public static void setAllHiraganaMemorised(boolean temp){
+          allHiraganaMemorised = temp;
+     }
+
+     public static void setAllKatakanaMemorised(boolean temp) {
+          allKatakanaMemorised = temp;
+     }
+
+     public static void setAllKanjiMemorised(boolean temp){
+          allKanjiMemorised = temp;
+     }
+
+     public static boolean isAllHiraganaMemorised() {
           return allHiraganaMemorised;
      }
 
-     public static void allHiraganaMemorised(){
-          allHiraganaMemorised = true;
-     }
-
-     public static void allHiraganaNotMemorised(){
-          allHiraganaMemorised = false;
-     }
-
-     public static boolean areAllKatakanaMemorised(){
+     public static boolean isAllKatakanaMemorised() {
           return allKatakanaMemorised;
      }
 
-     public static void allKatakanaMemorised() {
-          allKatakanaMemorised = true;
-     }
-
-     public static void allKatakanaNotMemorised(){
-          allKatakanaMemorised = false;
-     }
-
-     public static boolean areAllKanjiMemorised(){
+     public static boolean isAllKanjiMemorised() {
           return allKanjiMemorised;
      }
 
-     public static void allKanjiMemorised(){
-          allKanjiMemorised = true;
+     public static Array<Integer> getHiraganaList() {
+          hiraganaList = new Array<Integer>();
+
+          hiraganaList.add(hiraganaALvl);
+          hiraganaList.add(hiraganaILvl);
+          hiraganaList.add(hiraganaULvl);
+          hiraganaList.add(hiraganaELvl);
+          hiraganaList.add(hiraganaOLvl);
+          hiraganaList.add(hiraganaKaLvl);
+          hiraganaList.add(hiraganaKiLvl);
+          hiraganaList.add(hiraganaKuLvl);
+          hiraganaList.add(hiraganaKeLvl);
+          hiraganaList.add(hiraganaKoLvl);
+          hiraganaList.add(hiraganaSaLvl);
+          hiraganaList.add(hiraganaShiLvl);
+          hiraganaList.add(hiraganaSuLvl);
+          hiraganaList.add(hiraganaSeLvl);
+          hiraganaList.add(hiraganaSoLvl);
+          hiraganaList.add(hiraganaTaLvl);
+          hiraganaList.add(hiraganaChiLvl);
+          hiraganaList.add(hiraganaTsuLvl);
+          hiraganaList.add(hiraganaTeLvl);
+          hiraganaList.add(hiraganaToLvl);
+          hiraganaList.add(hiraganaNaLvl);
+          hiraganaList.add(hiraganaNiLvl);
+          hiraganaList.add(hiraganaNuLvl);
+          hiraganaList.add(hiraganaNeLvl);
+          hiraganaList.add(hiraganaNoLvl);
+          hiraganaList.add(hiraganaHaLvl);
+          hiraganaList.add(hiraganaHiLvl);
+          hiraganaList.add(hiraganaHuLvl);
+          hiraganaList.add(hiraganaHeLvl);
+          hiraganaList.add(hiraganaHoLvl);
+          hiraganaList.add(hiraganaMaLvl);
+          hiraganaList.add(hiraganaMiLvl);
+          hiraganaList.add(hiraganaMuLvl);
+          hiraganaList.add(hiraganaMeLvl);
+          hiraganaList.add(hiraganaMoLvl);
+          hiraganaList.add(hiraganaRaLvl);
+          hiraganaList.add(hiraganaRiLvl);
+          hiraganaList.add(hiraganaRuLvl);
+          hiraganaList.add(hiraganaReLvl);
+          hiraganaList.add(hiraganaRoLvl);
+          hiraganaList.add(hiraganaYuLvl);
+          hiraganaList.add(hiraganaYoLvl);
+          hiraganaList.add(hiraganaWaLvl);
+          hiraganaList.add(hiraganaWoLvl);
+          hiraganaList.add(hiraganaNLvl);
+          hiraganaList.add(hiraganaGaLvl);
+          hiraganaList.add(hiraganaGiLvl);
+          hiraganaList.add(hiraganaGuLvl);
+          hiraganaList.add(hiraganaGeLvl);
+          hiraganaList.add(hiraganaGoLvl);
+          hiraganaList.add(hiraganaZaLvl);
+          hiraganaList.add(hiraganaJiLvl);
+          hiraganaList.add(hiraganaZuLvl);
+          hiraganaList.add(hiraganaZeLvl);
+          hiraganaList.add(hiraganaZoLvl);
+          hiraganaList.add(hiraganaDaLvl);
+          hiraganaList.add(hiraganaDiLvl);
+          hiraganaList.add(hiraganaDuLvl);
+          hiraganaList.add(hiraganaDeLvl);
+          hiraganaList.add(hiraganaDoLvl);
+          hiraganaList.add(hiraganaBaLvl);
+          hiraganaList.add(hiraganaBiLvl);
+          hiraganaList.add(hiraganaBuLvl);
+          hiraganaList.add(hiraganaBeLvl);
+          hiraganaList.add(hiraganaBoLvl);
+          hiraganaList.add(hiraganaPaLvl);
+          hiraganaList.add(hiraganaPiLvl);
+          hiraganaList.add(hiraganaPuLvl);
+          hiraganaList.add(hiraganaPeLvl);
+          hiraganaList.add(hiraganaPoLvl);
+          hiraganaList.add(hiraganaYaLvl);
+          hiraganaList.add(hiraganaKyaLvl);
+          hiraganaList.add(hiraganaKyuLvl);
+          hiraganaList.add(hiraganaKyoLvl);
+          hiraganaList.add(hiraganaShaLvl);
+          hiraganaList.add(hiraganaShuLvl);
+          hiraganaList.add(hiraganaShoLvl);
+          hiraganaList.add(hiraganaChaLvl);
+          hiraganaList.add(hiraganaChuLvl);
+          hiraganaList.add(hiraganaChoLvl);
+          hiraganaList.add(hiraganaHyaLvl);
+          hiraganaList.add(hiraganaHyuLvl);
+          hiraganaList.add(hiraganaHyoLvl);
+          hiraganaList.add(hiraganaNyaLvl);
+          hiraganaList.add(hiraganaNyuLvl);
+          hiraganaList.add(hiraganaNyoLvl);
+          hiraganaList.add(hiraganaMyaLvl);
+          hiraganaList.add(hiraganaMyuLvl);
+          hiraganaList.add(hiraganaMyoLvl);
+          hiraganaList.add(hiraganaRyaLvl);
+          hiraganaList.add(hiraganaRyuLvl);
+          hiraganaList.add(hiraganaRyoLvl);
+          hiraganaList.add(hiraganaGyaLvl);
+          hiraganaList.add(hiraganaGyuLvl);
+          hiraganaList.add(hiraganaGyoLvl);
+          hiraganaList.add(hiraganaJyaLvl);
+          hiraganaList.add(hiraganaJyuLvl);
+          hiraganaList.add(hiraganaJyoLvl);
+          hiraganaList.add(hiraganaDyaLvl);
+          hiraganaList.add(hiraganaDyuLvl);
+          hiraganaList.add(hiraganaDyoLvl);
+          hiraganaList.add(hiraganaByaLvl);
+          hiraganaList.add(hiraganaByuLvl);
+          hiraganaList.add(hiraganaByoLvl);
+          hiraganaList.add(hiraganaPyaLvl);
+          hiraganaList.add(hiraganaPyuLvl);
+          hiraganaList.add(hiraganaPyoLvl);
+
+          return hiraganaList;
      }
 
-     public static void allKanjiNotMemorised(){
-          allKanjiMemorised = false;
+     public static Array<Integer> getKatakanaList() {
+          katakanaList = new Array<Integer>();
+
+          katakanaList.add(katakanaALvl);
+          katakanaList.add(katakanaILvl);
+          katakanaList.add(katakanaULvl);
+          katakanaList.add(katakanaELvl);
+          katakanaList.add(katakanaOLvl);
+          katakanaList.add(katakanaKaLvl);
+          katakanaList.add(katakanaKiLvl);
+          katakanaList.add(katakanaKuLvl);
+          katakanaList.add(katakanaKeLvl);
+          katakanaList.add(katakanaKoLvl);
+          katakanaList.add(katakanaSaLvl);
+          katakanaList.add(katakanaShiLvl);
+          katakanaList.add(katakanaSuLvl);
+          katakanaList.add(katakanaSeLvl);
+          katakanaList.add(katakanaSoLvl);
+          katakanaList.add(katakanaTaLvl);
+          katakanaList.add(katakanaChiLvl);
+          katakanaList.add(katakanaTsuLvl);
+          katakanaList.add(katakanaTeLvl);
+          katakanaList.add(katakanaToLvl);
+          katakanaList.add(katakanaNaLvl);
+          katakanaList.add(katakanaNiLvl);
+          katakanaList.add(katakanaNuLvl);
+          katakanaList.add(katakanaNeLvl);
+          katakanaList.add(katakanaNoLvl);
+          katakanaList.add(katakanaHaLvl);
+          katakanaList.add(katakanaHiLvl);
+          katakanaList.add(katakanaHuLvl);
+          katakanaList.add(katakanaHeLvl);
+          katakanaList.add(katakanaHoLvl);
+          katakanaList.add(katakanaMaLvl);
+          katakanaList.add(katakanaMiLvl);
+          katakanaList.add(katakanaMuLvl);
+          katakanaList.add(katakanaMeLvl);
+          katakanaList.add(katakanaMoLvl);
+          katakanaList.add(katakanaRaLvl);
+          katakanaList.add(katakanaRiLvl);
+          katakanaList.add(katakanaRuLvl);
+          katakanaList.add(katakanaReLvl);
+          katakanaList.add(katakanaRoLvl);
+          katakanaList.add(katakanaYuLvl);
+          katakanaList.add(katakanaYoLvl);
+          katakanaList.add(katakanaWaLvl);
+          katakanaList.add(katakanaWoLvl);
+          katakanaList.add(katakanaNLvl);
+          katakanaList.add(katakanaGaLvl);
+          katakanaList.add(katakanaGiLvl);
+          katakanaList.add(katakanaGuLvl);
+          katakanaList.add(katakanaGeLvl);
+          katakanaList.add(katakanaGoLvl);
+          katakanaList.add(katakanaZaLvl);
+          katakanaList.add(katakanaJiLvl);
+          katakanaList.add(katakanaZuLvl);
+          katakanaList.add(katakanaZeLvl);
+          katakanaList.add(katakanaZoLvl);
+          katakanaList.add(katakanaDaLvl);
+          katakanaList.add(katakanaDiLvl);
+          katakanaList.add(katakanaDuLvl);
+          katakanaList.add(katakanaDeLvl);
+          katakanaList.add(katakanaDoLvl);
+          katakanaList.add(katakanaBaLvl);
+          katakanaList.add(katakanaBiLvl);
+          katakanaList.add(katakanaBuLvl);
+          katakanaList.add(katakanaBeLvl);
+          katakanaList.add(katakanaBoLvl);
+          katakanaList.add(katakanaPaLvl);
+          katakanaList.add(katakanaPiLvl);
+          katakanaList.add(katakanaPuLvl);
+          katakanaList.add(katakanaPeLvl);
+          katakanaList.add(katakanaPoLvl);
+          katakanaList.add(katakanaYaLvl);
+          katakanaList.add(katakanaKyaLvl);
+          katakanaList.add(katakanaKyuLvl);
+          katakanaList.add(katakanaKyoLvl);
+          katakanaList.add(katakanaShaLvl);
+          katakanaList.add(katakanaShuLvl);
+          katakanaList.add(katakanaShoLvl);
+          katakanaList.add(katakanaChaLvl);
+          katakanaList.add(katakanaChuLvl);
+          katakanaList.add(katakanaChoLvl);
+          katakanaList.add(katakanaHyaLvl);
+          katakanaList.add(katakanaHyuLvl);
+          katakanaList.add(katakanaHyoLvl);
+          katakanaList.add(katakanaNyaLvl);
+          katakanaList.add(katakanaNyuLvl);
+          katakanaList.add(katakanaNyoLvl);
+          katakanaList.add(katakanaMyaLvl);
+          katakanaList.add(katakanaMyuLvl);
+          katakanaList.add(katakanaMyoLvl);
+          katakanaList.add(katakanaRyaLvl);
+          katakanaList.add(katakanaRyuLvl);
+          katakanaList.add(katakanaRyoLvl);
+          katakanaList.add(katakanaGyaLvl);
+          katakanaList.add(katakanaGyuLvl);
+          katakanaList.add(katakanaGyoLvl);
+          katakanaList.add(katakanaJyaLvl);
+          katakanaList.add(katakanaJyuLvl);
+          katakanaList.add(katakanaJyoLvl);
+          katakanaList.add(katakanaDyaLvl);
+          katakanaList.add(katakanaDyuLvl);
+          katakanaList.add(katakanaDyoLvl);
+          katakanaList.add(katakanaByaLvl);
+          katakanaList.add(katakanaByuLvl);
+          katakanaList.add(katakanaByoLvl);
+          katakanaList.add(katakanaPyaLvl);
+          katakanaList.add(katakanaPyuLvl);
+          katakanaList.add(katakanaPyoLvl);
+
+          return katakanaList;
      }
 
+     public static Array<Integer> getKanjiList() {
+
+          kanjiList = new Array<Integer>();
+
+           kanjiList.add( kanjiHaLvl);
+           kanjiList.add( kanjiKiLvl);
+           kanjiList.add( kanjiMushiLvl);
+           kanjiList.add( kanjiKazeLvl);
+           kanjiList.add(kanjiTsuchiLvl);
+           kanjiList.add( kanjiUchiLvl);
+           kanjiList.add( kanjiUmiLvl);
+           kanjiList.add( kanjiMizuLvl);
+           kanjiList.add( kanjiIkeLvl);
+           kanjiList.add( kanjiKooriLvl);
+           kanjiList.add(kanjiHayashiLvl);
+           kanjiList.add( kanjiToLvl);
+           kanjiList.add( kanjiTeraLvl);
+           kanjiList.add( kanjiSotoLvl);
+           kanjiList.add( kanjiHiLvl);
+           kanjiList.add( kanjiAkaLvl);
+           kanjiList.add( kanjiHanaLvl);
+           kanjiList.add( kanjiMoriLvl);
+           kanjiList.add( kanjiIshiLvl);
+           kanjiList.add( kanjiYamaLvl);
+           kanjiList.add(kanjiSakanaLvl);
+           kanjiList.add( kanjiKaiLvl);
+           kanjiList.add( kanjiYukiLvl);
+           kanjiList.add( kanjiKawaLvl);
+           kanjiList.add( kanjiFuyuLvl);
+           kanjiList.add( kanjiMonLvl);
+           kanjiList.add( kanjiAnaLvl);
+           kanjiList.add( kanjiKaLvl);
+           kanjiList.add( kanjiChiLvl);
+           kanjiList.add(kanjiHikariLvl);
+
+
+          return kanjiList;
+     }
+
+     public static void adjustLvl(String letter, int addOn){
+          switch (letter){
+               case "hiraganaA":         hiraganaALvl = addOn;    break;
+               case "hiraganaI":         hiraganaILvl = addOn;    break;
+               case "hiraganaU":         hiraganaULvl = addOn;    break;
+               case "hiraganaE":         hiraganaELvl = addOn;    break;
+               case "hiraganaO":         hiraganaOLvl = addOn;    break;
+               case "hiraganaKa":       hiraganaKaLvl = addOn;    break;
+               case "hiraganaKi":       hiraganaKiLvl = addOn;    break;
+               case "hiraganaKu":       hiraganaKuLvl = addOn;    break;
+               case "hiraganaKe":       hiraganaKeLvl = addOn;    break;
+               case "hiraganaKo":       hiraganaKoLvl = addOn;    break;
+               case "hiraganaSa":       hiraganaSaLvl = addOn;    break;
+               case "hiraganaShi":     hiraganaShiLvl = addOn;    break;
+               case "hiraganaSu":       hiraganaSuLvl = addOn;    break;
+               case "hiraganaSe":       hiraganaSeLvl = addOn;    break;
+               case "hiraganaSo":       hiraganaSoLvl = addOn;    break;
+               case "hiraganaTa":       hiraganaTaLvl = addOn;    break;
+               case "hiraganaChi":     hiraganaChiLvl = addOn;    break;
+               case "hiraganaTsu":     hiraganaTsuLvl = addOn;    break;
+               case "hiraganaTe":       hiraganaTeLvl = addOn;    break;
+               case "hiraganaTo":       hiraganaToLvl = addOn;    break;
+               case "hiraganaNa":       hiraganaNaLvl = addOn;    break;
+               case "hiraganaNi":       hiraganaNiLvl = addOn;    break;
+               case "hiraganaNu":       hiraganaNuLvl = addOn;    break;
+               case "hiraganaNe":       hiraganaNeLvl = addOn;    break;
+               case "hiraganaNo":       hiraganaNoLvl = addOn;    break;
+               case "hiraganaHa":       hiraganaHaLvl = addOn;    break;
+               case "hiraganaHi":       hiraganaHiLvl = addOn;    break;
+               case "hiraganaHu":       hiraganaHuLvl = addOn;    break;
+               case "hiraganaHe":       hiraganaHeLvl = addOn;    break;
+               case "hiraganaHo":       hiraganaHoLvl = addOn;    break;
+               case "hiraganaMa":       hiraganaMaLvl = addOn;    break;
+               case "hiraganaMi":       hiraganaMiLvl = addOn;    break;
+               case "hiraganaMu":       hiraganaMuLvl = addOn;    break;
+               case "hiraganaMe":       hiraganaMeLvl = addOn;    break;
+               case "hiraganaMo":       hiraganaMoLvl = addOn;    break;
+               case "hiraganaRa":       hiraganaRaLvl = addOn;    break;
+               case "hiraganaRi":       hiraganaRiLvl = addOn;    break;
+               case "hiraganaRu":       hiraganaRuLvl = addOn;    break;
+               case "hiraganaRe":       hiraganaReLvl = addOn;    break;
+               case "hiraganaRo":       hiraganaRoLvl = addOn;    break;
+               case "hiraganaYa":       hiraganaYaLvl = addOn;    break;
+               case "hiraganaYu":       hiraganaYuLvl = addOn;    break;
+               case "hiraganaYo":       hiraganaYoLvl = addOn;    break;
+               case "hiraganaWa":       hiraganaWaLvl = addOn;    break;
+               case "hiraganaWo":       hiraganaWoLvl = addOn;    break;
+               case "hiraganaN":         hiraganaNLvl = addOn;    break;
+               case "hiraganaGa":       hiraganaGaLvl = addOn;    break;
+               case "hiraganaGi":       hiraganaGiLvl = addOn;    break;
+               case "hiraganaGu":       hiraganaGuLvl = addOn;    break;
+               case "hiraganaGe":       hiraganaGeLvl = addOn;    break;
+               case "hiraganaGo":       hiraganaGoLvl = addOn;    break;
+               case "hiraganaZa":       hiraganaZaLvl = addOn;    break;
+               case "hiraganaJi":       hiraganaJiLvl = addOn;    break;
+               case "hiraganaZu":       hiraganaZuLvl = addOn;    break;
+               case "hiraganaZe":       hiraganaZeLvl = addOn;    break;
+               case "hiraganaZo":       hiraganaZoLvl = addOn;    break;
+               case "hiraganaDa":       hiraganaDaLvl = addOn;    break;
+               case "hiraganaDi":       hiraganaDiLvl = addOn;    break;
+               case "hiraganaDu":       hiraganaDuLvl = addOn;    break;
+               case "hiraganaDe":       hiraganaDeLvl = addOn;    break;
+               case "hiraganaDo":       hiraganaDoLvl = addOn;    break;
+               case "hiraganaBa":       hiraganaBaLvl = addOn;    break;
+               case "hiraganaBi":       hiraganaBiLvl = addOn;    break;
+               case "hiraganaBu":       hiraganaBuLvl = addOn;    break;
+               case "hiraganaBe":       hiraganaBeLvl = addOn;    break;
+               case "hiraganaBo":       hiraganaBoLvl = addOn;    break;
+               case "hiraganaPa":       hiraganaPaLvl = addOn;    break;
+               case "hiraganaPi":       hiraganaPiLvl = addOn;    break;
+               case "hiraganaPu":       hiraganaPuLvl = addOn;    break;
+               case "hiraganaPe":       hiraganaPeLvl = addOn;    break;
+               case "hiraganaPo":       hiraganaPoLvl = addOn;    break;
+               case "hiraganaKya":     hiraganaKyaLvl = addOn;    break;
+               case "hiraganaKyu":     hiraganaKyuLvl = addOn;    break;
+               case "hiraganaKyo":     hiraganaKyoLvl = addOn;    break;
+               case "hiraganaSha":     hiraganaShaLvl = addOn;    break;
+               case "hiraganaShu":     hiraganaShuLvl = addOn;    break;
+               case "hiraganaSho":     hiraganaShoLvl = addOn;    break;
+               case "hiraganaCha":     hiraganaChaLvl = addOn;    break;
+               case "hiraganaChu":     hiraganaChuLvl = addOn;    break;
+               case "hiraganaCho":     hiraganaChoLvl = addOn;    break;
+               case "hiraganaHya":     hiraganaHyaLvl = addOn;    break;
+               case "hiraganaHyu":     hiraganaHyuLvl = addOn;    break;
+               case "hiraganaHyo":     hiraganaHyoLvl = addOn;    break;
+               case "hiraganaNya":     hiraganaNyaLvl = addOn;    break;
+               case "hiraganaNyu":     hiraganaNyuLvl = addOn;    break;
+               case "hiraganaNyo":     hiraganaNyoLvl = addOn;    break;
+               case "hiraganaMya":     hiraganaMyaLvl = addOn;    break;
+               case "hiraganaMyu":     hiraganaMyuLvl = addOn;    break;
+               case "hiraganaMyo":     hiraganaMyoLvl = addOn;    break;
+               case "hiraganaRya":     hiraganaRyaLvl = addOn;    break;
+               case "hiraganaRyu":     hiraganaRyuLvl = addOn;    break;
+               case "hiraganaRyo":     hiraganaRyoLvl = addOn;    break;
+               case "hiraganaGya":     hiraganaGyaLvl = addOn;    break;
+               case "hiraganaGyu":     hiraganaGyuLvl = addOn;    break;
+               case "hiraganaGyo":     hiraganaGyoLvl = addOn;    break;
+               case "hiraganaJya":     hiraganaJyaLvl = addOn;    break;
+               case "hiraganaJyu":     hiraganaJyuLvl = addOn;    break;
+               case "hiraganaJyo":     hiraganaJyoLvl = addOn;    break;
+               case "hiraganaDya":     hiraganaDyaLvl = addOn;    break;
+               case "hiraganaDyu":     hiraganaDyuLvl = addOn;    break;
+               case "hiraganaDyo":     hiraganaDyoLvl = addOn;    break;
+               case "hiraganaBya":     hiraganaByaLvl = addOn;    break;
+               case "hiraganaByu":     hiraganaByuLvl = addOn;    break;
+               case "hiraganaByo":     hiraganaByoLvl = addOn;    break;
+               case "hiraganaPya":     hiraganaPyaLvl = addOn;    break;
+               case "hiraganaPyu":     hiraganaPyuLvl = addOn;    break;
+               case "hiraganaPyo":     hiraganaPyoLvl = addOn;    break;
+               case "katakanaA":         katakanaALvl = addOn;    break;
+               case "katakanaI":         katakanaILvl = addOn;    break;
+               case "katakanaU":         katakanaULvl = addOn;    break;
+               case "katakanaE":         katakanaELvl = addOn;    break;
+               case "katakanaO":         katakanaOLvl = addOn;    break;
+               case "katakanaKa":       katakanaKaLvl = addOn;    break;
+               case "katakanaKi":       katakanaKiLvl = addOn;    break;
+               case "katakanaKu":       katakanaKuLvl = addOn;    break;
+               case "katakanaKe":       katakanaKeLvl = addOn;    break;
+               case "katakanaKo":       katakanaKoLvl = addOn;    break;
+               case "katakanaSa":       katakanaSaLvl = addOn;    break;
+               case "katakanaLvlShi":  katakanaShiLvl = addOn;    break;
+               case "katakanaLvlSu":   katakanaSuLvl  = addOn;    break;
+               case "katakanaLvlSe":    katakanaSeLvl = addOn;    break;
+               case "katakanaLvlSo":    katakanaSoLvl = addOn;    break;
+               case "katakanaLvlTa":    katakanaTaLvl = addOn;    break;
+               case "katakanaLvlChi":  katakanaChiLvl = addOn;    break;
+               case "katakanaLvlTsu":  katakanaTsuLvl = addOn;    break;
+               case "katakanaLvlTe":    katakanaTeLvl = addOn;    break;
+               case "katakanaLvlTo":    katakanaToLvl = addOn;    break;
+               case "katakanaLvlNa":    katakanaNaLvl = addOn;    break;
+               case "katakanaLvlNi":    katakanaNiLvl = addOn;    break;
+               case "katakanaLvlNu":    katakanaNuLvl = addOn;    break;
+               case "katakanaLvlNe":    katakanaNeLvl = addOn;    break;
+               case "katakanaLvlNo":    katakanaNoLvl = addOn;    break;
+               case "katakanaLvlHa":    katakanaHaLvl = addOn;    break;
+               case "katakanaLvlHi":    katakanaHiLvl = addOn;    break;
+               case "katakanaLvlHu":    katakanaHuLvl = addOn;    break;
+               case "katakanaLvlHe":    katakanaHeLvl = addOn;    break;
+               case "katakanaLvlHo":    katakanaHoLvl = addOn;    break;
+               case "katakanaLvlMa":    katakanaMaLvl = addOn;    break;
+               case "katakanaLvlMi":    katakanaMiLvl = addOn;    break;
+               case "katakanaLvlMu":    katakanaMuLvl = addOn;    break;
+               case "katakanaLvlMe":    katakanaMeLvl = addOn;    break;
+               case "katakanaLvlMo":    katakanaMoLvl = addOn;    break;
+               case "katakanaLvlRa":    katakanaRaLvl = addOn;    break;
+               case "katakanaLvlRi":    katakanaRiLvl = addOn;    break;
+               case "katakanaLvlRu":    katakanaRuLvl = addOn;    break;
+               case "katakanaLvlRe":    katakanaReLvl = addOn;    break;
+               case "katakanaLvlRo":    katakanaRoLvl = addOn;    break;
+               case "katakanaLvlYa":    katakanaYaLvl = addOn;    break;
+               case "katakanaLvlYu":    katakanaYuLvl = addOn;    break;
+               case "katakanaLvlYo":    katakanaYoLvl = addOn;    break;
+               case "katakanaLvlWa":    katakanaWaLvl = addOn;    break;
+               case "katakanaLvlWo":    katakanaWoLvl = addOn;    break;
+               case "katakanaLvlN":      katakanaNLvl = addOn;    break;
+               case "katakanaLvlGa":    katakanaGaLvl = addOn;    break;
+               case "katakanaLvlGi":    katakanaGiLvl = addOn;    break;
+               case "katakanaLvlGu":    katakanaGuLvl = addOn;    break;
+               case "katakanaLvlGe":    katakanaGeLvl = addOn;    break;
+               case "katakanaLvlGo":    katakanaGoLvl = addOn;    break;
+               case "katakanaLvlZa":    katakanaZaLvl = addOn;    break;
+               case "katakanaLvlJi":    katakanaJiLvl = addOn;    break;
+               case "katakanaLvlZu":    katakanaZuLvl = addOn;    break;
+               case "katakanaLvlZe":    katakanaZeLvl = addOn;    break;
+               case "katakanaLvlZo":    katakanaZoLvl = addOn;    break;
+               case "katakanaLvlDa":    katakanaDaLvl = addOn;    break;
+               case "katakanaLvlDi":    katakanaDiLvl = addOn;    break;
+               case "katakanaLvlDu":    katakanaDuLvl = addOn;    break;
+               case "katakanaLvlDe":    katakanaDeLvl = addOn;    break;
+               case "katakanaLvlDo":    katakanaDoLvl = addOn;    break;
+               case "katakanaLvlBa":    katakanaBaLvl = addOn;    break;
+               case "katakanaLvlBi":    katakanaBiLvl = addOn;    break;
+               case "katakanaLvlBu":    katakanaBuLvl = addOn;    break;
+               case "katakanaLvlBe":    katakanaBeLvl = addOn;    break;
+               case "katakanaLvlBo":    katakanaBoLvl = addOn;    break;
+               case "katakanaLvlPa":    katakanaPaLvl = addOn;    break;
+               case "katakanaLvlPi":    katakanaPiLvl = addOn;    break;
+               case "katakanaLvlPu":    katakanaPuLvl = addOn;    break;
+               case "katakanaLvlPe":    katakanaPeLvl = addOn;    break;
+               case "katakanaLvlPo":    katakanaPoLvl = addOn;    break;
+               case "katakanaLvlKya":  katakanaKyaLvl = addOn;    break;
+               case "katakanaLvlKyu":  katakanaKyuLvl = addOn;    break;
+               case "katakanaLvlKyo":  katakanaKyoLvl = addOn;    break;
+               case "katakanaLvlSha":  katakanaShaLvl = addOn;    break;
+               case "katakanaLvlShu":  katakanaShuLvl = addOn;    break;
+               case "katakanaLvlSho":  katakanaShoLvl = addOn;    break;
+               case "katakanaLvlCha":  katakanaChaLvl = addOn;    break;
+               case "katakanaLvlChu":  katakanaChuLvl = addOn;    break;
+               case "katakanaLvlCho":  katakanaChoLvl = addOn;    break;
+               case "katakanaLvlHya":  katakanaHyaLvl = addOn;    break;
+               case "katakanaLvlHyu":  katakanaHyuLvl = addOn;    break;
+               case "katakanaLvlHyo":  katakanaHyoLvl = addOn;    break;
+               case "katakanaLvlNya":  katakanaNyaLvl = addOn;    break;
+               case "katakanaLvlNyu":  katakanaNyuLvl = addOn;    break;
+               case "katakanaLvlNyo":  katakanaNyoLvl = addOn;    break;
+               case "katakanaLvlMya":  katakanaMyaLvl = addOn;    break;
+               case "katakanaLvlMyu":  katakanaMyuLvl = addOn;    break;
+               case "katakanaLvlMyo":  katakanaMyoLvl = addOn;    break;
+               case "katakanaLvlRya":  katakanaRyaLvl = addOn;    break;
+               case "katakanaLvlRyu":  katakanaRyuLvl = addOn;    break;
+               case "katakanaLvlRyo":  katakanaRyoLvl = addOn;    break;
+               case "katakanaLvlGya":  katakanaGyaLvl = addOn;    break;
+               case "katakanaLvlGyu":  katakanaGyuLvl = addOn;    break;
+               case "katakanaLvlGyo":  katakanaGyoLvl = addOn;    break;
+               case "katakanaLvlJya":  katakanaJyaLvl = addOn;    break;
+               case "katakanaLvlJyu":  katakanaJyuLvl = addOn;    break;
+               case "katakanaLvlJyo":  katakanaJyoLvl = addOn;    break;
+               case "katakanaLvlDya":  katakanaDyaLvl = addOn;    break;
+               case "katakanaLvlDyu":  katakanaDyuLvl = addOn;    break;
+               case "katakanaLvlDyo":  katakanaDyoLvl = addOn;    break;
+               case "katakanaLvlBya":  katakanaByaLvl = addOn;    break;
+               case "katakanaLvlByu":  katakanaByuLvl = addOn;    break;
+               case "katakanaLvlByo":  katakanaByoLvl = addOn;    break;
+               case "katakanaLvlPya":  katakanaPyaLvl = addOn;    break;
+               case "katakanaLvlPyu":  katakanaPyuLvl = addOn;    break;
+               case "katakanaLvlPyo":  katakanaPyoLvl = addOn;    break;
+               case "kanjiHa":          kanjiHaLvl = addOn; break;
+               case "kanjiHana":          kanjiKiLvl = addOn; break;
+               case "kanjiKi":    kanjiMushiLvl = addOn; break;
+               case "kanjiMori":      kanjiKazeLvl = addOn; break;
+               case "kanjiMushi":      kanjiKazeLvl = addOn; break;
+               case "kanjiIshi":      kanjiUchiLvl = addOn; break;
+               case "kanjiKaze":        kanjiUmiLvl = addOn; break;
+               case "kanjiTsuchi":      kanjiMizuLvl = addOn; break;
+               case "kanjiUchi":        kanjiIkeLvl = addOn; break;
+               case "kanjiYama":    kanjiKooriLvl = addOn; break;
+               case "kanjiUmi":  kanjiHayashiLvl = addOn; break;
+               case "kanjiSakana":          kanjiToLvl = addOn; break;
+               case "kanjiMizu":      kanjiTeraLvl = addOn; break;
+               case "kanjiKai":      kanjiSotoLvl = addOn; break;
+               case "kanjiIke":          kanjiHiLvl = addOn; break;
+               case "kanjiYuki":        kanjiAkaLvl = addOn; break;
+               case "kanjiKoori":      kanjiHanaLvl = addOn; break;
+               case "kanjiKawa":      kanjiMoriLvl = addOn; break;
+               case "kanjiHayashi":      kanjiIshiLvl = addOn; break;
+               case "kanjiFuyu":    kanjiTsuchiLvl = addOn;  break;
+               case "kanjiTo":      kanjiYamaLvl = addOn; break;
+               case "kanjiMon":  kanjiSakanaLvl = addOn; break;
+               case "kanjiTera":        kanjiKaiLvl = addOn; break;
+               case "kanjiAna":      kanjiYukiLvl = addOn; break;
+               case "kanjiSoto":      kanjiKawaLvl = addOn; break;
+               case "kanjiKa":      kanjiFuyuLvl = addOn; break;
+               case "kanjiHi":        kanjiMonLvl = addOn; break;
+               case "kanjiChi":        kanjiAnaLvl = addOn; break;
+               case "kanjiAka":          kanjiKaLvl = addOn; break;
+               case "kanjiHikari":        kanjiChiLvl = addOn; break;
+               default: break;
+
+          }
+     }
 }

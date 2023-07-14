@@ -29,7 +29,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     public PlayerPhysicsComponent(){
         boundingBoxLocation = BoundingBoxLocation.BOTTOM_CENTER;
         initBoundingBox(0.6f, 0.4f);
-        super.velocity.set(15f,15f);
+        super.velocity.set(6f,6f);
         previousEnemySpawn = "0";
 
         mouseSelectCoordinates = new Vector3(0,0,0);

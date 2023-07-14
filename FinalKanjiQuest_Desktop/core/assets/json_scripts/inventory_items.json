@@ -45,14 +45,14 @@
 	itemAttributes: 1
 	itemUseType: 16
 	itemNameID: K_RUNESTONE
-	itemShortDescription: A mysterious stone that resets encounters with katakana
+	itemShortDescription: A mysterious stone that stops encounters with katakana
 	itemUseValue: 0
 },
 {
 	itemAttributes: 1
 	itemUseType: 32
 	itemNameID: NEGATIVE_K_RUNESTONE
-	itemShortDescription: A mysterious stone that stops encounters with katakana
+	itemShortDescription: A mysterious stone that resets encounters with katakana
 	itemUseValue: 0
 },
 

@@ -17,6 +17,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.battle.BattleObserver;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.components.ComponentObserver;
+import com.mygdx.game.japanese.KanaLetter;
+import com.mygdx.game.japanese.KanaLettersFactory;
+import com.mygdx.game.japanese.KanjiLetter;
+import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.OnScreenController;
@@ -27,6 +31,8 @@ import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
 import com.mygdx.game.inventory.InventoryItem.ItemNameID;
+
+import java.util.ArrayList;
 
 public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, BattleObserver{
 
@@ -273,8 +279,8 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 boolean firstTime = hpVal<0?true:false;
 
                 if( firstTime ){
-                    hpVal = 3;
                     hpMaxVal = 5;
+                    hpVal = 3;
                     maxNumberOfHearts = hpMaxVal;
                     numberOfHearts = hpVal;
                 }else{
@@ -283,6 +289,33 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 }
 
                 showHearts();
+
+                if(!firstTime){
+                    ArrayList<KanaLetter> kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
+                    ArrayList<KanjiLetter> kanjiLettersList = KanjiLettersFactory.getInstance().getKanjiLettersList();
+                    Array<Integer> hiraganaProgress = profileManager.getProperty("hiraganaList", Array.class);
+                    for(int i = 0; i <= hiraganaProgress.size-1; i++){
+                        LetterLvlCounter.adjustLvl(kanaLettersList.get(i).getHiraganaEquivalent(),
+                                hiraganaProgress.get(i));
+                    }
+                    Array<Integer> katakanaProgress = profileManager.getProperty("katakanaList", Array.class);
+                    for(int i = 0; i <= katakanaProgress.size-1; i++){
+                        LetterLvlCounter.adjustLvl(kanaLettersList.get(i).getKatakanaEquivalent(),
+                                katakanaProgress.get(i));
+                    }
+                    Array<Integer> kanjiProgress = profileManager.getProperty("kanjiList", Array.class);
+                    for(int i = 0; i <= kanjiProgress.size-1; i++){
+                        LetterLvlCounter.adjustLvl(kanjiLettersList.get(i).getKanjiNameID(),
+                                kanjiProgress.get(i));
+                    }
+
+                    LetterLvlCounter.setAllHiraganaMemorised(profileManager.getProperty("allHiraganaMemorised", boolean.class));
+                    LetterLvlCounter.setAllKatakanaMemorised(profileManager.getProperty("allKatakanaMemorised", boolean.class));
+                    LetterLvlCounter.setAllKanjiMemorised(profileManager.getProperty("allKanjiMemorised", boolean.class));
+
+                    progressUI.updateTable();
+                }
+
 
                 if( firstTime ){
                     //add default items if first time
@@ -303,6 +336,13 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                 profileManager.setProperty("playerInventory",  inventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
                 profileManager.setProperty("currentPlayerHPMax", maxNumberOfHearts );
                 profileManager.setProperty("currentPlayerHP", numberOfHearts);
+                profileManager.setProperty("hiraganaList", LetterLvlCounter.getHiraganaList());
+                profileManager.setProperty("katakanaList", LetterLvlCounter.getKatakanaList());
+                profileManager.setProperty("kanjiList", LetterLvlCounter.getKanjiList());
+                profileManager.setProperty("allHiraganaMemorised", LetterLvlCounter.isAllHiraganaMemorised());
+                profileManager.setProperty("allKatakanaMemorised", LetterLvlCounter.isAllKatakanaMemorised());
+                profileManager.setProperty("allKanjiMemorised", LetterLvlCounter.isAllKanjiMemorised());
+
                 break;
             default:
                 break;
@@ -428,22 +468,21 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                     showHearts();
                     ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                     ProfileManager.getInstance().setProperty("currentPlayerHPMax", maxNumberOfHearts);
-
                 }
                 else if(InventoryItem.doesIncreaseHiraganaLvl(type)){
-                    LetterLvlCounter.allHiraganaMemorised();
+                    LetterLvlCounter.setAllHiraganaMemorised(true);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseHiraganaLvl(type)){
-                    LetterLvlCounter.allHiraganaNotMemorised();
+                    LetterLvlCounter.setAllHiraganaMemorised(false);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesIncreaseKatakanaLvl(type)){
-                    LetterLvlCounter.allKatakanaMemorised();
+                    LetterLvlCounter.setAllKatakanaMemorised(true);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseKatakanaLvl(type)){
-                    LetterLvlCounter.allKatakanaNotMemorised();
+                    LetterLvlCounter.setAllKatakanaMemorised(false);
                     progressUI.updateTable();
                 }
 
@@ -459,7 +498,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         int hpVal;
         switch (event) {
             case LETTER_ANSWERED_CORRECTLY:
-                Gdx.app.debug(TAG, "areAllHiraganaMemorised: " + LetterLvlCounter.areAllHiraganaMemorised());
                 LetterLvlCounter.increaseLvl(answeredLetter, 1);
                 progressUI.updateTable();
 

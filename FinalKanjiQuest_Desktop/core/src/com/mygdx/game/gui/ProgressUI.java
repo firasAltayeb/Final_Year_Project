@@ -1,7 +1,5 @@
 package com.mygdx.game.gui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -14,7 +12,6 @@ import com.mygdx.game.japanese.KanjiLetter;
 import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Utility;
-import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
 
@@ -94,14 +91,14 @@ public class ProgressUI extends Window{
             tempInt = LetterLvlCounter.getHiraganaLvlTable().get(tempString);
             equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(tempString));
 
-            if(LetterLvlCounter.areAllHiraganaMemorised()) {
+            if(LetterLvlCounter.isAllHiraganaMemorised()) {
                 tempString = "memorised";
                 text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
             }
             else {
                 counter += tempInt;
                 if (counter >= 428) {
-                    LetterLvlCounter.allHiraganaMemorised();
+                    LetterLvlCounter.setAllHiraganaMemorised(true);
                 }
                 if (tempInt >= 3) {
                     tempString = "memorised";
@@ -136,14 +133,14 @@ public class ProgressUI extends Window{
             tempInt = LetterLvlCounter.getKatakanaLvlTable().get(tempString);
             equivalent = new Image(Utility.SMALL_KATAKANA_TEXTUREATLAS.findRegion(tempString));
 
-            if(LetterLvlCounter.areAllKatakanaMemorised()) {
+            if(LetterLvlCounter.isAllKatakanaMemorised()) {
                 tempString = "memorised";
                 text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
             }
             else {
                 counter += tempInt;
                 if (counter >= 428) {
-                    LetterLvlCounter.allKatakanaMemorised();
+                    LetterLvlCounter.setAllKatakanaMemorised(true);
                 }
                 if (tempInt >= 3) {
                     tempString = "memorised";
@@ -177,14 +174,14 @@ public class ProgressUI extends Window{
             tempInt = LetterLvlCounter.getKanjiLvlTable().get(tempString);
             equivalent = new Image(Utility.SMALL_KANJI_TEXTUREATLAS.findRegion(tempString));
 
-            if(LetterLvlCounter.areAllKanjiMemorised()) {
+            if(LetterLvlCounter.isAllKanjiMemorised()) {
                 tempString = "memorised";
                 text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
             }
             else {
                 counter += tempInt;
                 if (counter >= 175) {
-                    LetterLvlCounter.allKanjiMemorised();
+                    LetterLvlCounter.setAllKanjiMemorised(true);
                 }
                 if (tempInt >= 5) {
                     tempString = "memorised";

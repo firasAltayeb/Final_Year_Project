@@ -43,7 +43,7 @@ public class BattleState extends BattleSubject {
         String letterToAnswer;
         int letterToAnswersLvl;
         int cycleCounter;
-        if(!LetterLvlCounter.areAllHiraganaMemorised()){
+        if(!LetterLvlCounter.isAllHiraganaMemorised()){
             cycleCounter = 0;
             randomVal= MathUtils.random(0,106);
             letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getHiraganaEquivalent();
@@ -61,7 +61,7 @@ public class BattleState extends BattleSubject {
             this.currentLetter = letterToAnswer;
             notify(letterToAnswer, BattleObserver.BattleEvent.HIRAGANA_ADDED);
         }
-        else if(!LetterLvlCounter.areAllKatakanaMemorised()){
+        else if(!LetterLvlCounter.isAllKatakanaMemorised()){
             cycleCounter = 0;
             randomVal = MathUtils.random(0,106);
             letterToAnswer = KanaLettersFactory.getInstance().getKanaLettersList().get(randomVal).getKatakanaEquivalent();

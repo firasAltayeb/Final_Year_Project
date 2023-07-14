@@ -17,6 +17,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.battle.BattleObserver;
 import com.mygdx.game.components.Component;
 import com.mygdx.game.components.ComponentObserver;
+import com.mygdx.game.japanese.KanaLetter;
+import com.mygdx.game.japanese.KanaLettersFactory;
+import com.mygdx.game.japanese.KanjiLetter;
+import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Entity;
 import com.mygdx.game.tools.OnScreenController;
@@ -27,6 +31,8 @@ import com.mygdx.game.profile.ProfileManager;
 import com.mygdx.game.profile.ProfileObserver;
 import com.mygdx.game.screens.MainGameScreen;
 import com.mygdx.game.inventory.InventoryItem.ItemNameID;
+
+import java.util.ArrayList;
 
 public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, InventoryObserver, BattleObserver{
 
@@ -426,22 +432,21 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
                     showHearts();
                     ProfileManager.getInstance().setProperty("currentPlayerHP", numberOfHearts);
                     ProfileManager.getInstance().setProperty("currentPlayerHPMax", maxNumberOfHearts);
-
                 }
                 else if(InventoryItem.doesIncreaseHiraganaLvl(type)){
-                    LetterLvlCounter.allHiraganaMemorised();
+                    LetterLvlCounter.setAllHiraganaMemorised(true);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseHiraganaLvl(type)){
-                    LetterLvlCounter.allHiraganaNotMemorised();
+                    LetterLvlCounter.setAllHiraganaMemorised(false);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesIncreaseKatakanaLvl(type)){
-                    LetterLvlCounter.allKatakanaMemorised();
+                    LetterLvlCounter.setAllKatakanaMemorised(true);
                     progressUI.updateTable();
                 }
                 else if(InventoryItem.doesDecreaseKatakanaLvl(type)){
-                    LetterLvlCounter.allKatakanaNotMemorised();
+                    LetterLvlCounter.setAllKatakanaMemorised(false);
                     progressUI.updateTable();
                 }
 
@@ -457,7 +462,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
         int hpVal;
         switch (event) {
             case LETTER_ANSWERED_CORRECTLY:
-                Gdx.app.debug(TAG, "areAllHiraganaMemorised: " + LetterLvlCounter.areAllHiraganaMemorised());
                 LetterLvlCounter.increaseLvl(answeredLetter, 1);
                 progressUI.updateTable();
 
@@ -508,4 +512,6 @@ public class PlayerHUD implements Screen, ProfileObserver, ComponentObserver, In
     }
 
 }
+
+
 

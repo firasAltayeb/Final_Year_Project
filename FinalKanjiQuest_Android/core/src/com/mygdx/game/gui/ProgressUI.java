@@ -91,14 +91,14 @@ public class ProgressUI extends Window{
             tempInt = LetterLvlCounter.getHiraganaLvlTable().get(tempString);
             equivalent = new Image(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(tempString));
 
-            if(LetterLvlCounter.areAllHiraganaMemorised()) {
+            if(LetterLvlCounter.isAllHiraganaMemorised()) {
                 tempString = "memorised";
                 text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
             }
             else {
                 counter += tempInt;
                 if (counter >= 428) {
-                    LetterLvlCounter.allHiraganaMemorised();
+                    LetterLvlCounter.setAllHiraganaMemorised(true);
                 }
                 if (tempInt >= 3) {
                     tempString = "memorised";
@@ -133,14 +133,14 @@ public class ProgressUI extends Window{
             tempInt = LetterLvlCounter.getKatakanaLvlTable().get(tempString);
             equivalent = new Image(Utility.MEDIUM_KATAKANA_TEXTUREATLAS.findRegion(tempString));
 
-            if(LetterLvlCounter.areAllKatakanaMemorised()) {
+            if(LetterLvlCounter.isAllKatakanaMemorised()) {
                 tempString = "memorised";
                 text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
             }
             else {
                 counter += tempInt;
                 if (counter >= 428) {
-                    LetterLvlCounter.allKatakanaMemorised();
+                    LetterLvlCounter.setAllKatakanaMemorised(true);
                 }
                 if (tempInt >= 3) {
                     tempString = "memorised";
@@ -172,16 +172,16 @@ public class ProgressUI extends Window{
             kanjiLetter = kanjiLettersList.get(i);
             tempString = kanjiLetter.getKanjiNameID();
             tempInt = LetterLvlCounter.getKanjiLvlTable().get(tempString);
-            equivalent = new Image(Utility.SMALL_KANJI_TEXTUREATLAS.findRegion(tempString));
+            equivalent = new Image(Utility.MEDIUM_KANJI_TEXTUREATLAS.findRegion(tempString));
 
-            if(LetterLvlCounter.areAllKanjiMemorised()) {
+            if(LetterLvlCounter.isAllKanjiMemorised()) {
                 tempString = "memorised";
                 text = new Label(tempString, Utility.GUI_SKINS, "progress_list_text");
             }
             else {
                 counter += tempInt;
                 if (counter >= 175) {
-                    LetterLvlCounter.allKanjiMemorised();
+                    LetterLvlCounter.setAllKanjiMemorised(true);
                 }
                 if (tempInt >= 5) {
                     tempString = "memorised";
