@@ -14,14 +14,14 @@ import com.mygdx.game.PlayerController;
 public class MainGameScreen implements Screen {
     private static final String TAG = MainGameScreen.class.getSimpleName();
 
-    public static class VIEWPORT{
+    public static class VIEWPORT {
         static float viewportWidth;
         static float viewportHeight;
         static float virtualWidth;
         static float virtualHeight;
         static float physicalWidth;
         static float physicalHeight;
-        static float aspectRaito;
+        static float aspectRatio;
     }
 
     private Playercontroller controller;
@@ -34,7 +34,7 @@ public class MainGameScreen implements Screen {
 
     private static Entity player;
 
-    public MainGameScreen(){
+    public MainGameScreen() {
         mapManger = new MapManger();
     }
 
@@ -54,7 +54,7 @@ public class MainGameScreen implements Screen {
 
         player = new Entity();
         player.init(mapManger.getPlayerStartUnitScaled().x,
-            mapManger.getPlayerStartUnitScaled(),y);
+                mapManger.getPlayerStartUnitScaled(), y);
 
         currentPlayerSprite = player.getFrameSprite();
         controller = new PlayerController(player);
@@ -78,7 +78,7 @@ public class MainGameScreen implements Screen {
         updatePortalLayerActiviation(player.boundingBox);
 
         //check if player is in collision with layer
-        if(!isCollisionWithMapLayer(player.boundingBox)){
+        if (!isCollisionWithMapLayer(player.boundingBox)) {
             player.setNextPoitionToCurrent();
         }
 
@@ -89,7 +89,7 @@ public class MainGameScreen implements Screen {
 
         mapRenderer.getBatch().begin();
         mapRenderer.getBatch().draw(currentPlayerFrame, currentPlayerSprite.getX(),
-                                currentPlayerSprite.getY(), 1, 1);
+                currentPlayerSprite.getY(), 1, 1);
         mapRenderer.getBatch().end();
     }
 
@@ -115,6 +115,49 @@ public class MainGameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        player.dispose();
+        controller.dispose();
+        Gdx.input.setInputProcessor(null);
+        mapRenderer.dispose();
     }
+
+    private void setupViewport(int width, int height) {
+        //make the viewport a percentage of the total display area
+        VIEWPORT.virtualWidth = width;
+        VIEWPORT.virtualHeight = height;
+
+        //current viewport dimensions
+        VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
+        VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
+
+        //pixel dimensions of display
+        VIEWPORT.physicalWidth = Gdx.graphics.getWidth();
+        VIEWPORT.physicalHeight = Gdx.graphics.getHeight();
+
+        //aspect ratio for current viewport
+        VIEWPORT.aspectRatio = (VIEWPORT.virtualWidth /
+                VIEWPORT.virtualHeight);
+
+        //update viewport if there could be skewing
+        if (VIEWPORT.physicalWidth / VIEWPORT.physicalHeight
+                >= VIEWPORT.aspectRatio){
+            //letterbox left and right
+            VIEWPORT.viewportWidth = VIEWPORT.viewportHeight *
+                    (VIEWPORT.physicalWidth / VIEWPORT.physicalHeight);
+            VIEWPORT.viewportHeight = VIEWPORT.virtualHeight;
+        } else {
+            //letterbox above and below
+            VIEWPORT.viewportWidth = VIEWPORT.virtualWidth;
+            VIEWPORT.viewportHeight = VIEWPORT.viewportWidth *
+                    (VIEWPORT.physicalHeight / VIEWPORT.physicalWidth);
+        }
+
+        Gdx.app.debug(TAG, "WorldRenderer: virtual: (" +
+                VIEWPORT.virtualWidth + "," + VIEWPORT.virtualHeight + ")" );
+        Gdx.app.debug(TAG, "WorldRenderer: viewport: (" +
+                VIEWPORT.viewportWidth + "," + VIEWPORT.viewportHeight + ")" );
+        Gdx.app.debug(TAG, "WorldRenderer: physical: (" +
+                VIEWPORT.physicalWidth + "," + VIEWPORT.physicalHeight + ")" );
+    }
+
 }
