@@ -35,6 +35,7 @@ public class KanaUI extends Window{
 
         Label text;
         Image equivalent;
+        KanaLetter kanaLetter;
         table = new Table();
 
         ArrayList<KanaLetter> kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
@@ -43,7 +44,7 @@ public class KanaUI extends Window{
         for(int i = 0; i < kanaLettersList.size(); i++){
 
             if(this.kanaType.equalsIgnoreCase("hiragana")) {
-                KanaLetter kanaLetter = kanaLettersList.get(i);
+                kanaLetter = kanaLettersList.get(i);
                 equivalent = new Image(Utility.MEDIUM_HIRAGANA_TEXTUREATLAS.findRegion(kanaLetter.getHiraganaEquivalent()));
                 table.add(equivalent).left();
                 text = new Label("romaji" + "\n" + "Equivalent: ", Utility.GUI_SKINS, "list_text");
@@ -56,7 +57,7 @@ public class KanaUI extends Window{
                 table.add(equivalent).left();
             }
             else {
-                KanaLetter kanaLetter = kanaLettersList.get(i);
+                kanaLetter = kanaLettersList.get(i);
                 equivalent = new Image(Utility.MEDIUM_KATAKANA_TEXTUREATLAS.findRegion(kanaLetter.getKatakanaEquivalent()));
                 table.add(equivalent).left();
                 text = new Label("romaji" + "\n" + "Equivalent: ", Utility.GUI_SKINS, "list_text");

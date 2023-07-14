@@ -14,6 +14,7 @@ import com.mygdx.game.japanese.KanaLetter;
 import com.mygdx.game.japanese.KanaLettersFactory;
 import com.mygdx.game.japanese.KanjiLetter;
 import com.mygdx.game.japanese.KanjiLettersFactory;
+import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.tools.Utility;
 import com.badlogic.gdx.utils.Array;
 
@@ -44,23 +45,26 @@ public class ProgressUI extends Window implements ProgressSubject {
 
 
         Label text;
+        String temp;
+        Image equivalent;
         table = new Table();
+        KanaLetter kanaLetter;
 
-        for(int i = 0; i < 41; i++){
+        ArrayList<KanaLetter> kanaLettersList = KanaLettersFactory.getInstance().getKanaLettersList();
 
-            text = new Label("firstText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
+        for(int i = 0; i < kanaLettersList.size(); i++) {
 
-            text = new Label("secondText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
+            if(i % 4 == 0 ){
+                table.row();
+            }
 
-            text = new Label("ThirdText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
+            kanaLetter = kanaLettersList.get(i);
+            temp = kanaLetter.getHiraganaEquivalent();
+            equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(temp));
+            table.add(equivalent).left();
+            text = new Label("Lvl: " + LetterLvlCounter.getInstance().getHiraganaLvlTable().get(temp) + " ", Utility.GUI_SKINS, "list_text");
+            table.add(text).left();
 
-            text = new Label("fourthText", Utility.GUI_SKINS, "list_text");
-            table.add(text).align(Align.left);;
-
-            table.row();
         }
 
 

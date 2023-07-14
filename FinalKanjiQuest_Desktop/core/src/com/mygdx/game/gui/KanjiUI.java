@@ -7,8 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.japanese.KanaLetter;
-import com.mygdx.game.japanese.KanaLettersFactory;
 import com.mygdx.game.japanese.KanjiLetter;
 import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.tools.Utility;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 
 public class KanjiUI extends Window{
 
-    private final static String TAG = ProgressUI.class.getSimpleName();
+    private final static String TAG = KanjiUI.class.getSimpleName();
 
     Table table;
     Table innerTable;
@@ -41,7 +39,6 @@ public class KanjiUI extends Window{
         Image equivalent;
         innerTable = new Table();
         table = new Table();
-
 
         ArrayList<KanjiLetter> kanjiLettersList = KanjiLettersFactory.getInstance().getKanjiLettersList();
 
@@ -119,7 +116,7 @@ public class KanjiUI extends Window{
             for (int j = 0; j < temp.length(); j++) {
                 if (temp.charAt(j) == '.') {
                     try {
-                        Gdx.app.log(TAG, "j is: " + j);
+                        //Gdx.app.log(TAG, "j is: " + j);
                         indexOfFullStop = temp.indexOf('.', j + 1);
                         split = temp.substring(j + 1, indexOfFullStop);
                         equivalent = new Image(Utility.SMALL_HIRAGANA_TEXTUREATLAS.findRegion(split));
