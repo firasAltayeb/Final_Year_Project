@@ -23,7 +23,7 @@ public class Entity {
     private String entityID;
 
     private Direction currentDirection = Direction.LEFT;
-    private Direction perviousDirection = Direction.UP;
+    private Direction previousDirection = Direction.UP;
 
     private Animation walkLeftAnimation;
     private Animation walkRightAnimation;
@@ -133,7 +133,7 @@ public class Entity {
         currentFrame = textureFrames[0][0];
     }
 
-    private void loadAllAnimations(){
+    private void loadAllAnimations() {
         //Walking animation
         Texture texture = Utility.getTextureAsset(defaultSpritePath);
         TextureRegion[][] textureFrames = TextureRegion.split(texture, FRAME_WIDTH, FRAME_HEIGHT);
@@ -148,11 +148,10 @@ public class Entity {
             for (int j = 0; j < 4; j++) {
                 //Gdx.app.debug(TAG, "Got frame " + i + "," + j + " from " + sourceImage);
                 TextureRegion region = textureFrames[i][j];
-                if( region == null ){
+                if (region == null) {
                     Gdx.app.debug(TAG, "Got null animation frame " + i + "," + j);
                 }
-                switch(i)
-                {
+                switch (i) {
                     case 0:
                         walkUpFrames.insert(j, region);
                         break;
@@ -167,6 +166,57 @@ public class Entity {
                         break;
                 }
             }
+        }
+    }
+
+    public void dispose(){
+        Utility.unloadAsset(defaultSpritePath);
+    }
+
+    public void setState(State state){
+        this.state = state;
+    }
+
+    public Sprite getFrameSprite(){
+        return frameSprite;
+    }
+
+    public TextureRegion getFrame(){
+        return currentFrame;
+    }
+
+    public Vector2 getCurrentPosition(){
+        return currentPlayerPosition;
+    }
+
+    public void setCurrentPosition(float currentPositionX, float currentPositionY){
+        frameSprite.setX(currentPositionX);
+        frameSprite.setY(currentPositionY);
+        this.currentPlayerPosition.x = currentPositionX;
+        this.currentPlayerPosition.y = currentPositionY;
+    }
+
+    public void setDirection(Direction direction,  float deltaTime){
+        this.previousDirection = this.currentDirection;
+        this.currentDirection = direction;
+
+        //Look into the appropriate variable when changing position
+        switch (currentDirection) {
+            case DOWN :
+                currentFrame = walkDownAnimation.getKeyFrame(frameTime);
+                break;
+            case LEFT :
+                currentFrame = walkLeftAnimation.getKeyFrame(frameTime);
+                break;
+            case UP :
+                currentFrame = walkUpAnimation.getKeyFrame(frameTime);
+                break;
+            case RIGHT :
+                currentFrame = walkRightAnimation.getKeyFrame(frameTime);
+                break;
+            default:
+                break;
+        }
     }
 
 }
