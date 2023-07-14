@@ -18,7 +18,7 @@ public class ProgressUI extends Window implements ProgressSubject {
     float menuItemWindowHeight;
     private Array<ProgressObserver> observers;
 
-    private int hpCurrentMax = -1;
+    private int hpCurrentMax = 10;
     private int hpVal = -1;
 
     public ProgressUI(float width, float height){

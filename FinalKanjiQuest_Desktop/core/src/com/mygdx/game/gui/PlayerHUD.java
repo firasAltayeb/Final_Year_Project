@@ -2,19 +2,25 @@ package com.mygdx.game.gui;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Component;
 import com.mygdx.game.Entity;
 import com.mygdx.game.Utility;
+import com.mygdx.game.inventory.InventoryItem;
 import com.mygdx.game.inventory.InventoryItemLocation;
+import com.mygdx.game.profile.ProfileManager;
+import com.mygdx.game.profile.ProfileObserver;
+import com.mygdx.game.screens.MainGameScreen;
+import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 
-public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
+public class PlayerHUD implements Screen, ProfileObserver, InventoryObserver, ProgressObserver {
     private Stage stage;
     private Viewport viewport;
     private Camera camera;
@@ -31,7 +37,7 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
     private float menuItemWindowWidth;
     private float menuItemWindowHeight;
 
-    private InventoryUI _inventoryUI;
+    private InventoryUI inventoryUI;
     private Array<InventoryItemLocation> inventory;
 
     public PlayerHUD(Camera camera, Entity player) {
@@ -60,31 +66,32 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
         progressUI.setMovable(false);
         progressUI.setPosition(menuItemsXaxis, menuItemsYaxis);
 
-        _inventoryUI = new InventoryUI(menuItemWindowWidth, menuItemWindowHeight);
-        _inventoryUI.setMovable(false);
-        _inventoryUI.setVisible(false);
-        _inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
+        inventoryUI = new InventoryUI(menuItemWindowWidth, menuItemWindowHeight);
+        inventoryUI.setMovable(false);
+        inventoryUI.setVisible(false);
+        inventoryUI.setPosition(menuItemsXaxis, menuItemsYaxis);
 
         stage.addActor(menuButton);
         stage.addActor(menuList);
         stage.addActor(progressUI);
-        stage.addActor(_inventoryUI);
+        stage.addActor(inventoryUI);
 
         //add tooltips to the stage
-        Array<Actor> actors = _inventoryUI.getInventoryActors();
+        Array<Actor> actors = inventoryUI.getInventoryActors();
         for(Actor actor : actors){
             stage.addActor(actor);
         }
 
         //Observers
+        ProfileManager.getInstance().addObserver(this);
         progressUI.addObserver(this);
-        _inventoryUI.addObserver(this);
+        inventoryUI.addObserver(this);
 
         menuButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
                 menuList.setVisible(menuList.isVisible()?false:true);
                 progressUI.setVisible(false);
-                _inventoryUI.setVisible(false);
+                inventoryUI.setVisible(false);
             }
         });
 
@@ -92,7 +99,7 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
         statusButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
                 progressUI.setVisible(progressUI.isVisible()?false:true);
-                _inventoryUI.setVisible(false);
+                inventoryUI.setVisible(false);
             }
         });
 
@@ -100,7 +107,7 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
         inventoryButton.addListener(new ClickListener() {
             public void clicked (InputEvent event, float x, float y) {
                 progressUI.setVisible(false);
-                _inventoryUI.setVisible(_inventoryUI.isVisible()?false:true);
+                inventoryUI.setVisible(inventoryUI.isVisible()?false:true);
             }
         });
 
@@ -109,6 +116,45 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
 
     public Stage getStage() {
         return stage;
+    }
+
+    @Override
+    public void onNotify(ProfileManager profileManager, ProfileEvent event) {
+        switch(event){
+            case PROFILE_LOADED:
+                int lifePoints = profileManager.getProperty("currentPlayerHP", Integer.class);
+                boolean firstTime = lifePoints<0?true:false;
+
+                if( firstTime ){
+                    //add default items if first time
+                    Array<ItemTypeID> items = player.getEntityConfig().getInventory();
+                    Array<InventoryItemLocation> itemLocations = new Array<InventoryItemLocation>();
+                    for( int i = 0; i < items.size; i++){
+                        itemLocations.add(new InventoryItemLocation(i, items.get(i).toString()));
+                    }
+                    InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), itemLocations);
+                    profileManager.setProperty("playerInventory", InventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
+                }
+
+                Array<InventoryItemLocation> inventory = profileManager.getProperty("playerInventory", Array.class);
+                InventoryUI.populateInventory(inventoryUI.getInventorySlotTable(), inventory);
+
+                int hpVal = profileManager.getProperty("currentPlayerHP", Integer.class);
+
+                if( firstTime ){
+                    lifePoints = 3;
+                    progressUI.setHPValue(lifePoints);
+                }else{
+                    progressUI.setHPValue(hpVal);
+                }
+                break;
+            case SAVING_PROFILE:
+                profileManager.setProperty("playerInventory",  inventoryUI.getInventory(inventoryUI.getInventorySlotTable()));
+                profileManager.setProperty("currentPlayerHP", progressUI.getHPValue() );
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -133,11 +179,11 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
         progressUI.setPosition(width/40, height/40);
         progressUI.updateSize(width/1.35f, height/1.05f);
 
-        _inventoryUI.setPosition(width/40, height/40);
-        _inventoryUI.updateSize(width/1.35f, height/1.05f);
+        inventoryUI.setPosition(width/40, height/40);
+        inventoryUI.updateSize(width/1.35f, height/1.05f);
 
-//        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
-//        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
+        MainGameScreen.setGameState(MainGameScreen.GameState.PAUSED);
         stage.getViewport().update(width, height, true);
 
     }
@@ -164,32 +210,32 @@ public class PlayerHUD implements Screen, InventoryObserver, ProgressObserver {
 
     @Override
     public void onNotify(int value, StatusEvent event) {
-//        switch(event) {
-//            case UPDATED_HP:
-//                ProfileManager.getInstance().setProperty("currentPlayerHP", progressUI.getHPValue());
-//                break;
-//            default:
-//                break;
-//        }
+        switch(event) {
+            case UPDATED_HP:
+                ProfileManager.getInstance().setProperty("currentPlayerHP", progressUI.getHPValue());
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public void onNotify(String value, InventoryEvent event) {
-//        switch(event){
-//            case ITEM_CONSUMED:
-//                String[] strings = value.split(Component.MESSAGE_TOKEN);
-//                if( strings.length != 2) return;
-//
-//                int type = Integer.parseInt(strings[0]);
-//                int typeValue = Integer.parseInt(strings[1]);
-//
-//                if( InventoryItem.doesRestoreHP(type) ){
-//                    progressUI.addHPValue(typeValue);
-//                }
-//                break;
-//            default:
-//                break;
-//        }
+        switch(event){
+            case ITEM_CONSUMED:
+                String[] strings = value.split(Component.MESSAGE_TOKEN);
+                if( strings.length != 2) return;
+
+                int type = Integer.parseInt(strings[0]);
+                int typeValue = Integer.parseInt(strings[1]);
+
+                if( InventoryItem.doesRestoreHP(type) ){
+                    progressUI.addHPValue(typeValue);
+                }
+                break;
+            default:
+                break;
+        }
     }
 
 

@@ -14,6 +14,7 @@ import com.mygdx.game.FinalKanjiQuest;
 import com.mygdx.game.gui.PlayerHUD;
 import com.mygdx.game.maps.Map;
 import com.mygdx.game.maps.MapManager;
+import com.mygdx.game.profile.ProfileManager;
 
 public class MainGameScreen implements Screen {
 
@@ -78,6 +79,8 @@ public class MainGameScreen implements Screen {
 		multiplexer.addProcessor(player.getInputProcessor());
 		Gdx.input.setInputProcessor(multiplexer);
 
+		ProfileManager.getInstance().addObserver(playerHUD);
+		ProfileManager.getInstance().addObserver(mapMgr);
 	}
 
 	@Override
@@ -120,21 +123,48 @@ public class MainGameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		setupViewport(10, 10);
+		setupViewport(15, 15);
 		camera.setToOrtho(false, VIEWPORT.viewportWidth, VIEWPORT.viewportHeight);
 		playerHUD.resize((int) VIEWPORT.physicalWidth, (int) VIEWPORT.physicalHeight);
 	}
 
 	@Override
-	public void pause() {}
+	public void pause() {
+		gameState = GameState.PAUSED;
+		ProfileManager.getInstance().saveProfile();
+	}
 
 	@Override
-	public void resume() {}
+	public void resume() {
+		gameState = GameState.RUNNING;
+		ProfileManager.getInstance().loadProfile();
+	}
 
 	@Override
 	public void dispose() {
 		player.dispose();
 		mapRenderer.dispose();
+	}
+
+	public static void setGameState(GameState state){
+		switch(state){
+			case RUNNING:
+				gameState = GameState.RUNNING;
+				break;
+			case PAUSED:
+				if( gameState == GameState.PAUSED ){
+					gameState = GameState.RUNNING;
+					ProfileManager.getInstance().loadProfile();
+				}else if( gameState == GameState.RUNNING ){
+					gameState = GameState.PAUSED;
+					ProfileManager.getInstance().saveProfile();
+				}
+				break;
+			default:
+				gameState = GameState.RUNNING;
+				break;
+		}
+
 	}
 
 	private void setupViewport(int width, int height){

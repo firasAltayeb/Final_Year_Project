@@ -14,7 +14,7 @@ import com.mygdx.game.inventory.InventoryItem.ItemTypeID;
 public class InventoryItemFactory {
 
     private Json json = new Json();
-    private final String INVENTORY_ITEM = "scripts/inventory_items.json";
+    private final String INVENTORY_ITEM = "json_scripts/inventory_items.json";
     private static InventoryItemFactory instance = null;
     private Hashtable<ItemTypeID,InventoryItem> inventoryItemList;
 
