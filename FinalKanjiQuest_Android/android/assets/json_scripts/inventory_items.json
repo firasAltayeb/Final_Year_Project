@@ -1,0 +1,27 @@
+[
+{
+	itemAttributes: 1
+	itemUseType: 1
+	itemUseTypeValue: 1
+	itemTypeID: POTION_BLUE
+	itemShortDescription: A small potion that recovers 1 heart
+	itemValue: 1
+},
+{
+	itemAttributes: 1
+	itemUseType: 1
+	itemUseTypeValue: 1
+	itemTypeID: MEDIUM_POTION_BLUE
+	itemShortDescription: A medium potion that recovers 3 hearts
+	itemValue: 3
+},
+{
+	itemAttributes: 1
+	itemUseType: 1
+	itemUseTypeValue: 1
+	itemTypeID: LARGE_POTION_BLUE
+	itemShortDescription: A Large potion that recovers 5 hearts
+	itemValue: 5
+},
+
+]

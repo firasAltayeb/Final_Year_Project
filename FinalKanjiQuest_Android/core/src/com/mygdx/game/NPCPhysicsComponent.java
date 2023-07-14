@@ -11,7 +11,7 @@ public class NPCPhysicsComponent extends PhysicsComponent {
 
     public NPCPhysicsComponent(){
         boundingBoxLocation = BoundingBoxLocation.CENTER;
-        initBoundingBox(0.8f, 0.6f);
+        initBoundingBox(0.6f, 0.4f);
         super.velocity.set(3f,3f);
     }
 
@@ -21,19 +21,19 @@ public class NPCPhysicsComponent extends PhysicsComponent {
 
     @Override
     public void receiveMessage(String message) {
-        //Gdx.app.log(TAG, "Got message " + message);
+        //Gdx.app.debug(TAG, "Got message " + message);
         String[] string = message.split(Component.MESSAGE_TOKEN);
 
         if( string.length == 0 ) return;
 
         //Specifically for messages with 1 object payload
         if( string.length == 2 ) {
-            if (string[0].equalsIgnoreCase(Component.MESSAGE.INIT_START_POSITION.toString())) {
+            if (string[0].equalsIgnoreCase(MESSAGE.INIT_START_POSITION.toString())) {
                 currentEntityPosition = json.fromJson(Vector2.class, string[1]);
                 nextEntityPosition.set(currentEntityPosition.x, currentEntityPosition.y);
-            } else if (string[0].equalsIgnoreCase(Component.MESSAGE.CURRENT_STATE.toString())) {
+            } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_STATE.toString())) {
                 state = json.fromJson(Entity.State.class, string[1]);
-            } else if (string[0].equalsIgnoreCase(Component.MESSAGE.CURRENT_DIRECTION.toString())) {
+            } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_DIRECTION.toString())) {
                 currentDirection = json.fromJson(Entity.Direction.class, string[1]);
             }
         }

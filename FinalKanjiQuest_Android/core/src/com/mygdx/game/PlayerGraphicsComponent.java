@@ -19,7 +19,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
 
     @Override
     public void receiveMessage(String message) {
-        //Gdx.app.log(TAG, "Got message " + message);
+        //Gdx.app.debug(TAG, "Got message " + message);
         String[] string = message.split(MESSAGE_TOKEN);
 
         if( string.length == 0 ) return;
@@ -69,7 +69,7 @@ public class PlayerGraphicsComponent extends GraphicsComponent {
         batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1.2f, 2);
         batch.end();
 
-//        Used to graphically log boundingboxes
+//        Used to graphically debug boundingboxes
 //        Rectangle rect = entity.getCurrentBoundingBox();
 //        shapeRenderer.setProjectionMatrix(camera.combined);
 //        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

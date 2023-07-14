@@ -39,7 +39,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
     @Override
     public void receiveMessage(String message) {
-        //Gdx.app.log(TAG, "Got message " + message);
+        //Gdx.app.debug(TAG, "Got message " + message);
         String[] string = message.split(Component.MESSAGE_TOKEN);
 
         if( string.length == 0 ) return;
@@ -94,13 +94,13 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
         mouseSelectCoordinates.x /= Map.UNIT_SCALE;
         mouseSelectCoordinates.y /= Map.UNIT_SCALE;
 
-        //Gdx.app.log(TAG, "Mouse Coordinates " + "(" + mouseSelectCoordinates.x + "," + mouseSelectCoordinates.y + ")");
+        //Gdx.app.debug(TAG, "Mouse Coordinates " + "(" + mouseSelectCoordinates.x + "," + mouseSelectCoordinates.y + ")");
 
         for( Entity mapEntity : currentEntities ) {
             //Don't break, reset all entities
             mapEntity.sendMessage(MESSAGE.ENTITY_DESELECTED);
             Rectangle mapEntityBoundingBox = mapEntity.getCurrentBoundingBox();
-            //Gdx.app.log(TAG, "Entity Candidate Location " + "(" + mapEntityBoundingBox.x + "," + mapEntityBoundingBox.y + ")");
+            //Gdx.app.debug(TAG, "Entity Candidate Location " + "(" + mapEntityBoundingBox.x + "," + mapEntityBoundingBox.y + ")");
             if (mapEntity.getCurrentBoundingBox().contains(mouseSelectCoordinates.x, mouseSelectCoordinates.y)) {
                 //Check distance
                 selectionRay.set(boundingBox.x, boundingBox.y, 0.0f, mapEntityBoundingBox.x, mapEntityBoundingBox.y, 0.0f);
@@ -109,7 +109,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
                 if( distance <= selectRayMaximumDistance){
                     //We have a valid entity selection
                     //Picked/Selected
-                    Gdx.app.log(TAG, "Selected Entity! " + mapEntity.getEntityConfig().getEntityID());
+                    Gdx.app.debug(TAG, "Selected Entity! " + mapEntity.getEntityConfig().getEntityID());
                     mapEntity.sendMessage(MESSAGE.ENTITY_SELECTED);
                 }
             }
@@ -120,7 +120,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
         MapLayer mapPortalLayer =  mapMgr.getPortalLayer();
 
         if( mapPortalLayer == null ){
-            Gdx.app.log(TAG, "Portal Layer doesn't exist!");
+            Gdx.app.debug(TAG, "Portal Layer doesn't exist!");
             return false;
         }
 
@@ -144,7 +144,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
                     nextEntityPosition.x = mapMgr.getPlayerStartUnitScaled().x;
                     nextEntityPosition.y = mapMgr.getPlayerStartUnitScaled().y;
 
-                    Gdx.app.log(TAG, "Portal Activated");
+                    Gdx.app.debug(TAG, "Portal Activated");
                     return true;
                 }
             }

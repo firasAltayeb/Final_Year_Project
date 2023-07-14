@@ -2,6 +2,23 @@
 entityID : PLAYER_START
 state : IDLE
 direction : DOWN
+inventory : [
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: POTION_BLUE
+	},
+	{
+		value: MEDIUM_POTION_BLUE
+	},
+	{
+		value: LARGE_POTION_BLUE
+	},
+]
 animationConfig: [
 	{
 		frameDuration: 0.25

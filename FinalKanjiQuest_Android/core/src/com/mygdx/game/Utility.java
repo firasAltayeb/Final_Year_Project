@@ -9,8 +9,10 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public final class Utility {
 
@@ -20,12 +22,22 @@ public final class Utility {
     // a nice convenience class for  managing file handles when resolving paths
     private static InternalFileHandleResolver filepathResolver = new InternalFileHandleResolver();
 
+    private final static String GUI_SHEET_PATH = "gui/gui_sheet.atlas";
+    private final static String GUI_SKINS_PATH = "gui/gui_skins.json";
+    private final static String ITEMS_SHEET_PATH = "items/items_sheet.txt";
+    private final static String ITEMS_SKINS_PATH = "items/items_skins.json";
+
+    public static TextureAtlas GUI_TEXTUREATLAS = new TextureAtlas(GUI_SHEET_PATH);
+    public static TextureAtlas ITEMS_TEXTUREATLAS = new TextureAtlas(ITEMS_SHEET_PATH);
+    public static Skin GUI_SKINS = new Skin(Gdx.files.internal(GUI_SKINS_PATH), GUI_TEXTUREATLAS);
+    public static Skin ITEMS_SKINS = new Skin(Gdx.files.internal(ITEMS_SKINS_PATH), ITEMS_TEXTUREATLAS);
+
     public static void unloadAsset (String assetFileNamePath){
         // once the asset manger is done loading
         if(assetManager.isLoaded(assetFileNamePath)){
             assetManager.unload(assetFileNamePath);
         } else {
-            Gdx.app.log(TAG, "Asset is not loaded; Nothing to unload " + assetFileNamePath);
+            Gdx.app.debug(TAG, "Asset is not loaded; Nothing to unload " + assetFileNamePath);
         }
     }
 
@@ -63,9 +75,9 @@ public final class Utility {
             assetManager.load(mapFilenamePath, TiledMap.class);
             //until loading screen is added, block
             assetManager.finishLoadingAsset(mapFilenamePath);
-            Gdx.app.log(TAG, "Map loaded: " + mapFilenamePath);
+            Gdx.app.debug(TAG, "Map loaded: " + mapFilenamePath);
         } else{
-            Gdx.app.log(TAG, "Map doesn't exist: " + mapFilenamePath);
+            Gdx.app.debug(TAG, "Map doesn't exist: " + mapFilenamePath);
         }
     }
 
@@ -75,7 +87,7 @@ public final class Utility {
         if(assetManager.isLoaded(mapFilenamePath)) {
             map = assetManager.get(mapFilenamePath, TiledMap.class);
         } else {
-            Gdx.app.log(TAG, "Map is not loaded: " + mapFilenamePath);
+            Gdx.app.debug(TAG, "Map is not loaded: " + mapFilenamePath);
         }
         return map;
     }
@@ -91,9 +103,9 @@ public final class Utility {
             assetManager.load(textureFilenamePath, Texture.class);
             //until loading screen is added, block
             assetManager.finishLoadingAsset(textureFilenamePath);
-            Gdx.app.log(TAG, "Texture loaded: " + textureFilenamePath);
+            Gdx.app.debug(TAG, "Texture loaded: " + textureFilenamePath);
         } else{
-            Gdx.app.log(TAG, "Texture doesn't exist: " + textureFilenamePath);
+            Gdx.app.debug(TAG, "Texture doesn't exist: " + textureFilenamePath);
         }
     }
 
@@ -104,7 +116,7 @@ public final class Utility {
         if(assetManager.isLoaded(textureFilenamePath)){
             texture = assetManager.get(textureFilenamePath, Texture.class);
         } else {
-            Gdx.app.log(TAG, "Texture is not loaded: " + textureFilenamePath);
+            Gdx.app.debug(TAG, "Texture is not loaded: " + textureFilenamePath);
         }
         return texture;
     }

@@ -94,6 +94,9 @@ public class NPCInputComponent extends InputComponent implements InputProcessor 
 
     @Override
     public boolean keyDown(int keycode) {
+        if( keycode == Input.Keys.Q){
+            keys.put(Keys.QUIT, true);
+        }
         return false;
     }
 

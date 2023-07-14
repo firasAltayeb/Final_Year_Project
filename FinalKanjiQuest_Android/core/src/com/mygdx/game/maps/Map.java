@@ -58,7 +58,7 @@ public abstract class Map {
         convertedUnits = new Vector2(0,0);
 
         if( fullMapPath == null || fullMapPath.isEmpty() ) {
-            Gdx.app.log(TAG, "Map is invalid");
+            Gdx.app.debug(TAG, "Map is invalid");
             return;
         }
 
@@ -66,23 +66,23 @@ public abstract class Map {
         if( Utility.isAssetLoaded(fullMapPath) ) {
             currentMap = Utility.getMapAsset(fullMapPath);
         }else{
-            Gdx.app.log(TAG, "Map not loaded");
+            Gdx.app.debug(TAG, "Map not loaded");
             return;
         }
 
         collisionLayer = currentMap.getLayers().get(COLLISION_LAYER);
         if( collisionLayer == null ){
-            Gdx.app.log(TAG, "No collision layer!");
+            Gdx.app.debug(TAG, "No collision layer!");
         }
 
         portalLayer = currentMap.getLayers().get(PORTAL_LAYER);
         if( portalLayer == null ){
-            Gdx.app.log(TAG, "No portal layer!");
+            Gdx.app.debug(TAG, "No portal layer!");
         }
 
         spawnsLayer = currentMap.getLayers().get(SPAWNS_LAYER);
         if( spawnsLayer == null ){
-            Gdx.app.log(TAG, "No spawn layer!");
+            Gdx.app.debug(TAG, "No spawn layer!");
         }else{
             setClosestStartPosition(playerStart);
         }
@@ -97,6 +97,10 @@ public abstract class Map {
 
     public Vector2 getPlayerStart() {
         return playerStart;
+    }
+
+    public void setPlayerStart(Vector2 playerStart) {
+        this.playerStart = playerStart;
     }
 
     public abstract void updateMapEntities(MapManager mapMgr, Batch batch, float delta);
@@ -183,7 +187,7 @@ public abstract class Map {
     }
 
     private void setClosestStartPosition(final Vector2 position){
-         Gdx.app.log(TAG, "setClosestStartPosition INPUT: (" + position.x + "," + position.y + ") " + currentMapType.toString());
+         Gdx.app.debug(TAG, "setClosestStartPosition INPUT: (" + position.x + "," + position.y + ") " + currentMapType.toString());
 
         //Get last known position on this map
         playerStartPositionRect.set(0,0);
@@ -202,18 +206,17 @@ public abstract class Map {
                 ((RectangleMapObject)object).getRectangle().getPosition(playerStartPositionRect);
                 float distance = position.dst2(playerStartPositionRect);
 
-                Gdx.app.log(TAG, "DISTANCE: " + distance + " for " + currentMapType.toString());
+                Gdx.app.debug(TAG, "DISTANCE: " + distance + " for " + currentMapType.toString());
 
                 if( distance < shortestDistance || shortestDistance == 0 ){
                     closestPlayerStartPosition.set(playerStartPositionRect);
                     shortestDistance = distance;
-                    Gdx.app.log(TAG, "closest START is: (" + closestPlayerStartPosition.x + "," + closestPlayerStartPosition.y + ") " +  currentMapType.toString());
+                    Gdx.app.debug(TAG, "closest START is: (" + closestPlayerStartPosition.x + "," + closestPlayerStartPosition.y + ") " +  currentMapType.toString());
                 }
             }
         }
         playerStart =  closestPlayerStartPosition.cpy();
     }
-
 
     public Entity initEntity(EntityConfig entityConfig, Vector2 position){
         Entity entity = EntityFactory.getEntity(EntityFactory.EntityType.NPC);
@@ -233,7 +236,6 @@ public abstract class Map {
         if( specialNPCStartPositions.containsKey(entityConfig.getEntityID()) ) {
             position = specialNPCStartPositions.get(entityConfig.getEntityID());
         }
-
         return initEntity(entityConfig, position);
     }
 

@@ -106,7 +106,7 @@ public abstract class PhysicsComponent implements Component {
         this.currentEntityPosition.x = nextEntityPosition.x;
         this.currentEntityPosition.y = nextEntityPosition.y;
 
-        //Gdx.app.log(TAG, "SETTING Current Position " + entity.getEntityConfig().getEntityID()
+        //Gdx.app.debug(TAG, "SETTING Current Position " + entity.getEntityConfig().getEntityID()
         // + ": (" + currentEntityPosition.x + "," + currentEntityPosition.y + ")");
         entity.sendMessage(MESSAGE.CURRENT_POSITION, json.toJson(currentEntityPosition));
     }
@@ -177,7 +177,7 @@ public abstract class PhysicsComponent implements Component {
         }
 
         if( width == 0 || height == 0){
-            Gdx.app.log(TAG, "Width and Height are 0!! " + width + ":" + height);
+            Gdx.app.debug(TAG, "Width and Height are 0!! " + width + ":" + height);
         }
 
         //Need to account for the unitscale, since the map coordinates will be in pixels
@@ -211,7 +211,7 @@ public abstract class PhysicsComponent implements Component {
                 break;
         }
 
-        //Gdx.app.log(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
+        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
         // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 
@@ -240,7 +240,7 @@ public abstract class PhysicsComponent implements Component {
                 break;
         }
 
-        //Gdx.app.log(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
+        //Gdx.app.debug(TAG, "SETTING Bounding Box for " + entity.getEntityConfig().getEntityID() +
         // ": (" + minX + "," + minY + ")  width: " + width + " height: " + height);
     }
 }

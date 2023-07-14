@@ -25,30 +25,30 @@ public class NPCGraphicsComponent extends GraphicsComponent {
 
     @Override
     public void receiveMessage(String message) {
-        //Gdx.app.log(TAG, "Got message " + message);
+        //Gdx.app.debug(TAG, "Got message " + message);
         String[] string = message.split(MESSAGE_TOKEN);
 
         if( string.length == 0 ) return;
 
         if( string.length == 1 ) {
-            if (string[0].equalsIgnoreCase(Component.MESSAGE.ENTITY_SELECTED.toString())) {
+            if (string[0].equalsIgnoreCase(MESSAGE.ENTITY_SELECTED.toString())) {
                 isSelected = true;
-            }else if (string[0].equalsIgnoreCase(Component.MESSAGE.ENTITY_DESELECTED.toString())) {
+            }else if (string[0].equalsIgnoreCase(MESSAGE.ENTITY_DESELECTED.toString())) {
                 isSelected = false;
             }
         }
 
         //Specifically for messages with 1 object payload
         if( string.length == 2 ) {
-            if (string[0].equalsIgnoreCase(Component.MESSAGE.CURRENT_POSITION.toString())) {
+            if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_POSITION.toString())) {
                 currentPosition = json.fromJson(Vector2.class, string[1]);
-            } else if (string[0].equalsIgnoreCase(Component.MESSAGE.INIT_START_POSITION.toString())) {
+            } else if (string[0].equalsIgnoreCase(MESSAGE.INIT_START_POSITION.toString())) {
                 currentPosition = json.fromJson(Vector2.class, string[1]);
-            } else if (string[0].equalsIgnoreCase(Component.MESSAGE.CURRENT_STATE.toString())) {
+            } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_STATE.toString())) {
                 currentState = json.fromJson(Entity.State.class, string[1]);
-            } else if (string[0].equalsIgnoreCase(Component.MESSAGE.CURRENT_DIRECTION.toString())) {
+            } else if (string[0].equalsIgnoreCase(MESSAGE.CURRENT_DIRECTION.toString())) {
                 currentDirection = json.fromJson(Entity.Direction.class, string[1]);
-            }else if (string[0].equalsIgnoreCase(Component.MESSAGE.LOAD_ANIMATIONS.toString())) {
+            }else if (string[0].equalsIgnoreCase(MESSAGE.LOAD_ANIMATIONS.toString())) {
                 EntityConfig entityConfig = json.fromJson(EntityConfig.class, string[1]);
                 Array<AnimationConfig> animationConfigs = entityConfig.getAnimationConfig();
 
@@ -80,10 +80,10 @@ public class NPCGraphicsComponent extends GraphicsComponent {
         }
 
         batch.begin();
-        batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1.2f, 2f);
+        batch.draw(currentFrame, currentPosition.x, currentPosition.y, 1.2f, 2.2f);
         batch.end();
 
-//        Used to graphically log boundingboxes
+//        Used to graphically debug boundingboxes
 //        Rectangle rect = entity.getCurrentBoundingBox();
 //        Camera camera = mapMgr.getCamera();
 //        shapeRenderer.setProjectionMatrix(camera.combined);
@@ -103,9 +103,9 @@ public class NPCGraphicsComponent extends GraphicsComponent {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0.0f, 1.0f, 1.0f, 0.5f);
 
-        float width =  rect.getWidth() * Map.UNIT_SCALE*1.5f;
+        float width =  rect.getWidth() * Map.UNIT_SCALE*2f;
         float height = rect.getHeight() * Map.UNIT_SCALE/2f;
-        float x = rect.x * Map.UNIT_SCALE - width/6;
+        float x = rect.x * Map.UNIT_SCALE - width/3;
         float y = rect.y * Map.UNIT_SCALE - height/1.5f;
 
         shapeRenderer.ellipse(x,y,width,height);

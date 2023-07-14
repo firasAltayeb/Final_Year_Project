@@ -14,6 +14,7 @@ public class ProfileManager extends ProfileSubject {
     private static ProfileManager profileManager;
     private Hashtable<String,FileHandle> profiles = null;
     private ObjectMap<String, Object> profileProperties = new ObjectMap<String, Object>();
+
     private String _profileName;
 
     private static final String SAVEGAME_SUFFIX = ".sav";

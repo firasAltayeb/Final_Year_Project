@@ -1,18 +1,19 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Json;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class InputComponent implements Component {
+public abstract class InputComponent implements Component, InputProcessor {
 
     protected Entity.Direction currentDirection = null;
     protected Entity.State currentState = null;
     protected Json json;
 
     protected enum Keys {
-        LEFT, RIGHT, UP, DOWN, QUIT,
+        LEFT, RIGHT, UP, DOWN, QUIT, PAUSE,
         UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
     }
 
@@ -29,11 +30,12 @@ public abstract class InputComponent implements Component {
         keys.put(Keys.RIGHT, false);
         keys.put(Keys.UP, false);
         keys.put(Keys.DOWN, false);
-        keys.put(Keys.UP_RIGHT, false);
         keys.put(Keys.UP_LEFT, false);
-        keys.put(Keys.DOWN_RIGHT, false);
+        keys.put(Keys.UP_RIGHT, false);
         keys.put(Keys.DOWN_LEFT, false);
+        keys.put(Keys.DOWN_RIGHT, false);
         keys.put(Keys.QUIT, false);
+        keys.put(Keys.PAUSE, false);
     };
 
     static {
