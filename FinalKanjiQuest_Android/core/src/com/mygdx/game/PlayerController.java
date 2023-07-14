@@ -31,10 +31,7 @@ public class PlayerController implements InputProcessor {
 	}
 
 	private Entity player;
-	boolean actLeft;
-	boolean actRight;
-	boolean actUp;
-	boolean actDown;
+	boolean doNothing;
 
 	public PlayerController(Entity player) {
 		//Gdx.app.log(TAG, "Construction" );
@@ -42,10 +39,7 @@ public class PlayerController implements InputProcessor {
 
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
-		actLeft  = false;
-		actRight = false;
-		actUp    = false;
-		actDown  = false;
+		doNothing = false;
 
 	}
 
@@ -90,7 +84,7 @@ public class PlayerController implements InputProcessor {
 	}
 
 	//TODO Speak about this in report - corners for UP & Down
-	// majority of the right and left side are for the corresponding directions
+	//TODO majority of the right and left side are for the corresponding directions
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		//Gdx.app.log(TAG, "touch down : ( x == " + screenX + ", y ==" + screenY + ")" );
@@ -100,38 +94,34 @@ public class PlayerController implements InputProcessor {
 		if((screenX >= 0 && screenX <= screenWidth/2) &&
 				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
 			if (keys.get(Keys.UP) || keys.get(Keys.DOWN) || keys.get(Keys.RIGHT)) {
-					//do nothing
+				doNothing = true;
 			} else {
 				this.leftPressed();
-				actLeft = true;
 			}
 		}
 		if((screenX >= screenWidth/2 && screenX <= screenWidth) &&
 				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
 			if (keys.get(Keys.DOWN) || keys.get(Keys.UP) || keys.get(Keys.LEFT)){
-					//do nothing
+				doNothing = true;
 			} else {
 				this.rightPressed();
-				actRight = true;
 			}
 		}
 
 		if((screenX >= 0 && screenX <= screenWidth) &&
 				(screenY >= 0 && screenY <= screenHeight/4)){
 			if (keys.get(Keys.DOWN) || keys.get(Keys.LEFT) || keys.get(Keys.RIGHT)){
-					//do nothing
+				doNothing = true;
 			} else {
 				this.upPressed();
-				actUp = true;
 			}
 		}
 		if((screenX >= 0 && screenX <= screenWidth) &&
 				(screenY >= screenHeight/1.3 && screenY <= screenHeight)){
 			if (keys.get(Keys.UP) || keys.get(Keys.LEFT)  || keys.get(Keys.RIGHT)){
-					//do nothing
+				doNothing = true;
 			} else {
 				this.downPressed();
-				actDown = true;
 			}
 		}
 
@@ -142,46 +132,16 @@ public class PlayerController implements InputProcessor {
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		//Gdx.app.log(TAG, "touch up : ( x == " + screenX + ", y ==" + screenY + ")" );
 
-		if((screenX >= 0 && screenX <= screenWidth/2) &&
-				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
-			if (actLeft == true){
-				hide();
-				doNotAct();
-			}
+		if(doNothing){
+			// do nothing
+		}else {
+			hide();
 		}
 
-		if((screenX >= screenWidth/2 && screenX <= screenWidth) &&
-				(screenY >= screenHeight/4 && screenY <= screenHeight/1.3)){
-			if (actRight == true){
-				hide();
-				doNotAct();
-			}
-		}
-
-		if((screenX >= 0 && screenX <= screenWidth) &&
-				(screenY >= 0 && screenY <= screenHeight/4)){
-			if (actUp == true){
-				hide();
-				doNotAct();
-
-			}
-		}
-		if((screenX >= 0 && screenX <= screenWidth) &&
-				(screenY >= screenHeight/1.3 && screenY <= screenHeight)){
-			if (actDown == true){
-				hide();
-				doNotAct();
-			}
-		}
+		doNothing = false;
 
 		return true;
-	}
 
-	public void doNotAct(){
-		actLeft = false;
-		actRight = false;
-		actUp = false;
-		actDown = false;
 	}
 
 	@Override
