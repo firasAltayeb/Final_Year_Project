@@ -111,6 +111,7 @@ public class MainGameScreen extends GameScreen {
 		if( gameState == GameState.PAUSED ){
 			player.updateInput(delta);
 			playerHUD.render(delta);
+			//mapMgr.disableCurrentmapMusic();
 			return;
 		}
 

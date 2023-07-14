@@ -11,6 +11,7 @@ public interface BattleObserver {
         LETTER_ANSWERED_INCORRECTLY,
         PLAYER_HIT_DAMAGE,
         PLAYER_RUNNING,
+        PLAYER_HAS_MOVED,
         NONE
     }
 

@@ -27,7 +27,6 @@ import com.mygdx.game.japanese.KanjiLettersFactory;
 import com.mygdx.game.japanese.LetterLvlCounter;
 import com.mygdx.game.maps.MapManager;
 import com.mygdx.game.tools.Entity;
-import com.mygdx.game.tools.OnScreenController;
 import com.mygdx.game.tools.Utility;
 import com.mygdx.game.inventory.InventoryItem;
 import com.mygdx.game.inventory.InventoryItemLocation;
@@ -55,7 +54,6 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
     private KanaUI katakanaUI;
     private KanjiUI kanjiUI;
     private MnemonicsUI mnemonicsUI;
-    private OnScreenController controllerUI;
     private BattleUI battleUI;
 
     private TextButton menuButton;
@@ -65,7 +63,6 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
     private TextButton katakanaButton;
     private TextButton kanjiButton;
     private TextButton mnemonicsButton;
-    private TextButton controllerButton;
 
     private Array<Image> all_health_heart;
     private Image health_heart;
@@ -380,27 +377,6 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
     }
 
     @Override
-    public void onNotify(String value, ComponentEvent event) {
-        switch(event) {
-            case ENEMY_SPAWN_LOCATION_CHANGED:
-                String enemyZoneID = value;
-                Gdx.app.debug(TAG, "ENEMY_SPAWN_LOCATION_CHANGED " + enemyZoneID);
-                battleUI.battleZoneTriggered(Integer.parseInt(enemyZoneID));
-                break;
-            case PLAYER_HAS_MOVED:
-                //Gdx.app.debug(TAG, "PLAYER_HAS_MOVED ");
-                if (battleUI.isBattleReady()) {
-                    MainGameScreen.setGameState(MainGameScreen.GameState.SAVING);
-                    battleUI.toBack();
-                    battleUI.setVisible(true);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
     public void show() {
     }
 
@@ -524,6 +500,29 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
     }
 
     @Override
+    public void onNotify(String value, ComponentEvent event) {
+        switch(event) {
+            case ENEMY_SPAWN_LOCATION_CHANGED:
+                String enemyZoneID = value;
+                Gdx.app.debug(TAG, "ENEMY_SPAWN_LOCATION_CHANGED " + enemyZoneID);
+                battleUI.battleZoneTriggered(Integer.parseInt(enemyZoneID));
+                break;
+            case PLAYER_HAS_MOVED:
+                //Gdx.app.debug(TAG, "PLAYER_HAS_MOVED ");
+                if (battleUI.isBattleReady()) {
+                    MainGameScreen.setGameState(MainGameScreen.GameState.SAVING);
+                    mapManager.disableCurrentmapMusic();
+                    notify(AudioObserver.AudioCommand.MUSIC_PLAY_LOOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
+                    battleUI.toBack();
+                    battleUI.setVisible(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     public void onNotify(String answeredLetter, BattleEvent event) {
         int hpVal;
         switch (event) {
@@ -532,6 +531,7 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, Compone
                 progressUI.updateTable();
 
                 MainGameScreen.setGameState(MainGameScreen.GameState.RUNNING);
+                notify(AudioObserver.AudioCommand.MUSIC_STOP, AudioObserver.AudioTypeEvent.MUSIC_BATTLE);
                 mapManager.enableCurrentmapMusic();
                 battleUI.setVisible(false);
                 break;

@@ -48,8 +48,13 @@ public class MapManager implements ProfileObserver {
                 }
 
                 Vector2 forestMapStartPosition = profileManager.getProperty("forestMapStartPosition", Vector2.class);
-                if( townMapStartPosition != null ){
+                if( forestMapStartPosition != null ){
                     MapFactory.getMap(MapFactory.MapType.FOREST).setPlayerStart(forestMapStartPosition);
+                }
+
+                Vector2 caveMapStartPosition = profileManager.getProperty("caveMapStartPosition", Vector2.class);
+                if( caveMapStartPosition != null ){
+                    MapFactory.getMap(MapFactory.MapType.CAVE).setPlayerStart(caveMapStartPosition);
                 }
 
                 break;
@@ -61,6 +66,7 @@ public class MapManager implements ProfileObserver {
                 profileManager.setProperty("townMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOWN).getPlayerStart() );
                 profileManager.setProperty("topWorldMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOP_WORLD).getPlayerStart() );
                 profileManager.setProperty("forestMapStartPosition", MapFactory.getMap(MapFactory.MapType.FOREST).getPlayerStart() );
+                profileManager.setProperty("caveMapStartPosition", MapFactory.getMap(MapFactory.MapType.CAVE).getPlayerStart() );
 
 
                 break;
@@ -73,6 +79,7 @@ public class MapManager implements ProfileObserver {
                 profileManager.setProperty("townMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOWN).getPlayerStart() );
                 profileManager.setProperty("topWorldMapStartPosition", MapFactory.getMap(MapFactory.MapType.TOP_WORLD).getPlayerStart() );
                 profileManager.setProperty("forestMapStartPosition", MapFactory.getMap(MapFactory.MapType.FOREST).getPlayerStart() );
+                profileManager.setProperty("caveMapStartPosition", MapFactory.getMap(MapFactory.MapType.CAVE).getPlayerStart() );
 
                 break;
             default:

@@ -1168,7 +1168,7 @@
   <object id="318" name="TOP_WORLD.FOREST_START" x="720" y="1664" width="112" height="16"/>
   <object id="321" name="TOP_WORLD.CAVE_START" x="496" y="160" width="96" height="16"/>
  </objectgroup>
- <objectgroup name="MAP_ENEMY_SPAWN_LAYER" visible="0">
+ <objectgroup name="MAP_ENEMY_SPAWN_LAYER">
   <object id="325" name="1" x="112" y="0" width="848" height="1760"/>
  </objectgroup>
 </map>
