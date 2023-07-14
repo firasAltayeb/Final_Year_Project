@@ -29,7 +29,6 @@ public class KanaUI extends Window{
         menuItemWindowHeight = height;
         kanaType = temp;
 
-
         this.pad(this.getPadTop() + menuItemWindowHeight / 15, 10,
                 menuItemWindowHeight / 30, 10);
 

@@ -101,8 +101,8 @@ public class ProgressUI extends Window implements ProgressSubject {
     }
 
     public void updateSize(float width, float height){
-        float newMenuItemWindowWidth = width;
-        float newMenuItemWindowHeight = height;
+        menuItemWindowWidth = width;
+        menuItemWindowHeight = height;
 
         //if(newMenuItemWindowWidth > menuItemWindowWidth &&
         //        newMenuItemWindowHeight > menuItemWindowHeight){
@@ -111,13 +111,15 @@ public class ProgressUI extends Window implements ProgressSubject {
         //    }
         //}
 
-        this.setSize(newMenuItemWindowWidth, newMenuItemWindowHeight);
+        this.setSize(menuItemWindowWidth, menuItemWindowHeight);
     }
 
     //TODO speak about this
     public void updateTable(){
-        table.clear();
         innerTable.clear();
+        table.clear();
+        this.clear();
+
         table = new Table();
         innerTable = new Table();
 
@@ -162,6 +164,7 @@ public class ProgressUI extends Window implements ProgressSubject {
 
         ScrollPane scrollPane = new ScrollPane(table);
         this.add(scrollPane).fill().expand();
+        this.setSize(menuItemWindowWidth, menuItemWindowHeight);
     }
 
 

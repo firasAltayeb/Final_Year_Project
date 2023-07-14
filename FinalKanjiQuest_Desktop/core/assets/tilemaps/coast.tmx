@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="90" height="110" tilewidth="16" tileheight="16" nextobjectid="310">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="90" height="110" tilewidth="16" tileheight="16" nextobjectid="313">
  <tileset firstgid="1" name="tileset1" tilewidth="16" tileheight="16" tilecount="1833" columns="39">
   <image source="../sprites/map_objects/tileset1.png" trans="ffffff" width="624" height="752"/>
   <terraintypes>
@@ -832,6 +832,8 @@
   <object id="298" x="1152" y="768" width="112" height="16"/>
   <object id="299" x="1248" y="784" width="16" height="96"/>
   <object id="300" x="1184" y="880" width="80" height="16"/>
+  <object id="310" x="410.667" y="480" width="16" height="128"/>
+  <object id="312" x="470" y="480" width="16" height="128"/>
  </objectgroup>
  <objectgroup name="MAP_SPAWNS_LAYER">
   <object id="301" name="COAST_END" x="624" y="192" width="16" height="16"/>
