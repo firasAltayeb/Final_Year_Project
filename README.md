@@ -1,64 +1,56 @@
-# Final-Year-Project
+# Final Kanji Quest
 
-In order to download the Windows executables file please follow one of these links,
+Final Kanji Quest (FKQ) is a game that aims to teach the Japanese writing system by transforming traditional learning strategies, such as the spaced repetition algorithm (SRS), into a role-playing adventure game. 
 
-https://drive.google.com/open?id=0B7a2PtVOj_8mWFJ2bFNRcTZKTlU
-https://www.dropbox.com/s/1r6fovdhtdcwsi6/desktop-1.0.jar?dl=0
+## Game Start 
 
-In order to compile the Desktop version of the project you will first need to download the assets folder from one of the following links:
+| Onboarding Screen | Starting Location | 
+|---------------------------|-----------------------------------------------|
+| ![Screenshot](./screenshots/01.png) | ![Screenshot](./screenshots/02.png) |                                          
 
-https://drive.google.com/open?id=0B7a2PtVOj_8mVzhtTnZjS2IwVDA
-https://www.dropbox.com/s/nt7tpeci7daxbkh/desktop.zip?dl=0
+## Game Controls 
 
-After downloading the desktop directory from one of the above links, you will need to drag the assets folder which is inside the desktop directory to the path;
+Users are able to move the player character by tapping on one of the corners of the screen e.g. top-left box will move the character diagonally up-left. Desktop users are also able to do so using the arrow keys. The middle box is reserved for selecting things when the player character is facing them such as non-player characters (NPC) or treasure boxes.
 
-FinalKanjiQuest_Desktop/core
+<table>
+  <tr>
+    <td><img src="./screenshots/03.png" alt="Image 1"></td>
+    <td><img src="./screenshots/04.png" alt="Image 2"></td>
+  </tr>
+</table>
 
-The result of doing so should be;
+## Menu Buttons
 
-FinalKanjiQuest_Desktop/core/assets
+Tapping on the progress menu item reveals each study item's SRS level. The hignest SRS level for hiragna and katakana is 3, but for kanji it is 5 as they require more time to learn.  
 
-After doing the above, while using Android Studio, you will need to click "Edit Configuration" and then click the plus icon and add an "Application".  In the "Main class" space choose;
+<table>
+  <tr>
+    <td><img src="./screenshots/05.png" alt="Image 1"></td>
+    <td><img src="./screenshots/06.png" alt="Image 2"></td>
+  </tr>
+    <td><img src="./screenshots/07.png" alt="Image 2"></td>
+</table>
 
- "com.mygdx.game.desktop.DesktopLauncher"
+Tapping on the inventory menu itme will reveal the player character's inventory. Tapping on an item will display it in the top slot with its description. To consume or use a selected item users have to tap the item while on the top slot.
 
-For your "Working Directory" choose
+<table>
+  <tr>
+    <td><img src="./screenshots/08.png" alt="Image 1"></td>
+    <td><img src="./screenshots/09.png" alt="Image 2"></td>
+  </tr>
+</table>
 
-../Final_Year_Project/FinalKanjiQuest_Desktop/core/assets"
+The available items and their effects are as follows:
 
-For the "Use classpath of module" choose
-
-desktop
-
-After following the above steps, click apply. You will be able to run the app normally.
-
-In order to create a desktop executables file, run the following command in the included
-Android studio terminal
-
-./gradlew desktop:dist
-
-
-
-In order to download the Android executables file please follow one of these links,
-
-https://drive.google.com/open?id=0B7a2PtVOj_8mNkNmSC1vMVJMLU0
-https://www.dropbox.com/s/9ih0ndov7beqpqr/android-debug.apk?dl=0
+| Item Description | Item Effect | 
+|---------------------------|-----------------------------------------------|
+| Medium potion | Recovers 3 hearts |   
+| Large potion | Recovers 5 hearts |   
+| Extra heart | Increases max number of available hearts by one |   
+| + Hiragana mystery stone | Stops encounters with hiragana characters |   
+| - Hiragana mystery stone | Resets encounters with hiragana characters |   
+| + Katakana mystery stone | Stops encounters with katakana characters |   
+| - Katakana mystery stone | Resets encounters with katakana characters |   
 
 
-In order to compile the Android version of the project you will first need to download the assets folder from one of the following links: -
-
-https://drive.google.com/open?id=0B7a2PtVOj_8md3VJUjdiOFFoMjg
-https://www.dropbox.com/s/tis78te85lu9en7/android.zip?dl=0
-
-After downloading the Android directory from one of the above links, you will need to drag the assets folder which is inside the Android directory to the path
-
-FinalKanjiQuest_Desktop/android
-
-The result of doing so should be
-
-FinalKanjiQuest_Desktop/android/assets
-
-After following the above steps. You will be able to run the app normally.
-
-In order to create an Android executables file, click build from the top of the screen
-and then click build apk
+ 
