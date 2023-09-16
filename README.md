@@ -101,3 +101,7 @@ Once a user has learned all hiragana and katakana characters or opted out of lea
     <td><img src="./screenshots/maps/top-world.png" alt="top-world"></td>
   </tr>
 </table>
+
+The game can be download with the below link. To run the game, you will need a machine with Java installed. The game doesn't run on Apple Silicon
+
+ - [desktop-1.0.jar](https://github.com/firasAltayeb/bsc-thesis-project/raw/master/desktop-1.0.jar)
