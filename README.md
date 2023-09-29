@@ -10,60 +10,12 @@ Final Kanji Quest (FKQ) is a game that aims to teach the Japanese writing system
 
 ## Game Controls 
 
-Users are able to move the player character by tapping on one of the corners of the screen, for example, the top-left box will move the character diagonally up-left. Desktop users are also able to do so using the arrow keys. The middle box is reserved for selecting things when the player character is facing them, such as non-player characters (NPC) or treasure boxes.
+Users are able to move the player character by tapping on one of the corners of the screen; for example, the top-left box will move the character diagonally up-left. Desktop users are also able to do so using the arrow keys. The middle box is reserved for selecting things when the player character is facing them, such as non-player characters (NPC) or treasure boxes.
 
 <table>
   <tr>
     <td><img src="./screenshots/03.png" alt="Screenshot 3"></td>
     <td><img src="./screenshots/04.png" alt="Screenshot 4"></td>
-  </tr>
-</table>
-
-## Menu Buttons
-
-Tapping on the progress menu item reveals each study item's SRS level. The highest SRS level for hiragana and katakana is 3, but for kanji, it is five as they require more time to learn.  
-
-<table>
-  <tr>
-    <td><img src="./screenshots/05.png" alt="Screenshot 5"></td>
-    <td><img src="./screenshots/06.png" alt="Screenshot 6"></td>
-  </tr>
-    <td><img src="./screenshots/07.png" alt="Screenshot 7"></td>
-</table>
-
-Tapping on the inventory menu item will reveal the player character's inventory. Tapping on an item will display it in the top slot with its description. To consume or use a selected item, users have to tap the item while on the top slot.
-
-<table>
-  <tr>
-    <td><img src="./screenshots/08.png" alt="Screenshot 8"></td>
-    <td><img src="./screenshots/09.png" alt="Screenshot 9"></td>
-  </tr>
-</table>
-
-The available items and their effects are as follows:
-
-| Item Description | Item Effect | 
-|---------------------------|-----------------------------------------------|
-| Medium potion | Recovers 3 hearts |   
-| Large potion | Recovers 5 hearts |   
-| Extra heart | Increases max number of available hearts by one |   
-| + Hiragana mystery stone | Stops encounters with hiragana characters |   
-| - Hiragana mystery stone | Resets encounters with hiragana characters |   
-| + Katakana mystery stone | Stops encounters with katakana characters |   
-| - Katakana mystery stone | Resets encounters with katakana characters |   
-
-## Character Menu Buttons 
-
-Tapping on any of the remaining menu items will open a window showing the corresponding characters with their equivalent Latin character and mnemonics to help with remembering them.      
- 
-<table>
-  <tr>
-    <td><img src="./screenshots/10.png" alt="Screenshot 10"></td>
-    <td><img src="./screenshots/11.png" alt="Screenshot 11"></td>
-  </tr>
-    <tr>
-    <td><img src="./screenshots/12.png" alt="Screenshot 12"></td>
-    <td><img src="./screenshots/13.png" alt="Screenshot 13"></td>
   </tr>
 </table>
 
@@ -102,6 +54,53 @@ Once a user has learned all hiragana and katakana characters or opted out of lea
   </tr>
 </table>
 
-The game can be download with the below link. To run the game, you will need a machine with Java installed. The game doesn't run on Apple Silicon
+## Menu Buttons
+
+Tapping on the progress menu item reveals each study item's SRS level. The highest SRS level for hiragana and katakana is 3, but for kanji, it is five as they require more time to learn.  
+
+<table>
+  <tr>
+    <td><img src="./screenshots/05.png" alt="Screenshot 5"></td>
+    <td><img src="./screenshots/07.png" alt="Screenshot 7"></td>
+</table>
+
+Tapping on Hiragana, Katakana, Kanji, etc., will reveal a window showing the corresponding characters with their equivalent Latin character and mnemonics to help with remembering them.      
+ 
+<table>
+  <tr>
+    <td><img src="./screenshots/10.png" alt="Screenshot 10"></td>
+    <td><img src="./screenshots/11.png" alt="Screenshot 11"></td>
+  </tr>
+    <tr>
+    <td><img src="./screenshots/12.png" alt="Screenshot 12"></td>
+    <td><img src="./screenshots/13.png" alt="Screenshot 13"></td>
+  </tr>
+</table>
+
+## Usable Items 
+
+Tapping on the inventory menu item will reveal the player character's inventory. Tapping on an item will display it in the top slot with its description. To consume or use a selected item, users have to tap the item while on the top slot.
+
+<table>
+  <tr>
+    <td><img src="./screenshots/08.png" alt="Screenshot 8"></td>
+    <td><img src="./screenshots/09.png" alt="Screenshot 9"></td>
+  </tr>
+</table>
+
+The available items and their effects are as follows:
+
+| Item Description | Item Effect | 
+|---------------------------|-----------------------------------------------|
+| Medium potion | Recovers 3 hearts |   
+| Large potion | Recovers 5 hearts |   
+| Extra heart | Increases max number of available hearts by one |   
+| + Hiragana mystery stone | Stops encounters with hiragana characters |   
+| - Hiragana mystery stone | Resets encounters with hiragana characters |   
+| + Katakana mystery stone | Stops encounters with katakana characters |   
+| - Katakana mystery stone | Resets encounters with katakana characters |   
+
+
+The game can be downloaded with the below link. To run the game, you will need a machine with Java installed. The game doesn't run on Apple Silicon
 
  - [desktop-1.0.jar](https://github.com/firasAltayeb/bsc-thesis-project/raw/master/desktop-1.0.jar)
